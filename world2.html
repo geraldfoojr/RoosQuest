@@ -588,7 +588,7 @@
     <div class="overlay" id="riddleOverlay">
       <div class="box">
         <h2>ONE LAST RIDDLE<br>BEFORE YOU GO</h2>
-        <p id="riddleText">I have strings but no arms, a body but no heart. You've held me for years — what am I?</p>
+        <p id="riddleText">An Uncle who helped you find your stroke,<br>A relative you see more than most.<br>What do they share, beyond hair of the same hue?<br>Think back… the answer may come to you.</p>
         <input type="text" id="riddleInput" placeholder="type your answer" autocomplete="off">
         <br>
         <button id="riddleSubmit">SUBMIT</button>
@@ -708,6 +708,32 @@ const MOVE_SPEED = 3.2;
 const FRICTION = 0.82;
 const SWIM_SPEED = 2.6;
 const SWIM_ACCEL = 0.5;
+
+// ===== cheap 8-bit sound effects (WebAudio oscillators, no external assets) =====
+// audioCtx is created on the start-tap gesture below (iOS/Safari require the AudioContext to
+// be created or resumed from inside a real user gesture, so this can't happen on page load).
+let audioCtx = null;
+function playSfx(kind) {
+  if (!audioCtx) return;
+  const t0 = audioCtx.currentTime;
+  function tone(freq, start, dur, vol) {
+    const osc = audioCtx.createOscillator(), g = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(freq, t0 + start);
+    g.gain.setValueAtTime(0, t0 + start);
+    g.gain.linearRampToValueAtTime(vol, t0 + start + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + start + dur);
+    osc.connect(g); g.connect(audioCtx.destination);
+    osc.start(t0 + start); osc.stop(t0 + start + dur + 0.02);
+  }
+  switch (kind) {
+    case 'jump':     tone(300, 0, 0.09, 0.12); tone(560, 0.03, 0.08, 0.1); break;
+    case 'land':     tone(160, 0, 0.07, 0.1);  tone(90, 0.03, 0.08, 0.08); break;
+    case 'hit':      tone(140, 0, 0.12, 0.16); tone(100, 0.05, 0.12, 0.14); break;
+    case 'pickup':   tone(523, 0, 0.08, 0.13); tone(784, 0.07, 0.11, 0.13); break;
+    case 'lifeLost': tone(400, 0, 0.12, 0.15); tone(300, 0.11, 0.12, 0.15); tone(180, 0.22, 0.22, 0.15); break;
+  }
+}
 const SWIM_FRICTION = 0.85;
 
 // ============================================================
@@ -726,7 +752,7 @@ const player = {
 
 const inventory = []; // shared item ids: 'mbs_key', 'mrt_ticket', 'key_fob', 'guitar'
 function hasItem(id) { return inventory.includes(id); }
-function addItem(id) { if (!inventory.includes(id)) inventory.push(id); }
+function addItem(id) { if (!inventory.includes(id)) { inventory.push(id); playSfx('pickup'); } }
 
 /* ===== Jack's Quest: shared progress across worlds (see index.html) =====
    A single localStorage record carries lives + carryable inventory from one world's CONTINUE
@@ -747,6 +773,18 @@ function saveProgress(data) {
     if (Array.isArray(saved.inventory)) { inventory.length = 0; saved.inventory.forEach(i => inventory.push(i)); }
   }
 })();
+// Cross-world secrets tally: each world's hidden secret marks itself found here, independent
+// of the per-world progress record above (works even if worlds are replayed out of order).
+// World 5's credits screen reads this to show "SECRETS FOUND: x/5".
+const SECRETS_KEY = 'jacksQuestSecrets';
+function markSecretFound(worldNum) {
+  try {
+    const raw = localStorage.getItem(SECRETS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    if (!arr.includes(worldNum)) { arr.push(worldNum); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
+  } catch (e) {}
+}
+
 
 const OXY_MAX = 300;
 let oxygen = OXY_MAX;
@@ -819,7 +857,13 @@ startGate.id = 'startGate';
 startGate.style.cssText = 'position:absolute;inset:0;background:rgba(10,10,20,0.85);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ffd23f;font-family:"Press Start 2P",monospace;font-size:clamp(14px,2.4cqw,28px);text-align:center;cursor:pointer;z-index:50;';
 startGate.innerHTML = '<div>TAP TO START</div><div style="color:#9be3ff;font-size:clamp(9px,1.2cqw,14px);margin-top:1.6em;line-height:1.6;">(needed to connect your controls to the game)</div>';
 document.getElementById('gameWrap').appendChild(startGate);
-startGate.addEventListener('click', () => { canvas.focus(); startGate.remove(); });
+startGate.addEventListener('click', () => {
+  canvas.focus(); startGate.remove();
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (AC) { audioCtx = new AC(); if (audioCtx.resume) audioCtx.resume(); }
+  } catch (e) { audioCtx = null; }
+});
 
 function rectsOverlap(a, b) {
   return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -831,6 +875,7 @@ const KNOCKBACK_INVULN = 20;
 let knockbackTimer = 0;
 let knockbackInvulnTimer = 0;
 function triggerKnockback(pushDir, vertical) {
+  playSfx('hit');
   player.vx = pushDir * 5.5;
   player.vy = vertical !== undefined ? vertical : -6;
   knockbackTimer = KNOCKBACK_DURATION;
@@ -952,6 +997,7 @@ function updateHUD() {
 // all lives triggers a full reset of the CURRENT zone's own collectibles (not earlier zones'
 // already-secured items) plus the "OUT OF LIVES" message, then respawns.
 function loseLife() {
+  playSfx('lifeLost');
   player.lives -= 1;
   if (player.lives <= 0) {
     player.lives = 3;
@@ -1077,6 +1123,7 @@ const ZoneMBS = (function() {
     if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
       player.vy = JUMP_FORCE;
       player.onGround = false;
+      playSfx('jump');
     }
 
     player.vy += GRAVITY;
@@ -1099,6 +1146,7 @@ const ZoneMBS = (function() {
     for (const p of platforms) {
       if (rectsOverlap(player, p)) {
         if (player.vy > 0) {
+          if (player.vy > 2) playSfx('land');
           player.y = p.y - player.h;
           player.vy = 0;
           player.onGround = true;
@@ -1514,6 +1562,7 @@ const ZoneSkyDeck = (function() {
     if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
       player.vy = JUMP_FORCE;
       player.onGround = false;
+      playSfx('jump');
     }
 
     player.vy += GRAVITY;
@@ -1541,6 +1590,7 @@ const ZoneSkyDeck = (function() {
     for (const p of platforms) {
       if (rectsOverlap(player, p)) {
         if (player.vy > 0) {
+          if (player.vy > 2) playSfx('land');
           player.y = p.y - player.h;
           player.vy = 0;
           player.onGround = true;
@@ -1579,7 +1629,9 @@ const ZoneSkyDeck = (function() {
           player.y <= u.canopyY + 16 && player.y >= u.canopyY - 16) {
         u.popped = true;
         player.vy = 2;
-        activePopup = {text: 'FOUND: SOMETHING UNDER THE UMBRELLA!', timer: 90, x: u.x, y: u.canopyY - 20};
+        playSfx('pickup');
+        markSecretFound(2);
+        activePopup = {text: 'FOUND: A GUITAR PEDAL!', timer: 90, x: u.x, y: u.canopyY - 20};
       }
     }
 
@@ -1678,11 +1730,25 @@ const ZoneSkyDeck = (function() {
         ctx.stroke();
       }
       if (u.hasCollectible && !u.popped) {
+        // secret: a small 8-bit guitar effects pedal (stompbox), themed with the other
+        // guitar-related secrets tucked around the game
         const bob = Math.sin(Date.now()/400) * 2;
-        ctx.fillStyle = 'rgba(255,210,63,0.5)';
+        const px = u.x, py = u.canopyY + 12 + bob;
+        ctx.fillStyle = '#c23b3b';
+        ctx.fillRect(px - 8, py - 6, 16, 12);
+        ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(px - 8, py - 6, 16, 12);
+        ctx.fillStyle = '#2a2a2a';
         ctx.beginPath();
-        ctx.arc(u.x, u.canopyY + 10 + bob, 5, 0, Math.PI * 2);
+        ctx.arc(px, py - 3, 2, 0, Math.PI * 2);
         ctx.fill();
+        ctx.fillStyle = '#dcdcdc';
+        ctx.beginPath();
+        ctx.arc(px, py + 3, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#5fef5f';
+        ctx.fillRect(px - 6, py - 5, 2, 2);
       }
     }
   }
@@ -1942,8 +2008,8 @@ const ZoneReflections = (function() {
   const movingPlatforms = [
     {baseX: 980,  y: POOL_TOP_Y - 10, w: 70, h: 16, range: 25, dir: 1, _t: 0},
     {baseX: 1120, y: POOL_TOP_Y - 30, w: 70, h: 16, range: 25, dir: -1, _t: 10},
-    {baseX: 1250, y: POOL_TOP_Y - 45, w: 70, h: 16, range: 25, dir: 1, _t: -14},
-    {baseX: 1370, y: SKY_BRIDGE_Y,     w: 70, h: 16, range: 20, dir: -1, _t: 5},
+    {baseX: 1250, y: POOL_TOP_Y - 45, w: 70, h: 16, range: 17, dir: 1, _t: 0},
+    {baseX: 1400, y: SKY_BRIDGE_Y,     w: 70, h: 16, range: 17, dir: 1, _t: 0},
   ];
 
   const guitarBrick = {x: 1190, y: POOL_TOP_Y - 110, w: 40, h: 20};
@@ -2091,6 +2157,7 @@ const ZoneReflections = (function() {
       if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
         player.vy = JUMP_FORCE;
         player.onGround = false;
+        playSfx('jump');
       }
       player.vy += GRAVITY;
       if (player.vy > 14) player.vy = 14;
@@ -2153,6 +2220,7 @@ const ZoneReflections = (function() {
       for (const p of platforms) {
         if (rectsOverlap(player, p)) {
           if (player.vy > 0) {
+            if (player.vy > 2) playSfx('land');
             player.y = p.y - player.h;
             player.vy = 0;
             player.onGround = true;
@@ -2166,6 +2234,7 @@ const ZoneReflections = (function() {
         const rect = {x: mp.curX, y: mp.y, w: mp.w, h: mp.h};
         const wasAbove = (player.y + player.h - player.vy) <= mp.y + 2;
         if (rectsOverlap(player, rect) && player.vy >= 0 && wasAbove) {
+          if (player.vy > 2) playSfx('land');
           player.y = mp.y - player.h;
           player.vy = 0;
           player.onGround = true;
@@ -2311,7 +2380,7 @@ const ZoneReflections = (function() {
     captionText = 'USING KEY FOB...';
   }
 
-  const RIDDLE_ANSWERS = ['guitar', 'a guitar', 'my guitar'];
+  const RIDDLE_ANSWERS = ['uncle mark', 'mark'];
   // Win-screen photo: jack-singapore.jpg in the same folder as this HTML file.
   // Placeholder text shows until it loads (or if the file is missing).
   (function applyPhoto() {

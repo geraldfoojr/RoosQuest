@@ -572,7 +572,7 @@
     <div class="overlay" id="riddleOverlay">
       <div class="box">
         <h2>ONE LAST RIDDLE<br>BEFORE YOU GO</h2>
-        <!-- PLACEHOLDER RIDDLE (from Zone 3 standalone) — edit RIDDLE_TEXT / RIDDLE_ANSWERS in the script. -->
+        <!-- World 4 finale riddle -- see the RIDDLE object in the script. -->
         <p id="riddleText"></p>
         <input type="text" id="riddleInput" placeholder="type your answer" autocomplete="off">
         <br>
@@ -691,6 +691,32 @@ function updateMsgBox() {
 const GRAVITY = 0.55;
 const JUMP_FORCE = -11.5;
 const MOVE_SPEED = 3.2;
+
+// ===== cheap 8-bit sound effects (WebAudio oscillators, no external assets) =====
+// audioCtx is created on the start-tap gesture below (iOS/Safari require the AudioContext to
+// be created or resumed from inside a real user gesture, so this can't happen on page load).
+let audioCtx = null;
+function playSfx(kind) {
+  if (!audioCtx) return;
+  const t0 = audioCtx.currentTime;
+  function tone(freq, start, dur, vol) {
+    const osc = audioCtx.createOscillator(), g = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(freq, t0 + start);
+    g.gain.setValueAtTime(0, t0 + start);
+    g.gain.linearRampToValueAtTime(vol, t0 + start + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + start + dur);
+    osc.connect(g); g.connect(audioCtx.destination);
+    osc.start(t0 + start); osc.stop(t0 + start + dur + 0.02);
+  }
+  switch (kind) {
+    case 'jump':     tone(300, 0, 0.09, 0.12); tone(560, 0.03, 0.08, 0.1); break;
+    case 'land':     tone(160, 0, 0.07, 0.1);  tone(90, 0.03, 0.08, 0.08); break;
+    case 'hit':      tone(140, 0, 0.12, 0.16); tone(100, 0.05, 0.12, 0.14); break;
+    case 'pickup':   tone(523, 0, 0.08, 0.13); tone(784, 0.07, 0.11, 0.13); break;
+    case 'lifeLost': tone(400, 0, 0.12, 0.15); tone(300, 0.11, 0.12, 0.15); tone(180, 0.22, 0.22, 0.15); break;
+  }
+}
 const FRICTION = 0.82;
 const ICE_FRICTION = 0.95; // Zones 1 (trailhead ledges) + 2 (frozen pond) — only governs stopping
 
@@ -709,7 +735,7 @@ const player = {
 // persistent item; Zone 3's ingredients live in its own zone-local inventory.
 const inventory = [];
 function hasItem(id) { return inventory.includes(id); }
-function addItem(id) { if (!inventory.includes(id)) inventory.push(id); }
+function addItem(id) { if (!inventory.includes(id)) { inventory.push(id); playSfx('pickup'); } }
 function removeItem(id) { const i = inventory.indexOf(id); if (i !== -1) inventory.splice(i, 1); }
 
 /* ===== Jack's Quest: shared progress across worlds (see index.html) =====
@@ -729,6 +755,18 @@ function saveProgress(data) {
   const saved = loadProgress();
   if (saved && saved.world === 4 && typeof saved.lives === 'number') player.lives = saved.lives;
 })();
+// Cross-world secrets tally: each world's hidden secret marks itself found here, independent
+// of the per-world progress record above (works even if worlds are replayed out of order).
+// World 5's credits screen reads this to show "SECRETS FOUND: x/5".
+const SECRETS_KEY = 'jacksQuestSecrets';
+function markSecretFound(worldNum) {
+  try {
+    const raw = localStorage.getItem(SECRETS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    if (!arr.includes(worldNum)) { arr.push(worldNum); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
+  } catch (e) {}
+}
+
 
 let camX = 0;
 let hitFlash = 0;
@@ -812,7 +850,13 @@ document.getElementById('gameWrap').appendChild(startGate);
 // 4's tram-ride timing bug; applied globally here since it's harmless for Zones 1-3, which
 // have no time-based auto-advance, and keeps all 4 zones behaviorally consistent.)
 let gameStarted = false;
-startGate.addEventListener('click', () => { canvas.focus(); startGate.remove(); gameStarted = true; });
+startGate.addEventListener('click', () => {
+  canvas.focus(); startGate.remove(); gameStarted = true;
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (AC) { audioCtx = new AC(); if (audioCtx.resume) audioCtx.resume(); }
+  } catch (e) { audioCtx = null; }
+});
 
 function rectsOverlap(a, b) {
   return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -825,6 +869,7 @@ const KNOCKBACK_INVULN = 20;
 let knockbackTimer = 0;
 let knockbackInvulnTimer = 0;
 function triggerKnockback(pushDir, vertical) {
+  playSfx('hit');
   player.vx = pushDir * 5.5;
   player.vy = vertical !== undefined ? vertical : -6;
   knockbackTimer = KNOCKBACK_DURATION;
@@ -977,6 +1022,7 @@ function updateHUD() {
 // all lives resets the CURRENT zone's own not-yet-secured collectibles (not earlier zones'
 // already-secured progress) plus the "OUT OF LIVES" message, then respawns.
 function loseLife() {
+  playSfx('lifeLost');
   player.lives -= 1;
   const outOfLives = player.lives <= 0;
   if (outOfLives) {
@@ -1247,13 +1293,13 @@ const ZoneWharf = (function() {
         player.vx *= FRICTION;
         player.vx = Math.max(-MOVE_SPEED, Math.min(MOVE_SPEED, player.vx));
       }
-      if ((keys['Space'] || keys['ArrowUp']) && player.onGround) { player.vy = JUMP_FORCE; player.onGround = false; }
+      if ((keys['Space'] || keys['ArrowUp']) && player.onGround) { player.vy = JUMP_FORCE; player.onGround = false; playSfx('jump'); }
       player.vy += GRAVITY;
       if (player.vy > 14) player.vy = 14;
       player.x += player.vx;
       player.x = Math.max(CABIN_MIN_X, Math.min(CABIN_MAX_X, player.x));
       player.y += player.vy;
-      if (player.y + player.h >= GROUND_Y) { player.y = GROUND_Y - player.h; player.vy = 0; player.onGround = true; }
+      if (player.y + player.h >= GROUND_Y) { if (player.vy > 2) playSfx('land'); player.y = GROUND_Y - player.h; player.vy = 0; player.onGround = true; }
       if (rideTimer >= RIDE_DURATION_FRAMES) { rideActive = false; disembarking = true; }
       document.getElementById('progressFill').style.width = (Math.min(1, rideTimer / RIDE_DURATION_FRAMES) * 50 + 25) + '%';
       return;
@@ -1277,7 +1323,7 @@ const ZoneWharf = (function() {
       player.vx *= (phaseCActive && !anyDirKeyHeld) ? ICE_FRICTION : FRICTION;
       player.vx = Math.max(-MOVE_SPEED, Math.min(MOVE_SPEED, player.vx));
     }
-    if ((keys['Space'] || keys['ArrowUp']) && player.onGround) { player.vy = JUMP_FORCE; player.onGround = false; }
+    if ((keys['Space'] || keys['ArrowUp']) && player.onGround) { player.vy = JUMP_FORCE; player.onGround = false; playSfx('jump'); }
     player.vy += GRAVITY;
     if (player.vy > 14) player.vy = 14;
 
@@ -1305,7 +1351,7 @@ const ZoneWharf = (function() {
     player.onGround = false;
     for (const p of activePlatforms) {
       if (rectsOverlap(player, p)) {
-        if (player.vy > 0) { player.y = p.y - player.h; player.vy = 0; player.onGround = true; }
+        if (player.vy > 0) { if (player.vy > 2) playSfx('land'); player.y = p.y - player.h; player.vy = 0; player.onGround = true; }
         else if (player.vy < 0) { player.y = p.y + p.h; player.vy = 0; }
       }
     }
@@ -2347,7 +2393,7 @@ const ZoneHike = (function() {
       player.vx *= (onIce && !anyDirKeyHeld) ? ICE_FRICTION : FRICTION;
       player.vx = Math.max(-MOVE_SPEED, Math.min(MOVE_SPEED, player.vx));
     }
-    if ((keys['Space'] || keys['ArrowUp']) && player.onGround) { player.vy = JUMP_FORCE; player.onGround = false; }
+    if ((keys['Space'] || keys['ArrowUp']) && player.onGround) { player.vy = JUMP_FORCE; player.onGround = false; playSfx('jump'); }
     player.vy += GRAVITY;
     if (player.vy > 14) player.vy = 14;
 
@@ -2375,7 +2421,7 @@ const ZoneHike = (function() {
     player.onGround = false;
     for (const p of activePlatforms) {
       if (rectsOverlap(player, p)) {
-        if (player.vy > 0) { player.y = p.y - player.h; player.vy = 0; player.onGround = true; }
+        if (player.vy > 0) { if (player.vy > 2) playSfx('land'); player.y = p.y - player.h; player.vy = 0; player.onGround = true; }
         else if (player.vy < 0) {
           // Never let a ceiling-bump push the player's feet past the continuous chase-section
           // floor. A ridge platform with less clearance than the player's own height (34px) would
@@ -3002,6 +3048,7 @@ const ZoneDorm = (function() {
     function addItem(id, wx, wy){
       if (shared.inventory.includes(id)) return;
       shared.inventory.push(id);
+      playSfx('pickup');
       popups.push({ text:'+ '+ING_NAMES[id], x:wx, y:wy, t:100 });
       if (hasAll()) popups.push({ text:'ALL 4 INGREDIENTS!', x:wx, y:wy-22, t:120 });
       updateHUD();
@@ -3026,7 +3073,7 @@ const ZoneDorm = (function() {
       if (!player.frozen && player.knock<=0) {
         if (keys.ArrowLeft) dir -= 1;
         if (keys.ArrowRight) dir += 1;
-        if ((keys.Space || keys.ArrowUp) && player.onGround) { player.vy = JUMP_FORCE; player.onGround=false; }
+        if ((keys.Space || keys.ArrowUp) && player.onGround) { player.vy = JUMP_FORCE; player.onGround=false; playSfx('jump'); }
       }
       if (player.knock>0) player.knock--;
       if (player.frozen) { player.vx = 0; }
@@ -3044,7 +3091,7 @@ const ZoneDorm = (function() {
       player.x += player.vx;
       for (const s of solids) {
         if (!rectsOverlap(player, s)) continue;
-        if (player.vy >= 0 && (player.y + player.h) - s.y <= 8) { player.y = s.y - player.h; player.vy = 0; player.onGround = true; continue; }
+        if (player.vy >= 0 && (player.y + player.h) - s.y <= 8) { if (player.vy > 2) playSfx('land'); player.y = s.y - player.h; player.vy = 0; player.onGround = true; continue; }
         if (player.vx > 0) player.x = s.x - player.w; else if (player.vx < 0) player.x = s.x + s.w;
         else player.x = (player.x + player.w/2 < s.x + s.w/2) ? s.x - player.w : s.x + s.w;
         player.vx = 0;
@@ -3063,15 +3110,16 @@ const ZoneDorm = (function() {
       player.onGround = false;
       for (const s of solids) {
         if (!rectsOverlap(player, s)) continue;
-        if (player.vy > 0) { player.y = s.y - player.h; player.vy = 0; player.onGround = true; }
+        if (player.vy > 0) { if (player.vy > 2) playSfx('land'); player.y = s.y - player.h; player.vy = 0; player.onGround = true; }
         else if (player.vy < 0) { player.y = s.y + s.h; player.vy = 0; headHit(s); }
       }
       for (const o of oneways) {
         if (player.vy >= 0 && prevBottom <= o.y + 0.5 && player.y + player.h >= o.y && player.x < o.x+o.w && player.x+player.w > o.x) {
+          if (player.vy > 2) playSfx('land');
           player.y = o.y - player.h; player.vy = 0; player.onGround = true;
         }
       }
-      if (player.y + player.h >= GROUND_Y) { player.y = GROUND_Y - player.h; player.vy = 0; player.onGround = true; }
+      if (player.y + player.h >= GROUND_Y) { if (player.vy > 2) playSfx('land'); player.y = GROUND_Y - player.h; player.vy = 0; player.onGround = true; }
     }
     function headHit(s){
       if (s.kind==='cupboard') {
@@ -3200,7 +3248,7 @@ const ZoneDorm = (function() {
       updateNPCs();
       for (const p of pickups) if (!p.got && rectsOverlap(player, p)) {
         p.got = true;
-        if (p.bonus) { st.bonusGot = true; popups.push({ text:'SECRET STASH! + KVIKK LUNSJ', x:p.x+p.w/2, y:p.y-10, t:130 }); }
+        if (p.bonus) { st.bonusGot = true; playSfx('pickup'); markSecretFound(4); popups.push({ text:'SECRET STASH! + KVIKK LUNSJ', x:p.x+p.w/2, y:p.y-10, t:130 }); }
         else addItem(p.id, p.x+p.w/2, p.y);
       }
       updateCooking();
@@ -3530,16 +3578,15 @@ let riddleOpen = false;
 
 function openRiddle() {
   riddleOpen = true;
-  document.getElementById('riddleText').textContent = RIDDLE.text;
+  document.getElementById('riddleText').innerHTML = RIDDLE.text;
   document.getElementById('riddleOverlay').classList.add('show');
   setTimeout(() => document.getElementById('riddleInput').focus(), 50);
 }
 
 // ===== EDIT THESE (placeholders carried over from the Zone 3 standalone) =====
 const RIDDLE = {
-  // PLACEHOLDER riddle — replace with the real one
-  text: "Two of us rest on a muffin, wearing a golden sauce; a saint's name follows us. What did Jack cook in F Block?",
-  answers: ["eggs benedict", "egg benedict", "eggs benny"]
+  text: "Jeg var student,<br>Jeg bodde i Bergen.<br>Jeg husker fjell og snø,<br>Men gaten… husker du?",
+  answers: ["hatleveien"]
 };
 const CLUE_FRAGMENT = "????";   // PLACEHOLDER — World 4 clue fragment
 const PHOTO_SRC = "jack-bergen.jpg";   // Jack in Bergen (same folder)

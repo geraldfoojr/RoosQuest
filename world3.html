@@ -491,11 +491,7 @@
     <div class="overlay" id="riddleOverlay">
       <div class="box">
         <h2>ONE LAST RIDDLE<br>BEFORE YOU GO</h2>
-        <!-- PLACEHOLDER RIDDLE: Gerald hasn't decided the real World 3 finale riddle yet.
-             This is wired up end-to-end (text -> input -> wrong-answer feedback -> win) so
-             the full flow is testable now; swap riddleText's innerHTML and RIDDLE_ANSWERS
-             below for the real content whenever it's decided. -->
-        <p id="riddleText">[ PLACEHOLDER RIDDLE — swap this out ]<br>What gets shorter as the day goes on, but always comes back the next?</p>
+        <p id="riddleText">Before "Hello", I quietly appear<br>Where there are six strings I'm often near</p>
         <input type="text" id="riddleInput" placeholder="type your answer" autocomplete="off">
         <br>
         <button id="riddleSubmit">SUBMIT</button>
@@ -567,6 +563,31 @@ const JUMP_FORCE = -11.5;
 const MOVE_SPEED = 3.2;
 const FRICTION = 0.82;
 
+// ===== cheap 8-bit sound effects (WebAudio oscillators, no external assets) =====
+// Reuses the same audioCtx already created on the start-tap gesture below for the gig's
+// chiptune, so no extra user-gesture handling is needed here.
+function playSfx(kind) {
+  if (!audioCtx) return;
+  const t0 = audioCtx.currentTime;
+  function tone(freq, start, dur, vol) {
+    const osc = audioCtx.createOscillator(), g = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(freq, t0 + start);
+    g.gain.setValueAtTime(0, t0 + start);
+    g.gain.linearRampToValueAtTime(vol, t0 + start + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + start + dur);
+    osc.connect(g); g.connect(audioCtx.destination);
+    osc.start(t0 + start); osc.stop(t0 + start + dur + 0.02);
+  }
+  switch (kind) {
+    case 'jump':     tone(300, 0, 0.09, 0.12); tone(560, 0.03, 0.08, 0.1); break;
+    case 'land':     tone(160, 0, 0.07, 0.1);  tone(90, 0.03, 0.08, 0.08); break;
+    case 'hit':      tone(140, 0, 0.12, 0.16); tone(100, 0.05, 0.12, 0.14); break;
+    case 'pickup':   tone(523, 0, 0.08, 0.13); tone(784, 0.07, 0.11, 0.13); break;
+    case 'lifeLost': tone(400, 0, 0.12, 0.15); tone(300, 0.11, 0.12, 0.15); tone(180, 0.22, 0.22, 0.15); break;
+  }
+}
+
 // ============================================================
 // SHARED WORLD-3-WIDE STATE — carries across all 4 zones, never reset on transition
 // ============================================================
@@ -583,7 +604,7 @@ const player = {
 // (Zone 3) is a cosmetic optional pickup that's never consumed.
 const inventory = ['guitar'];
 function hasItem(id) { return inventory.includes(id); }
-function addItem(id) { if (!inventory.includes(id)) inventory.push(id); }
+function addItem(id) { if (!inventory.includes(id)) { inventory.push(id); playSfx('pickup'); } }
 function removeItem(id) { const i = inventory.indexOf(id); if (i !== -1) inventory.splice(i, 1); }
 
 /* ===== Jack's Quest: shared progress across worlds (see index.html) =====
@@ -605,6 +626,18 @@ function saveProgress(data) {
     if (Array.isArray(saved.inventory)) { inventory.length = 0; saved.inventory.forEach(i => inventory.push(i)); }
   }
 })();
+// Cross-world secrets tally: each world's hidden secret marks itself found here, independent
+// of the per-world progress record above (works even if worlds are replayed out of order).
+// World 5's credits screen reads this to show "SECRETS FOUND: x/5".
+const SECRETS_KEY = 'jacksQuestSecrets';
+function markSecretFound(worldNum) {
+  try {
+    const raw = localStorage.getItem(SECRETS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    if (!arr.includes(worldNum)) { arr.push(worldNum); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
+  } catch (e) {}
+}
+
 
 let camX = 0;
 let hitFlash = 0;
@@ -743,6 +776,7 @@ const KNOCKBACK_INVULN = 20;
 let knockbackTimer = 0;
 let knockbackInvulnTimer = 0;
 function triggerKnockback(pushDir, vertical) {
+  playSfx('hit');
   player.vx = pushDir * 5.5;
   player.vy = vertical !== undefined ? vertical : -6;
   knockbackTimer = KNOCKBACK_DURATION;
@@ -884,6 +918,7 @@ function updateHUD() {
 // all lives resets the CURRENT zone's own not-yet-secured collectibles (not earlier zones'
 // already-secured progress) plus the "OUT OF LIVES" message, then respawns.
 function loseLife() {
+  playSfx('lifeLost');
   player.lives -= 1;
   if (player.lives <= 0) {
     player.lives = 3;
@@ -994,6 +1029,12 @@ const ZoneTram = (function() {
   // Scripted "tram stops, inspector disembarks" beat between phases — a brief pause with the
   // inspector walking off-screen, not an elaborate cutscene (per "doesn't need to be elaborate").
   const DISEMBARK_DURATION_FRAMES = 90; // ~1.5s
+  // Per request: hold the Swanston St stop (the player's own stop, at the end of the birds
+  // section) open a bit longer than the Southbank one so there's time to actually read the
+  // tram stop sign before the scene hands off into the street phase. The tram fully decelerates
+  // to a stop partway through DISEMBARK_DURATION_FRAMES regardless (see decelProgress below), so
+  // this extra time is spent sitting stopped with the sign visible, not extra deceleration.
+  const SWANSTON_STOP_EXTRA_FRAMES = 90; // ~1.5s extra
   let disembarkTimer = 0;
   let disembarking = false;
 
@@ -1202,7 +1243,8 @@ const ZoneTram = (function() {
       // tram visually decelerates to a stop over the beat rather than freezing instantly
       const decelProgress = Math.min(1, disembarkTimer / (DISEMBARK_DURATION_FRAMES * 0.5));
       tramMotion += TRAM_SPEED * (1 - decelProgress);
-      if (disembarkTimer >= DISEMBARK_DURATION_FRAMES) {
+      const thisBeatDuration = DISEMBARK_DURATION_FRAMES + (phase1Cleared ? SWANSTON_STOP_EXTRA_FRAMES : 0);
+      if (disembarkTimer >= thisBeatDuration) {
         disembarking = false;
         if (!phase1Cleared) {
           // First disembark beat (after Phase 1) — hand off into Phase 2, don't end the zone.
@@ -1244,6 +1286,7 @@ const ZoneTram = (function() {
     if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
       player.vy = JUMP_FORCE;
       player.onGround = false;
+      playSfx('jump');
     }
 
     player.vy += GRAVITY;
@@ -1306,6 +1349,7 @@ const ZoneTram = (function() {
     for (const p of platforms) {
       if (rectsOverlap(player, p)) {
         if (player.vy > 0) {
+          if (player.vy > 2) playSfx('land');
           player.y = p.y - player.h;
           player.vy = 0;
           player.onGround = true;
@@ -2609,6 +2653,7 @@ const ZoneCampus = (function() {
     if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
       player.vy = JUMP_FORCE;
       player.onGround = false;
+      playSfx('jump');
     }
 
     player.vy += GRAVITY;
@@ -2689,6 +2734,7 @@ const ZoneCampus = (function() {
     for (const p of platforms) {
       if (rectsOverlap(player, p)) {
         if (player.vy > 0) {
+          if (player.vy > 2) playSfx('land');
           player.y = p.y - player.h;
           player.vy = 0;
           player.onGround = true;
@@ -3358,6 +3404,7 @@ const ZoneRestaurant = (function() {
     if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
       player.vy = JUMP_FORCE;
       player.onGround = false;
+      playSfx('jump');
     }
 
     player.vy += GRAVITY;
@@ -3395,6 +3442,7 @@ const ZoneRestaurant = (function() {
     for (const p of platforms) {
       if (rectsOverlap(player, p)) {
         if (player.vy > 0) {
+          if (player.vy > 2) playSfx('land');
           player.y = p.y - player.h;
           player.vy = 0;
           player.onGround = true;
@@ -4169,6 +4217,7 @@ const ZoneGig = (function() {
     if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
       player.vy = JUMP_FORCE;
       player.onGround = false;
+      playSfx('jump');
     }
     player.vy += GRAVITY;
     if (player.vy > 14) player.vy = 14;
@@ -4191,6 +4240,7 @@ const ZoneGig = (function() {
       player.vy = 0;
       player.y = SPEAKER.y + SPEAKER.h;
       addItem('pick');
+      markSecretFound(3);
       activePopup = {text: 'A LUCKY GUITAR PICK!', timer: 100, x: SPEAKER.x + SPEAKER.w / 2, y: SPEAKER.y - 12};
     }
 
@@ -4203,7 +4253,7 @@ const ZoneGig = (function() {
     player.onGround = false;
     for (const p of platforms) {
       if (rectsOverlap(player, p)) {
-        if (player.vy > 0) { player.y = p.y - player.h; player.vy = 0; player.onGround = true; }
+        if (player.vy > 0) { if (player.vy > 2) playSfx('land'); player.y = p.y - player.h; player.vy = 0; player.onGround = true; }
         else if (player.vy < 0) { player.y = p.y + p.h; player.vy = 0; }
       }
     }
@@ -5244,6 +5294,7 @@ const ZoneHome = (function() {
         if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
           player.vy = JUMP_FORCE;
           player.onGround = false;
+          playSfx('jump');
         }
         player.vy += GRAVITY;
         if (player.vy > 14) player.vy = 14;
@@ -5251,6 +5302,7 @@ const ZoneHome = (function() {
         player.x = Math.max(CABIN_MIN_X, Math.min(CABIN_MAX_X, player.x));
         player.y += player.vy;
         if (player.y + player.h >= GROUND_Y) {
+          if (player.vy > 2) playSfx('land');
           player.y = GROUND_Y - player.h;
           player.vy = 0;
           player.onGround = true;
@@ -5288,6 +5340,7 @@ const ZoneHome = (function() {
       if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
         player.vy = JUMP_FORCE;
         player.onGround = false;
+        playSfx('jump');
       }
       player.vy += GRAVITY;
       if (player.vy > 14) player.vy = 14;
@@ -5295,6 +5348,7 @@ const ZoneHome = (function() {
       player.x = Math.max(0, Math.min(WALK_LEVEL_WIDTH - player.w, player.x));
       player.y += player.vy;
       if (player.y + player.h >= GROUND_Y) {
+        if (player.vy > 2) playSfx('land');
         player.y = GROUND_Y - player.h;
         player.vy = 0;
         player.onGround = true;
@@ -5370,9 +5424,7 @@ function openRiddle() {
   setTimeout(() => document.getElementById('riddleInput').focus(), 50);
 }
 
-// PLACEHOLDER ANSWER — swap alongside riddleText's innerHTML in the HTML above once the real
-// riddle is decided. Kept wired end-to-end so the full flow is testable now.
-const RIDDLE_ANSWERS = ['today', 'sunset', 'a day', 'the day'];
+const RIDDLE_ANSWERS = ['wonderwall'];
 
 function submitRiddle() {
   const val = document.getElementById('riddleInput').value.trim().toLowerCase();

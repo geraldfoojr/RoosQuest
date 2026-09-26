@@ -436,7 +436,7 @@
     <div class="overlay" id="riddleOverlay">
       <div class="box">
         <h2 id="riddleTitle">THE HARBOUR GATE</h2>
-        <p id="riddleText">I have a mouth but cannot speak,<br>Hills stand guard on either side,<br>Ships sail into my open cheek<br>Carried in upon the tide.<br><br>What am I?</p>
+        <p id="riddleText">Between the wind and the waves, the gusts and the gulls<br>If you don't concentrate on the thing that you're doing<br>Whatever you're doing is not what you're thinking</p>
         <div>
           <input type="text" class="textInput" id="riddleInput" placeholder="TYPE YOUR ANSWER" autocomplete="off">
           <button class="goBtn" id="riddleSubmit">GO</button>
@@ -558,6 +558,32 @@ const GRAVITY = 0.55;
 const JUMP_FORCE = -11.5;
 const MOVE_SPEED = 3.2;
 const FRICTION = 0.82;
+
+// ===== cheap 8-bit sound effects (WebAudio oscillators, no external assets) =====
+// audioCtx is created on the start-tap gesture below (iOS/Safari require the AudioContext to
+// be created or resumed from inside a real user gesture, so this can't happen on page load).
+let audioCtx = null;
+function playSfx(kind) {
+  if (!audioCtx) return;
+  const t0 = audioCtx.currentTime;
+  function tone(freq, start, dur, vol) {
+    const osc = audioCtx.createOscillator(), g = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(freq, t0 + start);
+    g.gain.setValueAtTime(0, t0 + start);
+    g.gain.linearRampToValueAtTime(vol, t0 + start + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + start + dur);
+    osc.connect(g); g.connect(audioCtx.destination);
+    osc.start(t0 + start); osc.stop(t0 + start + dur + 0.02);
+  }
+  switch (kind) {
+    case 'jump':     tone(300, 0, 0.09, 0.12); tone(560, 0.03, 0.08, 0.1); break;
+    case 'land':     tone(160, 0, 0.07, 0.1);  tone(90, 0.03, 0.08, 0.08); break;
+    case 'hit':      tone(140, 0, 0.12, 0.16); tone(100, 0.05, 0.12, 0.14); break;
+    case 'pickup':   tone(523, 0, 0.08, 0.13); tone(784, 0.07, 0.11, 0.13); break;
+    case 'lifeLost': tone(400, 0, 0.12, 0.15); tone(300, 0.11, 0.12, 0.15); tone(180, 0.22, 0.22, 0.15); break;
+  }
+}
 const GROUND_Y = 360;
 
 // ============================================================
@@ -654,6 +680,24 @@ const collectibles = [
   {x: 5190, y: GROUND_Y - 120, w: 44, h: 22, found: false, label: 'BOOTIE', id: 'bootie', zone: 'postFerry', popTimer: 0, disguise: 'tree'},
 ];
 function hasItem(id) { const c = collectibles.find(c => c.id === id); return !!(c && c.found); }
+
+// ---- hidden secret (optional — separate from the collectibles[] above, so it never affects
+// the ticket/ferry-pass count or plane-boarding gate): a busker's harmonica tucked on a rooftop
+// ledge over the hillside houses, an early-instrument nod to match the guitar-family secrets
+// tucked into the other worlds. Headbutt from below, same mechanic as the collectible bricks.
+const secretHarmonica = { x: 545, y: 150, w: 36, h: 18, found: false };
+function checkSecretHarmonica() {
+  const s = secretHarmonica;
+  if (s.found) return;
+  if (player.vy < 0 && player.y < s.y + s.h && player.y - player.vy >= s.y + s.h - 0.5 &&
+      player.x < s.x + s.w && player.x + player.w > s.x) {
+    s.found = true;
+    player.y = s.y + s.h; player.vy = 0;
+    playSfx('pickup');
+    markSecretFound(1);
+    activePopup = {text: 'SECRET FOUND: A HARMONICA!', timer: 110, x: s.x, y: s.y};
+  }
+}
 
 // Popup bubble messages shown briefly when a collectible is found
 let activePopup = null; // {text, timer}
@@ -769,6 +813,18 @@ function saveProgress(data) {
   if (saved && saved.world === 1 && typeof saved.lives === 'number') player.lives = saved.lives;
 })();
 
+// Cross-world secrets tally: each world's hidden secret marks itself found here, independent
+// of the per-world progress record above (works even if worlds are replayed out of order).
+// World 5's credits screen reads this to show "SECRETS FOUND: x/5".
+const SECRETS_KEY = 'jacksQuestSecrets';
+function markSecretFound(worldNum) {
+  try {
+    const raw = localStorage.getItem(SECRETS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    if (!arr.includes(worldNum)) { arr.push(worldNum); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
+  } catch (e) {}
+}
+
 const keys = {};
 function handleKeyDown(e) {
   if (document.body.classList.contains('win-scroll')) return; // let arrows/space scroll the win screen
@@ -823,6 +879,10 @@ document.getElementById('gameWrap').appendChild(startGate);
 startGate.addEventListener('click', () => {
   canvas.focus();
   startGate.remove();
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (AC) { audioCtx = new AC(); if (audioCtx.resume) audioCtx.resume(); }
+  } catch (e) { audioCtx = null; }
 });
 let camX = 0;
 let gameWon = false;
@@ -849,6 +909,7 @@ function showLocked(title, text) {
 // Single place a life is lost. Returns true if that was the last life (lives refill to 3 and
 // the caller should send the player back to the last checkpoint).
 function loseLife() {
+  playSfx('lifeLost');
   player.lives -= 1;
   invulnTimer = 90;
   let out = false;
@@ -930,6 +991,7 @@ function update() {
   if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
     player.vy = JUMP_FORCE;
     player.onGround = false;
+    playSfx('jump');
   }
 
   // gravity
@@ -1085,6 +1147,7 @@ function update() {
   for (const p of platforms) {
     if (rectsOverlap(player, p)) {
       if (player.vy > 0) {
+        if (player.vy > 2) playSfx('land'); // guard so idle standing (~0.55/frame gravity creep) stays silent
         player.y = p.y - player.h;
         player.vy = 0;
         player.onGround = true;
@@ -1099,6 +1162,7 @@ function update() {
     if (c.found) continue;
     if (rectsOverlap(player, c)) {
       if (player.vy > 0) {
+        if (player.vy > 2) playSfx('land');
         player.y = c.y - player.h;
         player.vy = 0;
         player.onGround = true;
@@ -1110,13 +1174,16 @@ function update() {
         c.popTimer = 30;
         player.itemsFound++;
         updateHUD();
+        playSfx('pickup');
         activePopup = {text: `FOUND: ${c.label}!`, timer: 90, x: c.x + c.w/2, y: c.y};
       }
     }
   }
+  checkSecretHarmonica();
   // ferry deck as a platform (only solid, only relevant in Zone C gap)
   if (rectsOverlap(player, ferry)) {
     if (player.vy >= 0 && player.y + player.h - player.vy <= ferry.y + 2) {
+      if (player.vy > 2) playSfx('land');
       player.y = ferry.y - player.h;
       player.vy = 0;
       player.onGround = true;
@@ -1140,6 +1207,7 @@ function update() {
         player.vy = -3;
         activePopup = {text: 'SPLASHED! BAD LANDING — TRY AGAIN', timer: 90, x: player.x, y: player.y - 20};
       } else {
+        if (player.vy > 2) playSfx('land');
         player.y = b.y - player.h;
         player.vy = 0;
         player.onGround = true;
@@ -1394,6 +1462,25 @@ function drawDockTree(c, found) {
     // flat, slightly darker underside — the bit you bonk
     ctx.fillStyle = '#3f6a31';
     ctx.fillRect(-4, c.h - 6, c.w + 8, 6);
+  }
+}
+
+function drawSecretHarmonica() {
+  const s = secretHarmonica;
+  if (!s.found) {
+    // subtle tell only — a small dark chimney-pot shape on the rooftop line, easy to miss
+    // unless you're looking for somewhere to jump
+    ctx.fillStyle = '#5a4a3a';
+    ctx.fillRect(s.x + 10, s.y, 16, s.h);
+    ctx.fillStyle = 'rgba(255,255,255,0.15)';
+    ctx.fillRect(s.x + 12, s.y + 3, 4, s.h - 6);
+  } else {
+    const bob = Math.sin(Date.now()/450) * 2;
+    const hx = s.x + s.w/2, hy = s.y + s.h + 14 + bob;
+    ctx.fillStyle = '#c9c9c9';
+    ctx.fillRect(hx - 14, hy - 5, 28, 10);
+    ctx.fillStyle = '#8a8a8a';
+    for (let i = 0; i < 6; i++) ctx.fillRect(hx - 12 + i * 5, hy - 3, 2, 6);
   }
 }
 
@@ -1855,6 +1942,7 @@ function draw() {
     }
     ctx.restore();
   }
+  drawSecretHarmonica();
 
   // popup bubble (world-space) when a collectible was just found / hit taken
   if (activePopup && !activePopup.screen) drawPopup(activePopup.x, activePopup.y);
@@ -1999,7 +2087,7 @@ function openRiddle() {
 
 function solveRiddle() {
   const val = document.getElementById('riddleInput').value.trim().toLowerCase();
-  const accepted = ['harbour', 'harbor', 'a harbour', 'a harbor'];
+  const accepted = ['accidents happen', 'accidents will happen', 'an accident happens', 'accident', 'accidents'];
   const fb = document.getElementById('riddleFeedback');
   if (accepted.includes(val)) {
     fb.textContent = 'CORRECT!';
