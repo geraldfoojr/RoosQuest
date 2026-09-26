@@ -311,13 +311,14 @@ function saveProgress(data) {
 })();
 // Cross-world secrets tally: each world's hidden secret marks itself found here, independent
 // of the per-world progress record above (works even if worlds are replayed out of order).
-// World 5's credits screen reads this to show "SECRETS FOUND: x/5".
+// IDs are strings ('w1'..'w4', 'w5_lp', 'w5_capo') rather than plain world numbers because World 5
+// now holds two separate secrets. World 5's credits screen reads this to show "SECRETS FOUND: x/6".
 const SECRETS_KEY = 'jacksQuestSecrets';
-function markSecretFound(worldNum) {
+function markSecretFound(id) {
   try {
     const raw = localStorage.getItem(SECRETS_KEY);
     const arr = raw ? JSON.parse(raw) : [];
-    if (!arr.includes(worldNum)) { arr.push(worldNum); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
+    if (!arr.includes(id)) { arr.push(id); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
   } catch (e) {}
 }
 
@@ -554,7 +555,7 @@ const ZONE1 = (function(){
   const LEVEL_WIDTH = 2180, RIGHT_WALL = 2160;
   // room boundaries (x)
   const KITCHEN_X = 110, DINING_X = 700, HALL_X = 1030, LIVING_X = 1300;
-  const WET = { x0:480, x1:610 };                       // slippery patch under the sink
+  const WET = { x0:480, x1:560 };                       // slippery patch under the sink (narrowed so it's cleanly jumpable)
   const TABLE = { x:820, w:140 }, CHAIR_L = { x:786, w:26 }, CHAIR_R = { x:968, w:26 };
   const ALEX_DOOR = 1070, FLATMATE_DOOR = 1190, JACK_DOOR = 2060;
   const SOFA = { x:1360, w:170 }, COFFEE = { x:1590, w:80 };
@@ -564,7 +565,8 @@ const ZONE1 = (function(){
   // holding right carries Jack onto the shelf top. Landing on his back also boosts.
   const SHELF = { x:1812, w:92, top:GROUND_Y-160 };
   const ALEX_SPOT = 1776, ALEX_H = 22, BOOST_FORCE = -15.5;
-  // Hidden protein bar: right-hand upper cabinet over the wet patch, headbutt it from below (Mario-brick style).
+  // Hidden capo: right-hand upper cabinet over the wet patch, headbutt it from below (Mario-brick style) —
+  // one of two music-related secrets counted in the credits' secrets tally (the other is the Pink Floyd LP).
   // Cabinet bottom sits 132px above the floor; a floor jump's head peaks ~150px up, so the bump always connects.
   const KITCHEN_DROP = 150;
   const CAB = { x:530, y:40+KITCHEN_DROP, w:90, h:50 };
@@ -602,7 +604,7 @@ const ZONE1 = (function(){
   function respawnPlayer(){ player.x=40; player.y=GROUND_Y-player.h; player.vx=0; player.vy=0; player.frozen=false; player.knock=0; player.invuln=0; player.alpha=1; }
   function onOutOfLives(){ resetState(); }
   function sectionLabel(){ return 'THE FLAT'; }
-  function hudText(){ return st ? 'PROTEIN BAR ' + (st.hasBar ? '✓' : '✗') + '   ROOM KEY ' + (st.hasKey ? '✓' : '✗') : ''; }
+  function hudText(){ return st ? 'CAPO ' + (st.hasBar ? '✓' : '✗') + '   ROOM KEY ' + (st.hasKey ? '✓' : '✗') : ''; }
   function jackSay(text, t){ st.jackBubble=text; st.jackBubbleT=t||130; }
   function say(n, text, t){ n.bubble=text; n.bubbleT=t||110; }
   function alexRect(){ return { x:alex.x, y:GROUND_Y-ALEX_H, w:30, h:ALEX_H }; }
@@ -768,8 +770,8 @@ const ZONE1 = (function(){
     if (st.cabBump>0) st.cabBump--;
     if (st.bar) {   // bar pops out, arcs up, then auto-collects
       const b = st.bar; b.t++; b.vy += 0.35; b.y += b.vy;
-      if (b.t >= 34) { st.bar = null; st.hasBar = true; shared.inventory.push('proteinbar'); playSfx('pickup');
-        popups.push({ text:'+ PROTEIN BAR', x:CAB.x+CAB.w/2, y:CAB.y+CAB.h+10, t:110 }); jackSay('Snack secured!', 100); updateHUD(); }
+      if (b.t >= 34) { st.bar = null; st.hasBar = true; shared.inventory.push('capo'); playSfx('pickup'); markSecretFound('w5_capo');
+        popups.push({ text:'SECRET FOUND: A CAPO!', x:CAB.x+CAB.w/2, y:CAB.y+CAB.h+10, t:110 }); jackSay('Every guitarist needs one of these!', 100); updateHUD(); }
     }
     // key
     if (!key.got && rectsOverlap(player, key)) {
@@ -868,12 +870,13 @@ const ZONE1 = (function(){
     ctx.fillStyle='#8e6a4a'; ctx.fillRect(x, y, CAB.w, CAB.h);
     ctx.fillStyle='#6f5038'; ctx.fillRect(x+CAB.w/2-1, y+2, 2, CAB.h-4);
     ctx.fillStyle='#e6c35a'; ctx.fillRect(x+CAB.w/2-8, y+CAB.h/2, 4, 4); ctx.fillRect(x+CAB.w/2+4, y+CAB.h/2, 4, 4);
-    if (!st.hasBar && !st.bar) {   // subtle tell: door slightly ajar, wrapper corner poking out
+    if (!st.hasBar && !st.bar) {   // subtle tell: door slightly ajar, a strap-end poking out
       ctx.fillStyle='#5a3f2a'; ctx.fillRect(x+CAB.w-6, y+4, 3, CAB.h-8);
       ctx.fillStyle='#e0282e'; ctx.fillRect(x+CAB.w-3, y+CAB.h-14, 5, 5);
     }
     if (st.bar) { const b = st.bar, bx = b.x - cx, by = b.y;
-      ctx.fillStyle='#e0282e'; ctx.fillRect(bx, by, 24, 10); ctx.fillStyle='#ffd36b'; ctx.fillRect(bx+6, by+3, 12, 4); ctx.fillStyle='#a01c20'; ctx.fillRect(bx, by, 3, 10); ctx.fillRect(bx+21, by, 3, 10); }
+      // capo: dark clamp body with a silver spring lever
+      ctx.fillStyle='#2a2a2a'; ctx.fillRect(bx, by+2, 22, 7); ctx.fillStyle='#c9c9c9'; ctx.fillRect(bx+2, by-5, 4, 8); ctx.fillStyle='#8a8a8a'; ctx.fillRect(bx+17, by, 5, 5); }
   }
 
   function drawDining(cx){
@@ -1147,7 +1150,7 @@ const ZONE2 = (function(){
     // ...leading to a hidden headbutt pickup just above the shop roofline (same ceiling-bump pattern as the Zone 1 snack cabinet)
     if (st.seg==='city' && !st.hasLP && player.vy < 0 && player.y < LP_ITEM.y + LP_ITEM.h && player.y - player.vy >= LP_ITEM.y + LP_ITEM.h - 0.5 && player.x < LP_ITEM.x + LP_ITEM.w && player.x + player.w > LP_ITEM.x) {
       player.y = LP_ITEM.y + LP_ITEM.h; player.vy = 0;
-      st.hasLP = true; shared.inventory.push('lp'); playSfx('pickup'); markSecretFound(5);
+      st.hasLP = true; shared.inventory.push('lp'); playSfx('pickup'); markSecretFound('w5_lp');
       popups.push({ text:'+ SECRET FOUND: PINK FLOYD LP!', x:LP_ITEM.x, y:LP_ITEM.y-20, t:130 });
       jackSay('Whoa — a Pink Floyd record up here?!', 110);
     }
@@ -2051,7 +2054,7 @@ const ZONE4 = (function(){
   const LEVEL_W = 2400;
   const PASS_LO = 40, PASS_HI = 160, SPAWN_X = 90;          // kitchen hatch; spawning inside it auto-picks-up the next plate
   const BAR_X = 1250;                                       // wall switches to the dark wood bar
-  const SPILL_LO = 760, SPILL_HI = 860;                     // wet floor: ice friction (World 4)
+  const SPILL_LO = 760, SPILL_HI = 840;                     // wet floor: ice friction (World 4) — narrowed so it's cleanly jumpable
   const TABLES = { 3:{x:640}, 5:{x:1150}, 7:{x:1660} };      // x = table centre
   const ORDERS = [ {table:3, dish:'Pad see ew', col:'#c98a3a'}, {table:5, dish:'Green curry', col:'#6ab04a'}, {table:7, dish:'Mango sticky rice', col:'#ffd36b'} ];
   const T8_LO = 1990, T8_HI = 2240, T8_STOP = 1925;         // birthday table; Jack stops at T8_STOP
@@ -2233,14 +2236,19 @@ const ZONE4 = (function(){
     st.phase = 'reveal'; st.pt = 0; shared.mode = 'play';
     updateHUD();
   }
+  const ALL_SECRET_IDS = ['w1', 'w2', 'w3', 'w4', 'w5_lp', 'w5_capo'];
   function secretsFoundCount(){
-    try { const raw = localStorage.getItem(SECRETS_KEY); const arr = raw ? JSON.parse(raw) : []; return Array.isArray(arr) ? arr.filter(n => n >= 1 && n <= 5).length : 0; }
+    try { const raw = localStorage.getItem(SECRETS_KEY); const arr = raw ? JSON.parse(raw) : []; return Array.isArray(arr) ? arr.filter(id => ALL_SECRET_IDS.includes(id)).length : 0; }
     catch (e) { return 0; }
   }
   function showWin(){
     st.phase = 'won'; shared.mode = 'won';
     document.getElementById('giftBox').innerHTML = GIFT_TEXT;
-    document.getElementById('credits').innerHTML = CREDITS + `<div class="credHead">SECRETS FOUND</div><div>${secretsFoundCount()} / 5</div>`;
+    const foundCount = secretsFoundCount();
+    const bonusLine = foundCount >= ALL_SECRET_IDS.length
+      ? `<div class="credHead" style="margin-top:10px;">★ ALL SECRETS FOUND ★</div><div>You can finally nail that Comfortably Numb solo while spinning the album!</div>`
+      : '';
+    document.getElementById('credits').innerHTML = CREDITS + `<div class="credHead">SECRETS FOUND</div><div>${foundCount} / ${ALL_SECRET_IDS.length}</div>` + bonusLine;
     const fam = document.getElementById('familyPhoto');
     fam.onload = () => { fam.style.display = 'block'; };
     fam.src = FAMILY_PHOTO_SRC;

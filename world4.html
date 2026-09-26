@@ -757,13 +757,14 @@ function saveProgress(data) {
 })();
 // Cross-world secrets tally: each world's hidden secret marks itself found here, independent
 // of the per-world progress record above (works even if worlds are replayed out of order).
-// World 5's credits screen reads this to show "SECRETS FOUND: x/5".
+// IDs are strings ('w1'..'w4', 'w5_lp', 'w5_capo') rather than plain world numbers because World 5
+// now holds two separate secrets. World 5's credits screen reads this to show "SECRETS FOUND: x/6".
 const SECRETS_KEY = 'jacksQuestSecrets';
-function markSecretFound(worldNum) {
+function markSecretFound(id) {
   try {
     const raw = localStorage.getItem(SECRETS_KEY);
     const arr = raw ? JSON.parse(raw) : [];
-    if (!arr.includes(worldNum)) { arr.push(worldNum); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
+    if (!arr.includes(id)) { arr.push(id); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
   } catch (e) {}
 }
 
@@ -2405,7 +2406,11 @@ const ZoneHike = (function() {
     const activePlatforms = onIce ? walkPlatforms : [groundPlatform, ...ridgePlatforms];
     const levelWidth = onIce ? LEVEL_WIDTH : CHASE_LEVEL_WIDTH + 40;
     let rightEdge = levelWidth - player.w;
-    if (onIce) rightEdge = Math.min(rightEdge, GATE_X + GATE_W - player.w);
+    // Hard-block the gate until the log collectible has been headbutted (which also wakes the
+    // troll) — otherwise the whole ice crossing can be run without ever triggering the chase.
+    // Treat the un-broken gate as a solid wall at GATE_X; it only opens to let the player walk
+    // through once collectBroken is true.
+    if (onIce) rightEdge = Math.min(rightEdge, (collectBroken ? GATE_X + GATE_W : GATE_X) - player.w);
     if (player.x > rightEdge) player.x = rightEdge;
 
     for (const p of activePlatforms) {
@@ -2872,16 +2877,16 @@ const ZoneHike = (function() {
 
   function drawGateArch() {
     const gx = GATE_X - camX;
-    ctx.fillStyle = '#8a6a4a';
+    ctx.fillStyle = collectBroken ? '#8a6a4a' : '#5a4a3a';
     ctx.fillRect(gx - 6, GROUND_Y - GATE_H, 8, GATE_H);
     ctx.fillRect(gx + GATE_W - 2, GROUND_Y - GATE_H, 8, GATE_H);
     ctx.fillRect(gx - 6, GROUND_Y - GATE_H, GATE_W + 16, 8);
     ctx.fillStyle = 'rgba(26,26,46,0.85)';
     ctx.fillRect(gx + GATE_W / 2 - 72, GROUND_Y - GATE_H - 30, 144, 24);
-    ctx.fillStyle = '#6bff8f';
+    ctx.fillStyle = collectBroken ? '#6bff8f' : '#ff7a7a';
     ctx.font = 'bold 14px monospace';
     ctx.textAlign = 'center';
-    ctx.fillText('BACK TO CAMPUS', gx + GATE_W / 2, GROUND_Y - GATE_H - 13);
+    ctx.fillText(collectBroken ? 'BACK TO CAMPUS' : 'NEED TICKET DOWN', gx + GATE_W / 2, GROUND_Y - GATE_H - 13);
   }
 
   function drawIceScene() {
@@ -3248,7 +3253,7 @@ const ZoneDorm = (function() {
       updateNPCs();
       for (const p of pickups) if (!p.got && rectsOverlap(player, p)) {
         p.got = true;
-        if (p.bonus) { st.bonusGot = true; playSfx('pickup'); markSecretFound(4); popups.push({ text:'SECRET STASH! + KVIKK LUNSJ', x:p.x+p.w/2, y:p.y-10, t:130 }); }
+        if (p.bonus) { st.bonusGot = true; playSfx('pickup'); markSecretFound('w4'); popups.push({ text:'SECRET FOUND: A GUITAR AMP!', x:p.x+p.w/2, y:p.y-10, t:130 }); }
         else addItem(p.id, p.x+p.w/2, p.y);
       }
       updateCooking();
@@ -3343,8 +3348,7 @@ const ZoneDorm = (function() {
       ctx.fillStyle='#b4845a'; ctx.fillRect(cb.x-cx, cb.y+bump, cb.w, cb.h);
       ctx.fillStyle='#9a6d46'; ctx.fillRect(cb.x-cx+cb.w/2-1, cb.y+bump, 2, cb.h);
       ctx.fillStyle = st.hamGot ? '#6d4a2f' : '#ffd36b'; ctx.fillRect(cb.x-cx+cb.w/2-8, cb.y+bump+cb.h/2-2, 5, 5); ctx.fillRect(cb.x-cx+cb.w/2+3, cb.y+bump+cb.h/2-2, 5, 5);
-      if (!st.hamGot) { ctx.fillStyle='#ffd36b'; ctx.font='bold 14px monospace'; ctx.fillText('?', cb.x-cx+cb.w/2 - 30, cb.y+bump+cb.h/2); ctx.fillText('?', cb.x-cx+cb.w/2 + 30, cb.y+bump+cb.h/2); }
-      // plant pot on the cupboard (hides the secret stash behind its leaves)
+      // plant pot on the cupboard (hides the secret guitar amp behind its leaves)
       if (!pickups.find(p=>p.bonus).got) { ctx.fillStyle='#c8323c'; ctx.fillRect(cb.x-cx+20, cb.y-8, 22, 8); ctx.fillStyle='#ffd36b'; ctx.fillRect(cb.x-cx+23, cb.y-6, 8, 4); }
       ctx.fillStyle='#b4643c'; ctx.fillRect(cb.x-cx+26, cb.y-14, 16, 14); ctx.fillStyle='#9a4e2e'; ctx.fillRect(cb.x-cx+26, cb.y-14, 16, 3);
       ctx.fillStyle='#3f8f55'; ctx.fillRect(cb.x-cx+14, cb.y-30, 10, 16); ctx.fillRect(cb.x-cx+22, cb.y-36, 8, 22); ctx.fillRect(cb.x-cx+30, cb.y-40, 8, 26); ctx.fillRect(cb.x-cx+38, cb.y-32, 10, 18); ctx.fillStyle='#2c6a3d'; ctx.fillRect(cb.x-cx+18, cb.y-24, 26, 10);

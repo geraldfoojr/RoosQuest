@@ -628,13 +628,14 @@ function saveProgress(data) {
 })();
 // Cross-world secrets tally: each world's hidden secret marks itself found here, independent
 // of the per-world progress record above (works even if worlds are replayed out of order).
-// World 5's credits screen reads this to show "SECRETS FOUND: x/5".
+// IDs are strings ('w1'..'w4', 'w5_lp', 'w5_capo') rather than plain world numbers because World 5
+// now holds two separate secrets. World 5's credits screen reads this to show "SECRETS FOUND: x/6".
 const SECRETS_KEY = 'jacksQuestSecrets';
-function markSecretFound(worldNum) {
+function markSecretFound(id) {
   try {
     const raw = localStorage.getItem(SECRETS_KEY);
     const arr = raw ? JSON.parse(raw) : [];
-    if (!arr.includes(worldNum)) { arr.push(worldNum); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
+    if (!arr.includes(id)) { arr.push(id); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
   } catch (e) {}
 }
 
@@ -4240,7 +4241,7 @@ const ZoneGig = (function() {
       player.vy = 0;
       player.y = SPEAKER.y + SPEAKER.h;
       addItem('pick');
-      markSecretFound(3);
+      markSecretFound('w3');
       activePopup = {text: 'A LUCKY GUITAR PICK!', timer: 100, x: SPEAKER.x + SPEAKER.w / 2, y: SPEAKER.y - 12};
     }
 

@@ -682,9 +682,9 @@ const collectibles = [
 function hasItem(id) { const c = collectibles.find(c => c.id === id); return !!(c && c.found); }
 
 // ---- hidden secret (optional — separate from the collectibles[] above, so it never affects
-// the ticket/ferry-pass count or plane-boarding gate): a busker's harmonica tucked on a rooftop
-// ledge over the hillside houses, an early-instrument nod to match the guitar-family secrets
-// tucked into the other worlds. Headbutt from below, same mechanic as the collectible bricks.
+// the ticket/ferry-pass count or plane-boarding gate): a coiled guitar cable tucked on a rooftop
+// ledge over the hillside houses, matching the guitar-family secrets tucked into the other
+// worlds. Headbutt from below, same mechanic as the collectible bricks.
 const secretHarmonica = { x: 545, y: 150, w: 36, h: 18, found: false };
 function checkSecretHarmonica() {
   const s = secretHarmonica;
@@ -694,8 +694,8 @@ function checkSecretHarmonica() {
     s.found = true;
     player.y = s.y + s.h; player.vy = 0;
     playSfx('pickup');
-    markSecretFound(1);
-    activePopup = {text: 'SECRET FOUND: A HARMONICA!', timer: 110, x: s.x, y: s.y};
+    markSecretFound('w1');
+    activePopup = {text: 'SECRET FOUND: A GUITAR CABLE!', timer: 110, x: s.x, y: s.y};
   }
 }
 
@@ -815,13 +815,14 @@ function saveProgress(data) {
 
 // Cross-world secrets tally: each world's hidden secret marks itself found here, independent
 // of the per-world progress record above (works even if worlds are replayed out of order).
-// World 5's credits screen reads this to show "SECRETS FOUND: x/5".
+// IDs are strings ('w1'..'w4', 'w5_lp', 'w5_capo') rather than plain world numbers because World 5
+// now holds two separate secrets. World 5's credits screen reads this to show "SECRETS FOUND: x/6".
 const SECRETS_KEY = 'jacksQuestSecrets';
-function markSecretFound(worldNum) {
+function markSecretFound(id) {
   try {
     const raw = localStorage.getItem(SECRETS_KEY);
     const arr = raw ? JSON.parse(raw) : [];
-    if (!arr.includes(worldNum)) { arr.push(worldNum); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
+    if (!arr.includes(id)) { arr.push(id); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
   } catch (e) {}
 }
 
@@ -1475,12 +1476,18 @@ function drawSecretHarmonica() {
     ctx.fillStyle = 'rgba(255,255,255,0.15)';
     ctx.fillRect(s.x + 12, s.y + 3, 4, s.h - 6);
   } else {
+    // coiled guitar cable: a dark looping coil with a silver jack plug
     const bob = Math.sin(Date.now()/450) * 2;
     const hx = s.x + s.w/2, hy = s.y + s.h + 14 + bob;
+    ctx.strokeStyle = '#2a2a2a';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    for (let i = 0; i < 3; i++) ctx.arc(hx - 8 + i * 6, hy, 7, 0, Math.PI * 2);
+    ctx.stroke();
     ctx.fillStyle = '#c9c9c9';
-    ctx.fillRect(hx - 14, hy - 5, 28, 10);
+    ctx.fillRect(hx + 10, hy - 3, 12, 6);
     ctx.fillStyle = '#8a8a8a';
-    for (let i = 0; i < 6; i++) ctx.fillRect(hx - 12 + i * 5, hy - 3, 2, 6);
+    ctx.fillRect(hx + 20, hy - 2, 4, 4);
   }
 }
 
