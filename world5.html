@@ -32,7 +32,7 @@
   .instr { font-size:12px; color:#8f89b8; margin:0; }
 
   /* ---- Final win screen: one-time reveal, so it gets normal full-page scroll (World 2/4 pattern) ---- */
-  html.win-scroll, body.win-scroll { overflow-y:auto !important; height:auto !important; max-height:none !important; }
+  html.win-scroll, body.win-scroll { overflow:auto !important; height:auto !important; max-height:none !important; }
   body.win-scroll { justify-content:flex-start; padding-top:16px; }
   body.win-scroll #gameWrap { aspect-ratio:unset; max-height:none; height:auto; container-type:normal; }
   body.win-scroll #gameWrap > canvas, body.win-scroll #hud, body.win-scroll #touchControls, body.win-scroll .instr { display:none; }
@@ -100,6 +100,9 @@
   #msgName:empty { display: none; }
   #msgText { white-space: pre-line; }
   body[data-zone="3"] #msgBox { top: 5.5cqw; bottom: auto; } /* up in the sky, clear of the phone notifications and focus meter */
+  /* Zone 1 (the flat) and Zone 4 (Kan Eang finale) also move the text box up top — bottom-of-screen
+     text was sitting right over the play field (kitchen floor hazards / restaurant floor hazards). */
+  body[data-zone="1"] #msgBox, body[data-zone="4"] #msgBox { top: 5.5cqw; bottom: auto; }
   #rotateHint {
     display: none; color: #9be3ff; font-family: 'Press Start 2P', 'Courier New', monospace;
     font-size: 9px; line-height: 1.6; text-align: center; margin: 4px 0 0; flex-shrink: 0;
@@ -124,7 +127,7 @@
     #rightBtn { order: 2; }
     #jumpBtn { order: 3; margin-left: auto; width: 84px !important; font-family: 'Press Start 2P', 'Courier New', monospace; font-size: 11px !important; }
     #msgBox { bottom: 3cqw; max-width: 58%; }
-    body[data-zone="3"] #msgBox { top: 5.5cqw; bottom: auto; }
+    body[data-zone="3"] #msgBox, body[data-zone="1"] #msgBox, body[data-zone="4"] #msgBox { top: 5.5cqw; bottom: auto; }
   }
   body.win-scroll #gameWrap { width: min(900px, 100%); }
   body.win-scroll #msgBox, body.win-scroll #rotateHint { display: none !important; }
@@ -269,7 +272,11 @@ function saveProgress(data) {
 function isTypingInField(){ const a=document.activeElement; return a && (a.tagName==='INPUT' || a.tagName==='TEXTAREA'); }
 function keyName(e){ return e.code==='Space' ? 'Space' : e.key; }
 function releaseKeys(){ for (const k in keys) keys[k]=false; }
-window.addEventListener('keydown', e => { if (isTypingInField()) return; const k = keyName(e); if (k in keys) { keys[k]=true; e.preventDefault(); } });
+window.addEventListener('keydown', e => {
+  if (document.body.classList.contains('win-scroll')) return; // let arrows/space scroll the win/credits screen (World 4 pattern)
+  if (isTypingInField()) return;
+  const k = keyName(e); if (k in keys) { keys[k]=true; e.preventDefault(); }
+});
 window.addEventListener('keyup', e => { const k=keyName(e); if (k in keys) keys[k]=false; });
 window.addEventListener('blur', releaseKeys);
 document.querySelectorAll('#touchControls button').forEach(b => {
@@ -639,7 +646,7 @@ const ZONE1 = (function(){
       else alex.x += alex.dir*3;
     } else if (alex.state==='crouch') {
       if (st.hasKey && !(player.y + player.h <= GROUND_Y-ALEX_H+1 && player.x < alex.x+30 && player.x+player.w > alex.x)) {
-        alex.state='wander'; alex.dir=-1; say(alex, 'Nice one, gogo!', 120);
+        alex.state='wander'; alex.dir=-1; jackSay('Thanks Alex!', 120);
       }
     }
   }
@@ -970,12 +977,18 @@ const ZONE2 = (function(){
   const PATH_START = 1920, BOARD_X = 2700, CP2 = 2720;   // dirt path: bush → coastal heath → ocean comes into view; boardwalk to the lookout
   const WALKER = { lo:740, hi:930, speed:1.2 };          // a roo that walks instead of hopping (sits between hopper 1 and 2) — jump over it
   const COAST_SPAWN = 70;
+  // Secret: a near-invisible one-way ledge beside the RECORDS shopfront (x480-710), just high enough
+  // for a normal jump (~120px) to reach. Standing on it and jumping again headbutts a hidden LP above —
+  // same "ceiling bump" pattern as the snack cabinet in Zone 1, just with an extra hidden step first.
+  const LP_LEDGE = { x:636, y:GROUND_Y-92, w:56, h:8 };
+  const LP_ITEM  = { x:652, y:GROUND_Y-186, w:22, h:16 };
 
   let st, leo, trees, roos, popups;
 
   function resetState(){
     st = { phase:'coffee', seg:'city', t:0, pt:0, hasKoala:false, koalaPop:0, flash:0, fadeIn:0,
-           jackBubble:null, jackBubbleT:0, barBubble:null, barBubbleT:0, gateArmed:true, said:{}, cp:COAST_SPAWN };
+           jackBubble:null, jackBubbleT:0, barBubble:null, barBubbleT:0, gateArmed:true, said:{}, cp:COAST_SPAWN,
+           hasLP:false };
     leo = { x:266, dir:-1, bubble:null, bubbleT:0, walkT:0, moving:false, alpha:1 };
     trees = TREE_XS.map(x => ({ x, bump:0, leaves:[] }));
     resetRoos();
@@ -1032,6 +1045,17 @@ const ZONE2 = (function(){
       if (player.y < r.y + r.h && player.y - player.vy >= r.y + r.h - 0.5 && player.x < r.x + r.w && player.x + player.w > r.x) {
         player.y = r.y + r.h; player.vy = 0; bumpTree(tr);
       }
+    }
+    // secret near the RECORDS shopfront: an almost-invisible one-way ledge...
+    if (st.seg==='city' && player.vy >= 0 && prevBottom <= LP_LEDGE.y + 0.5 && player.y + player.h >= LP_LEDGE.y && player.x < LP_LEDGE.x + LP_LEDGE.w && player.x + player.w > LP_LEDGE.x) {
+      player.y = LP_LEDGE.y - player.h; player.vy = 0; player.onGround = true;
+    }
+    // ...leading to a hidden headbutt pickup just above the shop roofline (same ceiling-bump pattern as the Zone 1 snack cabinet)
+    if (st.seg==='city' && !st.hasLP && player.vy < 0 && player.y < LP_ITEM.y + LP_ITEM.h && player.y - player.vy >= LP_ITEM.y + LP_ITEM.h - 0.5 && player.x < LP_ITEM.x + LP_ITEM.w && player.x + player.w > LP_ITEM.x) {
+      player.y = LP_ITEM.y + LP_ITEM.h; player.vy = 0;
+      st.hasLP = true; shared.inventory.push('lp');
+      popups.push({ text:'+ SECRET FOUND: PINK FLOYD LP!', x:LP_ITEM.x, y:LP_ITEM.y-20, t:130 });
+      jackSay('Whoa — a Pink Floyd record up here?!', 110);
     }
     if (player.y + player.h >= GROUND_Y) { player.y = GROUND_Y - player.h; player.vy = 0; player.onGround = true; }
     return prevBottom;
@@ -1190,6 +1214,7 @@ const ZONE2 = (function(){
       ctx.fillStyle='#cfe6f2'; ctx.fillRect(fx+20, GROUND_Y-110, 120, 80); ctx.fillStyle='#5a3a22'; ctx.fillRect(fx+160, GROUND_Y-100, 44, 100);
       ctx.fillStyle='rgba(255,255,255,0.35)'; ctx.fillRect(fx+30, GROUND_Y-104, 30, 4);
     }
+    drawRecordSecret(cx);
     // footpath + road
     ctx.fillStyle='#b9b2a2'; ctx.fillRect(0, GROUND_Y, W, 16); ctx.fillStyle='#9a9385'; for (let x=0; x<CITY_W; x+=40) ctx.fillRect(x-cx, GROUND_Y, 2, 16);
     ctx.fillStyle='#3a3a44'; ctx.fillRect(0, GROUND_Y+16, W, H-GROUND_Y-16); ctx.fillStyle='#e8e4d8'; for (let x=0; x<CITY_W; x+=60) ctx.fillRect(x-cx, GROUND_Y+36, 30, 3);
@@ -1209,6 +1234,21 @@ const ZONE2 = (function(){
     const bs = 630 - cx; ctx.fillStyle='#2e2e36'; ctx.fillRect(bs, GROUND_Y-120, 4, 120); ctx.fillRect(bs, GROUND_Y-176, 4, 60); ctx.fillStyle='#3f8f55'; ctx.fillRect(bs-24, GROUND_Y-200, 52, 28); ctx.fillStyle='#fff'; ctx.font='bold 15px monospace'; ctx.fillText('BUS', bs+2, GROUND_Y-186);
     drawBus(BUS_X - cx, GROUND_Y, st.phase==='board' ? 1 : 0, 0);
     if (st.phase==='city' && st.pt < 200 && Math.floor(st.pt/20)%2===0) { ctx.fillStyle='#ffd36b'; ctx.font='bold 16px monospace'; ctx.fillText('▼', BUS_DOOR+18-cx, GROUND_Y-130); }
+  }
+  function drawRecordSecret(cx){
+    // the ledge itself is the only visible clue — a faint dusty step, easy to miss unless you're
+    // exploring the shopfronts on foot. The LP above stays completely invisible until headbutted.
+    const lx = LP_LEDGE.x - cx;
+    ctx.fillStyle = 'rgba(200,215,225,0.16)';
+    ctx.fillRect(lx, LP_LEDGE.y, LP_LEDGE.w, LP_LEDGE.h);
+    if (st.hasLP) {
+      // once found, leave the LP visible tucked above the shop roof as a little trophy
+      const ix = LP_ITEM.x - cx;
+      ctx.fillStyle = '#1c1a33'; ctx.beginPath(); ctx.arc(ix+11, LP_ITEM.y+8, 9, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#b8563c'; ctx.beginPath(); ctx.arc(ix+11, LP_ITEM.y+8, 3, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(ix+11, LP_ITEM.y+8, 6, 0, Math.PI*2); ctx.stroke();
+    }
   }
   function drawBus(x, footY, doorOpen, bob){
     const y = footY - 100 + bob;
@@ -1601,7 +1641,7 @@ const ZONE3 = (function(){
   function updateSubmit(){
     const t = st.pt;
     if (t === 20) jackSay('Uploading…', 110);
-    if (t === 250) jackSay('Done. Now… sleep.', 150);
+    if (t === 250) jackSay("Done! ...now just a shift at Kan Eang standing between me and sleep.", 170);
     if (t >= 480) zoneComplete();
   }
 

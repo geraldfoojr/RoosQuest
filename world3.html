@@ -1209,6 +1209,13 @@ const ZoneTram = (function() {
           phase1Active = false;
           phase1Cleared = true;
           phase2Active = true;
+          // Reposition "G'day mate" right into view as Phase 2 starts. He otherwise sits at his
+          // original spawn (world-x 520) while the player is already past x=1100 by this point —
+          // at his patrol speed (1.1px/frame) that gap took 10+ seconds to close, so he'd wander
+          // into frame only near the very end of the birds section, too late to be a real hazard.
+          mate.curX = Math.min(player.x + 90, TRAM_PHASE_WIDTH - 40 - mate.w);
+          mate.dir = -1;
+          mate.stunTimer = 0;
           activePopup = {text: 'LOOK OUT — BIRDS!', timer: 90, x: player.x, y: player.y - 24};
         } else {
           // Second disembark beat (after Phase 2) — player is now off the tram and onto the
@@ -1621,6 +1628,35 @@ const ZoneTram = (function() {
         }
       }
     }
+  }
+
+  // Tram-stop sign glimpsed past the tram body during each scripted disembark pause — Southbank
+  // for the inspectors' own stop (per Gerald's request, since that's where the inspector used to
+  // live and recognises it), Swanston St for the player's own stop at the end of the birds
+  // section, right where the street phase actually begins. Screen-space overlay (not tied to the
+  // scrolling scenery loop), so it's always correctly timed to the beat regardless of exactly how
+  // long tramMotion has been accumulating.
+  function drawTramStopSign() {
+    if (!disembarking) return;
+    const label = !phase1Cleared ? 'SOUTHBANK' : (!phase2Cleared ? 'SWANSTON ST' : null);
+    if (!label) return;
+    const alpha = Math.min(1, disembarkTimer / 20);
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    const sx = TRAM_MARGIN + TRAM_SCREEN_W + 14; // right-hand margin strip, just past the tram body
+    const postTopY = SCENERY_BOTTOM - 70;
+    ctx.fillStyle = '#5a5a5a';
+    ctx.fillRect(sx + 8, postTopY + 22, 4, SCENERY_BOTTOM - (postTopY + 22));
+    ctx.fillStyle = '#2f7a3f';
+    ctx.fillRect(sx - 6, postTopY, 60, 24);
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(sx - 6, postTopY, 60, 24);
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 7px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(label, sx + 24, postTopY + 15);
+    ctx.restore();
   }
 
   function drawExteriorScenery(px) {
@@ -2260,6 +2296,7 @@ const ZoneTram = (function() {
     // the tram body is then drawn on top, masked to the central TRAM_SCREEN_W band, leaving
     // TRAM_MARGIN strips of exterior visible on each side ahead of/behind the tram.
     drawExteriorScenery(tramMotion);
+    drawTramStopSign();
 
     ctx.save();
     ctx.beginPath();
@@ -3899,6 +3936,8 @@ const ZoneGig = (function() {
   let notes = [];                  // {frame, judged, hit}
   let hits = 0, misses = 0;
   let hype = 50;
+  let hypeBurstTimer = 0;   // >0 while the "crowd's hyped" payoff is playing (confetti + hands up)
+  let hypeWasFull = false;  // edge-trigger latch so the payoff fires once per time hype hits 100
   let judgement = null;            // {text, color, timer}
   let jumpWasDown = false;
   let lastBeatPlayed = -1;
@@ -4000,6 +4039,7 @@ const ZoneGig = (function() {
     lastBeatPlayed = -1;
     notes = NOTE_BEATS.map(b => ({frame: Math.round((COUNT_IN_BEATS + b) * BEAT), judged: false, hit: false}));
     hits = 0; misses = 0; hype = 50;
+    hypeBurstTimer = 0; hypeWasFull = false;
     judgement = null;
     activePopup = {text: 'LEANDER: ONE, TWO, THREE, FOUR!', timer: COUNT_IN_BEATS * BEAT, x: DRUMS_X, y: STAGE.y - 70};
   }
@@ -4010,10 +4050,20 @@ const ZoneGig = (function() {
     if (ok) { hits++; hype = Math.min(100, hype + 5); }
     else { misses++; hype = Math.max(0, hype - 9); }
     judgement = {text, color: ok ? '#6bff8f' : '#ff6b6b', timer: 24};
+    // Crowd hype payoff: the first time the meter maxes out, throw a confetti burst and bring
+    // everyone's hands up for a few seconds (drawn in drawHypeConfetti/drawForegroundCrowd).
+    // hypeWasFull resets once hype dips back under 100, so it can fire again later in the song.
+    if (hype >= 100 && !hypeWasFull) {
+      hypeWasFull = true;
+      hypeBurstTimer = 90;
+    } else if (hype < 100) {
+      hypeWasFull = false;
+    }
   }
 
   function updateSong() {
     songFrame++;
+    if (hypeBurstTimer > 0) hypeBurstTimer--;
     const half = Math.floor(songFrame / (BEAT / 2));
     if (songFrame % (BEAT / 2) === 0 && half !== lastBeatPlayed) { lastBeatPlayed = half; playBeatSounds(half); }
 
@@ -4534,10 +4584,27 @@ const ZoneGig = (function() {
       ctx.fillStyle = '#0e0a14';
       ctx.beginPath(); ctx.arc(x, 380 + b + (i % 3) * 6, 14, 0, Math.PI * 2); ctx.fill();
       ctx.fillRect(x - 22, 392 + b + (i % 3) * 6, 44, 60);
-      if (stageState === 'cheer' || (stageState === 'play' && i % 3 === 0)) {
+      // Normally only every 3rd person has their hands up; during a hype-burst payoff (meter
+      // just maxed out), everyone's hands go up too — reads as "more people getting into it."
+      if (stageState === 'cheer' || (stageState === 'play' && (hypeBurstTimer > 0 || i % 3 === 0))) {
         ctx.fillRect(x + 12, 340 + b, 5, 32);
       }
     }
+  }
+
+  function drawHypeConfetti() {
+    if (hypeBurstTimer <= 0) return;
+    const t = 90 - hypeBurstTimer;
+    const alpha = Math.min(1, hypeBurstTimer / 20); // fade out over the last ~1/3 second
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    for (let i = 0; i < 26; i++) {
+      const x = 120 + (i * 43 + t * (1 + (i % 3))) % (canvas.width - 140);
+      const y = 130 + ((i * 29 + t * (2 + (i % 4) * 0.5)) % 220);
+      ctx.fillStyle = ['#f4a6c0', '#f5ecd0', '#a0663f', '#ffd23f', '#6bff8f'][i % 5];
+      ctx.fillRect(x, y, 4, 4);
+    }
+    ctx.restore();
   }
 
   function drawOutsideBandmates() {
@@ -4611,8 +4678,12 @@ const ZoneGig = (function() {
     }
     // score
     ctx.font = 'bold 16px monospace'; ctx.textAlign = 'right';
+    // Denominator must be TOTAL_NOTES (28), not PASS_HITS (24, the 85%-to-pass threshold) — the
+    // live counter was showing "28/24" once the player nailed every note, since PASS_HITS is a
+    // pass/fail threshold, not the total achievable score. The end-of-song banner below already
+    // uses TOTAL_NOTES correctly; this just brings the live counter in line with it.
     ctx.fillStyle = hits >= PASS_HITS ? '#6bff8f' : '#fff';
-    ctx.fillText(`HITS ${hits}/${PASS_HITS}`, canvas.width - 32, LANE_Y + 46);
+    ctx.fillText(`HITS ${hits}/${TOTAL_NOTES}`, canvas.width - 32, LANE_Y + 46);
     ctx.textAlign = 'center'; ctx.fillStyle = '#9be3ff'; ctx.font = 'bold 14px monospace';
     ctx.fillText(songFrame < COUNT_IN_BEATS * BEAT ? 'PRESS JUMP AS EACH PICK HITS THE CIRCLE' : (takeNumber > 1 ? `TAKE ${takeNumber}` : ''), canvas.width / 2 + 30, LANE_Y + 45);
     // crowd hype meter — just under the note lane (the bottom of the screen is the message box)
@@ -4623,6 +4694,12 @@ const ZoneGig = (function() {
     ctx.fillStyle = '#2a2a3a'; ctx.fillRect(mx, my - 1, mw, 9);
     ctx.fillStyle = hype > 60 ? '#ff6bb8' : hype > 30 ? '#ffd23f' : '#e85454';
     ctx.fillRect(mx, my - 1, mw * hype / 100, 9);
+    if (hypeBurstTimer > 0) {
+      ctx.fillStyle = '#ffd23f';
+      ctx.font = 'bold 11px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText("CROWD'S HYPED!", mx + mw / 2, my + 20);
+    }
   }
 
   function drawPopup() {
@@ -4673,6 +4750,7 @@ const ZoneGig = (function() {
     drawPopup();
     ctx.restore();
     drawRhythmUI();
+    drawHypeConfetti();
     drawCheerBanner();
     if (doorFade > 0) {
       ctx.fillStyle = `rgba(0,0,0,${1 - Math.abs(doorFade - 20) / 20})`;

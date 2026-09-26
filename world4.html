@@ -1135,6 +1135,30 @@ const ZoneWharf = (function() {
   // short" rule, with a bit more margin than round 1 now that landings are less uniform.
   const WATER_DEATH_Y = Math.max(...LEDGES.map(l => l.y)) + LEDGE_H + 40;
 
+  // Fish leaping out of the fjord — an added hazard over the two hardest gaps (per Gerald's
+  // request that the coat+mittens ledges have something to dodge, not just the jump timing
+  // itself). Each fish is submerged (no hitbox) most of the cycle and only leaps up for a short
+  // window — same cyclical "isTipping"-style windowed-hazard shape as World 1's bucket fountain,
+  // just vertical instead of a tip. Placed mid-gap (not over a ledge) and their peak height is
+  // kept at/below the LOWER of the two ledges either side, specifically so they add a dodge/
+  // timing decision on top of the already sim-verified jump arcs rather than risking blocking a
+  // jump outright — same "knock into a hit, don't wall the path off" spirit as this zone's own
+  // seagulls. Costs a life on hit, same pattern as the wharf seagulls above (loseLife() +
+  // respawnPlayer(), which for Phase C just resets to the ledge-0 start, not a full water-reset).
+  const FISH_CYCLE = 130, FISH_UP_WINDOW = 34;
+  const fish = [
+    {x: 545, w: 22, h: 16, phase: 0,  waterY: WATER_DEATH_Y - 8, peakY: GROUND_Y + 6},   // gap 3 (big drop)
+    {x: 785, w: 22, h: 16, phase: 65, waterY: WATER_DEATH_Y - 8, peakY: GROUND_Y - 28},  // gap 5 (tall rise)
+  ];
+  let phaseCFrame = 0;
+  function fishCurrentY(f) {
+    const cyclePos = (phaseCFrame + f.phase) % FISH_CYCLE;
+    if (cyclePos >= FISH_UP_WINDOW) return null; // submerged — no hazard, not drawn
+    const t = cyclePos / FISH_UP_WINDOW;
+    const arc = Math.sin(t * Math.PI); // 0 -> 1 -> 0 over the leap
+    return f.waterY - arc * (f.waterY - f.peakY);
+  }
+
   const GEAR_HUT_X = 260; // sits within the second ledge (230-380), not on open ground
   const GEAR_TRIGGER = {x: GEAR_HUT_X, y: GROUND_Y - 70, w: 50, h: 70};
   let coatTaken = false;
@@ -1203,6 +1227,7 @@ const ZoneWharf = (function() {
       if (disembarkTimer >= DISEMBARK_DURATION_FRAMES) {
         disembarking = false;
         phaseCActive = true;
+        phaseCFrame = 0;
         player.x = 20; player.y = GROUND_Y - player.h;
         // x=130, not player.x (=20) — centered text at x=20 hangs half off the left edge of
         // the canvas every single time (this fires right after every disembark), caught by
@@ -1349,6 +1374,23 @@ const ZoneWharf = (function() {
 
     // ---- Phase C: gear hut pickup + trail gate ----
     if (phaseCActive) {
+      phaseCFrame++;
+      if (hitCooldown <= 0 && knockbackTimer <= 0 && knockbackInvulnTimer <= 0) {
+        for (const f of fish) {
+          const fy = fishCurrentY(f);
+          if (fy === null) continue; // submerged this frame, no hazard
+          const fRect = {x: f.x, y: fy - f.h, w: f.w, h: f.h};
+          if (rectsOverlap(player, fRect)) {
+            hitFlash = 10;
+            hitCooldown = 40;
+            activePopup = {text: 'FISH!', timer: 60, x: player.x, y: player.y - 20};
+            loseLife();
+            break;
+          }
+        }
+      }
+      if (hitCooldown > 0) hitCooldown--;
+
       if (!coatTaken && rectsOverlap(player, GEAR_TRIGGER)) {
         coatTaken = true;
         addItem('coat');
@@ -1865,11 +1907,45 @@ const ZoneWharf = (function() {
     }
   }
 
+  function drawFish() {
+    for (const f of fish) {
+      const fy = fishCurrentY(f);
+      if (fy === null) continue;
+      const sx = f.x - camX;
+      if (sx < -30 || sx > canvas.width + 30) continue;
+      ctx.save();
+      ctx.translate(sx + f.w / 2, fy - f.h / 2);
+      ctx.fillStyle = '#7aa8c2';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, f.w / 2, f.h / 2, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#5c88a0';
+      ctx.beginPath();
+      ctx.moveTo(-f.w / 2 - 6, 0);
+      ctx.lineTo(-f.w / 2 + 2, -f.h / 2);
+      ctx.lineTo(-f.w / 2 + 2, f.h / 2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(f.w / 2 - 5, -2, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      // a small splash mark at the water surface below, so the leap reads as coming FROM the
+      // water even once the fish is well above it
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.beginPath();
+      ctx.ellipse(sx + f.w / 2, f.waterY, 10, 3, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
   function drawTrailheadScene() {
     drawSky();
     drawMountainRange(0.15, '#f0f5fa', 40, -10); // close-up peaks dominate the backdrop here
     drawIcyWater(camX);
     for (const ledge of LEDGES) drawLedge(ledge, camX);
+    drawFish();
 
     // gear hut — sits on the second ledge, not on open ground, per the "make the coat harder
     // to reach" request
@@ -1985,7 +2061,15 @@ const ZoneHike = (function() {
                             // it close the gap. Same margin logic as the gulls/inspectors elsewhere.
   const TROLL_W = 70, TROLL_H = 110;
   const TROLL_STUN_FRAMES = 50; // pause-then-resume on a hit, not retreat — see design note below
-  let trollState = 'dormant'; // 'dormant' | 'chasing' | 'stunned' | 'givenUp'
+  // 'transforming' is the ~2s beat between the wake trigger and the actual chase, added per
+  // Gerald's request that the block visibly become the troll (pieces falling away, colour
+  // shifting from the block's mossy green to a grey "boulder" troll) rather than instantly
+  // snapping from dormant log to a chasing monster — gives the player a beat to register what's
+  // happening before they need to run. The troll doesn't move and can't catch the player during
+  // this state (see the movement/collision gating below, both keyed off trollState==='chasing').
+  let trollState = 'dormant'; // 'dormant' | 'transforming' | 'chasing' | 'stunned' | 'givenUp'
+  const TROLL_TRANSFORM_DURATION = 120; // ~2s at 60fps
+  let trollTransformTimer = 0;
   let troll = { x: TROLL_DORMANT_X, stunTimer: 0 };
   let giveUpPopupShown = false;
   // Separate from activePopup so the wake-up "ROAR!" (at the troll's position) can show at the
@@ -2087,6 +2171,7 @@ const ZoneHike = (function() {
     knockbackTimer = 0; knockbackInvulnTimer = 0;
     collectBroken = false;
     trollState = 'dormant'; troll.x = TROLL_DORMANT_X; troll.stunTimer = 0;
+    trollTransformTimer = 0;
     giveUpPopupShown = false;
     goats.forEach((g, i) => { g.curX = GOAT_RANGES[i].lo; g.dir = 1; g.stunTimer = 0; });
     goatHitCooldown = 0;
@@ -2163,10 +2248,17 @@ const ZoneHike = (function() {
     // since it only sets flags/state, doesn't move the player) ----
     if (!collectBroken && player.vy < 0 && rectsOverlap(player, COLLECT_HIT_ZONE)) {
       collectBroken = true;
-      trollState = 'chasing';
+      trollState = 'transforming';
+      trollTransformTimer = TROLL_TRANSFORM_DURATION;
       player.vy = 2; // stop the upward momentum, same "bonk" feel as a brick hit
       activePopup = {text: 'CRACK! SOMETHING WOKE UP...', timer: 60, x: player.x, y: player.y - 24,
                      next: {text: 'TROLL: ROAR!', timer: 70, x: player.x, y: player.y - 24}};
+    }
+
+    // ---- troll: transform beat (block -> boulder-troll), then the actual chase ----
+    if (trollState === 'transforming') {
+      trollTransformTimer--;
+      if (trollTransformTimer <= 0) trollState = 'chasing';
     }
 
     // ---- troll ----
@@ -2338,7 +2430,7 @@ const ZoneHike = (function() {
         player.vx = 0; player.vy = 0;
         activePopup = null;
         document.getElementById('progressFill').style.width = '100%';
-        beginZoneTransition(ZONE_DORM, 'DOWN THE MOUNTAIN TO F BLOCK...', -1);
+        beginZoneTransition(ZONE_DORM, 'WHEW, THAT WAS AN EXPERIENCE! GLAD TO BE HEADING BACK NOW.', -1);
       }
     }
 
@@ -2513,13 +2605,19 @@ const ZoneHike = (function() {
     }
   }
 
+  const TROLL_BLOCK_COLOR = '#5a6b4f';  // mossy log/block colour, matched at the start of the transform
+  const TROLL_BOULDER_COLOR = '#8a8a8a'; // grey "boulder" colour it settles into once fully awake
+  const TROLL_BOULDER_GIVEUP_COLOR = '#9a9a9a'; // slightly lighter grey while given-up, same idea as before
+
   function drawTrollDormant(px) {
-    // half-hidden among the trees before it wakes
+    // half-hidden among the trees before it wakes — only while still fully dormant; once it
+    // starts transforming, drawTrollTransform takes over and this block visually disappears.
+    if (trollState !== 'dormant') return;
     const sx = TROLL_DORMANT_X - px;
     if (sx < -100 || sx > canvas.width + 100) return;
     ctx.save();
     ctx.globalAlpha = 0.85;
-    ctx.fillStyle = '#5a6b4f';
+    ctx.fillStyle = TROLL_BLOCK_COLOR;
     ctx.fillRect(sx, GROUND_Y - TROLL_H, TROLL_W, TROLL_H);
     ctx.fillStyle = '#3f4a38';
     ctx.fillRect(sx + 14, GROUND_Y - TROLL_H + 18, 12, 12);
@@ -2527,14 +2625,71 @@ const ZoneHike = (function() {
     ctx.restore();
   }
 
+  // The block-to-troll transform: the troll's full silhouette fades in (from the block's own
+  // spot, TROLL_DORMANT_X) while its colour shifts block-green -> boulder-grey over the ~2s
+  // window, and a handful of small debris squares detach from the block's edges and fall away —
+  // deterministic (derived from trollTransformTimer, not a stored particle list) so there's
+  // nothing extra to reset elsewhere.
+  function drawTrollTransform(px) {
+    const sx = TROLL_DORMANT_X - px;
+    if (sx < -150 || sx > canvas.width + 150) return;
+    const elapsed = TROLL_TRANSFORM_DURATION - trollTransformTimer; // 0 -> DURATION
+    const p = elapsed / TROLL_TRANSFORM_DURATION; // 0 -> 1
+    const bodyColor = lerpColor(TROLL_BLOCK_COLOR, TROLL_BOULDER_COLOR, p);
+    const HEAD_W = 36, HEAD_H = 28, LEG_H = 20;
+    const headX = sx + (TROLL_W - HEAD_W) / 2, headY = GROUND_Y - TROLL_H;
+    const bodyY = headY + HEAD_H, bodyH = TROLL_H - HEAD_H - LEG_H;
+    ctx.save();
+    ctx.globalAlpha = 0.4 + 0.6 * p; // reads as solidifying, not just recoloring
+    ctx.fillStyle = bodyColor;
+    ctx.fillRect(sx - 8, bodyY + 6, 12, 34);
+    ctx.fillRect(sx + TROLL_W - 4, bodyY + 6, 12, 34);
+    ctx.fillRect(sx, bodyY, TROLL_W, bodyH);
+    ctx.fillRect(sx + 10, bodyY + bodyH, 16, LEG_H);
+    ctx.fillRect(sx + TROLL_W - 26, bodyY + bodyH, 16, LEG_H);
+    ctx.fillRect(headX, headY, HEAD_W, HEAD_H);
+    if (p > 0.35) {
+      ctx.fillStyle = '#ffd23f';
+      ctx.globalAlpha = Math.min(1, (p - 0.35) / 0.2);
+      ctx.fillRect(headX + 5, headY + 9, 9, 9);
+      ctx.fillRect(headX + HEAD_W - 14, headY + 9, 9, 9);
+    }
+    ctx.restore();
+
+    // debris: a handful of small chunks, each starting at a fixed spot around the block's edge
+    // and released at its own point in the 2s window, then falling and fading.
+    const DEBRIS = [
+      {dx: -4,           dy: 6,   release: 0.05},
+      {dx: TROLL_W - 8,  dy: 20,  release: 0.20},
+      {dx: 10,           dy: 60,  release: 0.40},
+      {dx: TROLL_W - 18, dy: 74,  release: 0.55},
+      {dx: 24,           dy: 96,  release: 0.72},
+      {dx: TROLL_W - 30, dy: 40,  release: 0.85},
+    ];
+    ctx.save();
+    for (const d of DEBRIS) {
+      if (p < d.release) continue;
+      const life = (p - d.release) / (1 - d.release); // 0 -> 1 for this piece
+      const fallY = life * 90;
+      const alpha = Math.max(0, 1 - life);
+      if (alpha <= 0) continue;
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = '#3f4a38';
+      ctx.fillRect(sx + d.dx, GROUND_Y - TROLL_H + d.dy + fallY, 10, 10);
+    }
+    ctx.restore();
+  }
+
   function drawTroll() {
-    if (trollState === 'dormant') return;
+    if (trollState === 'dormant' || trollState === 'transforming') return;
     const sx = troll.x - camX;
     if (sx < -150 || sx > canvas.width + 150) return;
     const walkCycle = Math.sin(Date.now() / 90) * 8;
     const legOffset = trollState === 'chasing' ? walkCycle : 0;
     const armOffset = -legOffset; // arms swing opposite the legs for a running read
-    const bodyColor = trollState === 'givenUp' ? '#6b7a60' : '#5a6b4f';
+    // Grey "boulder" troll now that it's fully transformed (was the same green as the block it
+    // came from) — givenUp gets a slightly lighter grey, same idea as the old two-tone scheme.
+    const bodyColor = trollState === 'givenUp' ? TROLL_BOULDER_GIVEUP_COLOR : TROLL_BOULDER_COLOR;
     const HEAD_W = 36, HEAD_H = 28, LEG_H = 20;
     const headX = sx + (TROLL_W - HEAD_W) / 2, headY = GROUND_Y - TROLL_H;
     const bodyY = headY + HEAD_H, bodyH = TROLL_H - HEAD_H - LEG_H;
@@ -2617,6 +2772,7 @@ const ZoneHike = (function() {
     for (const p of ridgePlatforms) drawRidgePlatform(p, camX);
     drawCollectLedge(camX);
     drawTrollDormant(camX);
+    if (trollState === 'transforming') drawTrollTransform(camX);
     for (const goat of goats) drawGoat(goat);
     drawTroll();
     drawPlayerSprite(player.x - camX, player.y);
