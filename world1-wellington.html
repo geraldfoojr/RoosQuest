@@ -565,8 +565,10 @@ const GROUND_Y = 360;
 //   Zone A:  0-1400        Hillside suburb, general platforming (2 collectibles)
 //   Zone A2: 1400-1900     Cable car climb (stepped platforms up to the station)
 //   Zone A3: 1900-2400     Cable car ride down (moving platform + dodge obstacles)
+//   [CHECKPOINT at 2400 -- right after the cable car ride, before the fountain, so running
+//    out of lives on the fountain only sends the player back to redo the fountain, not the
+//    whole suburb + climb + cable car ride again]
 //   Zone A4: 2400-3000     Bucket Fountain timing puzzle (Cuba Street)
-//   [CHECKPOINT at 3000]
 //   Zone B1: 3000-3500     First windy patch
 //   Calm:   3500-3790      Breather zone, no wind
 //   Zone B2: 3790-4300     Second windy patch
@@ -574,7 +576,7 @@ const GROUND_Y = 360;
 //   Zone D:  5290-6000     Airport gate + plane boarding finale
 // ============================================================
 const LEVEL_WIDTH = 6400;
-const CHECKPOINT_X = 3000;
+const CHECKPOINT_X = 2400;
 
 const platforms = [
   // Zone A - hillside suburb ground + platforming (step-ladder heights, max ~90px rise per jump)
@@ -686,11 +688,19 @@ const cableCarObstacles = [
 // one while it's mid-tip knocks the player back down rather than a simple walk-through hazard.
 const FOUNTAIN_X_START = 2650;
 const buckets = [
-  // timings are 20% slower than the original (cycle 110→138, tip 28→35, phases ×1.25)
-  {x: FOUNTAIN_X_START, y: GROUND_Y - 70, w: 50, h: 24, cycle: 138, phase: 0},
-  {x: FOUNTAIN_X_START + 70, y: GROUND_Y - 150, w: 50, h: 24, cycle: 138, phase: 38},
-  {x: FOUNTAIN_X_START + 20, y: GROUND_Y - 230, w: 50, h: 24, cycle: 138, phase: 81},
-  {x: FOUNTAIN_X_START + 90, y: GROUND_Y - 310, w: 50, h: 24, cycle: 138, phase: 113, isTop: true},
+  // Fix (Sep 26): the old phases (0/38/81/113 on a cycle of 138) made the buckets tip in the
+  // order bottom, TOP, 3rd, 2nd -- the top bucket tipped soon after the bottom one (long before
+  // a climbing player would reach it), and the 3rd and top buckets' tip windows overlapped by a
+  // few frames. That overlap is what made it look like "the 4th brick turning pink" was killing
+  // the player while they were standing safely on the 3rd -- really the 3rd was tipping under
+  // them at almost the same moment the top one (already tipped) was still showing pink.
+  // Re-timed on a cycle of 160 so each bucket tips exactly 40 frames after the one below it,
+  // bottom -> 2nd -> 3rd -> top, matching the climb, with a clean gap so at most one bucket is
+  // ever tipping at a time.
+  {x: FOUNTAIN_X_START, y: GROUND_Y - 70, w: 50, h: 24, cycle: 160, phase: 0},
+  {x: FOUNTAIN_X_START + 70, y: GROUND_Y - 150, w: 50, h: 24, cycle: 160, phase: 120},
+  {x: FOUNTAIN_X_START + 20, y: GROUND_Y - 230, w: 50, h: 24, cycle: 160, phase: 80},
+  {x: FOUNTAIN_X_START + 90, y: GROUND_Y - 310, w: 50, h: 24, cycle: 160, phase: 40, isTop: true},
 ];
 // A bucket is "tipping/splashing" (dangerous to land on) when (frameCount + phase) % cycle
 // is within the tip window
@@ -825,6 +835,7 @@ let knockbackTimer = 0;      // seagull hit: timed push-back, arrow input suppre
 let knockbackOnFerry = false; // if hit while riding, keep the push on the deck (no knock into the water)
 let invulnTimer = 0;         // post-hit / post-respawn invulnerability (player blinks)
 let ticketMsgShown = false;
+let noFerryPassMsgShown = false;
 let ferryPassShown = false;
 
 function showLocked(title, text) {
@@ -932,12 +943,23 @@ function update() {
     rectsOverlap(player, {x: cableCar.stationX - 60, y: cableCar.stationY - 50, w: cableCar.w + 120, h: 60});
 
   const nearStation = rectsOverlap(player, {x: cableCar.stationX - 60, y: cableCar.stationY - 50, w: cableCar.w + 120, h: 60});
-  if (!nearStation) ticketMsgShown = false;
+  if (!nearStation) { ticketMsgShown = false; noFerryPassMsgShown = false; }
   if (onStationNow && !cableCar.riding) {
     if (!hasItem('ticket')) {
       if (!ticketMsgShown) {
         ticketMsgShown = true;
         showLocked('NO TICKET', 'You need a cable car ticket to board. Maybe one blew away somewhere back down the hill...');
+      }
+    } else if (!hasItem('ferryPass')) {
+      // Fix (Sep 26): the ferry-pass brick can be stood on top of instead of hit from below
+      // (Mario-block blocks are solid before they're popped) -- from up there it's a short
+      // jump straight to the station platform, boarding with a ticket but no ferry pass, then
+      // riding down past the fountain with no way back up to fetch it. Gating boarding on the
+      // ferry pass too (same pattern as the ticket check above) sends the player back down to
+      // find it instead of getting them stranded at the harbour gate later.
+      if (!noFerryPassMsgShown) {
+        noFerryPassMsgShown = true;
+        showLocked('NO FERRY PASS', "Hold on — you'll need a ferry pass for later too. Find it back down the hillside before you ride down.");
       }
     } else {
       cableCar.boarded = true;
@@ -1102,9 +1124,14 @@ function update() {
   }
 
   // bucket fountain — each bucket acts as a solid landing platform when landed on from above;
-  // if it happens to be mid-tip at the moment of landing, that's a bad landing (knockback + retry)
+  // if it happens to be mid-tip at the moment of landing, that's a bad landing (knockback + retry).
+  // The "landed from above" check (bottom edge was at/above the bucket's top before this frame's
+  // move) is required, not just vy>=0 — without it, grazing a bucket's UNDERSIDE near a jump's
+  // apex (vy briefly 0 there too) was misread as a landing: it could snap the player up onto
+  // TOP of that bucket (an unearned height boost enabling an over-reach onto the bucket above),
+  // and if that bucket happened to be tipping, cost a life for what was really just a bonk from below.
   for (const b of buckets) {
-    if (rectsOverlap(player, b) && player.vy >= 0) {
+    if (rectsOverlap(player, b) && player.vy >= 0 && player.y + player.h - player.vy <= b.y + 2) {
       const cyclePos = (frameCount + b.phase) % b.cycle;
       const isTipping = cyclePos < BUCKET_TIP_WINDOW;
       if (isTipping) {
@@ -1118,6 +1145,7 @@ function update() {
         player.onGround = true;
         if (b.isTop) fountainCleared = true;
       }
+      break; // only one bucket should ever be resolved in a given frame
     }
   }
 
@@ -1548,7 +1576,8 @@ function drawBucketFountain() {
     ctx.save();
     ctx.translate(b.x + b.w/2, b.y + b.h);
     ctx.rotate(tipAmount * 0.7);
-    ctx.fillStyle = isTipping ? '#e05a5a' : '#4f8fd9';
+    const aboutToTip = !isTipping && (b.cycle - cyclePos) <= 12;
+    ctx.fillStyle = isTipping ? '#e05a5a' : (aboutToTip ? '#e0b23a' : '#4f8fd9');
     ctx.fillRect(-b.w/2, -b.h, b.w, b.h);
     ctx.strokeStyle = 'rgba(0,0,0,0.25)';
     ctx.lineWidth = 1;
