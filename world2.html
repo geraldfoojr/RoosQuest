@@ -2376,6 +2376,24 @@ const ZoneReflections = (function() {
     ctx.restore();
   }
 
+  // Low-rise villa blocks at the foot of the towers — Reflections at Keppel Bay's real
+  // skyline is the curved towers PLUS a run of lower waterfront villa blocks in front of
+  // them, so this is the detail that actually reads as "Reflections" rather than generic
+  // towers. Drawn at a slightly larger scrollFactor than the towers so they parallax as
+  // the nearer layer, sitting right at the towers' base line.
+  function drawVillaBlock(baseX, baseY, width, height, color) {
+    ctx.save();
+    ctx.fillStyle = color;
+    ctx.fillRect(baseX, baseY - height, width, height);
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.fillRect(baseX, baseY - height, width, 3);
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    for (let wx = baseX + 4; wx < baseX + width - 4; wx += 10) {
+      ctx.fillRect(wx, baseY - height + 6, 5, Math.max(4, height - 12));
+    }
+    ctx.restore();
+  }
+
   function drawParallaxTowers() {
     const scrollFactor = 0.045;
     const px = -camX * scrollFactor;
@@ -2391,6 +2409,14 @@ const ZoneReflections = (function() {
     drawTowerSilhouette(px + 330, towerBaseY, 220, 40, 10, '#9db3c2');
     drawTowerSilhouette(px + 386, towerBaseY, 205, 46, 12, '#8fa8b8');
     drawTowerSilhouette(px + 444, towerBaseY, 225, 40, -8, '#9db3c2');
+
+    const villaPx = -camX * 0.07;
+    drawVillaBlock(villaPx + 60, towerBaseY, 70, 22, '#d7c9a8');
+    drawVillaBlock(villaPx + 150, towerBaseY, 55, 18, '#c7bb9c');
+    drawVillaBlock(villaPx + 260, towerBaseY, 65, 24, '#d7c9a8');
+    drawVillaBlock(villaPx + 400, towerBaseY, 60, 20, '#c7bb9c');
+    drawVillaBlock(villaPx + 510, towerBaseY, 50, 18, '#d7c9a8');
+    drawVillaBlock(villaPx + 610, towerBaseY, 62, 22, '#c7bb9c');
   }
 
   function drawPool() {
@@ -2535,6 +2561,36 @@ const ZoneReflections = (function() {
     }
   }
 
+  // Decorative sky-bridge props (benches + a couple of small trees) — purely visual, no
+  // collision, so they don't interfere with the guards' patrol ranges. Kept out of the two
+  // guards' patrol ranges (~1600-1710 and ~1760-1870) so nothing visually overlaps a guard.
+  const bridgeBenches = [BRIDGE_START_X + 10, BRIDGE_END_X - 36];
+  const bridgeTrees = [1718, 1748];
+  function drawBridgeProps() {
+    for (const bx of bridgeBenches) {
+      const by = bridgePlatform.y;
+      ctx.fillStyle = '#5a4632';
+      ctx.fillRect(bx + 2, by - 6, 3, 6);
+      ctx.fillRect(bx + 21, by - 6, 3, 6);
+      ctx.fillStyle = '#7a6248';
+      ctx.fillRect(bx, by - 10, 26, 4);
+      ctx.fillRect(bx, by - 4, 26, 3);
+    }
+    for (const tx of bridgeTrees) {
+      const ty = bridgePlatform.y;
+      ctx.fillStyle = '#6b4a2a';
+      ctx.fillRect(tx + 6, ty - 20, 4, 20);
+      ctx.fillStyle = '#3f7a4a';
+      ctx.beginPath();
+      ctx.arc(tx + 8, ty - 26, 12, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      ctx.beginPath();
+      ctx.arc(tx + 4, ty - 30, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
   function drawBridgeGuards() {
     for (const g of bridgeGuards) {
       const x = g.curX !== undefined ? g.curX : g.centerX - g.w/2;
@@ -2593,6 +2649,7 @@ const ZoneReflections = (function() {
     drawKeyFob();
     drawEmergeFloorAndPlatforms();
     drawSkyBridge();
+    drawBridgeProps();
     drawBridgeGuards();
     drawTowerEnterAndDoor();
 
