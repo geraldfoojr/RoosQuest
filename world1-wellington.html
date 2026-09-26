@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Jack's Quest</title>
+<style>
+  /* Press Start 2P (SIL Open Font License), embedded so it works offline and on any host */
+  @font-face { font-family: 'Press Start 2P'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(data:font/woff2;base64,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) format('woff2'); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    background: #0a0a12;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: 'Courier New', monospace;
+    padding: 8px;
+  }
+  #gameWrap {
+    position: relative;
+    border: 6px solid #2b2b3a;
+    border-radius: 4px;
+    box-shadow: 0 0 0 3px #6b6b8a, 0 0 40px rgba(0,0,0,0.6);
+    width: min(768px, 100%);
+    max-height: 60dvh;
+    container-type: inline-size;
+  }
+  canvas {
+    display: block;
+    image-rendering: pixelated;
+    background: #7ec8e3;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 768 / 432;
+    max-height: 60dvh;
+  }
+  #hud {
+    position: absolute;
+    top: 1.5cqw;
+    left: 1.5cqw;
+    right: 1.5cqw;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 2.2cqw;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+    pointer-events: none;
+  }
+  #title {
+    color: #ffd23f;
+    text-shadow: 2px 2px 0 #000;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    text-align: center;
+  }
+  #subtitle {
+    color: #9be3ff;
+    font-size: 10px;
+    margin-bottom: 16px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+  }
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10,10,20,0.92);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    text-align: center;
+    padding: 30px;
+  }
+  .overlay.show { display: flex; }
+  .box {
+    border: 3px solid #ffd23f;
+    background: #1a1a2e;
+    padding: 24px 30px;
+    max-width: 480px;
+  }
+  .box h2 {
+    color: #ffd23f;
+    font-size: 13px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .box p {
+    font-size: 10px;
+    line-height: 1.8;
+    color: #cfe8ff;
+    margin-bottom: 18px;
+  }
+  .textInput {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    padding: 8px 10px;
+    width: 220px;
+    background: #0a0a12;
+    border: 2px solid #6b6b8a;
+    color: #fff;
+    text-align: center;
+  }
+  .textInput:focus { outline: none; border-color: #ffd23f; }
+  .goBtn {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 9px;
+    padding: 10px 14px;
+    margin-left: 8px;
+    background: #ffd23f;
+    border: none;
+    color: #1a1a2e;
+    cursor: pointer;
+  }
+  .goBtn:hover { background: #ffe27a; }
+  .feedback {
+    margin-top: 14px;
+    font-size: 9px;
+    min-height: 14px;
+    color: #ff6b6b;
+  }
+  .feedback.correct { color: #6bff8f; }
+  #instructions {
+    color: #6b6b8a;
+    font-size: 9px;
+    margin-top: 14px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  #touchControls {
+    display: flex;
+    gap: 14px;
+    margin-top: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .touchBtn {
+    width: 64px;
+    height: 64px;
+    background: #2b2b3a;
+    border: 3px solid #6b6b8a;
+    border-radius: 8px;
+    color: #ffd23f;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+  }
+  .touchBtn:active { background: #4a4a63; }
+  #jumpBtn { width: 96px; }
+  .clueFragment {
+    border: 2px solid #ffd23f;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 16px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 14px;
+    color: #ffd23f;
+    letter-spacing: 4px;
+  }
+  .photoPlaceholder {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 4 / 3;
+    margin: 0 auto 18px;
+    border: 3px dashed #6b6b8a;
+    background: repeating-linear-gradient(45deg, #22223a, #22223a 10px, #1a1a2e 10px, #1a1a2e 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9a9ab5;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    line-height: 1.6;
+    padding: 10px;
+    text-align: center;
+  }
+  #progressBar {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    height: 6px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  #progressFill {
+    height: 100%;
+    background: #ffd23f;
+    width: 0%;
+    transition: width 0.2s;
+  }
+  #touchControls { display: none; }
+  @media (hover: none) and (pointer: coarse) {
+    #touchControls { display: flex; }
+  }
+  @media (max-height: 700px) {
+    #title { font-size: 14px; margin-bottom: 4px; }
+    #subtitle { font-size: 8px; margin-bottom: 6px; }
+    #instructions { display: none; }
+    .touchBtn { width: 48px; height: 48px; font-size: 12px; }
+    #jumpBtn { width: 72px; }
+    #touchControls { margin-top: 8px; gap: 10px; }
+  }
+  body.win-scroll, html.win-scroll {
+    overflow: auto;
+    height: auto;
+    display: block;
+  }
+  html.win-scroll body { display: block; min-height: 100dvh; padding: 20px 12px; }
+  body.win-scroll #gameWrap {
+    width: auto;
+    max-height: none;
+    border: none;
+    box-shadow: none;
+    container-type: normal;
+  }
+  body.win-scroll canvas,
+  body.win-scroll #hud,
+  body.win-scroll #progressBar,
+  body.win-scroll #title,
+  body.win-scroll #subtitle,
+  body.win-scroll #instructions,
+  body.win-scroll #touchControls {
+    display: none !important;
+  }
+  body.win-scroll #winOverlay {
+    position: static;
+    display: flex;
+    background: transparent;
+    padding: 0;
+  }
+  /* Win screen: photo + boarding pass. Side-by-side when there's room, stacked when not —
+     decided by available WIDTH via flex-wrap (not orientation), and every piece can shrink,
+     so the pass can never be pushed past the right edge. The box is widened on the win
+     screen only; mid-game overlays keep their 480px cap. */
+  body.win-scroll #winOverlay .box { max-width: min(860px, 100%); width: 100%; }
+  #winContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  #winContent .photoPlaceholder { flex: 0 1 230px; aspect-ratio: 3 / 4; margin: 0; min-width: 0; position: relative; overflow: hidden; }
+  #worldPhoto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+  #boardingPass {
+    flex: 1 1 320px;
+    max-width: 460px;
+    min-width: 0;
+    background: linear-gradient(135deg, #f5f0e0 0%, #e8dfc5 100%);
+    border-radius: 6px;
+    padding: 16px clamp(12px, 3vw, 22px);
+    color: #1a1a2e;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+  #boardingPass .bpHeader {
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    border-bottom: 2px dashed #1a1a2e; padding-bottom: 8px; margin-bottom: 10px;
+  }
+  #boardingPass .bpAirline { font-family: 'Press Start 2P', monospace; font-size: 11px; color: #2a4d8f; white-space: nowrap; }
+  #boardingPass .bpLabel { font-size: 9px; color: #6b6b8a; white-space: nowrap; }
+  #boardingPass .bpRoute { display: flex; justify-content: space-between; align-items: center; margin: 14px 0; }
+  #boardingPass .bpEnd { flex: 0 1 auto; min-width: 0; }
+  #boardingPass .bpCity { font-size: clamp(13px, 3.6vw, 20px); font-weight: bold; color: #1a1a2e; overflow-wrap: anywhere; }
+  #boardingPass .bpCode { font-size: clamp(18px, 5vw, 26px); font-weight: bold; letter-spacing: 1px; color: #1a1a2e; }
+  #boardingPass .bpArrow { flex: 1 1 0; min-width: 0; overflow: hidden; white-space: nowrap; text-align: center; margin: 0 8px; font-size: 18px; color: #2a4d8f; }
+  #boardingPass .bpGrid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
+    font-size: 10px; font-weight: bold; margin-top: 12px; border-top: 1px dashed #6b6b8a; padding-top: 10px;
+  }
+  #boardingPass .bpGrid div span { display: block; color: #6b6b8a; font-size: 8px; font-weight: normal; margin-bottom: 2px; }
+  #boardingPass .bpBarcode { margin-top: 14px; height: 30px; background: repeating-linear-gradient(90deg, #1a1a2e 0 2px, transparent 2px 5px); }
+  @media (max-width: 480px) {
+    body.win-scroll .box { padding: 18px 14px; }
+  }
+</style>
+
+<style>
+  /* ---- family-photo piece (this world's share of final-photo.jpg; all pieces reassemble in World 5's finale) ---- */
+  #photoPiece { display:flex; align-items:center; justify-content:center; gap:14px; margin:16px auto 0; padding:10px 14px;
+    max-width:440px; background:#14122a; border:2px solid #ffd36b; border-radius:6px; color:#f3eed8; text-align:left; box-sizing:border-box; }
+  body.win-scroll #pieceCanvas, #pieceCanvas { display:block !important; width:clamp(72px, 22vw, 120px); height:auto; aspect-ratio:3/4; image-rendering:pixelated; image-rendering:crisp-edges;
+    border:2px solid #3a3566; flex-shrink:0; }
+  #photoPiece .pieceTxt { font-family:'Courier New', monospace; font-size:11px; line-height:1.5; color:#c9c3e8; }
+  #photoPiece .pieceTxt b { color:#ffd36b; font-size:12px; letter-spacing:1px; }
+</style>
+<style>
+  /* ===== LEGIBILITY PASS (ported from World 3): bigger game, text box, sideways phone layout ===== */
+  html, body { height: 100%; overscroll-behavior: none; overflow: hidden; }
+  body {
+    height: 100dvh; max-height: 100dvh; min-height: 0;
+    justify-content: center; padding: 6px; gap: 4px;
+  }
+  #title { margin-bottom: 4px; flex-shrink: 0; }
+  #subtitle, .subtitle-text { margin-bottom: 4px; flex-shrink: 0; text-align: center; }
+  #gameWrap {
+    /* Scales up to fill the window (16:9), capped at 1600px; reserved height covers the
+       title/subtitle/instructions (desktop) or touch buttons (phones). */
+    width: min(calc(100vw - 12px), calc((100dvh - var(--reserveH, 120px)) * 1.7778), 1600px);
+    max-height: none;
+    aspect-ratio: 768 / 432;
+    container-type: inline-size;
+    flex-shrink: 0;
+  }
+  #gameWrap > canvas#game { width: 100%; height: 100%; max-height: none; aspect-ratio: auto; }
+  #hud { top: 1.04cqw; left: 1.04cqw; right: 1.04cqw; font-size: clamp(9px, 1.3cqw, 18px); }
+  #livesDisplay { font-size: clamp(13px, 2.1cqw, 26px); }
+  .overlay { padding: 3.9cqw; }
+  .box { max-width: min(520px, 92%); max-height: 92%; overflow-y: auto; padding: 3.1cqw 3.9cqw; }
+  .box h2 { font-size: clamp(12px, 2cqw, 24px); margin-bottom: 2.1cqw; }
+  .box p { font-size: clamp(10px, 1.5cqw, 18px); margin-bottom: 2.3cqw; }
+  #riddleInput { font-size: max(16px, 1.7cqw); } /* 16px minimum stops iPhone auto-zooming into the field */
+  .goBtn { font-size: clamp(10px, 1.3cqw, 16px); padding: 1.3cqw 1.82cqw; }
+  #instructions { margin-top: 6px; flex-shrink: 0; }
+  #touchControls { margin-top: 8px; flex-shrink: 0; }
+  @media (max-height: 700px) {
+    #title { font-size: 14px; margin-bottom: 2px; }
+    #subtitle, .subtitle-text { font-size: 8px; margin-bottom: 2px; }
+    #instructions { display: none; }
+    #gameWrap { --reserveH: 90px; }
+    #touchControls { margin-top: 6px; }
+  }
+  /* ---- message box: all speech/pickup/caption text as real page text ---- */
+  #msgBox {
+    position: absolute; left: 50%; bottom: 3.4cqw; transform: translateX(-50%);
+    width: max-content; max-width: 94%;
+    background: rgba(10,10,20,0.9); border: 2px solid #ffd23f; border-radius: 4px;
+    padding: clamp(6px, 1cqw, 14px) clamp(8px, 1.6cqw, 20px);
+    color: #fff; font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: clamp(10px, 1.75cqw, 22px); line-height: 1.6; text-align: center;
+    pointer-events: none; display: none; z-index: 5;
+  }
+  #msgBox.show { display: block; }
+  #msgName { display: block; color: #ffd23f; font-size: 0.8em; margin-bottom: 0.35em; }
+  #msgName:empty { display: none; }
+  #msgText { white-space: pre-line; }
+  #rotateHint {
+    display: none; color: #9be3ff; font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 9px; line-height: 1.6; text-align: center; margin-top: 8px; flex-shrink: 0;
+  }
+  @media (hover: none) and (pointer: coarse) and (orientation: portrait) {
+    #rotateHint { display: block; }
+    #gameWrap { --reserveH: 200px; }
+  }
+  /* Phones held sideways: full-screen game, title hidden, touch buttons float over the
+     bottom corners of the game (arrows left, jump right) */
+  @media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+    body { padding: 0; gap: 0; }
+    #title, #subtitle, .subtitle-text, #instructions { display: none; }
+    #gameWrap {
+      --reserveH: 0px;
+      width: min(100vw, calc(100dvh * 1.7778));
+      border: none; box-shadow: none; border-radius: 0;
+    }
+    #touchControls {
+      position: fixed; left: 0; right: 0;
+      bottom: max(8px, env(safe-area-inset-bottom));
+      margin: 0;
+      padding: 0 max(12px, env(safe-area-inset-left)) 0 max(12px, env(safe-area-inset-right));
+      pointer-events: none; z-index: 20;
+    }
+    .touchBtn { pointer-events: auto; opacity: 0.55; width: 58px; height: 58px; }
+    #leftBtn { order: 1; }
+    #rightBtn { order: 2; }
+    #jumpBtn { order: 3; margin-left: auto; width: 84px; }
+    #msgBox { bottom: 3cqw; max-width: 58%; }
+  }
+  /* ---- win screen: normal page scroll, game frame collapses around the win box ---- */
+  html.win-scroll, body.win-scroll { overflow: auto !important; height: auto !important; max-height: none !important; }
+  body.win-scroll #gameWrap {
+    width: min(900px, 100%); margin: 0 auto; aspect-ratio: auto; height: auto; max-height: none;
+    border: none; box-shadow: none;
+  }
+  body.win-scroll #msgBox, body.win-scroll #rotateHint { display: none !important; }
+  body.win-scroll #winOverlay .box { max-width: min(860px, 100%); width: 100%; max-height: none; overflow: visible; padding: 24px clamp(14px, 3vw, 30px); }
+  body.win-scroll #winOverlay .box h2 { font-size: clamp(13px, 1.9cqw, 18px); }
+  body.win-scroll #winOverlay .box p { font-size: clamp(10px, 1.4cqw, 13px); }
+  /* ---- photo-piece card: bigger text ---- */
+  #photoPiece { max-width: 520px; }
+  #photoPiece .pieceTxt { font-size: 15px; line-height: 1.55; }
+  #photoPiece .pieceTxt b { font-size: 13px; font-family: 'Press Start 2P', 'Courier New', monospace; line-height: 1.7; }
+</style>
+<style>
+  /* ===== polish pass 2: the win screen is its own full-screen scroll area (works in Safari/iOS
+     regardless of the page's gameplay scroll lock), bigger Jack photo, readable boarding pass ===== */
+  body.win-scroll #winOverlay {
+    position: fixed !important; inset: 0 !important; z-index: 200;
+    display: block !important; overflow-y: auto !important; -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain; background: #0a0a12 !important;
+    padding: 20px 12px 48px !important;
+  }
+  body.win-scroll #winOverlay .box { margin: 0 auto; max-height: none !important; overflow: visible !important; }
+  #winContent #photoPlaceholder, #winContent .photoPlaceholder {
+    flex: 0 1 260px !important; width: 260px !important; max-width: 100%; height: auto !important;
+    aspect-ratio: 3 / 4; margin: 0 !important; position: relative; overflow: hidden; padding: 0 !important;
+  }
+  #winContent #worldPhoto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #boardingPass .bpAirline { font-size: 14px !important; }
+  #boardingPass .bpLabel { font-size: 12px !important; }
+  #boardingPass .bpGrid { font-size: 15px !important; gap: 10px 8px !important; }
+  #boardingPass .bpGrid div span { font-size: 11px !important; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+  <div id="title">JACK'S QUEST</div>
+  <div id="subtitle">Wellington</div>
+  <div id="gameWrap">
+    <canvas id="game" width="768" height="432"></canvas>
+    <div id="hud">
+      <div id="livesDisplay">♥ ♥ ♥</div>
+      <div id="itemsDisplay">ITEMS: 0/3</div>
+    </div>
+    <div id="progressBar"><div id="progressFill"></div></div>
+    <div id="msgBox"><span id="msgName"></span><span id="msgText"></span></div>
+
+    <div class="overlay" id="riddleOverlay">
+      <div class="box">
+        <h2 id="riddleTitle">THE HARBOUR GATE</h2>
+        <p id="riddleText">I have a mouth but cannot speak,<br>Hills stand guard on either side,<br>Ships sail into my open cheek<br>Carried in upon the tide.<br><br>What am I?</p>
+        <div>
+          <input type="text" class="textInput" id="riddleInput" placeholder="TYPE YOUR ANSWER" autocomplete="off">
+          <button class="goBtn" id="riddleSubmit">GO</button>
+        </div>
+        <div class="feedback" id="riddleFeedback"></div>
+      </div>
+    </div>
+
+    <div class="overlay" id="lockedOverlay">
+      <div class="box">
+        <h2 id="lockedTitle">GATE LOCKED</h2>
+        <p id="lockedText">You still need to find all 3 hidden items before the ferry will depart.</p>
+        <button class="goBtn" id="lockedOk">OK</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="winOverlay">
+      <div class="box">
+        <h2>WELLINGTON<br>COMPLETE!</h2>
+        <p>You rode the cable car,<br>crossed the harbour,<br>and solved the riddle.<br>Jack boards the plane to Singapore...</p>
+        <div id="winContent">
+          <div class="photoPlaceholder" id="photoPlaceholder">
+            <!-- Photo of Jack (Wellington era). Loads jack-wellington.jpg from the same
+                 folder as this file; the placeholder text stays if the file isn't there yet. -->
+            <img id="worldPhoto" alt="Jack — Wellington years">
+            <span id="photoPlaceholderText">[ PHOTO OF JACK<br>WELLINGTON ERA<br>GOES HERE ]</span>
+          </div>
+          <div id="boardingPass">
+            <div class="bpHeader">
+              <div class="bpAirline">✈ JACK AIR</div>
+              <div class="bpLabel">BOARDING PASS</div>
+            </div>
+            <div class="bpRoute">
+              <div class="bpEnd">
+                <div class="bpCity">Wellington</div>
+                <div class="bpCode">WLG</div>
+              </div>
+              <div class="bpArrow">✈ ────────────</div>
+              <div class="bpEnd" style="text-align:right;">
+                <div class="bpCity">Singapore</div>
+                <div class="bpCode">SIN</div>
+              </div>
+            </div>
+            <div class="bpGrid">
+              <div><span>PASSENGER</span>JACK</div>
+              <div><span>GATE</span>A21</div>
+              <div><span>SEAT</span>21A</div>
+              <div><span>FLIGHT</span>JA021</div>
+              <div><span>BOARDING</span>21:00</div>
+              <div><span>CLASS</span>KID</div>
+            </div>
+            <div class="bpBarcode"></div>
+          </div>
+        </div>
+        <div id="photoPiece"><canvas id="pieceCanvas" width="225" height="300"></canvas><div class="pieceTxt"><b>MYSTERY PIECE FOUND! (1/5)</b><br>A strange little scrambled fragment.<br>Better hang on to it…</div></div>
+        <button class="goBtn" id="continueBtn" style="margin-top:18px; margin-left:0;">CONTINUE →</button>
+      </div>
+    </div>
+  </div>
+  <div id="instructions">ARROW KEYS TO MOVE · SPACE / UP TO JUMP</div>
+  <div id="touchControls">
+    <div class="touchBtn" id="leftBtn">◀</div>
+    <div class="touchBtn" id="jumpBtn">JUMP</div>
+    <div class="touchBtn" id="rightBtn">▶</div>
+  </div>
+  <div id="rotateHint">↻ TURN YOUR PHONE SIDEWAYS<br>FOR A BIGGER VIEW</div>
+
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = false;
+
+// ---- message box (legibility pass, same as World 3): gameplay code sets activePopup
+// (short-lived) or captionText (set every frame while a scripted line is showing); speech
+// bubbles call sayInBox(name, text) every frame they're up. updateMsgBox() mirrors whichever is
+// active into #msgBox as real page text. Popups and speech linger ~1.5s after they end so short
+// messages are still readable. "NAME: text" shows NAME as a speaker label. ----
+let captionText = null;
+let captionOpacity = 1;
+let frameSpeech = []; // [{name, text}] — cleared at the start of every draw()
+function sayInBox(name, text) { if (text) frameSpeech.push({name: name || '', text: String(text)}); }
+let msgShown = null, msgLingerUntil = 0;
+const MSG_NOT_SPEAKERS = ['FOUND'];
+function splitSpeaker(text) {
+  const m = /^([A-ZÀ-Ý][A-ZÀ-Ý'. &]{1,16}): (.+)$/.exec(text);
+  return (m && MSG_NOT_SPEAKERS.indexOf(m[1]) === -1) ? {name: m[1], text: m[2]} : {name: '', text: text};
+}
+function updateMsgBox() {
+  const box = document.getElementById('msgBox');
+  if (!box) return;
+  let lines = null, isCaption = false;
+  if (captionText !== null) { lines = [splitSpeaker(captionText)]; isCaption = true; }
+  else if (frameSpeech.length) lines = frameSpeech.some(l => l.name) ? frameSpeech.filter(l => l.name) : frameSpeech.slice(-1);
+  else if (typeof activePopup !== 'undefined' && activePopup && activePopup.text) lines = [splitSpeaker(activePopup.text)];
+  const now = performance.now();
+  if (lines) {
+    const key = JSON.stringify(lines);
+    if (key !== msgShown) {
+      msgShown = key;
+      const nameEl = document.getElementById('msgName'), textEl = document.getElementById('msgText');
+      if (lines.length === 1) { nameEl.textContent = lines[0].name; textEl.textContent = lines[0].text; }
+      else {
+        // two people talking at once: one line each, "NAME: text"
+        nameEl.textContent = '';
+        textEl.textContent = lines.map(l => (l.name ? l.name + ': ' : '') + l.text).join('\n');
+      }
+    }
+    msgLingerUntil = isCaption ? now : now + 1500;
+    box.style.opacity = isCaption ? captionOpacity : 1;
+    box.classList.add('show');
+  } else if (now > msgLingerUntil && box.classList.contains('show')) {
+    box.classList.remove('show');
+    msgShown = null;
+  }
+}
+
+
+const GRAVITY = 0.55;
+const JUMP_FORCE = -11.5;
+const MOVE_SPEED = 3.2;
+const FRICTION = 0.82;
+const GROUND_Y = 360;
+
+// ============================================================
+// WORLD LAYOUT — stitched into one long level (~3 min)
+//   Zone A:  0-1400        Hillside suburb, general platforming (2 collectibles)
+//   Zone A2: 1400-1900     Cable car climb (stepped platforms up to the station)
+//   Zone A3: 1900-2400     Cable car ride down (moving platform + dodge obstacles)
+//   Zone A4: 2400-3000     Bucket Fountain timing puzzle (Cuba Street)
+//   [CHECKPOINT at 3000]
+//   Zone B1: 3000-3500     First windy patch
+//   Calm:   3500-3790      Breather zone, no wind
+//   Zone B2: 3790-4300     Second windy patch
+//   Zone C:  4300-5290     Harbour ferry crossing + 1 collectible after disembarking
+//   Zone D:  5290-6000     Airport gate + plane boarding finale
+// ============================================================
+const LEVEL_WIDTH = 6400;
+const CHECKPOINT_X = 3000;
+
+const platforms = [
+  // Zone A - hillside suburb ground + platforming (step-ladder heights, max ~90px rise per jump)
+  {x: 0, y: GROUND_Y, w: 420, h: 72},
+  {x: 480, y: GROUND_Y, w: 260, h: 72},
+  {x: 800, y: GROUND_Y, w: 300, h: 72},
+  {x: 1160, y: GROUND_Y, w: 240, h: 72},
+  // floating platforms zone A — reachable step-ladders, heights varied for visual interest
+  // (each step stays within verified reachable range: <=90px rise, gaps <=110px)
+  {x: 250, y: 300, w: 90, h: 18},
+  {x: 400, y: 230, w: 90, h: 18},
+  {x: 560, y: 290, w: 90, h: 18},
+  {x: 700, y: 210, w: 90, h: 18},
+  {x: 870, y: 280, w: 90, h: 18},
+  {x: 1020, y: 200, w: 90, h: 18},
+  {x: 1170, y: 270, w: 90, h: 18},
+
+  // Zone A2 - cable car climb: stepped platforms rising toward the elevated station.
+  // Pure zigzag with zero horizontal overlap between consecutive steps, so no platform's
+  // underside ever hangs as a low ceiling over the one below it.
+  {x: 1400, y: GROUND_Y, w: 120, h: 72},
+  {x: 1560, y: 300, w: 110, h: 18},
+  {x: 1420, y: 240, w: 110, h: 18},
+  {x: 1580, y: 180, w: 110, h: 18},
+  {x: 1440, y: 120, w: 110, h: 18},
+  {x: 1150, y: 80, w: 240, h: 18}, // cable car station platform (top) — wide, generous landing, fully clear of the step below
+
+  // Zone A3 - cable car ride down: destination platform at the bottom of the ride
+  {x: 2350, y: GROUND_Y - 20, w: 130, h: 20},
+
+  // Zone A4 - Bucket Fountain: solid ground before and after, but the entire gap under the
+  // fountain is water (deadly on contact, see fountainWater below) so the buckets are the
+  // only way up and across, and falling means a splash + respawn, not a safe landing.
+  {x: 2480, y: GROUND_Y, w: 140, h: 72},
+  {x: 2900, y: GROUND_Y, w: 200, h: 72},
+
+  // Zone B1 - first windy patch (short)
+  {x: 3100, y: GROUND_Y, w: 200, h: 72},
+  {x: 3230, y: 300, w: 90, h: 18},
+  {x: 3370, y: GROUND_Y - 40, w: 160, h: 112},
+
+  // Calm gap between wind patches — solid ground, no wind, breather zone
+  {x: 3600, y: GROUND_Y, w: 220, h: 72},
+
+  // Zone B2 - second windy patch
+  {x: 3890, y: GROUND_Y, w: 180, h: 72},
+  {x: 4030, y: 300, w: 90, h: 18},
+  {x: 4170, y: GROUND_Y - 40, w: 160, h: 112},
+
+  // Zone C - harbour edge (dock) before ferry
+  {x: 4400, y: GROUND_Y, w: 260, h: 72},
+  // ferry deck is a moving platform (handled separately)
+  // far dock after crossing — continuous ground the whole way, so the player can walk
+  // underneath the elevated mound below rather than only approaching it from the top
+  {x: 5060, y: GROUND_Y, w: 570, h: 72},
+
+  // Zone D - airport approach
+  {x: 5700, y: GROUND_Y, w: 400, h: 72},
+];
+
+// Wind gust zones (push player left while inside) — two separated patches, clouds at head height
+const windZones = [
+  {x: 3110, y: 0, w: 210, h: GROUND_Y, clouds: [{x: 3165, y: 250, ph: 0}, {x: 3268, y: 232, ph: 1.7}]},
+  {x: 3900, y: 0, w: 210, h: GROUND_Y, clouds: [{x: 3955, y: 250, ph: 0.8}, {x: 4058, y: 232, ph: 2.5}]},
+];
+
+// Hidden collectible bricks (Mario-style "?" blocks): hit from below to pop.
+// 2 in the suburb (gate ferry boarding), 1 after disembarking (gates final riddle)
+// Each sits directly above a named platform so it's reachable by jumping up into it.
+const collectibles = [
+  {x: 285, y: 240, w: 26, h: 22, found: false, label: 'CABLE CAR TICKET', id: 'ticket', zone: 'preFerry', popTimer: 0, disguise: 'cloud'},
+  {x: 1055, y: 130, w: 26, h: 22, found: false, label: 'FERRY PASS', id: 'ferryPass', zone: 'preFerry', popTimer: 0, disguise: 'cloud'},
+  // tree planted on the far-dock ground; the hit box IS the underside of the canopy, high
+  // enough to walk under (bottom 98px above ground) and headbutt with a plain jump from the ground
+  {x: 5190, y: GROUND_Y - 120, w: 44, h: 22, found: false, label: 'BOOTIE', id: 'bootie', zone: 'postFerry', popTimer: 0, disguise: 'tree'},
+];
+function hasItem(id) { const c = collectibles.find(c => c.id === id); return !!(c && c.found); }
+
+// Popup bubble messages shown briefly when a collectible is found
+let activePopup = null; // {text, timer}
+
+function preFerryFoundCount() {
+  return collectibles.filter(c => c.zone === 'preFerry' && c.found).length;
+}
+function postFerryFound() {
+  return collectibles.find(c => c.zone === 'postFerry').found;
+}
+
+// Cable car (Zone A2 -> A3): rides from the station platform down to the Zone A3 destination platform.
+// Player boards at the station (top of the climb); car departs automatically after a short pause.
+const cableCar = {
+  stationX: 1220, stationY: 80,   // boarding point at the top of the climb (centered on wide station platform)
+  destX: 2350, destY: GROUND_Y - 20 - 40, // riding height above the destination platform
+  x: 1220, y: 80,
+  w: 70, h: 40,
+  riding: false,
+  rideProgress: 0, // 0..1
+  boarded: false,
+};
+
+// Obstacles along the cable car ride (birds swooping across the track)
+const cableCarObstacles = [
+  {t: 0.35, y: -18, w: 20, h: 14, hit: false}, // t = fraction along the ride when this appears
+  {t: 0.65, y: 14, w: 20, h: 14, hit: false},
+];
+
+// Bucket Fountain (Zone A4): a VERTICAL stack of buckets, evoking the real Cuba Street fountain
+// where water cascades down between tiers. Each bucket acts as a jump-to platform; jumping onto
+// one while it's mid-tip knocks the player back down rather than a simple walk-through hazard.
+const FOUNTAIN_X_START = 2650;
+const buckets = [
+  // timings are 20% slower than the original (cycle 110→138, tip 28→35, phases ×1.25)
+  {x: FOUNTAIN_X_START, y: GROUND_Y - 70, w: 50, h: 24, cycle: 138, phase: 0},
+  {x: FOUNTAIN_X_START + 70, y: GROUND_Y - 150, w: 50, h: 24, cycle: 138, phase: 38},
+  {x: FOUNTAIN_X_START + 20, y: GROUND_Y - 230, w: 50, h: 24, cycle: 138, phase: 81},
+  {x: FOUNTAIN_X_START + 90, y: GROUND_Y - 310, w: 50, h: 24, cycle: 138, phase: 113, isTop: true},
+];
+// A bucket is "tipping/splashing" (dangerous to land on) when (frameCount + phase) % cycle
+// is within the tip window
+const BUCKET_TIP_WINDOW = 35;
+
+// Sunken pool at the bottom of the fountain gap — spans the full gap between the ground
+// platforms on either side (2620-2900) and is deadly on contact: falling off the buckets
+// (or retreating backward off the far platform, since the climb can't be done in reverse)
+// means a splash and a respawn at the fountain's start, not a safe landing.
+const fountainWater = {x: 2620, y: GROUND_Y + 40, w: 280, h: 20};
+const FOUNTAIN_RESPAWN_X = FOUNTAIN_X_START - 40;
+
+// Ferry crossing (Zone C): moving platform + obstacles
+const ferry = {
+  startX: 4640, // where it picks up
+  endX: 5040,   // where it drops off
+  minX: 4640,
+  maxX: 5040,
+  x: 4640,
+  y: GROUND_Y,
+  w: 160,
+  h: 30,
+  dir: 1,
+  speed: 1.4,
+  carrying: false,
+};
+
+// Ferry obstacles: seagulls that fly back and forth across the harbour independently of the
+// ferry's position, so standing still is not a safe strategy — each has its own patrol range and speed.
+const ferryObstacles = [
+  {minX: 4650, maxX: 5030, x: 4650, y: GROUND_Y - 80, w: 22, h: 16, speed: 1.8, dir: 1, bobPhase: 0},
+  {minX: 4650, maxX: 5030, x: 5030, y: GROUND_Y - 130, w: 22, h: 16, speed: 1.3, dir: -1, bobPhase: 2},
+  {minX: 4650, maxX: 5030, x: 4840, y: GROUND_Y - 60, w: 22, h: 16, speed: 2.2, dir: 1, bobPhase: 4},
+];
+
+const gateX = 4600; // dock gate before ferry — locked until 2 pre-ferry items collected
+const riddleGateX = 5450; // gate after disembarking — locked until post-ferry item collected
+const finalePlaneX = LEVEL_WIDTH - 500;
+
+// ---------- Player ----------
+const player = {
+  x: 40, y: 280, w: 26, h: 34,
+  vx: 0, vy: 0,
+  onGround: false,
+  facing: 1,
+  lives: 3,
+  itemsFound: 0,
+  onFerry: false,
+};
+
+/* ===== Jack's Quest: shared progress across worlds (see index.html) =====
+   A single localStorage record carries lives (and, for later worlds, inventory) from one
+   world's CONTINUE click into the next world's opening state. Opening a world file directly
+   (no matching saved record) falls back to this file's own defaults untouched, so standalone
+   testing still works exactly as before. */
+const PROGRESS_KEY = 'jacksQuestProgress';
+function loadProgress() {
+  try { const raw = localStorage.getItem(PROGRESS_KEY); return raw ? JSON.parse(raw) : null; }
+  catch (e) { return null; }
+}
+function saveProgress(data) {
+  try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(data)); } catch (e) {}
+}
+(function applySavedProgress() {
+  const saved = loadProgress();
+  if (saved && saved.world === 1 && typeof saved.lives === 'number') player.lives = saved.lives;
+})();
+
+const keys = {};
+function handleKeyDown(e) {
+  if (document.body.classList.contains('win-scroll')) return; // let arrows/space scroll the win screen
+  keys[e.code] = true;
+  // Arrow keys + Space only — WASD removed so letter keys are free for typing riddle answers
+  // (e.g. words containing "a") without doubling as movement controls.
+  if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.code)) e.preventDefault();
+}
+function handleKeyUp(e) {
+  keys[e.code] = false;
+}
+// listen on both window and document — some embedded/iframe contexts only deliver
+// key events reliably to one or the other
+window.addEventListener('keydown', handleKeyDown);
+window.addEventListener('keyup', handleKeyUp);
+document.addEventListener('keydown', handleKeyDown);
+document.addEventListener('keyup', handleKeyUp);
+
+function bindHold(el, code) {
+  const press = e => { e.preventDefault(); keys[code] = true; };
+  const release = e => { e.preventDefault(); keys[code] = false; };
+  el.addEventListener('touchstart', press, {passive: false});
+  el.addEventListener('touchend', release, {passive: false});
+  el.addEventListener('touchcancel', release, {passive: false});
+  el.addEventListener('mousedown', press);
+  el.addEventListener('mouseup', release);
+  el.addEventListener('mouseleave', release);
+}
+bindHold(document.getElementById('leftBtn'), 'ArrowLeft');
+bindHold(document.getElementById('rightBtn'), 'ArrowRight');
+bindHold(document.getElementById('jumpBtn'), 'Space');
+
+canvas.tabIndex = 0;
+canvas.addEventListener('click', () => canvas.focus());
+window.addEventListener('load', () => canvas.focus());
+setTimeout(() => canvas.focus(), 300);
+
+// If the browser tab/window loses focus (e.g. the player clicks elsewhere), release all
+// held keys so the character doesn't keep "running" and don't try to steal focus back —
+// the player will click the canvas again when they want to resume.
+window.addEventListener('blur', () => {
+  for (const k in keys) keys[k] = false;
+});
+
+// visible "click to start" gate — makes it unambiguous that a click is needed to
+// establish keyboard focus in embedded/iframe contexts, and gives the click a clear target
+const startGate = document.createElement('div');
+startGate.id = 'startGate';
+startGate.style.cssText = 'position:absolute;inset:0;background:rgba(10,10,20,0.85);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ffd23f;font-family:"Press Start 2P",monospace;font-size:clamp(14px,2.4cqw,28px);text-align:center;cursor:pointer;z-index:50;';
+startGate.innerHTML = '<div>CLICK / TAP TO START</div><div style="color:#9be3ff;font-size:clamp(9px,1.2cqw,14px);margin-top:1.6em;line-height:1.6;">(needed so your keyboard connects to the game)</div>';
+document.getElementById('gameWrap').appendChild(startGate);
+startGate.addEventListener('click', () => {
+  canvas.focus();
+  startGate.remove();
+});
+let camX = 0;
+let gameWon = false;
+let riddleOpen = false;
+let lockedMsgOpen = false;
+let planeSequence = false;
+let planeSeqTimer = 0;
+let hitFlash = 0;
+let knockbackTimer = 0;      // seagull hit: timed push-back, arrow input suppressed while > 0
+let knockbackOnFerry = false; // if hit while riding, keep the push on the deck (no knock into the water)
+let invulnTimer = 0;         // post-hit / post-respawn invulnerability (player blinks)
+let ticketMsgShown = false;
+let ferryPassShown = false;
+
+function showLocked(title, text) {
+  lockedMsgOpen = true;
+  for (const k in keys) keys[k] = false;
+  document.getElementById('lockedTitle').textContent = title;
+  document.getElementById('lockedText').textContent = text;
+  document.getElementById('lockedOverlay').classList.add('show');
+}
+
+// Single place a life is lost. Returns true if that was the last life (lives refill to 3 and
+// the caller should send the player back to the last checkpoint).
+function loseLife() {
+  player.lives -= 1;
+  invulnTimer = 90;
+  let out = false;
+  if (player.lives <= 0) {
+    player.lives = 3;
+    out = true;
+    activePopup = {text: 'OUT OF LIVES — RESTARTING!', timer: 110, x: 0, y: 0, screen: true};
+  }
+  updateHUD();
+  return out;
+}
+function respawnAt(x) {
+  player.x = x; player.y = 280; player.vx = 0; player.vy = 0;
+  knockbackTimer = 0;
+}
+function respawnAtCheckpoint() {
+  respawnAt(checkpointReached ? CHECKPOINT_X + 20 : 40);
+}
+
+function rectsOverlap(a, b) {
+  return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
+function allItemsFound() {
+  return player.itemsFound >= collectibles.length;
+}
+
+function update() {
+  if (riddleOpen || gameWon || lockedMsgOpen) return;
+
+  if (activePopup) {
+    activePopup.timer--;
+    if (activePopup.timer <= 0) activePopup = null;
+  }
+
+  if (planeSequence) {
+    planeSeqTimer++;
+    // phase 1 (0-70): walk to the foot of the boarding stairs
+    // phase 2 (70-120): brief pause at the stairs (~0.8s) — kept short so it doesn't read as
+    //                   "waiting for the player to do something"
+    // phase 3 (120-190): climb the stairs diagonally into the doorway, fading out near the top
+    // phase 4 (200+): win screen
+    if (planeSeqTimer > 200) {
+      gameWon = true;
+      document.getElementById('winOverlay').classList.add('show');
+      document.documentElement.classList.add('win-scroll');
+      document.body.classList.add('win-scroll');
+    }
+    return;
+  }
+
+  if (invulnTimer > 0) invulnTimer--;
+
+  // horizontal input (arrow keys only) — suppressed during a knockback so it isn't cancelled
+  if (knockbackTimer > 0) {
+    knockbackTimer--;
+    player.vx *= FRICTION;
+    player.vx = Math.max(-8, Math.min(8, player.vx));
+  } else {
+    if (keys['ArrowLeft']) { player.vx -= 0.6; player.facing = -1; }
+    if (keys['ArrowRight']) { player.vx += 0.6; player.facing = 1; }
+    player.vx *= FRICTION;
+    player.vx = Math.max(-MOVE_SPEED, Math.min(MOVE_SPEED, player.vx));
+  }
+
+  frameCount++;
+  if (!checkpointReached && player.x >= CHECKPOINT_X) {
+    checkpointReached = true;
+  }
+
+  // wind zones push back
+  for (const wz of windZones) {
+    if (rectsOverlap(player, wz)) {
+      player.vx -= 0.35;
+    }
+  }
+
+  // jump
+  if ((keys['Space'] || keys['ArrowUp']) && player.onGround) {
+    player.vy = JUMP_FORCE;
+    player.onGround = false;
+  }
+
+  // gravity
+  player.vy += GRAVITY;
+  if (player.vy > 14) player.vy = 14;
+
+  // ---- cable car logic ----
+  // player boards by standing on the station platform; car auto-departs after a short pause,
+  // rides down to the destination, dodging 1-2 obstacles along the way.
+  const onStationNow = player.onGround && !cableCar.riding && !cableCar.boarded &&
+    rectsOverlap(player, {x: cableCar.stationX - 60, y: cableCar.stationY - 50, w: cableCar.w + 120, h: 60});
+
+  const nearStation = rectsOverlap(player, {x: cableCar.stationX - 60, y: cableCar.stationY - 50, w: cableCar.w + 120, h: 60});
+  if (!nearStation) ticketMsgShown = false;
+  if (onStationNow && !cableCar.riding) {
+    if (!hasItem('ticket')) {
+      if (!ticketMsgShown) {
+        ticketMsgShown = true;
+        showLocked('NO TICKET', 'You need a cable car ticket to board. Maybe one blew away somewhere back down the hill...');
+      }
+    } else {
+      cableCar.boarded = true;
+      activePopup = {text: 'TICKET CHECKED ✓ — ALL ABOARD!', timer: 120, x: 0, y: 0, screen: true};
+    }
+  }
+
+  if (cableCar.boarded && !cableCar.riding) {
+    cableCar.rideProgress = 0;
+    cableCar.riding = true;
+    for (const ob of cableCarObstacles) ob.hit = false;
+  }
+
+  if (cableCar.riding) {
+    cableCar.rideProgress += 0.003; // ~5s ride (halved from original speed)
+    if (cableCar.rideProgress >= 1) {
+      cableCar.rideProgress = 1;
+      cableCar.riding = false;
+      cableCar.boarded = false;
+      // deposit player onto the Zone A3 destination platform
+      player.x = cableCar.destX + 20;
+      player.y = cableCar.destY - player.h + 20;
+      player.vx = 0; player.vy = 0;
+    } else {
+      // carry player along with the car
+      const t = cableCar.rideProgress;
+      cableCar.x = cableCar.stationX + (cableCar.destX - cableCar.stationX) * t;
+      cableCar.y = cableCar.stationY + (cableCar.destY - cableCar.stationY) * t;
+      player.x = cableCar.x + cableCar.w/2 - player.w/2;
+      player.y = cableCar.y - player.h + 6;
+      player.vx = 0; player.vy = 0;
+
+      // dodge obstacles: if the player is at roughly the same t as an obstacle and doesn't
+      // move up/down (jump within the car) to avoid it, lose a life and reset the ride
+      for (const ob of cableCarObstacles) {
+        if (!ob.hit && Math.abs(t - ob.t) < 0.025) {
+          const obstacleWorldY = cableCar.y + ob.y;
+          const playerCenterY = player.y + player.h/2;
+          const dodged = Math.abs(playerCenterY - (cableCar.y + cableCar.h/2)) > 16; // jumped up/crouched to avoid
+          if (!dodged) {
+            ob.hit = true;
+            hitFlash = 12;
+            activePopup = {text: 'HIT BY A BIRD!', timer: 70, x: player.x, y: player.y - 20};
+            loseLife(); // mid-ride: keep riding even on the last life (lives just refill)
+          } else {
+            ob.hit = true;
+          }
+        }
+      }
+    }
+  }
+
+  // (bucket fountain collision is handled in the main Y-collision pass below, alongside
+  // platforms and collectibles, so it uses the player's up-to-date position)
+
+  // ---- ferry logic ----
+  // ferry only moves once player has boarded it (stands on it) and both pre-ferry items found
+  const onFerryNow = player.onGround && rectsOverlap(
+    {x: player.x, y: player.y + player.h, w: player.w, h: 4},
+    {x: ferry.x, y: ferry.y, w: ferry.w, h: ferry.h}
+  );
+  player.onFerry = onFerryNow;
+
+  if (onFerryNow && hasItem('ferryPass') && !ferryPassShown) {
+    ferryPassShown = true;
+    activePopup = {text: 'FERRY PASS ✓', timer: 90, x: player.x + player.w/2, y: player.y};
+  }
+  if (onFerryNow && hasItem('ferryPass')) {
+    ferry.x += ferry.speed * ferry.dir;
+    if (ferry.x >= ferry.maxX) { ferry.x = ferry.maxX; ferry.dir = 1; }
+    if (ferry.x <= ferry.minX) { ferry.x = ferry.minX; ferry.dir = 1; }
+    player.x += ferry.speed * ferry.dir; // carry player along
+  }
+
+  // gate check: no boarding the ferry without a ferry pass
+  if (player.x + player.w > gateX && !hasItem('ferryPass')) {
+    player.x = gateX - player.w;
+    player.vx = 0;
+    if (keys['ArrowRight']) {
+      showLocked('NO FERRY PASS', 'You need a ferry pass to board. Did you spot one hidden back up the hillside?');
+    }
+  }
+
+  // gate check: block progress to riddle gate until post-ferry item found
+  if (player.x + player.w > riddleGateX && !postFerryFound()) {
+    player.x = riddleGateX - player.w;
+    player.vx = 0;
+    if (keys['ArrowRight']) {
+      showLocked('GATE LOCKED', 'Find the last hidden item on the dock before continuing.');
+    }
+  }
+
+  // gate check: block progress past the fountain until the top bucket has been reached —
+  // stops the pool base from being used as a free walk-through bypass of the climb
+  if (player.x + player.w > 2900 && !fountainCleared) {
+    player.x = 2900 - player.w;
+    player.vx = 0;
+    if (keys['ArrowRight']) {
+      showLocked('GATE LOCKED', 'Climb the buckets to the top before continuing.');
+    }
+  }
+
+  // move + collide X (skip world bound on ferry deck area, handled above)
+  player.x += player.vx;
+  if (player.x < 0) player.x = 0;
+  if (player.x > LEVEL_WIDTH - player.w) player.x = LEVEL_WIDTH - player.w;
+  // seagull knockback while riding stays on the deck (never pushes him into the harbour)
+  if (knockbackTimer > 0 && knockbackOnFerry) {
+    player.x = Math.max(ferry.x, Math.min(ferry.x + ferry.w - player.w, player.x));
+  }
+
+  for (const p of platforms) {
+    if (rectsOverlap(player, p)) {
+      if (player.vx > 0) player.x = p.x - player.w;
+      else if (player.vx < 0) player.x = p.x + p.w;
+      player.vx = 0;
+    }
+  }
+
+  // move + collide Y
+  player.y += player.vy;
+  player.onGround = false;
+  for (const p of platforms) {
+    if (rectsOverlap(player, p)) {
+      if (player.vy > 0) {
+        player.y = p.y - player.h;
+        player.vy = 0;
+        player.onGround = true;
+      } else if (player.vy < 0) {
+        player.y = p.y + p.h;
+        player.vy = 0;
+      }
+    }
+  }
+  // undiscovered collectible bricks act as solid blocks (land on top, bonk from below)
+  for (const c of collectibles) {
+    if (c.found) continue;
+    if (rectsOverlap(player, c)) {
+      if (player.vy > 0) {
+        player.y = c.y - player.h;
+        player.vy = 0;
+        player.onGround = true;
+      } else if (player.vy < 0) {
+        // hit from below — pop the brick
+        player.y = c.y + c.h;
+        player.vy = 2;
+        c.found = true;
+        c.popTimer = 30;
+        player.itemsFound++;
+        updateHUD();
+        activePopup = {text: `FOUND: ${c.label}!`, timer: 90, x: c.x + c.w/2, y: c.y};
+      }
+    }
+  }
+  // ferry deck as a platform (only solid, only relevant in Zone C gap)
+  if (rectsOverlap(player, ferry)) {
+    if (player.vy >= 0 && player.y + player.h - player.vy <= ferry.y + 2) {
+      player.y = ferry.y - player.h;
+      player.vy = 0;
+      player.onGround = true;
+    }
+  }
+
+  // bucket fountain — each bucket acts as a solid landing platform when landed on from above;
+  // if it happens to be mid-tip at the moment of landing, that's a bad landing (knockback + retry)
+  for (const b of buckets) {
+    if (rectsOverlap(player, b) && player.vy >= 0) {
+      const cyclePos = (frameCount + b.phase) % b.cycle;
+      const isTipping = cyclePos < BUCKET_TIP_WINDOW;
+      if (isTipping) {
+        if (loseLife()) { respawnAtCheckpoint(); break; }
+        respawnAt(FOUNTAIN_RESPAWN_X);
+        player.vy = -3;
+        activePopup = {text: 'SPLASHED! BAD LANDING — TRY AGAIN', timer: 90, x: player.x, y: player.y - 20};
+      } else {
+        player.y = b.y - player.h;
+        player.vy = 0;
+        player.onGround = true;
+        if (b.isTop) fountainCleared = true;
+      }
+    }
+  }
+
+  // sunken fountain pool — deadly on contact (splash + respawn at the fountain's start),
+  // whether the player falls off the buckets or backs into it retreating from the far side
+  // (the climb can't be done in reverse, so backing off the far platform is the only "way
+  // out" going backward — it should cost a life and drop them back at the fountain, not
+  // send them all the way to the start of the level)
+  if (rectsOverlap(player, fountainWater)) {
+    if (loseLife()) respawnAtCheckpoint();
+    else {
+      respawnAt(FOUNTAIN_RESPAWN_X);
+      player.vy = -3;
+      activePopup = {text: 'SPLASH! TRY THE FOUNTAIN AGAIN', timer: 90, x: player.x, y: player.y - 20};
+    }
+  }
+
+  // fell off world (into harbour gap, fountain, or elsewhere)
+  if (player.y > 500) {
+    const out = loseLife();
+    // respawn at nearest checkpoint behind the player, so ferry/fountain state stays in sync
+    if (player.x > 4400) {
+      player.x = 4450; player.y = 280; // near harbour dock
+    } else if (player.x > FOUNTAIN_X_START - 100 && player.x < 2950) {
+      player.x = FOUNTAIN_RESPAWN_X; player.y = 280; // fell in/near the fountain — retry the climb, not the whole level
+    } else if (player.x > CHECKPOINT_X) {
+      player.x = CHECKPOINT_X + 20; player.y = 280; // just past the mid-level checkpoint
+    } else {
+      player.x = 40; player.y = 280; // start of the suburb
+    }
+    if (out) respawnAtCheckpoint();
+    player.vx = 0; player.vy = 0;
+    knockbackTimer = 0;
+  }
+
+  // ferry auto-returns to the near dock if nobody is aboard (prevents it getting stranded
+  // on the far side after the player falls off mid-crossing)
+  if (!onFerryNow && ferry.x !== ferry.minX) {
+    ferry.x -= ferry.speed;
+    if (ferry.x < ferry.minX) ferry.x = ferry.minX;
+  }
+
+  // seagulls patrol independently across the harbour every frame (not tied to ferry position)
+  for (const ob of ferryObstacles) {
+    ob.x += ob.speed * ob.dir;
+    if (ob.x >= ob.maxX) { ob.x = ob.maxX; ob.dir = -1; }
+    if (ob.x <= ob.minX) { ob.x = ob.minX; ob.dir = 1; }
+  }
+
+  // seagulls — a hit costs a life and knocks the player back (timed knockback state + separate
+  // invulnerability window, so holding into a gull can't chain hits). If riding the ferry, the
+  // push is kept on the deck rather than knocking him into the water.
+  if (invulnTimer <= 0 && knockbackTimer <= 0 && (player.onFerry || (player.x > ferry.minX - 40 && player.x < ferry.maxX + 200))) {
+    for (const ob of ferryObstacles) {
+      const bob = Math.sin(Date.now()/260 + ob.bobPhase) * 20;
+      const obRect = {x: ob.x, y: ob.y + bob, w: ob.w, h: ob.h};
+      if (rectsOverlap(player, obRect)) {
+        hitFlash = 12;
+        const wasOnFerry = player.onFerry;
+        const dir = (player.x + player.w/2) < (ob.x + ob.w/2) ? -1 : 1;
+        if (loseLife()) { respawnAtCheckpoint(); break; }
+        activePopup = {text: 'SQUAWK! SEAGULL HIT', timer: 70, x: player.x + player.w/2, y: player.y};
+        knockbackTimer = 18;
+        knockbackOnFerry = wasOnFerry;
+        player.vx = dir * 7;
+        if (!wasOnFerry) player.vy = -5;
+        break;
+      }
+    }
+  }
+
+  if (hitFlash > 0) hitFlash--;
+
+  // camera follows player, clamped to level
+  camX = player.x - 300;
+  camX = Math.max(0, Math.min(LEVEL_WIDTH - canvas.width, camX));
+
+  // progress bar
+  document.getElementById('progressFill').style.width = Math.min(100, (player.x / (LEVEL_WIDTH - 200)) * 100) + '%';
+
+  // riddle gate trigger — placed just after the post-ferry collectible dock
+  if (player.x > riddleGateX && player.x < riddleGateX + 80 && !riddleOpen && !gameWon && postFerryFound()) {
+    openRiddle();
+  }
+
+  // plane boarding finale trigger — fires while still approaching so the plane is in view
+  // plane boarding finale trigger — fires once close enough that the camera has scrolled
+  // to (or very near) its max clamp, so the frozen camera during the sequence fully frames the plane
+  if (player.x + player.w > finalePlaneX - 60 && !planeSequence && !riddleOpen && riddleSolved) {
+    planeSequence = true;
+    planeSeqTimer = 0;
+    // snap camera to max scroll so the full plane is guaranteed to be in frame for the sequence
+    camX = LEVEL_WIDTH - canvas.width;
+  }
+}
+
+let riddleSolved = false;
+let frameCount = 0;
+let checkpointReached = false;
+let fountainCleared = false;
+
+function updateHUD() {
+  document.getElementById('livesDisplay').textContent = '♥ '.repeat(player.lives).trim();
+  document.getElementById('itemsDisplay').textContent = `ITEMS: ${player.itemsFound}/3`;
+}
+
+// ---------- Drawing ----------
+function drawSky() {
+  const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  grad.addColorStop(0, '#4a90c2');
+  grad.addColorStop(0.6, '#7ec8e3');
+  grad.addColorStop(1, '#bfe8f0');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+// Colourful hillside houses (Wellington-style weatherboard homes stacked on green hills)
+function drawHillsideHouses(offsetFactor, baseY, scale, colorSet) {
+  const off = (camX * offsetFactor) % (280 * scale);
+  for (let i = -1; i < 8; i++) {
+    const hx = i * 280 * scale - off;
+    const hillSpan = 280 * scale;
+    // hill mound (quadratic bezier from (hx,GROUND_Y) via control (hx+span/2,baseY) to (hx+span,GROUND_Y))
+    ctx.fillStyle = colorSet.hill;
+    ctx.beginPath();
+    ctx.moveTo(hx, GROUND_Y);
+    ctx.quadraticCurveTo(hx + hillSpan/2, baseY, hx + hillSpan, GROUND_Y);
+    ctx.fill();
+
+    // helper: y-height of the quadratic curve at fraction t (0..1) along this hill
+    const curveY = (t) => {
+      // quadratic bezier: B(t) = (1-t)^2*P0 + 2(1-t)t*P1 + t^2*P2
+      const p0 = GROUND_Y, p1 = baseY, p2 = GROUND_Y;
+      return (1-t)*(1-t)*p0 + 2*(1-t)*t*p1 + t*t*p2;
+    };
+
+    // houses clustered on the hill, sitting flush on the slope at their x position
+    const houseColors = ['#d9704f', '#4f8fd9', '#e8c14a', '#7fd94f', '#d94f9c'];
+    const houseFractions = [0.22, 0.38, 0.55, 0.72]; // positions along the hill (avoid extreme edges)
+    for (let h = 0; h < houseFractions.length; h++) {
+      const t = houseFractions[h];
+      const hxOff = hx + hillSpan * t - 11*scale;
+      const slopeY = curveY(t);
+      const houseH = 16*scale;
+      const hyOff = slopeY - houseH; // sit house base ON the slope at this point
+      const c = houseColors[(i + h) % houseColors.length];
+      // house body
+      ctx.fillStyle = '#f2e9d8';
+      ctx.fillRect(hxOff, hyOff, 22*scale, houseH);
+      // roof
+      ctx.fillStyle = c;
+      ctx.beginPath();
+      ctx.moveTo(hxOff - 3*scale, hyOff);
+      ctx.lineTo(hxOff + 11*scale, hyOff - 10*scale);
+      ctx.lineTo(hxOff + 25*scale, hyOff);
+      ctx.fill();
+      // window
+      ctx.fillStyle = '#2a4d8f';
+      ctx.fillRect(hxOff + 7*scale, hyOff + 5*scale, 6*scale, 6*scale);
+    }
+  }
+}
+
+function drawPixelCloud(x, y, s) {
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(x, y, 40*s, 12*s);
+  ctx.fillRect(x + 10*s, y - 8*s, 24*s, 12*s);
+  ctx.fillRect(x - 8*s, y + 6*s, 56*s, 8*s);
+}
+
+// Top surface directly below (x, fromY) — used so rain stops on whatever it hits
+function surfaceBelow(x, fromY) {
+  let best = GROUND_Y + 72;
+  for (const p of platforms) {
+    if (x >= p.x && x < p.x + p.w && p.y >= fromY && p.y < best) best = p.y;
+  }
+  return best;
+}
+
+// Rain falling from a gust cloud to the surface below it (pure prop, no gameplay effect)
+function drawRain(cx, cy, ph) {
+  const top = cy + 20;
+  const t = Date.now() / 7;
+  ctx.fillStyle = 'rgba(190,220,255,0.9)';
+  for (let i = 0; i < 11; i++) {
+    const rx = cx - 38 + i * 7.6;
+    const floorY = surfaceBelow(rx, top);
+    const span = floorY - top;
+    if (span < 10) continue;
+    for (let k = 0; k < 3; k++) {
+      const dy = (t + i * 37 + k * span / 3 + ph * 50) % span;
+      ctx.fillRect(Math.round(rx - dy * 0.12), top + dy, 2, 7);
+    }
+    // little splash on the surface
+    if (((Date.now() / 90) + i * 3) % 4 < 1) {
+      ctx.fillRect(Math.round(rx - span * 0.12) - 3, floorY - 2, 2, 2);
+      ctx.fillRect(Math.round(rx - span * 0.12) + 3, floorY - 2, 2, 2);
+    }
+  }
+}
+
+// Angry gust cloud with a face, used in wind zones
+function drawGustCloud(cx, cy, ph) {
+  const bob = Math.sin(Date.now()/260 + (ph || 0)) * 5;
+  const cy2 = cy + bob;
+  ctx.fillStyle = '#c9d3de';
+  ctx.fillRect(cx - 30, cy2, 60, 20);
+  ctx.fillRect(cx - 16, cy2 - 12, 40, 16);
+  ctx.fillRect(cx - 42, cy2 + 8, 84, 12);
+  // face
+  ctx.fillStyle = '#3a3a4a';
+  ctx.fillRect(cx - 10, cy2 + 4, 5, 5);
+  ctx.fillRect(cx + 8, cy2 + 4, 5, 5);
+  // angry brows
+  ctx.fillRect(cx - 12, cy2 - 1, 8, 3);
+  ctx.fillRect(cx + 6, cy2 - 1, 8, 3);
+  // mouth (blowing - open oval)
+  ctx.fillStyle = '#1a1a2e';
+  ctx.beginPath();
+  ctx.ellipse(cx - 2, cy2 + 15, 7, 5, 0, 0, Math.PI * 2);
+  ctx.fill();
+  // wind puff lines from mouth
+  ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+  ctx.lineWidth = 2;
+  for (let i = 0; i < 3; i++) {
+    const puffOffset = (Date.now()/80 + i * 20) % 60;
+    ctx.beginPath();
+    ctx.moveTo(cx - 10 - puffOffset, cy2 + 15 + i * 3 - 3);
+    ctx.lineTo(cx - 22 - puffOffset, cy2 + 15 + i * 3 - 3);
+    ctx.stroke();
+  }
+}
+
+// Tree growing from the dock ground. Local origin = collectible hit box top-left; the canopy's
+// underside sits flush with the hit box's bottom edge so a jump from the ground headbutts it.
+function drawDockTree(c, found) {
+  const trunkBottom = GROUND_Y - c.y;
+  ctx.fillStyle = '#6b4a2a';
+  ctx.fillRect(c.w/2 - 6, c.h - 6, 12, trunkBottom - c.h + 6);
+  ctx.fillStyle = found ? 'rgba(74,122,58,0.35)' : '#4a7a3a';
+  ctx.beginPath(); ctx.arc(c.w/2, -6, 28, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = found ? 'rgba(93,143,74,0.35)' : '#5d8f4a';
+  ctx.beginPath(); ctx.arc(c.w/2 - 14, 6, 16, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(c.w/2 + 14, 6, 16, 0, Math.PI * 2); ctx.fill();
+  if (!found) {
+    // flat, slightly darker underside — the bit you bonk
+    ctx.fillStyle = '#3f6a31';
+    ctx.fillRect(-4, c.h - 6, c.w + 8, 6);
+  }
+}
+
+function drawHarbourWater(x1, x2) {
+  const t = Date.now() / 400;
+  ctx.fillStyle = '#2f6fa8';
+  ctx.fillRect(x1, GROUND_Y + 20, x2 - x1, 200);
+  ctx.fillStyle = '#3f82c2';
+  ctx.fillRect(x1, GROUND_Y + 20, x2 - x1, 10);
+  // shimmer lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+  ctx.lineWidth = 2;
+  for (let wx = x1; wx < x2; wx += 40) {
+    const wy = GROUND_Y + 40 + Math.sin(t + wx * 0.05) * 4;
+    ctx.beginPath();
+    ctx.moveTo(wx, wy);
+    ctx.lineTo(wx + 20, wy);
+    ctx.stroke();
+  }
+}
+
+function drawFerryObstacle(ob) {
+  const bob = Math.sin(Date.now()/260 + ob.bobPhase) * 20;
+  const ox = ob.x;
+  const oy = ob.y + bob;
+  ctx.save();
+  ctx.translate(ox + ob.w/2, oy);
+  ctx.scale(ob.dir, 1); // face direction of travel
+  ctx.translate(-ob.w/2, 0);
+  // seagull: simple pixel bird silhouette
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, ob.w, 6);
+  ctx.fillStyle = '#3a3a4a';
+  ctx.fillRect(-4, 6, 6, 3);
+  ctx.fillRect(ob.w - 2, 6, 6, 3);
+  ctx.fillStyle = '#e8b23f';
+  ctx.fillRect(ob.w/2 - 2, 4, 4, 3);
+  ctx.restore();
+}
+
+function drawCableCarHillBackdrop() {
+  // a single tall hill silhouette spanning the cable car climb zone (world x: ~1300-2450),
+  // taller than the regular parallax hills so the cable car reads as "set against a hill"
+  ctx.fillStyle = '#3a5c32';
+  ctx.beginPath();
+  ctx.moveTo(1250, GROUND_Y);
+  ctx.quadraticCurveTo(1750, -40, 2450, GROUND_Y);
+  ctx.fill();
+  // houses dotted along the hillside. The curve's x is NOT linear in t (control point at
+  // x=1750 isn't the midpoint of 1250..2450), so solve for t from each house's x before
+  // reading the slope height — otherwise houses float above the hill.
+  // x(t) = 1250 + 1000t + 200t²  →  t = (-1000 + sqrt(1e6 + 800(x-1250))) / 400
+  const houseColors = ['#d9704f', '#4f8fd9', '#e8c14a', '#7fd94f', '#d94f9c'];
+  const houseXs = [1330, 1415, 1560, 1705, 1830, 1985, 2170, 2310];
+  const hillY = (x) => {
+    const t = (-1000 + Math.sqrt(1e6 + 800 * (x - 1250))) / 400;
+    return (1-t)*(1-t)*GROUND_Y + 2*(1-t)*t*(-40) + t*t*GROUND_Y;
+  };
+  for (let i = 0; i < houseXs.length; i++) {
+    const hx = houseXs[i];
+    // sit on the LOWER of the two base corners, so neither corner floats on the slope
+    const base = Math.max(hillY(hx - 9), hillY(hx + 9)) + 2;
+    const hy = base - 14;
+    ctx.fillStyle = '#f2e9d8';
+    ctx.fillRect(hx - 9, hy, 18, base - hy + 6);
+    ctx.fillStyle = houseColors[i % houseColors.length];
+    ctx.beginPath();
+    ctx.moveTo(hx - 11, hy);
+    ctx.lineTo(hx, hy - 8);
+    ctx.lineTo(hx + 11, hy);
+    ctx.fill();
+    ctx.fillStyle = '#2a4d8f';
+    ctx.fillRect(hx - 3, hy + 4, 5, 5);
+  }
+  // re-cover the house bases with the hill fill below the curve so they look planted
+  ctx.fillStyle = '#3a5c32';
+  ctx.beginPath();
+  ctx.moveTo(1250, GROUND_Y);
+  ctx.quadraticCurveTo(1750, -40, 2450, GROUND_Y);
+  ctx.lineTo(2450, GROUND_Y + 80);
+  ctx.lineTo(1250, GROUND_Y + 80);
+  ctx.closePath();
+  ctx.save();
+  ctx.clip();
+  // only paint just under the surface: a band following the curve
+  for (const hx of houseXs) {
+    const y0 = Math.min(hillY(hx - 9), hillY(hx + 9));
+    ctx.fillRect(hx - 12, y0 + 3, 24, 30);
+  }
+  ctx.restore();
+}
+
+function drawCableCarTrack() {
+  // simple rail line from station to destination
+  ctx.strokeStyle = '#5a4a3a';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(cableCar.stationX + cableCar.w/2, cableCar.stationY + 6);
+  ctx.lineTo(cableCar.destX + cableCar.w/2 - 20, cableCar.destY + 6);
+  ctx.stroke();
+  // street sign post at the station, matching real Wellington cable car signage style
+  const signX = cableCar.stationX - 70, signY = cableCar.stationY - 72;
+  ctx.fillStyle = '#5a4a3a';
+  ctx.fillRect(signX + 30, signY + 40, 6, 32); // post
+  ctx.fillStyle = '#2a5c3a';
+  ctx.fillRect(signX, signY, 164, 40); // sign board (green, like NZ street signs)
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(signX + 1, signY + 1, 162, 38);
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 14px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('WELLINGTON', signX + 82, signY + 17);
+  ctx.fillText('CABLE CAR', signX + 82, signY + 33);
+}
+
+function drawCableCar() {
+  const cx = cableCar.x, cy = cableCar.y;
+  // classic red Wellington cable car — boxy body, white roof band, big windows
+  ctx.fillStyle = '#c9403f';
+  ctx.fillRect(cx, cy, cableCar.w, cableCar.h);
+  ctx.fillStyle = '#f5f5f5';
+  ctx.fillRect(cx, cy - 6, cableCar.w, 8);
+  ctx.fillStyle = '#bfe8f0';
+  ctx.fillRect(cx + 8, cy + 8, cableCar.w - 16, 18);
+  ctx.strokeStyle = '#7a2a2a';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(cx + 8, cy + 8, cableCar.w - 16, 18);
+  // wheels/undercarriage
+  ctx.fillStyle = '#2a2a2a';
+  ctx.fillRect(cx + 6, cy + cableCar.h - 4, 10, 6);
+  ctx.fillRect(cx + cableCar.w - 16, cy + cableCar.h - 4, 10, 6);
+
+  // draw obstacles (birds) along the track if currently riding
+  if (cableCar.riding) {
+    for (const ob of cableCarObstacles) {
+      const dt = ob.t - cableCar.rideProgress;
+      if (dt > -0.06 && dt < 0.15) {
+        const obX = cx + cableCar.w/2 - 10;
+        const obY = cy + cableCar.h/2 + ob.y;
+        ctx.fillStyle = ob.hit ? 'rgba(120,120,120,0.4)' : '#3a3a4a';
+        ctx.fillRect(obX, obY, ob.w, 6);
+        ctx.fillRect(obX - 4, obY + 6, 6, 3);
+        ctx.fillRect(obX + ob.w - 2, obY + 6, 6, 3);
+      }
+    }
+  }
+}
+
+function drawBucketFountain() {
+  // "Cuba Mall" street sign posted just before the fountain
+  const signX = FOUNTAIN_X_START - 118, signY = GROUND_Y - 84;
+  ctx.fillStyle = '#5a4a3a';
+  ctx.fillRect(signX + 26, signY + 30, 6, 54);
+  ctx.fillStyle = '#2a5c3a';
+  ctx.fillRect(signX, signY, 124, 30);
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(signX + 1, signY + 1, 122, 28);
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 15px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('CUBA MALL', signX + 62, signY + 20);
+
+  // sunken pool at the bottom (visible through the gap) — full width, deadly on contact
+  ctx.fillStyle = '#5a7a8a';
+  ctx.fillRect(fountainWater.x, fountainWater.y, fountainWater.w, fountainWater.h);
+  ctx.fillStyle = 'rgba(180,220,255,0.5)';
+  ctx.fillRect(fountainWater.x, fountainWater.y, fountainWater.w, 6);
+  // subtle animated ripple line so it reads clearly as water, not a solid platform
+  const rippleX = fountainWater.x + ((Date.now()/20) % fountainWater.w);
+  ctx.fillStyle = 'rgba(255,255,255,0.35)';
+  ctx.fillRect(rippleX, fountainWater.y + 2, 14, 2);
+
+  for (const b of buckets) {
+    const cyclePos = (frameCount + b.phase) % b.cycle;
+    const isTipping = cyclePos < BUCKET_TIP_WINDOW;
+    const tipAmount = isTipping ? Math.sin((cyclePos / BUCKET_TIP_WINDOW) * Math.PI) : 0;
+
+    ctx.save();
+    ctx.translate(b.x + b.w/2, b.y + b.h);
+    ctx.rotate(tipAmount * 0.7);
+    ctx.fillStyle = isTipping ? '#e05a5a' : '#4f8fd9';
+    ctx.fillRect(-b.w/2, -b.h, b.w, b.h);
+    ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(-b.w/2, -b.h, b.w, b.h);
+    // rim highlight so the "landing surface" reads clearly
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.fillRect(-b.w/2, -b.h, b.w, 3);
+    ctx.restore();
+
+    // splash cascading down to the next bucket/pool when tipping
+    if (isTipping) {
+      ctx.fillStyle = 'rgba(180,220,255,0.85)';
+      for (let i = 0; i < 4; i++) {
+        const sx = b.x + b.w/2 + (i - 1.5) * 6;
+        const sy = b.y + b.h + ((Date.now()/6 + i * 20) % 60);
+        ctx.fillRect(sx, sy, 4, 4);
+      }
+      ctx.fillStyle = 'rgba(255,100,100,0.25)';
+      ctx.fillRect(b.x, b.y - 2, b.w, b.h + 4);
+    }
+  }
+}
+
+function drawFerry() {
+  // hull
+  ctx.fillStyle = '#d94f4f';
+  ctx.fillRect(ferry.x, ferry.y, ferry.w, ferry.h);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(ferry.x + 6, ferry.y - 20, ferry.w - 12, 20);
+  // cabin windows
+  ctx.fillStyle = '#4a90c2';
+  for (let wx = ferry.x + 14; wx < ferry.x + ferry.w - 14; wx += 20) {
+    ctx.fillRect(wx, ferry.y - 14, 10, 8);
+  }
+  // funnel
+  ctx.fillStyle = '#ffd23f';
+  ctx.fillRect(ferry.x + ferry.w/2 - 6, ferry.y - 36, 12, 18);
+  // waterline froth
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  ctx.fillRect(ferry.x - 6, ferry.y + ferry.h - 4, ferry.w + 12, 4);
+}
+
+function drawGateSign(x, locked) {
+  ctx.fillStyle = '#3a2a1a';
+  ctx.fillRect(x, GROUND_Y - 130, 14, 130);
+  ctx.fillStyle = locked ? '#8a3a3a' : '#4fae5a';
+  ctx.fillRect(x - 24, GROUND_Y - 156, 88, 30);
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 15px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(locked ? 'LOCKED' : 'FERRY', x + 20, GROUND_Y - 136);
+}
+
+function drawGateStructure() {
+  const gx = riddleGateX;
+  ctx.fillStyle = '#3a2a1a';
+  ctx.fillRect(gx, GROUND_Y - 72, 14, 72);
+  ctx.fillRect(gx + 76, GROUND_Y - 72, 14, 72);
+  ctx.fillStyle = '#ffd23f';
+  ctx.fillRect(gx - 8, GROUND_Y - 94, 106, 26);
+  ctx.fillStyle = '#1a1a2e';
+  ctx.font = 'bold 16px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('GATE', gx + 45, GROUND_Y - 75);
+}
+
+function drawAirportAndPlane() {
+  // terminal building — positioned near the actual airport at the end of the level
+  ctx.fillStyle = '#c9d3de';
+  ctx.fillRect(5770, GROUND_Y - 140, 200, 140);
+  ctx.fillStyle = '#4a90c2';
+  for (let wx = 5782; wx < 5950; wx += 24) {
+    ctx.fillRect(wx, GROUND_Y - 120, 14, 90);
+  }
+  // control tower
+  ctx.fillStyle = '#e8e8ee';
+  ctx.fillRect(5950, GROUND_Y - 200, 24, 200);
+  ctx.fillStyle = '#4a90c2';
+  ctx.fillRect(5945, GROUND_Y - 210, 34, 20);
+
+  // plane (Singapore Airlines-style gold/navy livery on white body) — large and clear
+  const planeX = finalePlaneX;
+  const planeY = GROUND_Y - 90;
+  ctx.save();
+  ctx.translate(planeX, planeY);
+
+  // engine (under wing, drawn first so fuselage sits above it)
+  ctx.fillStyle = '#4a4a5a';
+  ctx.fillRect(50, 58, 34, 20);
+  ctx.fillStyle = '#2a2a3a';
+  ctx.beginPath();
+  ctx.ellipse(50, 68, 6, 10, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // fuselage (long clear body)
+  ctx.fillStyle = '#f5f5f5';
+  ctx.fillRect(0, 0, 220, 60);
+  // nose cone (rounded taper)
+  ctx.beginPath();
+  ctx.moveTo(0, 8); ctx.lineTo(-30, 30); ctx.lineTo(0, 52);
+  ctx.fill();
+  // tail cone taper
+  ctx.beginPath();
+  ctx.moveTo(220, 6); ctx.lineTo(250, 20); ctx.lineTo(220, 54);
+  ctx.fill();
+
+  // cockpit windows
+  ctx.fillStyle = '#0a2a5c';
+  ctx.fillRect(-18, 16, 10, 10);
+  ctx.fillRect(-6, 14, 10, 12);
+
+  // navy underbelly stripe
+  ctx.fillStyle = '#0a2a5c';
+  ctx.fillRect(0, 44, 220, 8);
+  // gold accent stripe (Singapore Airlines-inspired livery)
+  ctx.fillStyle = '#ffd23f';
+  ctx.fillRect(0, 34, 220, 8);
+
+  // wing
+  ctx.fillStyle = '#e8e8ee';
+  ctx.beginPath();
+  ctx.moveTo(70, 52);
+  ctx.lineTo(40, 100);
+  ctx.lineTo(90, 100);
+  ctx.lineTo(110, 52);
+  ctx.fill();
+
+  // tail fin — large, prominent, with clear SQ-style logo. Flipped vertically from the
+  // previous version so the sweep now leans backward toward the tail cone at the BOTTOM
+  // (near the fuselage) and tapers narrower at the top — the correct real-world silhouette.
+  ctx.fillStyle = '#0a2a5c';
+  ctx.fillRect(186, -46, 16, 52);
+  ctx.beginPath();
+  ctx.moveTo(186, 6); ctx.lineTo(170, 6); ctx.lineTo(186, -46); ctx.lineTo(202, -46);
+  ctx.fill();
+  // gold bird/swoosh emblem on tail (simplified, evokes the SIA logo without copying it exactly)
+  ctx.fillStyle = '#ffd23f';
+  ctx.beginPath();
+  ctx.moveTo(180, -6);
+  ctx.quadraticCurveTo(176, -20, 184, -26);
+  ctx.quadraticCurveTo(190, -22, 184, -16);
+  ctx.quadraticCurveTo(188, -10, 180, -6);
+  ctx.fill();
+  // "SQ" lettering on tail
+  ctx.fillStyle = '#ffd23f';
+  ctx.font = 'bold 10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('SQ', 192, -40);
+
+  // wordmark on the fuselage body itself, sitting on the white section just above the stripes
+  ctx.fillStyle = '#0a2a5c';
+  ctx.font = 'bold 11px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('SINGAPORE AIRLINES', 28, 31);
+
+  // passenger windows
+  ctx.fillStyle = '#0a2a5c';
+  for (let wx = 14; wx < 200; wx += 14) {
+    ctx.fillRect(wx, 12, 7, 7);
+  }
+
+  // door (boarding point) — positioned near the front, matches player walk-in target
+  const doorX = 6, doorY = 14;
+  ctx.fillStyle = '#c9c9d3';
+  ctx.fillRect(doorX, doorY, 14, 26);
+  ctx.strokeStyle = '#0a2a5c';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(doorX, doorY, 14, 26);
+
+  // boarding stairs leading from the ground up to the door
+  const groundLocalY = GROUND_Y - planeY; // local y-coordinate of the ground, relative to plane origin
+  const stairSteps = 7;
+  const stairRise = (groundLocalY - (doorY + 26)) / stairSteps;
+  ctx.fillStyle = '#8a8a9a';
+  for (let s = 0; s < stairSteps; s++) {
+    const stepY = doorY + 26 + s * stairRise;
+    ctx.fillRect(doorX - 12 - s * 8, stepY, 14, 6);
+  }
+
+  ctx.restore();
+
+  // expose door world-position for the player-boarding animation to target
+  window._planeDoorWorld = { x: planeX + 6, y: planeY + 14 };
+}
+
+function draw() {
+  captionText = null; captionOpacity = 1; frameSpeech = [];
+  drawSky();
+
+  ctx.save();
+  ctx.translate(-camX, 0);
+
+  // clouds
+  ctx.globalAlpha = 0.9;
+  for (let i = 0; i < 12; i++) {
+    drawPixelCloud(i * 320 + 60, 50 + (i % 3) * 30, 1);
+  }
+  ctx.globalAlpha = 1;
+
+  // hillside houses — two parallax layers, distinct colour sets
+  drawHillsideHouses(0.25, 210, 1, {hill: '#4a6b3f'});
+  drawHillsideHouses(0.45, 250, 0.8, {hill: '#5d8a4f'});
+
+  // tall backdrop hill specifically behind the cable car climb, evoking the real hill
+  // the Wellington cable car runs against — drawn once at a fixed world position, not parallax
+  drawCableCarHillBackdrop();
+
+  // harbour water in Zone C gap (visually under the ferry crossing)
+  drawHarbourWater(4620, 5060);
+
+  // platforms
+  for (const p of platforms) {
+    ctx.fillStyle = '#8fae4a';
+    ctx.fillRect(p.x, p.y, p.w, 10);
+    ctx.fillStyle = '#7a5230';
+    ctx.fillRect(p.x, p.y + 10, p.w, p.h - 10);
+    ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+    ctx.lineWidth = 1;
+    for (let bx = p.x; bx < p.x + p.w; bx += 20) {
+      ctx.beginPath();
+      ctx.moveTo(bx, p.y + 10);
+      ctx.lineTo(bx, p.y + p.h);
+      ctx.stroke();
+    }
+  }
+
+  // gust clouds (visual + zone indicator) in Zone B
+  for (const wz of windZones) {
+    for (const c of wz.clouds) drawRain(c.x, c.y, c.ph);
+    for (const c of wz.clouds) drawGustCloud(c.x, c.y, c.ph);
+  }
+
+  // cable car track + car
+  drawCableCarTrack();
+  drawCableCar();
+
+  // bucket fountain
+  drawBucketFountain();
+
+  // collectible hit-blocks — disguised as scenery (odd low clouds or a tree canopy) so they
+  // blend in rather than reading as an obvious "only brick floating alone" giveaway
+  for (const c of collectibles) {
+    const popScale = c.popTimer > 0 ? 1 + (c.popTimer / 30) * 0.3 : 1;
+    if (c.popTimer > 0) c.popTimer--;
+    ctx.save();
+    ctx.translate(c.x + c.w/2, c.y + c.h/2);
+    ctx.scale(popScale, popScale);
+    if (c.disguise === 'tree') ctx.translate(-c.w/2, -c.h/2); // tree: origin = hit box top-left
+    else ctx.translate(-c.w/2 - 20, -c.h/2 - 10); // recenter since cloud shapes are wider than the hit box
+
+    if (!c.found) {
+      if (c.disguise === 'cloud') {
+        // a slightly odd, low-hanging cloud — a bit smaller and squatter than the decorative
+        // sky clouds, sitting near platform height instead of high in the sky. Clearly grey
+        // (vs the pure white decorative clouds) so it reads as findable rather than blending in.
+        const bob = Math.sin(Date.now()/500 + c.x) * 3;
+        ctx.save();
+        ctx.translate(0, bob);
+        ctx.fillStyle = '#9aa0ab';
+        ctx.fillRect(6, 6, 40, 12);
+        ctx.fillRect(16, -2, 24, 12);
+        ctx.fillRect(-2, 12, 56, 8);
+        ctx.restore();
+      } else if (c.disguise === 'tree') {
+        drawDockTree(c, false);
+      }
+    } else {
+      // found: leave a faint trace so it's clear something was already collected here
+      if (c.disguise === 'cloud') {
+        ctx.fillStyle = 'rgba(154,160,171,0.3)';
+        ctx.fillRect(6, 6, 40, 12);
+      } else if (c.disguise === 'tree') {
+        drawDockTree(c, true);
+      }
+    }
+    ctx.restore();
+  }
+
+  // popup bubble (world-space) when a collectible was just found / hit taken
+  if (activePopup && !activePopup.screen) drawPopup(activePopup.x, activePopup.y);
+
+  // dock gate (locked/unlocked sign) before ferry
+  drawGateSign(gateX, !hasItem('ferryPass'));
+
+  // ferry + obstacles
+  drawFerry();
+  for (const ob of ferryObstacles) drawFerryObstacle(ob);
+
+  // gate structure (riddle) after crossing
+  drawGateStructure();
+
+  // airport + plane
+  drawAirportAndPlane();
+
+  // player (hide during plane sequence walk-on, drawn separately)
+  if (!planeSequence) {
+    if (!(invulnTimer > 0 && Math.floor(invulnTimer / 4) % 2 === 0)) drawPlayer(player.x, player.y);
+  } else {
+    const door = window._planeDoorWorld || { x: finalePlaneX, y: GROUND_Y - 50 };
+    const stairsBaseX = door.x - 90; // foot of the stairs, on the ground
+    const stairsBaseY = player.y;    // player's normal ground-level y
+    if (planeSeqTimer <= 70) {
+      // phase 1: walk to the foot of the stairs
+      const t = planeSeqTimer / 70;
+      const px = player.x + t * (stairsBaseX - player.x);
+      drawPlayer(px, stairsBaseY, 1);
+    } else if (planeSeqTimer <= 120) {
+      // phase 2: pause at the foot of the stairs, plane fully in view with livery/tail logo visible
+      drawPlayer(stairsBaseX, stairsBaseY, 1);
+    } else {
+      // phase 3: climb the stairs diagonally up into the doorway, fading out near the top
+      const t = Math.min(1, (planeSeqTimer - 120) / 70);
+      const px = stairsBaseX + t * (door.x + 6 - stairsBaseX);
+      const py = stairsBaseY + t * (door.y - stairsBaseY);
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, 1 - Math.max(0, t - 0.7) / 0.3);
+      drawPlayer(px, py, 1);
+      ctx.restore();
+    }
+  }
+
+  ctx.restore();
+
+  if (activePopup && activePopup.screen) drawPopup(canvas.width / 2, 72);
+
+  if (hitFlash > 0) {
+    ctx.save();
+    ctx.globalAlpha = (hitFlash / 12) * 0.5;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+  }
+
+  updateMsgBox();
+}
+
+function drawPopup(x, y) {
+  return; // legibility pass: popups now show in the #msgBox text box (updateMsgBox)
+  const alpha = Math.min(1, activePopup.timer / 20);
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.font = '9px monospace';
+  const bw = Math.max(140, ctx.measureText(activePopup.text).width + 24), bh = 30;
+  const bx = x - bw/2;
+  const rise = activePopup.screen ? 0 : (90 - activePopup.timer) * 0.4;
+  const by = Math.max(8, y - 50 - rise); // clamp so it can't float out of the top of the canvas
+  ctx.fillStyle = '#1a1a2e';
+  ctx.strokeStyle = '#ffd23f';
+  ctx.lineWidth = 2;
+  ctx.fillRect(bx, by, bw, bh);
+  ctx.strokeRect(bx, by, bw, bh);
+  ctx.fillStyle = '#ffd23f';
+  ctx.textAlign = 'center';
+  ctx.fillText(activePopup.text, x, by + 19);
+  ctx.restore();
+}
+
+function drawPlayer(px, py, forceFacing) {
+  ctx.save();
+  ctx.translate(px + player.w/2, py);
+  ctx.scale(forceFacing || player.facing, 1);
+  ctx.translate(-player.w/2, 0);
+
+  ctx.fillStyle = '#2a4d8f';
+  ctx.fillRect(4, 24, 8, 10);
+  ctx.fillRect(14, 24, 8, 10);
+  ctx.fillStyle = '#d94f4f';
+  ctx.fillRect(3, 12, 20, 14);
+  ctx.fillStyle = '#f2c185';
+  ctx.fillRect(5, 0, 16, 13);
+  ctx.fillStyle = '#3a2a1a';
+  ctx.fillRect(4, 0, 18, 5);
+  ctx.fillStyle = '#d94f4f';
+  ctx.fillRect(3, 0, 20, 4);
+  ctx.fillRect(17, 3, 8, 3);
+  ctx.fillStyle = '#1a1a2e';
+  ctx.fillRect(16, 6, 3, 3);
+
+  ctx.restore();
+}
+
+// Fixed-timestep loop: caps simulation at 60 updates/sec regardless of the display's actual
+// refresh rate. Without this, every frame-counted timer in the game (plane sequence, splash
+// knockback, bucket tip cycles, wind, etc.) would run proportionally faster on high-refresh
+// displays (120Hz+), making sequences feel rushed or cut short compared to what was designed.
+const FIXED_STEP_MS = 1000 / 60;
+let lastFrameTime = performance.now();
+let stepAccumulator = 0;
+
+function loop(now) {
+  if (now === undefined) now = performance.now();
+  let frameDelta = now - lastFrameTime;
+  lastFrameTime = now;
+  // clamp huge deltas (e.g. tab was backgrounded) so we don't try to "catch up" through
+  // a massive number of steps at once
+  if (frameDelta > 250) frameDelta = 250;
+  stepAccumulator += frameDelta;
+
+  let stepsRun = 0;
+  while (stepAccumulator >= FIXED_STEP_MS && stepsRun < 8) {
+    update();
+    stepAccumulator -= FIXED_STEP_MS;
+    stepsRun++;
+  }
+
+  draw();
+  requestAnimationFrame(loop);
+}
+
+// ---------- Riddle gate ----------
+function openRiddle() {
+  riddleOpen = true;
+  document.getElementById('riddleOverlay').classList.add('show');
+  document.getElementById('riddleInput').value = '';
+  document.getElementById('riddleFeedback').textContent = '';
+  document.getElementById('riddleFeedback').className = 'feedback';
+  setTimeout(() => document.getElementById('riddleInput').focus(), 50);
+}
+
+function solveRiddle() {
+  const val = document.getElementById('riddleInput').value.trim().toLowerCase();
+  const accepted = ['harbour', 'harbor', 'a harbour', 'a harbor'];
+  const fb = document.getElementById('riddleFeedback');
+  if (accepted.includes(val)) {
+    fb.textContent = 'CORRECT!';
+    fb.className = 'feedback correct';
+    setTimeout(() => {
+      document.getElementById('riddleOverlay').classList.remove('show');
+      riddleOpen = false;
+      riddleSolved = true;
+      player.x = riddleGateX + 130; // move forward past the gate, toward the plane
+    }, 900);
+  } else {
+    fb.textContent = 'NOT QUITE — TRY AGAIN';
+    fb.className = 'feedback';
+  }
+}
+document.getElementById('riddleSubmit').addEventListener('click', solveRiddle);
+document.getElementById('riddleInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') solveRiddle();
+});
+
+document.getElementById('lockedOk').addEventListener('click', () => {
+  lockedMsgOpen = false;
+  document.getElementById('lockedOverlay').classList.remove('show');
+  canvas.focus();
+});
+
+// Continue button on the win screen — player controls when to advance, no auto-timer.
+document.getElementById('continueBtn').addEventListener('click', () => {
+  saveProgress({ world: 2, lives: player.lives, inventory: [] });
+  location.href = 'world2.html';
+});
+
+// Win-screen photo: jack-wellington.jpg in the same folder as this HTML file.
+// (Or set PHOTO_SRC to any other path / data URI.) Placeholder text shows until it loads.
+const PHOTO_SRC = 'jack-wellington.jpg';
+(function applyPhoto() {
+  const img = document.getElementById('worldPhoto');
+  img.onload = () => {
+    img.style.display = 'block';
+    document.getElementById('photoPlaceholderText').style.display = 'none';
+    document.getElementById('photoPlaceholder').style.borderStyle = 'solid';
+  };
+  img.onerror = () => { img.style.display = 'none'; };
+  img.src = PHOTO_SRC;
+})();
+
+updateHUD();
+loop();
+</script>
+
+<script>
+/* ===== FAMILY PHOTO PIECE — copied verbatim from world5.html so the cut/deal is identical ===== */
+const FAMILY_PHOTO_SRC = "final-photo.jpg";
+const PIECE_WORLD = 1;
+function renderPhotoPiece(){
+  const c = document.getElementById('pieceCanvas'); if (!c) return;
+  const g = c.getContext('2d'); g.clearRect(0, 0, c.width, c.height);
+  FRAGMENTS.drawWorldPiece(g, PIECE_WORLD, 0, 0, c.width, c.height);
+}
+function onFragmentsReady(){ renderPhotoPiece(); }
+const FRAGMENTS = (function(){
+  const COLS = 9, ROWS = 12, FW = 225, FH = 300;    // 3:4 frame, 25px tiles
+  function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const order = [...Array(COLS*ROWS).keys()];
+  const r = rng(2109);                              // fixed seed: same cut in every world file
+  for (let i = order.length-1; i > 0; i--) { const j = Math.floor(r()*(i+1)); [order[i], order[j]] = [order[j], order[i]]; }
+  const tilesFor = w => order.filter((_, i) => i % 5 === w - 1);   // world 1..5
+  // resolution ladder: [0]=36×48 (4px per tile, chunky 8-bit) … [3]=225×300, [4]=450×600 (sharp)
+  const levels = [];
+  let usingPhoto = false;
+  function mk(w,h){ const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+  function build(src){
+    const full = mk(FW*2, FH*2), g = full.getContext('2d');
+    if (src) {   // cover-crop to 3:4
+      const iw = src.naturalWidth || src.width, ih = src.naturalHeight || src.height;
+      const s = Math.max(full.width/iw, full.height/ih), dw = iw*s, dh = ih*s;
+      g.drawImage(src, (full.width-dw)/2, (full.height-dh)/2, dw, dh);
+    } else {     // stand-in art if final-photo.jpg is missing
+      const gr = g.createLinearGradient(0,0,0,full.height); gr.addColorStop(0,'#5fa8e0'); gr.addColorStop(0.6,'#ffd9a0'); gr.addColorStop(1,'#6a8a4a');
+      g.fillStyle = gr; g.fillRect(0,0,full.width,full.height);
+      g.fillStyle = '#ffd36b'; g.beginPath(); g.arc(360,100,50,0,Math.PI*2); g.fill();
+      ['#c94f6a','#4f7ac9','#2c4a7a','#3f9a8a','#e0a03a','#8a5ac9'].forEach((c,i) => { const x = 20 + i*70; g.fillStyle = c; g.fillRect(x, 380, 56, 220); g.fillStyle = '#f1c9a5'; g.beginPath(); g.arc(x+28, 350, 26, 0, Math.PI*2); g.fill(); });
+      g.fillStyle = 'rgba(20,18,42,0.8)'; g.fillRect(40, 190, 370, 50); g.fillStyle = '#fff'; g.font = 'bold 24px monospace'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('final-photo.jpg', 225, 215);
+    }
+    levels.length = 0;
+    for (const w of [36, 72, 144, 225]) { const c = mk(w, w*4/3); const cg = c.getContext('2d'); cg.imageSmoothingEnabled = true; cg.drawImage(full, 0, 0, c.width, c.height); levels.push(c); }
+    levels.push(full);
+  }
+  build(null);
+  const img = new Image();
+  img.onload = () => { usingPhoto = true; build(img); if (typeof onFragmentsReady === 'function') onFragmentsReady(); };
+  img.src = FAMILY_PHOTO_SRC;
+  function drawTile(c, idx, L, dx, dy, dw, dh){
+    const src = levels[L], tw = src.width / COLS, th = src.height / ROWS;
+    const col = idx % COLS, row = Math.floor(idx / COLS);
+    c.imageSmoothingEnabled = L >= 4;
+    c.drawImage(src, col*tw, row*th, tw, th, Math.round(dx), Math.round(dy), Math.ceil(dw), Math.ceil(dh));
+    c.imageSmoothingEnabled = true;
+  }
+  function drawWorldPiece(c, world, x, y, w, h, skip){
+    const tw = w / COLS, th = h / ROWS;
+    c.fillStyle = 'rgba(20,18,42,0.6)'; c.fillRect(x, y, w, h);
+    tilesFor(world).forEach((idx, j) => { if (!skip || !skip(j)) drawTile(c, idx, 0, x + (idx%COLS)*tw, y + Math.floor(idx/COLS)*th, tw, th); });
+  }
+  return { COLS, ROWS, FW, FH, tilesFor, drawTile, drawWorldPiece, usingPhoto: () => usingPhoto };
+})();
+renderPhotoPiece();
+(function(){ const ov = document.getElementById('winOverlay'); if (!ov) return;
+  new MutationObserver(() => { if (ov.classList.contains('show')) renderPhotoPiece(); }).observe(ov, { attributes:true, attributeFilter:['class'] });
+})();
+</script>
+</body>
+</html>

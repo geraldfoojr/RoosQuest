@@ -1,0 +1,3556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Jack's Quest</title>
+<style>
+  /* Press Start 2P (SIL Open Font License), embedded so it works offline and on any host */
+  @font-face { font-family: 'Press Start 2P'; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(data:font/woff2;base64,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) format('woff2'); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    overscroll-behavior: none;
+  }
+  body {
+    background: #0a0a12;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    padding: 6px;
+    gap: 4px;
+  }
+  #gameWrap {
+    position: relative;
+    border: 6px solid #2b2b3a;
+    border-radius: 4px;
+    box-shadow: 0 0 0 3px #6b6b8a, 0 0 40px rgba(0,0,0,0.6);
+    width: min(768px, 100%);
+    aspect-ratio: 768 / 432;
+    max-height: 62dvh;
+    container-type: inline-size;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    background: #7ec8e3;
+  }
+  #hud {
+    position: absolute;
+    top: 1.04cqw;
+    left: 1.04cqw;
+    right: 1.04cqw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1.3cqw;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+    pointer-events: none;
+  }
+  #hudLeft { display: flex; flex-direction: column; gap: 0.52cqw; }
+  #livesDisplay { color: #e84545; font-size: 1.7cqw; }
+  #invLabel { font-size: 1.04cqw; color: #9be3ff; letter-spacing: 1px; }
+  #inventoryRow { display: flex; gap: 0.78cqw; }
+  .invSlot {
+    width: 3.6cqw;
+    height: 3.6cqw;
+    border: 2px solid #6b6b8a;
+    background: rgba(10,10,20,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8cqw;
+    position: relative;
+  }
+  .invSlot.filled { border-color: #ffd23f; }
+  .invSlot.filled::before { content: '🧥'; font-size: 2.4cqw; }
+  .invSlot.pulse { border-color: #6bff8f; box-shadow: 0 0 0 2px rgba(107,255,143,0.5); }
+  #title {
+    color: #ffd23f;
+    text-shadow: 2px 2px 0 #000;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .subtitle-text {
+    color: #9be3ff;
+    font-size: 10px;
+    margin-bottom: 4px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10,10,20,0.92);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    text-align: center;
+    padding: 3.9cqw;
+  }
+  .overlay.show { display: flex; }
+  .box {
+    border: 3px solid #ffd23f;
+    background: #1a1a2e;
+    padding: 3.1cqw 3.9cqw;
+    max-width: min(520px, 92%);
+    max-height: 92%;
+    overflow-y: auto;
+  }
+  /* Win-screen-specific exception (established pattern, World 2): every OTHER overlay
+     (here, just the riddle) stays pinned inside gameWrap with its own small internal
+     scroll, since it appears mid-gameplay and the canvas/HUD/touch-controls need to stay
+     anchored and visible. The win screen is a one-time end-of-world reveal with no HUD or
+     controls to protect, so it gets a normal full-page scroll instead of a cramped
+     scroll-within-a-box: body.win-scroll (added in JS the moment the win overlay shows)
+     unlocks page scrolling and lets #winOverlay flow in normal document layout. */
+  html.win-scroll,
+  body.win-scroll {
+    overflow-y: auto !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  body.win-scroll #winOverlay {
+    position: static;
+    inset: auto;
+    padding: 4vw 4vw 6vw;
+    min-height: 100dvh;
+  }
+  body.win-scroll #winOverlay .box {
+    max-height: none;
+    overflow-y: visible;
+  }
+  body.win-scroll #gameWrap {
+    aspect-ratio: unset;
+    max-height: none;
+    height: auto;
+  }
+  body.win-scroll #gameWrap > canvas,
+  body.win-scroll #hud,
+  body.win-scroll #progressBar,
+  body.win-scroll #startGate {
+    display: none;
+  }
+  .box h2 {
+    color: #ffd23f;
+    font-size: 1.7cqw;
+    margin-bottom: 2.1cqw;
+    line-height: 1.6;
+  }
+  .box p {
+    font-size: 1.3cqw;
+    line-height: 1.8;
+    color: #cfe8ff;
+    margin-bottom: 2.3cqw;
+  }
+  #riddleInput {
+    font-family: 'Courier New', monospace;
+    font-size: 1.7cqw;
+    padding: 1.04cqw;
+    width: 31.25cqw;
+    text-align: center;
+    border: 2px solid #ffd23f;
+    background: #0a0a12;
+    color: #fff;
+    margin-bottom: 1.56cqw;
+  }
+  #riddleSubmit {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1.3cqw;
+    padding: 1.3cqw 2.1cqw;
+    background: #ffd23f;
+    border: none;
+    color: #1a1a2e;
+    cursor: pointer;
+  }
+  #riddleSubmit:hover { background: #ffe07a; }
+  #riddleWrong {
+    color: #e85454;
+    font-size: 1.17cqw;
+    margin-top: 1.3cqw;
+    height: 12px;
+  }
+  .goBtn {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1.17cqw;
+    padding: 1.3cqw 1.82cqw;
+    margin-left: 1.04cqw;
+    background: #ffd23f;
+    border: none;
+    color: #1a1a2e;
+    cursor: pointer;
+  }
+  .goBtn:hover { background: #ffe27a; }
+  #winContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+  @media (orientation: landscape) {
+    #winContent {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    #winContent #photoPlaceholder { margin: 0; flex-shrink: 0; }
+    #winContent #boardingPass { flex-shrink: 1; min-width: 0; }
+  }
+  #photoPlaceholder {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 16px;
+    border: 3px dashed #ffd23f;
+    background: #2b2b3a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b6b8a;
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    text-align: center;
+    line-height: 1.6;
+    padding: 8px;
+    flex-shrink: 0;
+  }
+  #photoPlaceholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+  #boardingPass {
+    background: linear-gradient(135deg, #f5f0e0 0%, #e8dfc5 100%);
+    border-radius: 6px;
+    padding: 18px 22px;
+    width: 100%;
+    max-width: 440px;
+    color: #1a1a2e;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+  #boardingPass .bpHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed #1a1a2e;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  #boardingPass .bpAirline {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    color: #2a4d8f;
+  }
+  #boardingPass .bpRoute {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 14px 0;
+  }
+  #boardingPass .bpCity { font-size: 20px; font-weight: bold; color: #1a1a2e; }
+  #boardingPass .bpCode { font-size: 26px; font-weight: bold; letter-spacing: 1px; color: #1a1a2e; }
+  #boardingPass .bpArrow { font-size: 20px; color: #2a4d8f; }
+  #boardingPass .bpGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    font-size: 9px;
+    margin-top: 12px;
+    border-top: 1px dashed #6b6b8a;
+    padding-top: 10px;
+  }
+  #boardingPass .bpGrid div span {
+    display: block;
+    color: #6b6b8a;
+    font-size: 7px;
+    margin-bottom: 2px;
+  }
+  #boardingPass .bpBarcode {
+    margin-top: 14px;
+    height: 30px;
+    background: repeating-linear-gradient(90deg, #1a1a2e 0 2px, transparent 2px 5px);
+  }
+  .goBtn {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1.17cqw;
+    padding: 1.3cqw 1.82cqw;
+    margin-left: 1.04cqw;
+    background: #ffd23f;
+    border: none;
+    color: #1a1a2e;
+    cursor: pointer;
+  }
+  .goBtn:hover { background: #ffe27a; }
+  #instructions {
+    color: #6b6b8a;
+    font-size: 9px;
+    margin-top: 6px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+  #touchControls {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    user-select: none;
+    -webkit-user-select: none;
+    flex-shrink: 0;
+    display: none;
+  }
+  .touchBtn {
+    width: 56px;
+    height: 56px;
+    background: #2b2b3a;
+    border: 3px solid #6b6b8a;
+    border-radius: 8px;
+    color: #ffd23f;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+  }
+  .touchBtn:active { background: #4a4a63; }
+  #jumpBtn { width: 82px; font-size: 10px; }
+  @media (hover: none) and (pointer: coarse) {
+    #touchControls { display: flex; }
+  }
+  @media (max-height: 700px) {
+    #title { font-size: 14px; margin-bottom: 2px; }
+    .subtitle-text { font-size: 8px; margin-bottom: 2px; }
+    #instructions { display: none; }
+    #gameWrap { max-height: 56dvh; }
+    #touchControls { margin-top: 6px; }
+    .touchBtn { width: 50px; height: 50px; font-size: 12px; }
+    #jumpBtn { width: 72px; }
+  }
+  #progressBar {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    height: 6px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  #progressFill {
+    height: 100%;
+    background: #ffd23f;
+    width: 0%;
+    transition: width 0.2s;
+  }
+  #hudRight { display: flex; flex-direction: column; align-items: flex-end; gap: 0.52cqw; }
+  /* Ice meter lives bottom-center, same placement World 2's oxygen bar used in the Reflections
+     pool — that's the established "something needs your attention right now" spot, and putting it
+     up in the corner (an earlier draft did) made it too easy to miss while focused on the ledges
+     and gaps in the middle of the screen. */
+  #iceMeterBottom {
+    position: absolute;
+    bottom: 3.3cqw; left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.39cqw;
+    pointer-events: none;
+  }
+  #iceMeterBottom.show { display: flex; }
+  #iceLabel2 {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1.17cqw;
+    color: #9be3ff;
+    text-shadow: 2px 2px 0 #000;
+    letter-spacing: 1px;
+  }
+  #iceBarOuter2 {
+    width: 40cqw; height: 2.6cqw;
+    border: 2px solid #6b6b8a;
+    background: rgba(10,10,20,0.7);
+  }
+  #iceBarFill2 { height: 100%; width: 100%; background: #6bd6ff; transition: width 0.08s linear, background 0.15s; }
+  #iceBarFill2.low { background: #ff5a5a; }
+  /* Zone 3 (F Block) is an indoor night scene — darker canvas tint before first paint. */
+  body[data-zone="dorm"] canvas { background: #1c1a33; }
+  #fragmentLine {
+    margin-top: 14px;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 11px;
+    color: #9be3ff;
+  }
+  #fragCode { color: #ffd23f; letter-spacing: 3px; }
+  /* Mobile legibility: a fixed 2px text-shadow is huge relative to cqw-scaled HUD text on a
+     phone (reads as doubled text) — scale the shadow with the HUD instead. */
+  #hud, #iceLabel2 { text-shadow: 0.2cqw 0.2cqw 0 #000; }
+  /* The canvas takes focus for keyboard play; hide the browser focus ring around it. */
+  canvas:focus { outline: none; }
+  /* 'Melbourne' is longer than any earlier destination and overflowed the pass on phones —
+     let the arrow shrink and the city name scale down on narrow screens. */
+  #boardingPass .bpArrow { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-align: center; margin: 0 6px; }
+  #boardingPass .bpRoute > div:not(.bpArrow) { flex-shrink: 0; }
+  #boardingPass .bpCity { font-size: clamp(14px, 4.2vw, 20px); }
+</style>
+
+<style>
+  /* ---- family-photo piece (this world's share of final-photo.jpg; all pieces reassemble in World 5's finale) ---- */
+  #photoPiece { display:flex; align-items:center; justify-content:center; gap:14px; margin:16px auto 0; padding:10px 14px;
+    max-width:440px; background:#14122a; border:2px solid #ffd36b; border-radius:6px; color:#f3eed8; text-align:left; box-sizing:border-box; }
+  body.win-scroll #pieceCanvas, #pieceCanvas { display:block !important; width:clamp(72px, 22vw, 120px); height:auto; aspect-ratio:3/4; image-rendering:pixelated; image-rendering:crisp-edges;
+    border:2px solid #3a3566; flex-shrink:0; }
+  #photoPiece .pieceTxt { font-family:'Courier New', monospace; font-size:11px; line-height:1.5; color:#c9c3e8; }
+  #photoPiece .pieceTxt b { color:#ffd36b; font-size:12px; letter-spacing:1px; }
+</style>
+<style>
+  /* ===== LEGIBILITY PASS (ported from World 3): bigger game, text box, sideways phone layout ===== */
+  html, body { height: 100%; overscroll-behavior: none; overflow: hidden; }
+  body {
+    height: 100dvh; max-height: 100dvh; min-height: 0;
+    justify-content: center; padding: 6px; gap: 4px;
+  }
+  #title { margin-bottom: 4px; flex-shrink: 0; }
+  #subtitle, .subtitle-text { margin-bottom: 4px; flex-shrink: 0; text-align: center; }
+  #gameWrap {
+    /* Scales up to fill the window (16:9), capped at 1600px; reserved height covers the
+       title/subtitle/instructions (desktop) or touch buttons (phones). */
+    width: min(calc(100vw - 12px), calc((100dvh - var(--reserveH, 120px)) * 1.7778), 1600px);
+    max-height: none;
+    aspect-ratio: 768 / 432;
+    container-type: inline-size;
+    flex-shrink: 0;
+  }
+  #gameWrap > canvas#game { width: 100%; height: 100%; max-height: none; aspect-ratio: auto; }
+  #hud { top: 1.04cqw; left: 1.04cqw; right: 1.04cqw; font-size: clamp(9px, 1.3cqw, 18px); }
+  #livesDisplay { font-size: clamp(13px, 2.1cqw, 26px); }
+  .overlay { padding: 3.9cqw; }
+  .box { max-width: min(520px, 92%); max-height: 92%; overflow-y: auto; padding: 3.1cqw 3.9cqw; }
+  .box h2 { font-size: clamp(12px, 2cqw, 24px); margin-bottom: 2.1cqw; }
+  .box p { font-size: clamp(10px, 1.5cqw, 18px); margin-bottom: 2.3cqw; }
+  #riddleInput { font-size: max(16px, 1.7cqw); } /* 16px minimum stops iPhone auto-zooming into the field */
+  .goBtn { font-size: clamp(10px, 1.3cqw, 16px); padding: 1.3cqw 1.82cqw; }
+  #instructions { margin-top: 6px; flex-shrink: 0; }
+  #touchControls { margin-top: 8px; flex-shrink: 0; }
+  @media (max-height: 700px) {
+    #title { font-size: 14px; margin-bottom: 2px; }
+    #subtitle, .subtitle-text { font-size: 8px; margin-bottom: 2px; }
+    #instructions { display: none; }
+    #gameWrap { --reserveH: 90px; }
+    #touchControls { margin-top: 6px; }
+  }
+  /* ---- message box: all speech/pickup/caption text as real page text ---- */
+  #msgBox {
+    position: absolute; left: 50%; bottom: 3.4cqw; transform: translateX(-50%);
+    width: max-content; max-width: 94%;
+    background: rgba(10,10,20,0.9); border: 2px solid #ffd23f; border-radius: 4px;
+    padding: clamp(6px, 1cqw, 14px) clamp(8px, 1.6cqw, 20px);
+    color: #fff; font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: clamp(10px, 1.75cqw, 22px); line-height: 1.6; text-align: center;
+    pointer-events: none; display: none; z-index: 5;
+  }
+  #msgBox.show { display: block; }
+  #msgName { display: block; color: #ffd23f; font-size: 0.8em; margin-bottom: 0.35em; }
+  #msgName:empty { display: none; }
+  #msgBox.top { top: 5cqw; bottom: auto !important; }
+  #msgText { white-space: pre-line; }
+  #rotateHint {
+    display: none; color: #9be3ff; font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 9px; line-height: 1.6; text-align: center; margin-top: 8px; flex-shrink: 0;
+  }
+  @media (hover: none) and (pointer: coarse) and (orientation: portrait) {
+    #rotateHint { display: block; }
+    #gameWrap { --reserveH: 200px; }
+  }
+  /* Phones held sideways: full-screen game, title hidden, touch buttons float over the
+     bottom corners of the game (arrows left, jump right) */
+  @media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+    body { padding: 0; gap: 0; }
+    #title, #subtitle, .subtitle-text, #instructions { display: none; }
+    #gameWrap {
+      --reserveH: 0px;
+      width: min(100vw, calc(100dvh * 1.7778));
+      border: none; box-shadow: none; border-radius: 0;
+    }
+    #touchControls {
+      position: fixed; left: 0; right: 0;
+      bottom: max(8px, env(safe-area-inset-bottom));
+      margin: 0;
+      padding: 0 max(12px, env(safe-area-inset-left)) 0 max(12px, env(safe-area-inset-right));
+      pointer-events: none; z-index: 20;
+    }
+    .touchBtn { pointer-events: auto; opacity: 0.55; width: 58px; height: 58px; }
+    #leftBtn { order: 1; }
+    #rightBtn { order: 2; }
+    #jumpBtn { order: 3; margin-left: auto; width: 84px; }
+    #msgBox { bottom: 3cqw; max-width: 58%; }
+  }
+  /* ---- win screen: normal page scroll, game frame collapses around the win box ---- */
+  html.win-scroll, body.win-scroll { overflow: auto !important; height: auto !important; max-height: none !important; }
+  body.win-scroll #gameWrap {
+    width: min(900px, 100%); margin: 0 auto; aspect-ratio: auto; height: auto; max-height: none;
+    border: none; box-shadow: none;
+  }
+  body.win-scroll #msgBox, body.win-scroll #rotateHint { display: none !important; }
+  body.win-scroll #winOverlay .box { max-width: min(860px, 100%); width: 100%; max-height: none; overflow: visible; padding: 24px clamp(14px, 3vw, 30px); }
+  body.win-scroll #winOverlay .box h2 { font-size: clamp(13px, 1.9cqw, 18px); }
+  body.win-scroll #winOverlay .box p { font-size: clamp(10px, 1.4cqw, 13px); }
+  /* ---- photo-piece card: bigger text ---- */
+  #photoPiece { max-width: 520px; }
+  #photoPiece .pieceTxt { font-size: 15px; line-height: 1.55; }
+  #photoPiece .pieceTxt b { font-size: 13px; font-family: 'Press Start 2P', 'Courier New', monospace; line-height: 1.7; }
+  #invLabel { font-size: clamp(8px, 1.1cqw, 14px); }
+  .invSlot { width: clamp(22px, 3.6cqw, 44px); height: clamp(22px, 3.6cqw, 44px); }
+  .invSlot.filled::before { font-size: clamp(14px, 2.4cqw, 30px); }
+  #iceLabel2 { font-size: clamp(9px, 1.3cqw, 18px); }
+  #gameWrap:has(#iceMeterBottom.show) #msgBox { bottom: 10cqw; }
+</style>
+<style>
+  /* ===== polish pass 2: the win screen is its own full-screen scroll area (works in Safari/iOS
+     regardless of the page's gameplay scroll lock), bigger Jack photo, readable boarding pass ===== */
+  body.win-scroll #winOverlay {
+    position: fixed !important; inset: 0 !important; z-index: 200;
+    display: block !important; overflow-y: auto !important; -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain; background: #0a0a12 !important;
+    padding: 20px 12px 48px !important;
+  }
+  body.win-scroll #winOverlay .box { margin: 0 auto; max-height: none !important; overflow: visible !important; }
+  #winContent #photoPlaceholder, #winContent .photoPlaceholder {
+    flex: 0 1 260px !important; width: 260px !important; max-width: 100%; height: auto !important;
+    aspect-ratio: 3 / 4; margin: 0 !important; position: relative; overflow: hidden; padding: 0 !important;
+  }
+  #winContent #worldPhoto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #boardingPass .bpAirline { font-size: 14px !important; }
+  #boardingPass .bpLabel { font-size: 12px !important; }
+  #boardingPass .bpGrid { font-size: 15px !important; gap: 10px 8px !important; }
+  #boardingPass .bpGrid div span { font-size: 11px !important; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+  <div id="title">JACK'S QUEST</div>
+  <div id="subtitleText" class="subtitle-text">Bergen</div>
+  <div id="gameWrap">
+    <canvas id="game" width="768" height="432"></canvas>
+    <div id="hud">
+      <div id="hudLeft">
+        <div id="livesDisplay">♥ ♥ ♥</div>
+        <div id="invLabel">GEAR</div>
+        <div id="inventoryRow">
+          <div class="invSlot" id="invSlot0"></div>
+        </div>
+      </div>
+      <div id="hudRight"><div id="itemsDisplay"></div></div>
+    </div>
+    <div id="progressBar"><div id="progressFill"></div></div>
+    <div id="msgBox"><span id="msgName"></span><span id="msgText"></span></div>
+    <div id="iceMeterBottom">
+      <div id="iceLabel2">⚠ ICE — KEEP MOVING ⚠</div>
+      <div id="iceBarOuter2"><div id="iceBarFill2"></div></div>
+    </div>
+
+    <div class="overlay" id="riddleOverlay">
+      <div class="box">
+        <h2>ONE LAST RIDDLE<br>BEFORE YOU GO</h2>
+        <!-- PLACEHOLDER RIDDLE (from Zone 3 standalone) — edit RIDDLE_TEXT / RIDDLE_ANSWERS in the script. -->
+        <p id="riddleText"></p>
+        <input type="text" id="riddleInput" placeholder="type your answer" autocomplete="off">
+        <br>
+        <button id="riddleSubmit">SUBMIT</button>
+        <div id="riddleWrong"></div>
+      </div>
+    </div>
+
+    <div class="overlay" id="winOverlay">
+      <div class="box">
+        <h2>BERGEN<br>COMPLETE!</h2>
+        <p>Fjords, trolls, thin ice, eggs benedict — and Léonie.<br>Next stop: back to Melbourne.</p>
+        <!-- PHOTO PLACEHOLDER: standing instruction for every World's final cutscene — drop
+             in a real photo of Jack from this phase of his life (Melbourne, first year) by
+             setting this img's src (e.g. a data URI) and switching display:none -> block. -->
+        <div id="winContent">
+          <div id="photoPlaceholder">
+            <img id="worldPhoto" src="jack-bergen.jpg" alt="Jack — Bergen exchange">
+            <span id="photoPlaceholderText">[ PHOTO OF JACK<br>BERGEN ERA<br>GOES HERE ]</span>
+          </div>
+          <div id="boardingPass">
+            <div class="bpHeader">
+              <div class="bpAirline">✈ JACK AIR</div>
+              <div style="font-size:9px;color:#6b6b8a;">BOARDING PASS</div>
+            </div>
+            <div class="bpRoute">
+              <div style="text-align:left;">
+                <div class="bpCity">Bergen</div>
+                <div class="bpCode">BGO</div>
+              </div>
+              <div class="bpArrow">✈ ────────────</div>
+              <div style="text-align:right;">
+                <div class="bpCity">Melbourne</div>
+                <div class="bpCode">MEL</div>
+              </div>
+            </div>
+            <div class="bpGrid">
+              <div><span>PASSENGER</span><span style="color:#1a1a2e;">JACK</span></div>
+              <div><span>GATE</span><span style="color:#1a1a2e;">F21</span></div>
+              <div><span>SEAT</span><span style="color:#1a1a2e;">21A</span></div>
+              <div><span>FLIGHT</span><span style="color:#1a1a2e;">JA421</span></div>
+              <div><span>BOARDING</span><span style="color:#1a1a2e;">21:00</span></div>
+              <div><span>CLASS</span><span style="color:#1a1a2e;">HOME</span></div>
+            </div>
+            <div class="bpBarcode"></div>
+          </div>
+        </div>
+        <div id="photoPiece"><canvas id="pieceCanvas" width="225" height="300"></canvas><div class="pieceTxt"><b>MYSTERY PIECE FOUND! (4/5)</b><br>A strange little scrambled fragment.<br>Better hang on to it…</div></div>
+        <!-- NEXT-WORLD PLACEHOLDER: wire to World 5 once hosting/index shell exists. -->
+        <button class="goBtn" id="nextWorldBtn" style="margin-top:3vw;">CONTINUE →</button>
+      </div>
+    </div>
+  </div>
+  <div id="instructions">ARROW KEYS TO MOVE · SPACE / UP TO JUMP</div>
+  <div id="touchControls">
+    <div class="touchBtn" id="leftBtn">◀</div>
+    <div class="touchBtn" id="jumpBtn">JUMP</div>
+    <div class="touchBtn" id="rightBtn">▶</div>
+  </div>
+  <div id="rotateHint">↻ TURN YOUR PHONE SIDEWAYS<br>FOR A BIGGER VIEW</div>
+
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = false;
+
+// ---- message box (legibility pass, same as World 3): gameplay code sets activePopup
+// (short-lived) or captionText (set every frame while a scripted line is showing); speech
+// bubbles call sayInBox(name, text) every frame they're up. updateMsgBox() mirrors whichever is
+// active into #msgBox as real page text. Popups and speech linger ~1.5s after they end so short
+// messages are still readable. "NAME: text" shows NAME as a speaker label. ----
+let captionText = null;
+let captionOpacity = 1;
+let frameSpeech = [];
+let msgTopThisFrame = false; // true = show the text box at the TOP of the game this frame // [{name, text}] — cleared at the start of every draw()
+function sayInBox(name, text) { if (text) frameSpeech.push({name: name || '', text: String(text)}); }
+let msgShown = null, msgLingerUntil = 0;
+const MSG_NOT_SPEAKERS = ['FOUND'];
+function splitSpeaker(text) {
+  const m = /^([A-ZÀ-Ý][A-ZÀ-Ý'. &]{1,16}): (.+)$/.exec(text);
+  return (m && MSG_NOT_SPEAKERS.indexOf(m[1]) === -1) ? {name: m[1], text: m[2]} : {name: '', text: text};
+}
+function updateMsgBox() {
+  const box = document.getElementById('msgBox');
+  if (!box) return;
+  let lines = null, isCaption = false;
+  if (captionText !== null) { lines = [splitSpeaker(captionText)]; isCaption = true; }
+  else if (frameSpeech.length) lines = frameSpeech.some(l => l.name) ? frameSpeech.filter(l => l.name) : frameSpeech.slice(-1);
+  else if (typeof activePopup !== 'undefined' && activePopup && activePopup.text) lines = [splitSpeaker(activePopup.text)];
+  const now = performance.now();
+  if (lines) {
+    const key = JSON.stringify(lines);
+    if (key !== msgShown) {
+      msgShown = key;
+      const nameEl = document.getElementById('msgName'), textEl = document.getElementById('msgText');
+      if (lines.length === 1) { nameEl.textContent = lines[0].name; textEl.textContent = lines[0].text; }
+      else {
+        // two people talking at once: one line each, "NAME: text"
+        nameEl.textContent = '';
+        textEl.textContent = lines.map(l => (l.name ? l.name + ': ' : '') + l.text).join('\n');
+      }
+    }
+    msgLingerUntil = isCaption ? now : now + 1500;
+    box.style.opacity = isCaption ? captionOpacity : 1;
+    box.classList.add('show');
+  } else if (now > msgLingerUntil && box.classList.contains('show')) {
+    box.classList.remove('show');
+    msgShown = null;
+  }
+}
+
+
+// ============================================================
+// SHARED PHYSICS CONSTANTS
+// ============================================================
+const GRAVITY = 0.55;
+const JUMP_FORCE = -11.5;
+const MOVE_SPEED = 3.2;
+const FRICTION = 0.82;
+const ICE_FRICTION = 0.95; // Zones 1 (trailhead ledges) + 2 (frozen pond) — only governs stopping
+
+// ============================================================
+// SHARED WORLD-4-WIDE STATE — carries across all 3 zones, never reset on transition
+// ============================================================
+const player = {
+  x: 40, y: 280, w: 26, h: 34,
+  vx: 0, vy: 0,
+  onGround: false,
+  facing: 1,
+  lives: 3,
+};
+
+// World 4 starts EMPTY — nothing carries forward from World 3. Coat+mittens (Zone 1) is the only
+// persistent item; Zone 3's ingredients live in its own zone-local inventory.
+const inventory = [];
+function hasItem(id) { return inventory.includes(id); }
+function addItem(id) { if (!inventory.includes(id)) inventory.push(id); }
+function removeItem(id) { const i = inventory.indexOf(id); if (i !== -1) inventory.splice(i, 1); }
+
+/* ===== Jack's Quest: shared progress across worlds (see index.html) =====
+   A single localStorage record carries lives from one world's CONTINUE click into the next
+   world's opening state. World 4 starts with an empty inventory by design (see comment above),
+   so only lives are read back here. Opening this file directly (no matching saved record)
+   falls back to the defaults above untouched, so standalone testing still works. */
+const PROGRESS_KEY = 'jacksQuestProgress';
+function loadProgress() {
+  try { const raw = localStorage.getItem(PROGRESS_KEY); return raw ? JSON.parse(raw) : null; }
+  catch (e) { return null; }
+}
+function saveProgress(data) {
+  try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(data)); } catch (e) {}
+}
+(function applySavedProgress() {
+  const saved = loadProgress();
+  if (saved && saved.world === 4 && typeof saved.lives === 'number') player.lives = saved.lives;
+})();
+
+let camX = 0;
+let hitFlash = 0;
+let activePopup = null; // {text, timer, x, y} — world-space popup, drawn by the active zone
+
+// ---- item-use animation (HUD icon flies to interaction point) — used by Zone 1's busker
+// handoff and Zone 2's assignment hand-in ----
+const ITEM_USE_DURATION = 100; // ~1.7s at 60fps
+let itemUseAnim = null; // {slotIndex, fromX, fromY, toX, toY, timer, onComplete}
+function triggerItemUse(slotIndex, toWorldX, toWorldY, onComplete) {
+  if (itemUseAnim) return;
+  itemUseAnim = {
+    slotIndex,
+    fromX: player.x + player.w / 2,
+    fromY: player.y - 10,
+    toX: toWorldX,
+    toY: toWorldY,
+    timer: 0,
+    onComplete,
+  };
+  const slot = document.getElementById('invSlot' + slotIndex);
+  if (slot) slot.classList.add('pulse');
+}
+
+// ============================================================
+// INPUT
+// ============================================================
+const keys = {};
+// Guards both handlers on whether an <input>/<textarea> is currently focused and bails out
+// before touching `keys` or calling preventDefault when it is — needed so the Zone 4 riddle
+// answer field can take multi-word answers (space bar) without the game also treating it as
+// a jump press. (Fix originally made for Zone 4 standalone; applied globally here since it's
+// strictly safer for every zone and the merged file now shares one riddle field.)
+function isTypingInField() {
+  const el = document.activeElement;
+  return !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
+}
+function handleKeyDown(e) {
+  if (document.body.classList.contains('win-scroll')) return; // let arrows/space scroll the win screen
+  if (isTypingInField()) return;
+  keys[e.code] = true;
+  if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.code)) e.preventDefault();
+}
+function handleKeyUp(e) {
+  if (isTypingInField()) return;
+  keys[e.code] = false;
+}
+window.addEventListener('keydown', handleKeyDown);
+window.addEventListener('keyup', handleKeyUp);
+document.addEventListener('keydown', handleKeyDown);
+document.addEventListener('keyup', handleKeyUp);
+
+function bindHold(el, code) {
+  const press = e => { e.preventDefault(); keys[code] = true; };
+  const release = e => { e.preventDefault(); keys[code] = false; };
+  el.addEventListener('touchstart', press, {passive: false});
+  el.addEventListener('touchend', release, {passive: false});
+  el.addEventListener('touchcancel', release, {passive: false});
+  el.addEventListener('mousedown', press);
+  el.addEventListener('mouseup', release);
+  el.addEventListener('mouseleave', release);
+}
+bindHold(document.getElementById('leftBtn'), 'ArrowLeft');
+bindHold(document.getElementById('rightBtn'), 'ArrowRight');
+bindHold(document.getElementById('jumpBtn'), 'Space');
+// No zone in World 4 needs a vertical touch button — all left/right/jump.
+
+canvas.tabIndex = 0;
+canvas.addEventListener('click', () => canvas.focus());
+window.addEventListener('load', () => canvas.focus());
+setTimeout(() => canvas.focus(), 300);
+window.addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
+
+const startGate = document.createElement('div');
+startGate.id = 'startGate';
+startGate.style.cssText = 'position:absolute;inset:0;background:rgba(10,10,20,0.85);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#ffd23f;font-family:"Press Start 2P",monospace;font-size:clamp(14px,2.4cqw,28px);text-align:center;cursor:pointer;z-index:50;';
+startGate.innerHTML = '<div>TAP TO START</div><div style="color:#9be3ff;font-size:clamp(9px,1.2cqw,14px);margin-top:1.6em;line-height:1.6;">(needed to connect your controls to the game)</div>';
+document.getElementById('gameWrap').appendChild(startGate);
+// gameStarted gates the entire update loop so nothing — including a zone's own internal
+// timers — advances before the player has actually tapped in. (Fix originally made for Zone
+// 4's tram-ride timing bug; applied globally here since it's harmless for Zones 1-3, which
+// have no time-based auto-advance, and keeps all 4 zones behaviorally consistent.)
+let gameStarted = false;
+startGate.addEventListener('click', () => { canvas.focus(); startGate.remove(); gameStarted = true; });
+
+function rectsOverlap(a, b) {
+  return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
+// ---- shared knockback state, used by Zones 1-3's obstacle-bump logic (Zone 4 has no
+// hazards and never calls this) ----
+const KNOCKBACK_DURATION = 22;
+const KNOCKBACK_INVULN = 20;
+let knockbackTimer = 0;
+let knockbackInvulnTimer = 0;
+function triggerKnockback(pushDir, vertical) {
+  player.vx = pushDir * 5.5;
+  player.vy = vertical !== undefined ? vertical : -6;
+  knockbackTimer = KNOCKBACK_DURATION;
+  hitFlash = 14;
+}
+
+// ---- small color-lerp helper, used by Zone 4's dusk sky/building progression ----
+function lerpColor(hexA, hexB, t) {
+  t = Math.max(0, Math.min(1, t));
+  const a = parseInt(hexA.slice(1), 16), b = parseInt(hexB.slice(1), 16);
+  const ar = (a >> 16) & 255, ag = (a >> 8) & 255, ab = a & 255;
+  const br = (b >> 16) & 255, bg = (b >> 8) & 255, bb = b & 255;
+  const r = Math.round(ar + (br - ar) * t);
+  const g = Math.round(ag + (bg - ag) * t);
+  const bl = Math.round(ab + (bb - ab) * t);
+  return `rgb(${r},${g},${bl})`;
+}
+
+// ============================================================
+// ZONE MANAGEMENT
+// ============================================================
+const ZONE_WHARF = 0, ZONE_HIKE = 1, ZONE_DORM = 2;
+let currentZone = ZONE_WHARF;
+let worldWon = false; // true only once World 4 is fully complete (Zone 3's riddle solved)
+let zoneComplete = false; // per-zone one-shot completion guard; reset to false on every zone entry
+
+// ---- cross-zone transition cutscene (soft transition: brief flash at the trigger point, then
+// a sweeping loading-clock, then drop into the next zone's start) — same pattern established
+// for World 2's stitch. Each zone calls beginZoneTransition() directly at its own completion
+// point instead of showing a "ZONE X CLEAR" popup+button, so the player never sees these as
+// separate files — World 3 reads as one continuous playthrough. ----
+let transitioning = false;
+let transitionStage = null; // 'flash' | 'clock' | null
+let transitionStageStart = 0;
+let transitionDirection = 1;
+let transitionTargetZone = null;
+let transitionLabel = '';
+const TRANSITION_FLASH_MS = 1700;
+const TRANSITION_CLOCK_MS = 3000;
+
+function beginZoneTransition(targetZone, label, direction) {
+  transitioning = true;
+  transitionStage = 'flash';
+  transitionStageStart = performance.now();
+  transitionTargetZone = targetZone;
+  transitionLabel = label;
+  transitionDirection = direction || 1;
+  player.vx = 0; player.vy = 0;
+  activePopup = null;
+}
+
+function updateZoneTransition(now) {
+  if (!transitioning) return;
+  const elapsed = now - transitionStageStart;
+  if (transitionStage === 'flash' && elapsed >= TRANSITION_FLASH_MS) {
+    transitionStage = 'clock';
+    transitionStageStart = now;
+  } else if (transitionStage === 'clock' && elapsed >= TRANSITION_CLOCK_MS) {
+    transitioning = false;
+    transitionStage = null;
+    currentZone = transitionTargetZone;
+    zoneComplete = false;
+    zones[currentZone].onEnter();
+    updateHUD();
+  }
+}
+
+function drawTransitionClock(elapsed) {
+  const progress = Math.min(1, elapsed / TRANSITION_CLOCK_MS);
+  const cx = canvas.width / 2, cy = canvas.height / 2 + 40, r = 70;
+  ctx.save();
+  ctx.fillStyle = 'rgba(10,10,20,0.88)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = '#ffd23f';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, Math.PI, 0, false);
+  ctx.stroke();
+  const angle = transitionDirection >= 0 ? (Math.PI - progress * Math.PI) : (progress * Math.PI);
+  ctx.strokeStyle = '#9be3ff';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(cx + r * Math.cos(angle), cy - r * Math.sin(angle));
+  ctx.stroke();
+  ctx.fillStyle = '#ffd23f';
+  ctx.beginPath();
+  ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 22px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(transitionLabel, cx, cy - r - 24);
+  ctx.restore();
+}
+
+function drawTransitionFlash(elapsed, worldX, worldY) {
+  const t = Math.min(1, elapsed / TRANSITION_FLASH_MS);
+  ctx.save();
+  ctx.globalAlpha = 1 - Math.abs(t - 0.5) * 0.6;
+  const fx = worldX - camX, fy = worldY;
+  ctx.fillStyle = '#ffd23f';
+  ctx.beginPath();
+  ctx.arc(fx, fy - (1 - t) * 40, 8, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+// ============================================================
+// HUD
+// ============================================================
+// Per-zone HUD config: which single item (if any) invSlot0 tracks, its label, and the
+// body[data-zone] value used by the CSS overrides above (Zone 3's $ tip-jar icon, its
+// darker canvas tint).
+const HUD_CONFIG = [
+  {label: 'GEAR', item: 'coat', dataZone: 'wharf'},
+  {label: 'GEAR', item: 'coat', dataZone: 'hike'},
+  {label: 'GEAR', item: 'coat', dataZone: 'dorm'},
+];
+
+function updateHUD() {
+  document.getElementById('livesDisplay').textContent = '♥ '.repeat(player.lives).trim();
+
+  const cfg = HUD_CONFIG[currentZone];
+  document.getElementById('invLabel').textContent = cfg.label;
+  document.body.dataset.zone = cfg.dataZone;
+  const slot0 = document.getElementById('invSlot0');
+  if (slot0) {
+    if (cfg.item && hasItem(cfg.item)) slot0.classList.add('filled');
+    else slot0.classList.remove('filled');
+  }
+
+  // no location labels — only F Block's ingredient count is shown (it's a to-do, not a place name)
+  document.getElementById('itemsDisplay').textContent = currentZone === ZONE_DORM ? ZoneDorm.hudCount() : '';
+
+  // Zone 2's ice meter (was updateHUDLocal in the standalone file) — driven every frame from draw().
+  const iceWrap = document.getElementById('iceMeterBottom');
+  const iceFill = document.getElementById('iceBarFill2');
+  const zs = currentZone === ZONE_HIKE && !transitioning ? zones[ZONE_HIKE].__debugState() : null;
+  if (zs && zs.onIce) {
+    iceWrap.classList.add('show');
+    iceFill.style.width = Math.max(0, zs.iceMeter) + '%';
+    iceFill.classList.toggle('low', zs.iceMeter < 30);
+  } else {
+    iceWrap.classList.remove('show');
+  }
+}
+
+// Losing a life respawns within the current zone (progress/inventory intact); running out of
+// all lives resets the CURRENT zone's own not-yet-secured collectibles (not earlier zones'
+// already-secured progress) plus the "OUT OF LIVES" message, then respawns.
+function loseLife() {
+  player.lives -= 1;
+  const outOfLives = player.lives <= 0;
+  if (outOfLives) {
+    player.lives = 3;
+    zones[currentZone].onOutOfLives();
+  }
+  zones[currentZone].respawnPlayer();
+  if (outOfLives) {
+    activePopup = {text: 'OUT OF LIVES — RESTARTING!', timer: 110, x: zones[currentZone].respawnPopupX(), y: 250};
+  }
+  updateHUD();
+}
+
+
+// ============================================================
+// ZONE 1: BRYGGEN HARBOUR ARRIVAL
+// Phase A — wharf walk (seagull patrol hazards, walk to the funicular station)
+// Phase B — funicular ride (fixed-cabin scripted sequence, mirrors World 3 Zone 4's tram ride)
+// Phase C — trailhead walk (gear-hut coat+mittens pickup, mandatory trail-gate)
+// ============================================================
+const ZoneWharf = (function() {
+  const GROUND_Y = 300;
+  const BASE_H = 24;
+
+  // ---- Phase A: wharf ----
+  const WHARF_LEVEL_WIDTH = 1100;
+  const platforms = [
+    {x: 0, y: GROUND_Y, w: WHARF_LEVEL_WIDTH, h: 132},
+  ];
+
+  // Two seagulls patrolling the wharf air — reusing Zone-1-Tram's proven inspector pattern
+  // (stun-and-retreat, per-hazard hitCooldown, life-loss on hit) rather than World 1's simpler
+  // ferry-seagull version, since the stun/retreat refinement is what avoids the stuck-trap bug
+  // class documented for patrol hazards sharing a range. Phase-offset starting positions (not
+  // full anti-phase), per the same established lesson.
+  const PATROL_SPEED = 1.6;
+  const PATROL_MARGIN = 40;
+  // Positioned to overlap a STANDING player's box (GROUND_Y-34 to GROUND_Y) — a "swooping low
+  // over the wharf" read, and — importantly — dodgeable the same way as Tram's ground-walking
+  // inspectors: jumping clears the player's box well above this band for most of the jump arc,
+  // so walking straight through hits, timing a jump over doesn't. Verified below via headless
+  // simulation (walk-through hits, jump-through doesn't), not just eyeballed.
+  //
+  // FIXED world-space patrol ranges, not camera-relative — deliberately simpler than Tram's
+  // camera-following-band approach. An earlier version computed each gull's band from camX
+  // every frame (copying Tram's Phase-1 technique verbatim); headless simulation caught a real
+  // stuck-loop bug from it: because that band re-centers on the player every frame, it never
+  // actually falls behind as the player advances, so a continuously-walking player stayed
+  // inside both gulls' reach for the ENTIRE wharf phase and got knocked back to the zone start
+  // (x=40) over and over, plateauing around x≈300-400 for 800+ simulated frames — a genuine
+  // permanent blocker, not just "hard." Tram's camera-relative band exists because its
+  // inspectors are confined to the visibly-clipped tram-cabin strip, a real constraint for that
+  // scene; the wharf has no such constraint. Two separate FIXED ranges (World 1's ferry-gull
+  // style) let the player clear each one in turn and leave it behind for good, with a breather
+  // gap between them and a clear run to the station after the second — verified below.
+  // Range width capped well under the verified single-jump horizontal reach (~134px): a jump
+  // started with a little runway before a range's start clears the WHOLE range in one arc
+  // regardless of where the gull currently is in its sweep, no phase-timing against the gull
+  // itself required — this is the property the earlier 300px-wide ranges lacked (confirmed via
+  // simulation: even a continuous-hop bot got knocked back repeatedly and never reliably
+  // cleared them). Generous clear runway before/between/after both ranges.
+  const GULL_RANGES = [
+    {lo: 260, hi: 360},
+    {lo: 620, hi: 720},
+  ];
+  const gulls = [
+    {y: GROUND_Y - 30, w: 22, h: 16, dir: 1, curX: 260, stunTimer: 0, bobPhase: 0},
+    {y: GROUND_Y - 34, w: 22, h: 16, dir: -1, curX: 720, stunTimer: 0, bobPhase: 3},
+  ];
+  const GULL_STUN_FRAMES = 45;
+  let hitCooldown = 0;
+
+  const STATION_X = WHARF_LEVEL_WIDTH - 140;
+  const STATION_TRIGGER_W = 60;
+  let phaseAActive = true;
+  let phaseACleared = false;
+
+  // ---- Phase B: funicular ride ----
+  const TRAM_SCREEN_W = 576;
+  const TRAM_MARGIN = (768 - TRAM_SCREEN_W) / 2;
+  const RIDE_DURATION_FRAMES = 660; // ~11s — shorter than World 3's dusk-tram ride, since this
+                                     // is a brief establishing beat, not a paced narrative scene
+  const TEXT_FADE_FRAMES = 200;
+  const TEXT_FADE_START = 240;
+  const RIDE_SPEED = 2.0;
+  let rideMotion = 0;
+  let rideTimer = 0;
+  let rideActive = false;
+  // These clamp player.x, which is a WORLD/screen coordinate — they need to be offset by
+  // TRAM_MARGIN to match where the cabin is actually drawn (bodyL..bodyR in drawRideScene).
+  // The old values (10, TRAM_SCREEN_W-40 = 536) were unoffset, i.e. anchored to the screen's
+  // left edge instead of the cabin's left wall (TRAM_MARGIN = 96px in from the screen edge) —
+  // so the player could walk out through the cabin's left wall into the margin before hitting
+  // this clamp. Gerald's flag.
+  const CABIN_WALL_INSET = 16;
+  const CABIN_MIN_X = TRAM_MARGIN + CABIN_WALL_INSET;
+  const CABIN_MAX_X = TRAM_MARGIN + TRAM_SCREEN_W - CABIN_WALL_INSET - player.w;
+
+  const DISEMBARK_DURATION_FRAMES = 90;
+  let disembarkTimer = 0;
+  let disembarking = false;
+
+  // ---- Phase C: trailhead — floating icy ledges over the fjord, per Gerald's request that
+  // the coat+mittens pickup be more of a real challenge. Each ledge is a THIN platform (h<100)
+  // — landing-surface-only per the established rule, not a side-wall — so there's no false-bump
+  // risk jumping up onto one. Missing a jump and falling into the water is a full reset (all
+  // lives restored, coat/gate progress cleared), distinct from and harsher than the usual
+  // single-life-loss hazard hit — Gerald's explicit call.
+  //
+  // Round 2: Gerald asked for two more things to raise the stakes once the coat is in hand —
+  // (1) shorten the landing right after the hut so an ice-slide can genuinely carry you past
+  // it, and (2) a proper multi-height gauntlet (3-4 floating ledges at different elevations)
+  // over a bigger stretch of water before the trail gate. Ledges now carry their own `y`
+  // (previously all shared GROUND_Y); walkPlatforms/drawLedge/drawIcyWater below all read it
+  // per-ledge rather than assuming one flat line. NOTE on jump timing: the Y-collision code
+  // only lands the player while descending (vy>0) — while still ascending (vy<0) a platform
+  // overlap is treated as a head-bump, not a landing (see the ceiling-bump branch in update()).
+  // So a RISE onto a higher ledge only works if the player is past their jump's apex and
+  // falling again by the time they reach that ledge's x-span, which eats into the usable
+  // horizontal distance — verified empirically via a run-up-then-jump bot (debug_gauntlet.js),
+  // not just hand-calculated, after the plain distance math turned out to miss this once
+  // already this session (see the ICE_FRICTION regression above).
+  const WALK_LEVEL_WIDTH = 1545; // gate ledge end (1470) + 75, same margin as before
+  let phaseCActive = false;
+  const LEDGE_H = 28;
+  // Round 3: Gerald asked for the landing zones themselves to be narrower still, for more
+  // slide-off risk. Widths are cut hard here (70/80/70/90 → 50/50/50/55), but each ledge's LEFT
+  // edge (the side you land ON, i.e. the approach jump's target) is kept at its previously-
+  // verified-safe distance from the ledge before it — only the trailing/right edge moves in.
+  // That way the extra difficulty lands entirely on "stick a narrower landing, don't slide off
+  // it," not on "the jump itself got longer," which would silently break the already-tuned
+  // gauntlet (confirmed the hard way: an earlier pass here shifted ledges to keep them visually
+  // centered, which grew the toughest rise jump's gap by 25px and made it fail outright —
+  // caught via debug_gauntlet.js, not assumed away).
+  // Round 4 (Gerald: "still too easy — the evenly spaced ledges give a fixed jump rhythm"):
+  // gaps now vary 45-105px and heights swing up/down unevenly, so no two consecutive jumps want
+  // the same timing — short hops punish a full-speed jump (you overshoot a 45-50px landing on
+  // ice), long ones need a proper run-up. Two extra ledges extend the gauntlet from 4 to 6.
+  // Every hop verified reachable via sim.js (faithful copy of this zone's movement/collision
+  // code, brute-forcing run-up/jump/release/brake timings and chaining real landing spots
+  // from the spawn ledge through to the gate ledge).
+  const LEDGES = [
+    {x: 0,    w: 140, y: GROUND_Y},      // spawn ledge, right after disembark
+    {x: 230,  w: 150, y: GROUND_Y},      // gear-hut ledge (coat + mittens)
+    {x: 455,  w: 50,  y: GROUND_Y - 20}, // gap 75,  small rise
+    {x: 610,  w: 45,  y: GROUND_Y + 35}, // gap 105, big drop — narrowest landing
+    {x: 700,  w: 50,  y: GROUND_Y - 10}, // gap 45,  short hop back up — easy to overshoot
+    {x: 850,  w: 45,  y: GROUND_Y - 55}, // gap 100, tall rise — the hardest jump
+    {x: 1000, w: 55,  y: GROUND_Y + 20}, // gap 105, long drop
+    {x: 1110, w: 50,  y: GROUND_Y - 15}, // gap 55,  short hop up
+    {x: 1250, w: 220, y: GROUND_Y},      // gate ledge (gap 90) — the finish line, left wide
+  ];
+  const walkPlatforms = LEDGES.map(l => ({x: l.x, y: l.y, w: l.w, h: LEDGE_H}));
+  // Comfortably below the LOWEST ledge's underside (not just GROUND_Y, now that ledges sit at
+  // different heights) — catches a missed jump promptly, per the established "keep hazard beats
+  // short" rule, with a bit more margin than round 1 now that landings are less uniform.
+  const WATER_DEATH_Y = Math.max(...LEDGES.map(l => l.y)) + LEDGE_H + 40;
+
+  const GEAR_HUT_X = 260; // sits within the second ledge (230-380), not on open ground
+  const GEAR_TRIGGER = {x: GEAR_HUT_X, y: GROUND_Y - 70, w: 50, h: 70};
+  let coatTaken = false;
+  const GATE_X = 1360; // sits within the final ledge (1250-1470), with room to walk through after
+  const GATE_W = 30, GATE_H = 90;
+  let trailGateOpen = false;
+  let phaseCCleared = false;
+
+  let zoneComplete = false;
+
+  function respawnPlayer() {
+    player.x = 40; player.y = GROUND_Y - player.h;
+    player.vx = 0; player.vy = 0;
+    knockbackTimer = 0; knockbackInvulnTimer = 0;
+  }
+
+  function onOutOfLives() {
+    // Phase A's only stake is the seagulls (no collectible to reset there). Phase C has its own
+    // dedicated full-reset path (falling into the water, see fallIntoWater() below) rather than
+    // routing through the standard 3-hits life system, so this stays a no-op — kept for
+    // interface-shape consistency.
+  }
+
+  // Full reset, distinct from (and harsher than) the standard single-life hazard hit: all lives
+  // restored, coat + gate progress cleared, respawn at the top of the ledges. Triggered only by
+  // falling into the water below the ledges (see the WATER_DEATH_Y check in update()).
+  function fallIntoWater() {
+    player.lives = 3;
+    // Surfaced by the round-2 gauntlet: with more ledges past the hut, a bot (or player) can
+    // now genuinely grab the coat and THEN fall in later — this used to leave 'coat' sitting in
+    // the shared inventory even after coatTaken reset to false, since only the coat's own gear-
+    // hut/gate flags were cleared, not the item itself. Full reset means full reset.
+    if (coatTaken) removeItem('coat');
+    coatTaken = false;
+    trailGateOpen = false;
+    activePopup = {text: 'INTO THE FJORD — RESTARTING!', timer: 110, x: 140, y: 190};
+    player.x = 20; player.y = GROUND_Y - player.h; player.vx = 0; player.vy = 0;
+    updateHUD();
+  }
+
+  function sectionLabel() {
+    if (zoneComplete) return 'SECTION: CLEARED';
+    if (phaseCActive) {
+      if (!coatTaken) return 'SECTION: GEAR UP AT THE HUT';
+      if (!trailGateOpen) return 'SECTION: FOLLOW THE TRAIL SIGN';
+      return 'SECTION: ONTO THE TRAIL';
+    }
+    if (disembarking) return 'SECTION: ARRIVING...';
+    if (rideActive) return 'SECTION: FLØIBANEN';
+    if (phaseACleared) return 'SECTION: WHARF (CLEAR)';
+    return 'SECTION: THE WHARF';
+  }
+
+  function update() {
+    if (zoneComplete) return;
+
+    if (activePopup) {
+      activePopup.timer--;
+      if (activePopup.timer <= 0) activePopup = null;
+    }
+
+    // ---- scripted disembark beat, identical pattern to World 3 Zone 4 ----
+    if (disembarking) {
+      disembarkTimer++;
+      player.vx = 0;
+      if (disembarkTimer >= DISEMBARK_DURATION_FRAMES) {
+        disembarking = false;
+        phaseCActive = true;
+        player.x = 20; player.y = GROUND_Y - player.h;
+        // x=130, not player.x (=20) — centered text at x=20 hangs half off the left edge of
+        // the canvas every single time (this fires right after every disembark), caught by
+        // reviewing the trailhead snapshot rather than just trusting the state-machine test.
+        activePopup = {text: 'FLØYEN TRAILHEAD', timer: 90, x: 130, y: player.y - 24};
+      }
+      return;
+    }
+
+    // ---- Phase B: fixed-cabin ride, free wandering inside, no hazards ----
+    if (rideActive) {
+      rideTimer++;
+      rideMotion += RIDE_SPEED;
+      if (knockbackTimer <= 0) {
+        if (keys['ArrowLeft']) { player.vx -= 0.6; player.facing = -1; }
+        if (keys['ArrowRight']) { player.vx += 0.6; player.facing = 1; }
+        player.vx *= FRICTION;
+        player.vx = Math.max(-MOVE_SPEED, Math.min(MOVE_SPEED, player.vx));
+      }
+      if ((keys['Space'] || keys['ArrowUp']) && player.onGround) { player.vy = JUMP_FORCE; player.onGround = false; }
+      player.vy += GRAVITY;
+      if (player.vy > 14) player.vy = 14;
+      player.x += player.vx;
+      player.x = Math.max(CABIN_MIN_X, Math.min(CABIN_MAX_X, player.x));
+      player.y += player.vy;
+      if (player.y + player.h >= GROUND_Y) { player.y = GROUND_Y - player.h; player.vy = 0; player.onGround = true; }
+      if (rideTimer >= RIDE_DURATION_FRAMES) { rideActive = false; disembarking = true; }
+      document.getElementById('progressFill').style.width = (Math.min(1, rideTimer / RIDE_DURATION_FRAMES) * 50 + 25) + '%';
+      return;
+    }
+
+    if (knockbackTimer > 0) knockbackTimer--;
+    else if (knockbackInvulnTimer > 0) knockbackInvulnTimer--;
+
+    if (knockbackTimer <= 0) {
+      const anyDirKeyHeld = keys['ArrowLeft'] || keys['ArrowRight'];
+      if (keys['ArrowLeft']) { player.vx -= 0.6; player.facing = -1; }
+      if (keys['ArrowRight']) { player.vx += 0.6; player.facing = 1; }
+      // Ice only governs STOPPING, not accelerating: while a direction key is held, friction is
+      // identical to every other zone (the jump-arc/gap-clearing physics stay byte-for-byte the
+      // same as the already-verified behavior). The icy feel — and the actual hazard — kicks in
+      // the moment the key is released: instead of stopping quickly, the player keeps sliding,
+      // so letting go too close to a ledge edge (or mid-air) can slide them right off into the
+      // fjord. (Trying ICE_FRICTION on the accelerating branch too made the very first bunny-hop
+      // off a ledge ramp to top speed so fast it overshot the edge mid-arc instead of landing
+      // short for a run-up — confirmed via headless sim; this asymmetric version avoids that.)
+      player.vx *= (phaseCActive && !anyDirKeyHeld) ? ICE_FRICTION : FRICTION;
+      player.vx = Math.max(-MOVE_SPEED, Math.min(MOVE_SPEED, player.vx));
+    }
+    if ((keys['Space'] || keys['ArrowUp']) && player.onGround) { player.vy = JUMP_FORCE; player.onGround = false; }
+    player.vy += GRAVITY;
+    if (player.vy > 14) player.vy = 14;
+
+    player.x += player.vx;
+    if (player.x < 0) player.x = 0;
+
+    const activePlatforms = phaseCActive ? walkPlatforms : platforms;
+    let levelWidth = phaseCActive ? WALK_LEVEL_WIDTH : WHARF_LEVEL_WIDTH;
+    let rightEdge = levelWidth - player.w;
+    if (phaseCActive && !trailGateOpen) {
+      rightEdge = Math.min(rightEdge, GATE_X + GATE_W - player.w);
+    }
+    if (player.x > rightEdge) player.x = rightEdge;
+
+    for (const p of activePlatforms) {
+      if (p.h >= 100) {
+        if (rectsOverlap(player, p)) {
+          if (player.vx > 0) player.x = p.x - player.w;
+          else if (player.vx < 0) player.x = p.x + p.w;
+          player.vx = 0;
+        }
+      }
+    }
+    player.y += player.vy;
+    player.onGround = false;
+    for (const p of activePlatforms) {
+      if (rectsOverlap(player, p)) {
+        if (player.vy > 0) { player.y = p.y - player.h; player.vy = 0; player.onGround = true; }
+        else if (player.vy < 0) { player.y = p.y + p.h; player.vy = 0; }
+      }
+    }
+
+    // ---- Phase C: fell off a ledge into the fjord — full reset, checked right after Y
+    // collision so a missed jump is caught the moment it happens, not several falling frames
+    // later.
+    if (phaseCActive && !zoneComplete && player.y > WATER_DEATH_Y) {
+      fallIntoWater();
+      return;
+    }
+
+    // ---- Phase A: seagull patrol + station trigger ----
+    if (!phaseCActive) {
+      gulls.forEach((gull, idx) => {
+        const range = GULL_RANGES[idx];
+        if (gull.stunTimer > 0) {
+          const RETREAT_SPEED = PATROL_SPEED * 2.5;
+          gull.stunTimer--;
+          gull.dir = (player.x < gull.curX) ? 1 : -1;
+          gull.curX += gull.dir * RETREAT_SPEED;
+          gull.curX = Math.max(20, Math.min(WHARF_LEVEL_WIDTH - 20 - gull.w, gull.curX));
+          return;
+        }
+        gull.curX += gull.dir * PATROL_SPEED;
+        const visMinX = range.lo;
+        const visMaxX = Math.max(range.lo, range.hi - gull.w);
+        if (gull.curX > visMaxX) {
+          gull.dir = -1; // walk back in gradually, don't snap — same established lesson
+        } else if (gull.curX < visMinX) {
+          gull.dir = 1;
+        } else if (gull.curX >= visMaxX) {
+          gull.curX = visMaxX; gull.dir = -1;
+        } else if (gull.curX <= visMinX) {
+          gull.curX = visMinX; gull.dir = 1;
+        }
+      });
+
+      if (hitCooldown <= 0 && knockbackTimer <= 0 && knockbackInvulnTimer <= 0) {
+        for (const gull of gulls) {
+          const bob = Math.sin(Date.now() / 260 + gull.bobPhase) * 6;
+          const gRect = {x: gull.curX, y: gull.y + bob, w: gull.w, h: gull.h};
+          if (rectsOverlap(player, gRect)) {
+            gull.stunTimer = GULL_STUN_FRAMES;
+            hitFlash = 10;
+            hitCooldown = 40;
+            activePopup = {text: 'SQUAWK!', timer: 60, x: player.x, y: player.y - 20};
+            loseLife();
+            break;
+          }
+        }
+      }
+      if (hitCooldown > 0) hitCooldown--;
+
+      if (!phaseACleared) {
+        const triggerRect = {x: STATION_X, y: GROUND_Y - 90, w: STATION_TRIGGER_W, h: 90};
+        if (rectsOverlap(player, triggerRect)) {
+          phaseACleared = true;
+          phaseAActive = false;
+          rideActive = true;
+          player.vx = 0; player.vy = 0;
+          activePopup = null;
+        }
+      }
+    }
+
+    // ---- Phase C: gear hut pickup + trail gate ----
+    if (phaseCActive) {
+      if (!coatTaken && rectsOverlap(player, GEAR_TRIGGER)) {
+        coatTaken = true;
+        addItem('coat');
+        trailGateOpen = true;
+        activePopup = {text: 'GRABBED YOUR COAT + MITTENS!', timer: 90, x: player.x, y: player.y - 24};
+        updateHUD();
+      }
+      if (!phaseCCleared) {
+        const gateRect = {x: GATE_X, y: GROUND_Y - GATE_H, w: GATE_W, h: GATE_H};
+        if (rectsOverlap(player, gateRect)) {
+          if (trailGateOpen) {
+            phaseCCleared = true;
+            player.vx = 0; player.vy = 0;
+            activePopup = null;
+          } else if (!activePopup || !activePopup.missingItem) {
+            activePopup = {
+              text: "TOO COLD WITHOUT A COAT — CHECK THE HUT!",
+              timer: 90, missingItem: true,
+              x: player.x, y: player.y - 24,
+            };
+          }
+        }
+      }
+    }
+
+    if (hitFlash > 0) hitFlash--;
+
+    // Both phases now scroll — Phase C's ledge run (WALK_LEVEL_WIDTH, now well over one screen
+    // wide with the round-2 gauntlet added) is wider than one screen, unlike the short original
+    // flat walk it replaced, so it needs the same camera-follows-player clamping as Phase A
+    // rather than staying pinned at camX=0 (which would cut off everything past the first
+    // screen-width of ledges).
+    const activeLevelWidth = phaseCActive ? WALK_LEVEL_WIDTH : WHARF_LEVEL_WIDTH;
+    camX = player.x - 300;
+    camX = Math.max(0, Math.min(activeLevelWidth - canvas.width, camX));
+
+    if (phaseCCleared && !zoneComplete) {
+      zoneComplete = true;
+      document.getElementById('progressFill').style.width = '100%';
+      beginZoneTransition(ZONE_HIKE, 'HITTING THE FLØYEN TRAIL...', 1);
+    }
+  }
+
+  // ============================================================
+  // DRAWING
+  // ============================================================
+  function drawSky() {
+    // Bright winter sun in a blue sky — held constant through the whole zone, no
+    // dusk/time-of-day progression (unlike World 3's Zone 4), per the visual-identity spec.
+    ctx.fillStyle = '#7ec8e3';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#fff6c9';
+    ctx.beginPath();
+    ctx.arc(660, 70, 34, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,246,201,0.5)';
+    ctx.lineWidth = 3;
+    for (let i = 0; i < 8; i++) {
+      const a = (Math.PI * 2 / 8) * i;
+      ctx.beginPath();
+      ctx.moveTo(660 + Math.cos(a) * 42, 70 + Math.sin(a) * 42);
+      ctx.lineTo(660 + Math.cos(a) * 54, 70 + Math.sin(a) * 54);
+      ctx.stroke();
+    }
+  }
+
+  // Snow-capped mountain silhouette range — adapted from World 1's cable-car hill backdrop
+  // (quadratic-curve silhouette technique), with a jagged snow-cap band painted along the top
+  // third of each peak so the range reads as alpine/Norwegian rather than green hills, and is
+  // unmistakable at a glance per the spec ("tall, snow capped mountains... unmistakable where
+  // he is now").
+  function drawMountainRange(scrollFactor, baseColor, snowLine, yOffset) {
+    const scroll = (rideActive ? rideMotion : camX) * scrollFactor;
+    const peaks = [
+      {cx: 120, peakY: 60 + yOffset, halfW: 220},
+      {cx: 420, peakY: 20 + yOffset, halfW: 260},
+      {cx: 760, peakY: 55 + yOffset, halfW: 230},
+      {cx: 1080, peakY: 10 + yOffset, halfW: 270},
+      {cx: 1420, peakY: 65 + yOffset, halfW: 220},
+    ];
+    ctx.fillStyle = baseColor;
+    ctx.beginPath();
+    ctx.moveTo(-400, GROUND_Y);
+    for (const pk of peaks) {
+      const x = pk.cx - scroll;
+      ctx.lineTo(x - pk.halfW, GROUND_Y);
+      ctx.lineTo(x, pk.peakY);
+      ctx.lineTo(x + pk.halfW, GROUND_Y);
+    }
+    ctx.lineTo(1600, GROUND_Y);
+    ctx.closePath();
+    ctx.fill();
+
+    // Snow caps — MUST follow the mountain's own slope lines, or the white shape sticks out
+    // past the rock silhouette at that height and reads as a hat sitting on top rather than
+    // snow on the peak (exactly what happened in an earlier version: it used a width fixed at
+    // 0.32*halfW regardless of height, but a peak's actual half-width at a point only
+    // `snowLine` below the apex — close to the apex, on a triangle whose full halfW is only
+    // reached all the way down at GROUND_Y — is a much smaller fraction, verified by the same
+    // linear taper the mountain silhouette itself uses: halfWidthAt(y) = halfW * (y-peakY) /
+    // (GROUND_Y-peakY). Drawing the cap as a triangle sharing the apex and reusing that exact
+    // taper keeps it strictly inside the mountain's own outline at every height, with a small
+    // inward margin (0.85x) so it reads as snow sitting just below the silhouette edge, not
+    // precisely tracing it.
+    ctx.fillStyle = '#ffffff';
+    for (const pk of peaks) {
+      const x = pk.cx - scroll;
+      const capY = pk.peakY + snowLine;
+      const taper = snowLine / (GROUND_Y - pk.peakY);
+      const capHalfW = pk.halfW * taper * 0.85;
+      // a couple of small jagged notches partway down, still inside the taper at their own
+      // (lower) height, so the cap edge reads as uneven snowline rather than a clean triangle
+      const midY = pk.peakY + snowLine * 0.6;
+      const midTaper = (snowLine * 0.6) / (GROUND_Y - pk.peakY);
+      const midHalfW = pk.halfW * midTaper * 0.85;
+      ctx.beginPath();
+      ctx.moveTo(x, pk.peakY);
+      ctx.lineTo(x - midHalfW * 0.55, midY);
+      ctx.lineTo(x - capHalfW, capY);
+      ctx.lineTo(x - capHalfW * 0.4, capY - 6);
+      ctx.lineTo(x, capY + 5);
+      ctx.lineTo(x + capHalfW * 0.4, capY - 6);
+      ctx.lineTo(x + capHalfW, capY);
+      ctx.lineTo(x + midHalfW * 0.55, midY);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+
+  function drawBryggenHouses(px) {
+    // Colorful wharf-house facades — the single most recognizable Bergen image — drawn as a
+    // row of gabled buildings in alternating bright colors, same flat-silhouette technique used
+    // for World 3's leaning-tower parallax buildings. Widened and shortened from the original
+    // pass (54 wide x 150 tall, a ~2.8:1 ratio) — Gerald flagged them as too skinny/tall for how
+    // the real Bryggen row houses read, so they're now wider and less extreme (66 x 105, ~1.6:1)
+    // while still keeping the tall-narrow-gabled silhouette that makes the row recognizable.
+    const colors = ['#d94f4f', '#e8c14a', '#4f8fd9', '#e88a3f', '#6ab04c', '#d94f8f'];
+    const HOUSE_W = 66;
+    const HOUSE_STEP = 78;
+    const HOUSE_TOP = GROUND_Y - 105;
+    for (let i = 0, wx = -100; wx < WHARF_LEVEL_WIDTH + 200; i++, wx += HOUSE_STEP) {
+      const sx = wx - px;
+      if (sx < -90 || sx > canvas.width + 90) continue;
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.beginPath();
+      ctx.moveTo(sx, GROUND_Y);
+      ctx.lineTo(sx, HOUSE_TOP + 20);
+      ctx.lineTo(sx + HOUSE_W / 2, HOUSE_TOP);
+      ctx.lineTo(sx + HOUSE_W, HOUSE_TOP + 20);
+      ctx.lineTo(sx + HOUSE_W, GROUND_Y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = 'rgba(0,0,0,0.18)';
+      ctx.fillRect(sx + 13, HOUSE_TOP + 42, 14, 18);
+      ctx.fillRect(sx + HOUSE_W - 27, HOUSE_TOP + 42, 14, 18);
+    }
+  }
+
+  function drawFishMarket(px) {
+    const stalls = [260, 520, 800];
+    for (const wx of stalls) {
+      const sx = wx - px;
+      if (sx < -60 || sx > canvas.width + 60) continue;
+      ctx.fillStyle = '#f2f2f2';
+      ctx.fillRect(sx - 4, GROUND_Y - 34, 40, 8); // awning
+      ctx.fillStyle = '#e85454';
+      for (let i = 0; i < 5; i++) {
+        ctx.fillRect(sx - 4 + i * 8, GROUND_Y - 34, 4, 8);
+      }
+      ctx.fillStyle = '#8a6a4a';
+      ctx.fillRect(sx, GROUND_Y - 26, 32, 26); // crate/stall body
+      ctx.fillStyle = '#c0d8e8';
+      ctx.fillRect(sx + 4, GROUND_Y - 22, 24, 10); // fish on ice
+    }
+  }
+
+  function drawGull(gull) {
+    const bob = Math.sin(Date.now() / 260 + gull.bobPhase) * 6;
+    const sx = gull.curX - (phaseCActive ? 0 : camX);
+    const sy = gull.y + bob;
+    ctx.save();
+    ctx.translate(sx + gull.w / 2, sy);
+    ctx.scale(gull.dir, 1);
+    ctx.translate(-gull.w / 2, 0);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, gull.w, 6);
+    ctx.fillStyle = '#3a3a4a';
+    ctx.fillRect(-4, 6, 6, 3);
+    ctx.fillRect(gull.w - 2, 6, 6, 3);
+    ctx.fillStyle = '#e8b23f';
+    ctx.fillRect(gull.w / 2 - 2, 4, 4, 3);
+    ctx.restore();
+  }
+
+  function drawPlayerSprite(px, py) {
+    ctx.save();
+    ctx.translate(px + player.w / 2, py);
+    if (player.facing < 0) ctx.scale(-1, 1);
+    ctx.translate(-player.w / 2, 0);
+    if (knockbackInvulnTimer > 0 && Math.floor(knockbackInvulnTimer / 3) % 2 === 0) { ctx.restore(); return; }
+    ctx.fillStyle = '#2a5fb0';
+    ctx.fillRect(4, 12, player.w - 8, player.h - 12);
+    ctx.fillStyle = '#e8b98a';
+    ctx.fillRect(6, 0, player.w - 12, 14);
+    ctx.fillStyle = '#5a3a2a';
+    ctx.fillRect(4, 0, player.w - 8, 6);
+    ctx.restore();
+  }
+
+  function drawGroundFloor(px, w) {
+    ctx.fillStyle = '#6b7280';
+    ctx.fillRect(-px, GROUND_Y, w, BASE_H);
+    ctx.fillStyle = '#8a92a0';
+    for (let x = 0; x < w; x += 24) ctx.fillRect(x - px, GROUND_Y, 2, BASE_H);
+  }
+
+  function drawWharfScene() {
+    drawSky();
+    drawMountainRange(0.25, '#a8c8dc', 26, 30);
+    drawBryggenHouses(camX * 0.6);
+    drawFishMarket(camX);
+    drawGroundFloor(camX, WHARF_LEVEL_WIDTH + 40);
+    for (const gull of gulls) drawGull(gull);
+    drawPlayerSprite(player.x - camX, player.y);
+
+    // welcome sign — per Gerald's request, somewhere clearly readable naming the place
+    const signX = 80 - camX;
+    if (signX > -80 && signX < canvas.width + 20) {
+      ctx.fillStyle = '#7a4a30';
+      ctx.fillRect(signX + 24, GROUND_Y - 46, 6, 46);
+      ctx.fillRect(signX + 96, GROUND_Y - 46, 6, 46);
+      ctx.fillStyle = '#e8dfc5';
+      ctx.fillRect(signX, GROUND_Y - 86, 126, 44);
+      ctx.strokeStyle = '#5a3320';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(signX, GROUND_Y - 86, 126, 44);
+      ctx.fillStyle = '#1a1a2e';
+      ctx.font = 'bold 15px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('BRYGGEN', signX + 63, GROUND_Y - 67);
+      ctx.fillText('HARBOUR', signX + 63, GROUND_Y - 50);
+    }
+
+    // funicular station marker
+    const sx = STATION_X - camX;
+    ctx.fillStyle = '#4a4a63';
+    ctx.fillRect(sx, GROUND_Y - 90, STATION_TRIGGER_W, 90);
+    ctx.fillStyle = '#1a1a2e';
+    ctx.fillRect(sx + STATION_TRIGGER_W / 2 - 58, GROUND_Y - 118, 116, 26);
+    ctx.fillStyle = '#ffd23f';
+    ctx.font = 'bold 15px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('FLØIBANEN', sx + STATION_TRIGGER_W / 2, GROUND_Y - 100);
+  }
+
+  function drawCaption() {
+    const fadeT = Math.max(0, Math.min(1, (rideTimer - TEXT_FADE_START) / TEXT_FADE_FRAMES));
+    if (fadeT <= 0) return;
+    captionText = 'Up above the harbour, the mountains open up.';
+    captionOpacity = fadeT;
+  }
+
+  // Funicular interior dressing: three benches, two seated passengers, a couple on the middle
+  // bench and a standing hiker holding the pole. Pure scenery — no collision.
+  function drawCabinExtras(bodyL, roofY) {
+    const fy = GROUND_Y, bob = Math.floor(rideTimer / 18) % 2;
+    const benches = [bodyL + 26, bodyL + 238, bodyL + 470];
+    for (const bx of benches) {
+      ctx.fillStyle = '#3a2f2a'; ctx.fillRect(bx + 4, fy - 12, 4, 12); ctx.fillRect(bx + 52, fy - 12, 4, 12);   // legs
+      ctx.fillStyle = '#2f4a6e'; ctx.fillRect(bx, fy - 18, 62, 7);                                           // seat cushion
+      ctx.fillStyle = '#26405f'; ctx.fillRect(bx, fy - 44, 8, 30);                                           // backrest
+    }
+    // seated passenger (side view, facing right): hip at sx
+    function seated(sx, coat, hat, skin, legs, lean) {
+      const y0 = fy - 18, b = lean ? bob : 0;
+      ctx.fillStyle = legs; ctx.fillRect(sx + 6, y0 - 6, 18, 6); ctx.fillRect(sx + 20, y0 - 6, 6, 22);        // thigh + shin
+      ctx.fillStyle = '#1a1a1a'; ctx.fillRect(sx + 20, y0 + 14, 9, 4);                                       // shoe
+      ctx.fillStyle = coat; ctx.fillRect(sx, y0 - 26 + b, 14, 22);                                            // torso
+      ctx.fillStyle = skin; ctx.fillRect(sx + 1, y0 - 37 + b, 12, 11);                                        // head
+      ctx.fillStyle = hat; ctx.fillRect(sx, y0 - 40 + b, 14, 5);                                              // beanie / hair
+      ctx.fillStyle = '#1a1a1a'; ctx.fillRect(sx + 9, y0 - 33 + b, 2, 2);                                     // eye
+    }
+    seated(benches[0] + 12, '#3f8f55', '#c94f4f', '#f1c9a5', '#34343e', true);
+    seated(benches[1] + 8, '#e2b93b', '#6b3f22', '#e8bb92', '#2f2f3a', false);
+    seated(benches[1] + 32, '#8a5ac9', '#2a1c12', '#f5d3b6', '#3b3350', true);
+    // standing hiker with backpack, holding the grab pole
+    const hx = bodyL + 420;
+    ctx.fillStyle = '#c9c2b0'; ctx.fillRect(hx + 18, roofY + 10, 3, fy - roofY - 10);                      // pole
+    ctx.fillStyle = '#2b2b33'; ctx.fillRect(hx + 3, fy - 14, 5, 14); ctx.fillRect(hx + 10, fy - 14, 5, 14); // legs
+    ctx.fillStyle = '#b8502a'; ctx.fillRect(hx - 6, fy - 34, 8, 16);                                      // backpack
+    ctx.fillStyle = '#2c6a8a'; ctx.fillRect(hx + 1, fy - 36, 16, 22);                                     // coat
+    ctx.fillStyle = '#f1c9a5'; ctx.fillRect(hx + 3, fy - 47, 12, 11); ctx.fillRect(hx + 16, fy - 32, 4, 4); // head + hand on pole
+    ctx.fillStyle = '#e2b93b'; ctx.fillRect(hx + 2, fy - 50, 14, 5);                                     // beanie
+    ctx.fillStyle = '#1a1a1a'; ctx.fillRect(hx + 11, fy - 43, 2, 2);
+  }
+
+  function drawRideScene() {
+    drawSky();
+    // As the funicular climbs, the distant range should appear to sink LOWER relative to the
+    // viewer — you're rising above it, not toward it — so yOffset must INCREASE with climbT
+    // (pushing peakY down-screen). An earlier version did the opposite (yOffset decreasing,
+    // peaks climbing UP-screen as the ride progressed), which read as the mountains growing
+    // taller while riding up them — backwards. Simple screen-space approximation, not a real
+    // zoom/perspective system, for what's a ~11s establishing beat.
+    const climbT = Math.min(1, rideTimer / RIDE_DURATION_FRAMES);
+    drawMountainRange(0.15, '#c9dcE8', 30 - climbT * 10, 40 + climbT * 90);
+
+    // rail line runs the full canvas width, BEHIND the cabin — drawn outside the clip so it's
+    // visible climbing away on both sides, reads as "the cabin is one car on a long incline."
+    const RAIL_RISE = 130; // total rise of the incline across the canvas width
+    const railYAt = (screenX) => GROUND_Y + BASE_H - 10 - (screenX / canvas.width) * RAIL_RISE;
+    ctx.strokeStyle = '#7a828f';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(0, railYAt(0));
+    ctx.lineTo(canvas.width, railYAt(canvas.width));
+    ctx.stroke();
+    // cross-ties along the rail for a funicular-track read. The phase offset must SCROLL
+    // OPPOSITE the cabin's direction of travel (the standard "ground slides backward beneath a
+    // forward-moving vehicle" cue — same reason road markings rush toward and past a driving
+    // car) — using +rideMotion here made the ties drift toward the uphill end in step with the
+    // wheels' forward spin instead of against it, which read as the whole rig sliding backwards
+    // down the incline. Negating it fixes the direction; the double-mod keeps the result
+    // positive for JS's % operator.
+    ctx.strokeStyle = '#5a6270';
+    ctx.lineWidth = 2;
+    for (let sx = (((Math.floor(-rideMotion) % 40) + 40) % 40); sx < canvas.width; sx += 40) {
+      const ry = railYAt(sx);
+      ctx.beginPath();
+      ctx.moveTo(sx - 8, ry + 6);
+      ctx.lineTo(sx + 8, ry - 6);
+      ctx.stroke();
+    }
+
+    // ---- Cabin — drawn as a simple axis-aligned rectangle inside a ROTATED coordinate frame,
+    // so the whole car (walls, floor, AND windows) reads as one rigid raked shape parallel to
+    // the rail's incline. An earlier version slanted only the roofline by hand and left the
+    // floor flat, which didn't match — Gerald's flag. Rotating the whole assembly around its
+    // bottom-left corner fixes that in one stroke: floor and roof are now the same rectangle's
+    // top/bottom edges, so they're parallel by construction. The player's actual game-logic
+    // position stays flat/unrotated (GROUND_Y, untouched) — only its DRAWING is affected, by
+    // calling drawPlayerSprite from inside this same rotated context, so it appears correctly
+    // planted on the tilted floor without touching physics.
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(TRAM_MARGIN, 0, TRAM_SCREEN_W, canvas.height);
+    ctx.clip();
+
+    const bodyL = TRAM_MARGIN, bodyR = TRAM_MARGIN + TRAM_SCREEN_W;
+    const floorY = GROUND_Y + BASE_H;
+    const bodyTopY = 215; // roof height, before rotation is applied — raised from 150 to make
+                           // the carriage noticeably shorter/less towering, per Gerald's flag
+    // The angle MUST match the rail's actual slope (RAIL_RISE/canvas.width), not some separate
+    // hand-picked rise/run — using a different ratio here (the old RISE=70 over TRAM_SCREEN_W,
+    // vs. the rail's RAIL_RISE=130 over the full canvas.width) made the cabin visibly LESS
+    // angled than the wheels/track it's sitting on, worst at the right/uphill end where the two
+    // slopes had diverged the most — exactly Gerald's "front wheels almost overlap the
+    // interior" report. Same fix logic for the pivot: it needs to sit where the wheels/rail
+    // actually are (railYAt), not at a GROUND_Y+BASE_H point that was never checked against the
+    // rail's real screen position — pivoting at GROUND_Y (the floor's TOP surface, where the
+    // player stands) lands within ~2px of the rail line at the cabin's left edge, which is the
+    // right anchor; the previous GROUND_Y+BASE_H pivot was a full BASE_H (24px) further off.
+    const angle = Math.atan2(RAIL_RISE, canvas.width);
+
+    ctx.save();
+    ctx.translate(bodyL, GROUND_Y);
+    ctx.rotate(-angle);
+    ctx.translate(-bodyL, -GROUND_Y);
+
+    // car body shell — a plain rect in this rotated frame becomes a parallelogram on screen
+    ctx.fillStyle = '#c94f4f';
+    ctx.fillRect(bodyL, bodyTopY, TRAM_SCREEN_W, floorY - bodyTopY);
+    ctx.fillStyle = '#f2ead8'; // roof trim strip
+    ctx.fillRect(bodyL, bodyTopY, TRAM_SCREEN_W, 10);
+
+    // Three windows that show the REAL exterior (sky + mountains), not a translucent tint over
+    // the cabin's own red wall fill — an earlier version blended light-blue glass over red body
+    // color and came out muddy pink. Fixed by clipping to each window rect (the clip is
+    // captured in on-screen/device space at the moment clip() runs, so it keeps its rotated
+    // parallelogram shape even after the transform below is reset), then resetting to the
+    // identity transform so the redrawn sky/mountains render upright through it, not rotated
+    // with the cabin — exactly what a real window onto the outside would show.
+    const winCount = 3;
+    const winW = 62, winMargin = 34, winTop = bodyTopY + 30, winH = (floorY - 26) - winTop;
+    for (let i = 0; i < winCount; i++) {
+      const t = i / (winCount - 1);
+      const wx = bodyL + winMargin + t * (TRAM_SCREEN_W - winMargin * 2 - winW);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.roundRect(wx, winTop, winW, winH, 4);
+      ctx.clip();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      drawSky();
+      drawMountainRange(0.15, '#c9dcE8', 30 - climbT * 10, 40 + climbT * 90);
+      ctx.fillStyle = 'rgba(220,240,255,0.18)'; // faint glass reflection
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.restore(); // back to the rotated cabin transform
+
+      ctx.strokeStyle = '#f2ead8';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(wx, winTop, winW, winH);
+    }
+
+    // floor / walkway strip — now the same rigid rotated body as the roof, genuinely parallel
+    // to it rather than a flat rect breaking the illusion
+    ctx.fillStyle = '#5a4a42';
+    ctx.fillRect(bodyL, GROUND_Y, TRAM_SCREEN_W, 6);
+    ctx.fillStyle = '#3f332d';
+    ctx.fillRect(bodyL, GROUND_Y + 6, TRAM_SCREEN_W, BASE_H - 6);
+
+    drawCabinExtras(bodyL, bodyTopY);
+    drawPlayerSprite(player.x, player.y); // drawn inside the rotation: sits on the tilted floor
+    ctx.restore(); // undo the cabin rotation, keep the outer TRAM_MARGIN clip
+
+    // wheel undercarriage, sitting on the TRUE (unrotated) rail line, rotating with rideMotion —
+    // same technique as World 3's tram wheels
+    const wheelR = 12;
+    const rotation = (rideMotion * 0.12) % (Math.PI * 2);
+    for (let wx = bodyL + 60; wx < bodyR; wx += 110) {
+      const wy = railYAt(wx - TRAM_MARGIN) + 6;
+      ctx.save();
+      ctx.translate(wx, wy);
+      ctx.rotate(rotation);
+      ctx.fillStyle = '#1a1a1a';
+      ctx.beginPath();
+      ctx.arc(0, 0, wheelR, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#555';
+      ctx.lineWidth = 2;
+      for (let s = 0; s < 4; s++) {
+        const a = (Math.PI / 2) * s;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(Math.cos(a) * wheelR, Math.sin(a) * wheelR);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    drawCaption();
+    ctx.restore();
+  }
+
+  // A handful of fixed, deterministic floating ice-floe props scattered across the fjord — pure
+  // decoration, purely cosmetic (no collision), each capped well under the narrowest ledge's
+  // width (70px) so there's no chance of mistaking one for a landing spot. Fixed world-space x
+  // (scrolls 1:1 with camX, like the ledges) so they read as solid chunks sitting in the water
+  // rather than a drifting background texture. Defined once at module scope, not regenerated
+  // per frame, so they don't jitter between draws.
+  const ICE_PROPS = [
+    {x: 60,   size: 16, depth: 8},
+    {x: 205,  size: 12, depth: 32},
+    {x: 415,  size: 19, depth: 14},
+    {x: 600,  size: 13, depth: 44},
+    {x: 775,  size: 17, depth: 12},
+    {x: 930,  size: 11, depth: 36},
+    {x: 1080, size: 15, depth: 20},
+    {x: 1250, size: 13, depth: 38},
+    {x: 1420, size: 16, depth: 16},
+  ];
+
+  function drawIceProp(sx, sy, size) {
+    // A small irregular ice-chunk (not a plain circle) with a soft highlight and rim, so it
+    // reads as a little floating slab rather than the flatter repeating water texture below.
+    ctx.fillStyle = 'rgba(222,238,248,0.8)';
+    ctx.beginPath();
+    ctx.ellipse(sx, sy, size, size * 0.55, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.beginPath();
+    ctx.ellipse(sx - size * 0.3, sy - size * 0.15, size * 0.4, size * 0.2, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(150,182,200,0.65)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.ellipse(sx, sy, size, size * 0.55, 0, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  function drawIcyWater(px) {
+    // Fjord water below the floating ledges — dark, cold blue, with a pale repeating glint
+    // texture plus a handful of small floating ice props, distinct enough from the sky-blue
+    // above that "fall in = bad" reads immediately.
+    // Sits below the LOWEST ledge now that ledges vary in height, not a flat GROUND_Y line.
+    const waterTop = Math.max(...LEDGES.map(l => l.y)) + LEDGE_H;
+    ctx.fillStyle = '#2a5c78';
+    ctx.fillRect(0, waterTop, canvas.width, canvas.height - waterTop);
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    for (let wx = -((px * 0.4) % 90); wx < canvas.width; wx += 90) {
+      ctx.beginPath();
+      ctx.ellipse(wx, waterTop + 22, 20, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    for (const p of ICE_PROPS) {
+      const sx = p.x - px;
+      if (sx < -40 || sx > canvas.width + 40) continue;
+      drawIceProp(sx, waterTop + 16 + p.depth, p.size);
+    }
+  }
+
+  function drawLedge(ledge, px) {
+    const sx = ledge.x - px;
+    if (sx + ledge.w < -20 || sx > canvas.width + 20) return;
+    const ly = ledge.y;
+    ctx.fillStyle = '#dce8f0';
+    ctx.fillRect(sx, ly, ledge.w, LEDGE_H);
+    ctx.fillStyle = '#b8cbd8';
+    ctx.fillRect(sx, ly + LEDGE_H - 6, ledge.w, 6);
+    // a little snow cap texture along the top edge
+    ctx.fillStyle = '#ffffff';
+    for (let i = 0; i < ledge.w; i += 14) {
+      ctx.fillRect(sx + i, ly - 2, 8, 4);
+    }
+  }
+
+  function drawTrailheadScene() {
+    drawSky();
+    drawMountainRange(0.15, '#f0f5fa', 40, -10); // close-up peaks dominate the backdrop here
+    drawIcyWater(camX);
+    for (const ledge of LEDGES) drawLedge(ledge, camX);
+
+    // gear hut — sits on the second ledge, not on open ground, per the "make the coat harder
+    // to reach" request
+    const hx = GEAR_HUT_X - camX;
+    ctx.fillStyle = '#7a4a30';
+    ctx.fillRect(hx, GROUND_Y - 70, 50, 70);
+    ctx.fillStyle = '#5a3320';
+    ctx.beginPath();
+    ctx.moveTo(hx - 6, GROUND_Y - 70);
+    ctx.lineTo(hx + 25, GROUND_Y - 96);
+    ctx.lineTo(hx + 56, GROUND_Y - 70);
+    ctx.closePath();
+    ctx.fill();
+    if (!coatTaken) {
+      ctx.fillStyle = '#ffd23f';
+      ctx.font = '18px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('🧥', hx + 25, GROUND_Y - 30);
+    }
+
+    // trail gate/arch — sits on the fourth ledge
+    const gx = GATE_X - camX;
+    ctx.fillStyle = trailGateOpen ? '#8a6a4a' : '#5a4a3a';
+    ctx.fillRect(gx - 6, GROUND_Y - GATE_H, 8, GATE_H);
+    ctx.fillRect(gx + GATE_W - 2, GROUND_Y - GATE_H, 8, GATE_H);
+    ctx.fillRect(gx - 6, GROUND_Y - GATE_H, GATE_W + 16, 8);
+    ctx.fillStyle = 'rgba(26,26,46,0.85)';
+    ctx.fillRect(gx + GATE_W / 2 - 64, GROUND_Y - GATE_H - 30, 128, 24);
+    ctx.fillStyle = trailGateOpen ? '#6bff8f' : '#ff7a7a';
+    ctx.font = 'bold 14px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(trailGateOpen ? 'TRAIL OPEN' : 'TRAIL LOCKED', gx + GATE_W / 2, GROUND_Y - GATE_H - 13);
+
+    drawPlayerSprite(player.x - camX, player.y);
+  }
+
+  function draw() {
+    if (rideActive || disembarking) drawRideScene();
+    else if (phaseCActive) drawTrailheadScene();
+    else drawWharfScene();
+
+    if (hitFlash > 0) {
+      ctx.fillStyle = `rgba(255,80,80,${hitFlash / 20})`;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    // (popups now show in the #msgBox text box)
+  }
+
+  function onEnter() {
+    player.x = 40; player.y = GROUND_Y - player.h; player.vx = 0; player.vy = 0;
+    camX = 0;
+  }
+
+  return {
+    zoneName: 'BRYGGEN',
+    update, draw, onEnter, respawnPlayer, onOutOfLives, sectionLabel,
+    respawnPopupX: () => player.x,
+    __debugState: () => ({ phaseAActive, phaseACleared, rideActive, phaseCActive, coatTaken, trailGateOpen, phaseCCleared, zoneComplete }),
+  };
+})();
+
+// ============================================================
+// ZONE 2: FLØYEN TRAIL
+// One continuous run (no scripted-cutscene phase breaks like Zone 1) —
+//   Forest (safe walk to the collectible) -> chase begins -> goat ridge (still chased) ->
+//   shoreline (troll gives up) -> frozen pond crossing (ice ledges + "don't linger" meter) -> gate
+// Ground floor is CONTINUOUS from x=0 to ICE_START_X (World 1's "platforms float above one
+// continuous floor" pattern) specifically so the chase is a pure running/dodging test, never a
+// gap-jump test — falling isn't possible until the pond, where the challenge changes shape
+// entirely (precision jumping + not lingering, no more chase pressure).
+// ============================================================
+const ZoneHike = (function() {
+  const GROUND_Y = 300;
+  const BASE_H = 24;
+
+  const ICE_START_X = 2000;
+  const CHASE_LEVEL_WIDTH = ICE_START_X;
+
+  // ---- decorative/optional elevated rock platforms on the ridge stretch — thin, landing-only
+  // (h<100, same "no false side-wall" rule as everywhere else), purely optional relief/variety,
+  // never mandatory, so a chased player always has the plain ground as a guaranteed way through.
+  // Positions checked against the goat ranges/jump-clearance corridors below (each goat needs
+  // roughly [lo-40, hi+20] clear overhead for its dodge-jump) — a decorative platform sitting
+  // over that corridor turns a clearing jump into a ceiling-bump that drops the player straight
+  // back down into the goat, confirmed by simulation during testing. None of these three overlap
+  // a goat's clearance zone.
+  const ridgePlatforms = [
+    {x: 950,  y: GROUND_Y - 60, w: 120, h: 24},
+    {x: 1300, y: GROUND_Y - 40, w: 100, h: 24},
+    {x: 1450, y: GROUND_Y - 70, w: 110, h: 24},
+  ];
+  const groundPlatform = {x: 0, y: GROUND_Y, w: CHASE_LEVEL_WIDTH + 40, h: 132};
+
+  // ---- collectible: a snow-capped log, hit Mario-brick-style from below. This IS the troll's
+  // wake trigger (per Gerald's request) rather than a separate walk-past-the-statue trigger — the
+  // crack from the hit is what wakes it. Hit-zone height is 32px (the ±16px window World 2's
+  // headbutt tuning found necessary — ±4px gave an unusably thin ~17ms window), checked only
+  // while ascending (vy<0), same "headbutt vs landing" distinction used for every hidden
+  // collectible so far.
+  const COLLECT_X = 340, COLLECT_Y = GROUND_Y - 100, COLLECT_W = 60;
+  const COLLECT_HIT_ZONE = {x: COLLECT_X, y: COLLECT_Y, w: COLLECT_W, h: 32};
+  let collectBroken = false;
+
+  // ---- the troll. Dormant near the collectible (half-seen among the trees), wakes on the
+  // collectible hit, then marches steadily rightward — deliberately NOT chasing player.x directly
+  // (a fixed advance is simpler, avoids any teleport/overshoot edge case, and still reads as
+  // relentless since it never stops or backtracks while active). Ground-based only — it doesn't
+  // navigate the ridge's optional elevated platforms, it just strides along the base ground line;
+  // giving it jump logic wasn't worth the complexity for a background chase threat.
+  const TROLL_DORMANT_X = 200;
+  const TROLL_SPEED = 2.1; // comfortably under MOVE_SPEED's ~3.2 capped run speed — a player who
+                            // keeps moving pulls away; any pause (a goat, a platform detour) lets
+                            // it close the gap. Same margin logic as the gulls/inspectors elsewhere.
+  const TROLL_W = 70, TROLL_H = 110;
+  const TROLL_STUN_FRAMES = 50; // pause-then-resume on a hit, not retreat — see design note below
+  let trollState = 'dormant'; // 'dormant' | 'chasing' | 'stunned' | 'givenUp'
+  let troll = { x: TROLL_DORMANT_X, stunTimer: 0 };
+  let giveUpPopupShown = false;
+  // Separate from activePopup so the wake-up "ROAR!" (at the troll's position) can show at the
+  // same time as the "CRACK!..." popup (at the player's position) without one cutting the other off.
+  let trollPopup = null;
+
+  // ---- death-fall: getting caught by the troll gets its own short animated beat rather than an
+  // instant reset — the player pops up then falls straight down off the bottom of the screen
+  // (same "yeeted off-screen" shape as a missed-jump fall, just triggered by a hazard instead of a
+  // gap), with an "AHHHH!" callout. Input is frozen and the world stops scrolling/updating for
+  // this beat (camX is simply never touched while dying, so the background holds still under the
+  // falling player) — matches the established "keep hazard 'you failed' sequences short and
+  // punchy" rule rather than a lingering multi-second cutscene.
+  let dying = false;
+  let dyingVy = 0;
+  function startDeathFall() {
+    dying = true;
+    dyingVy = -7;
+    player.vx = 0;
+    hitFlash = 16;
+    activePopup = {text: 'AHHHH!', timer: 999, x: player.x, y: player.y - 30};
+  }
+
+  // ---- goats: ground-walking patrol hazards, same stun-and-retreat-per-hazard pattern as Zone
+  // 1's gulls (proven safe against the "shared cooldown lets a camped player permanently stun-lock
+  // a hazard outside its range" bug) — each goat gets its own fixed, well-separated range so none
+  // of them share a range and that bug class can't recur.
+  // 100px, matching Zone 1's proven gull-range width exactly (a 55px first pass made the goats'
+  // own back-and-forth patrol look twitchy/cramped — Gerald's flag — with barely any walking
+  // room). Checked against the same real per-frame physics as the ice ledges below (friction
+  // applies every frame, including mid-air, so steady-state run speed is ~2.73px/frame and real
+  // same-height jump reach is ~110-115px, not the ~131-134px a naive constant-vx estimate gives) —
+  // 100px still clears with a properly-timed jump, just as it does in Zone 1.
+  const GOAT_RANGES = [
+    {lo: 650,  hi: 750},
+    {lo: 1150, hi: 1250},
+    {lo: 1650, hi: 1750},
+  ];
+  const GOAT_SPEED = 1.5;
+  const GOAT_STUN_FRAMES = 40;
+  const goats = GOAT_RANGES.map((r, i) => ({
+    curX: i % 2 === 0 ? r.lo : r.hi,
+    dir: i % 2 === 0 ? 1 : -1,
+    stunTimer: 0,
+    w: 26, h: 22,
+  }));
+  let goatHitCooldown = 0;
+
+  // ---- the frozen pond: floating ice ledges, gaps/rises all kept within the simulated-safe
+  // envelope already validated for this engine (≤~90px rise, ≤110-130px same/lower-height gap) —
+  // numbers below were checked against the actual jump-arc math (GRAVITY/JUMP_FORCE/MOVE_SPEED),
+  // not eyeballed, though a real playtest may still want a pass like every previous zone got.
+  // Gaps/rises below were checked against a faithful replica of the real per-frame physics
+  // (friction applied every frame including mid-air, steady-state run speed ~2.73px/frame — see
+  // the goat-range note above for why this differs from a naive constant-vx estimate), targeting
+  // a landing roughly 20-30px onto the next ledge rather than right at its edge:
+  //   same-height jump lands ~110px out; +20/+30/+40 rises land a bit SOONER (~105/~102/~99px,
+  //   since less height needs to be lost); -30/-40 drops land a bit LATER (~119/~121px).
+  const LEDGE_H = 28;
+  // Round 2 (Gerald: evenly spaced ledges made the jump rhythm too predictable): gaps now
+  // 50-110px with uneven rises/drops, and two landings narrowed (55px, 50px). All hops verified
+  // reachable via sim.js brute-force, and a stop-and-go crossing still fits the ice meter.
+  const LEDGES = [
+    {x: 2000, w: 200, y: GROUND_Y},       // shoreline — troll gives up here, safe & wide
+    {x: 2270, w: 90,  y: GROUND_Y - 25},  // gap 70,  rise 25
+    {x: 2470, w: 55,  y: GROUND_Y + 15},  // gap 110, drop 40 — narrow
+    {x: 2575, w: 85,  y: GROUND_Y - 35},  // gap 50,  rise 50 — short, steep hop
+    {x: 2760, w: 50,  y: GROUND_Y - 55},  // gap 100, rise 20 — narrow
+    {x: 2895, w: 220, y: GROUND_Y},       // gap 85,  drop 55, gate ledge
+  ];
+  const walkPlatforms = LEDGES.map(l => ({x: l.x, y: l.y, w: l.w, h: LEDGE_H}));
+  const WATER_DEATH_Y = Math.max(...LEDGES.map(l => l.y)) + LEDGE_H + 40;
+  const LEVEL_WIDTH = LEDGES[LEDGES.length - 1].x + LEDGES[LEDGES.length - 1].w + 40;
+
+  const GATE_X = LEDGES[LEDGES.length - 1].x + 60, GATE_W = 30, GATE_H = 90;
+  let zoneComplete = false;
+
+  let onIce = false; // one-way flag, same "boolean gate, not a live position re-check every
+                      // frame" pattern used for mandatory-path gates elsewhere — flips true the
+                      // first time player.x crosses ICE_START_X and only ever resets on a full
+                      // zone reset (see resetZoneToStart below).
+
+  // ---- ice meter: reskin of World 2 Reflections' oxygen-bar depletion (same "must be driven from
+  // the draw loop every frame, not discrete events" lesson that bit that zone) — drains at a flat
+  // rate for the ENTIRE time the player is on the ice, full stop, exactly like real oxygen
+  // underwater. An earlier version only drained while stationary and refilled while moving, which
+  // had a real exploit: walking BACKWARD counts as "moving" too, so retreating toward the shore
+  // actually bought more time instead of less — any time on the ice should cost you, regardless of
+  // direction or whether you're moving at all. Deliberately a single whole-crossing meter rather
+  // than per-ledge crack states/animations, per Gerald's steer to keep this as simple as the
+  // mechanic allows.
+  const ICE_DRAIN_PER_FRAME = 100 / 700; // ~11.7s on the ice before it gives way — comfortably
+                                          // above a clean, well-timed crossing's measured ~6s, but
+                                          // still a real ticking clock rather than a formality
+  let iceMeter = 100;
+
+  function resetZoneToStart() {
+    player.x = 40; player.y = GROUND_Y - player.h; player.vx = 0; player.vy = 0;
+    knockbackTimer = 0; knockbackInvulnTimer = 0;
+    collectBroken = false;
+    trollState = 'dormant'; troll.x = TROLL_DORMANT_X; troll.stunTimer = 0;
+    giveUpPopupShown = false;
+    goats.forEach((g, i) => { g.curX = GOAT_RANGES[i].lo; g.dir = 1; g.stunTimer = 0; });
+    goatHitCooldown = 0;
+    onIce = false;
+    iceMeter = 100;
+    activePopup = null;
+    trollPopup = null;
+    dying = false; dyingVy = 0;
+  }
+
+  // Single-hit respawn behaviour is deliberately different depending on where the hit happened —
+  // a hit during the chase re-triggers the whole coupled troll/collectible sequence (the troll
+  // being mid-chase IS the chase-phase's state, so a partial reset doesn't make sense — this also
+  // sidesteps the exact "respawned player reappears with the hazard already on top of them" bug
+  // class flagged during planning: the troll is fully un-triggered again, not just repositioned).
+  // A hit on the ice is the lighter "pacing failure" penalty discussed during planning — respawn
+  // at the pond's edge, keep the crossing's own progress (the troll has already permanently given
+  // up either way, nothing to re-trigger there).
+  function respawnPlayer() {
+    if (onIce) {
+      player.x = ICE_START_X + 20; player.y = GROUND_Y - player.h;
+      player.vx = 0; player.vy = 0;
+      knockbackTimer = 0; knockbackInvulnTimer = 0;
+      iceMeter = 100;
+    } else {
+      resetZoneToStart();
+    }
+  }
+
+  // Out of lives is always the harsher full reset, regardless of phase — matches the established
+  // "losing all 3 lives resets the zone's own not-yet-collected progress" rule used everywhere else.
+  function onOutOfLives() {
+    resetZoneToStart();
+  }
+
+  function sectionLabel() {
+    if (zoneComplete) return 'SECTION: CLEARED';
+    if (onIce) return 'SECTION: SKOMAKERDIKET CROSSING';
+    if (trollState === 'chasing' || trollState === 'stunned') return 'SECTION: RUN!';
+    if (trollState === 'givenUp') return 'SECTION: TO THE ICE';
+    return 'SECTION: THE TRAILHEAD';
+  }
+
+  function fellInWater() {
+    activePopup = {text: 'CRACK! INTO THE WATER!', timer: 80, x: player.x, y: player.y - 24};
+    loseLife();
+  }
+
+  function update() {
+    if (zoneComplete) return;
+
+    // ---- death-fall: frozen input, player just falls, everything else on hold until it resolves ----
+    if (dying) {
+      dyingVy += GRAVITY;
+      player.y += dyingVy;
+      if (player.y > canvas.height + 60) {
+        dying = false;
+        activePopup = null;
+        loseLife();
+      }
+      return;
+    }
+
+    if (activePopup) {
+      activePopup.timer--;
+      if (activePopup.timer <= 0) activePopup = activePopup.next || null;
+    }
+    if (trollPopup) {
+      trollPopup.timer--;
+      if (trollPopup.timer <= 0) trollPopup = null;
+    }
+
+    // ---- collectible trigger (checked before general movement resolves, harmless either order
+    // since it only sets flags/state, doesn't move the player) ----
+    if (!collectBroken && player.vy < 0 && rectsOverlap(player, COLLECT_HIT_ZONE)) {
+      collectBroken = true;
+      trollState = 'chasing';
+      player.vy = 2; // stop the upward momentum, same "bonk" feel as a brick hit
+      activePopup = {text: 'CRACK! SOMETHING WOKE UP...', timer: 60, x: player.x, y: player.y - 24,
+                     next: {text: 'TROLL: ROAR!', timer: 70, x: player.x, y: player.y - 24}};
+    }
+
+    // ---- troll ----
+    // Give up the instant the PLAYER is safely on the ice, not just once the troll's own x happens
+    // to reach ICE_START_X — the troll is a fixed TROLL_SPEED (2.1) slower than the player's own
+    // cruise speed, so it only closes the gap while the player is slowed down dodging goats/ridge
+    // platforms, and a real (non-bot) playthrough does plenty of that. That leaves the troll able to
+    // still be short of ICE_START_X, but close, right as the player crosses — under the old
+    // troll.x>=ICE_START_X-only check it kept marching those last steps and could still reach and
+    // catch the player standing on the first ledge, seconds after they'd already reached "safety",
+    // long before the ice meter was anywhere near depleted (found via simulating a player who
+    // dawdles near the goats/platforms, then crosses — exactly what a real, non-optimal run looks
+    // like). The popup text promises the ice itself is what stops the troll, so the give-up has to
+    // be keyed off the player's own arrival, not the troll's.
+    if (onIce && (trollState === 'chasing' || trollState === 'stunned')) {
+      trollState = 'givenUp';
+      troll.x = Math.min(troll.x, ICE_START_X - TROLL_W - 10);
+    } else if (trollState === 'chasing') {
+      troll.x += TROLL_SPEED;
+      if (troll.x >= ICE_START_X) {
+        troll.x = ICE_START_X - TROLL_W - 10; // stops just short of the shore, doesn't overlap the ledge
+        trollState = 'givenUp';
+      }
+    } else if (trollState === 'stunned') {
+      troll.stunTimer--;
+      if (troll.stunTimer <= 0) trollState = 'chasing';
+    }
+    if (trollState === 'givenUp' && !giveUpPopupShown) {
+      giveUpPopupShown = true;
+      activePopup = {
+        text: 'TROLL: NOPE.', timer: 70, x: ICE_START_X - 20, y: GROUND_Y - 120,
+        next: { text: "I'M SAFE... THE TROLL WON'T STEP ONTO THIN ICE.", timer: 170, x: ICE_START_X - 20, y: GROUND_Y - 120 },
+      };
+    }
+    // Belt-and-suspenders: the catch check itself is also scoped to !onIce, so even if some future
+    // change reopens a path to trollState 'chasing' while onIce, a catch still can't fire there.
+    if ((trollState === 'chasing') && !onIce && knockbackTimer <= 0 && knockbackInvulnTimer <= 0) {
+      const trollRect = {x: troll.x, y: GROUND_Y - TROLL_H, w: TROLL_W, h: TROLL_H};
+      if (rectsOverlap(player, trollRect)) {
+        trollState = 'stunned'; // holds the troll in place while the death-fall plays out
+        troll.stunTimer = TROLL_STUN_FRAMES;
+        startDeathFall();
+        return; // skip the rest of this frame's physics — dying's own branch takes over next frame
+      }
+    }
+
+    // ---- goats (only relevant before the ice; harmless to leave running after, but they're
+    // never in view again once onIce so it doesn't matter either way) ----
+    goats.forEach((goat, idx) => {
+      const range = GOAT_RANGES[idx];
+      if (goat.stunTimer > 0) {
+        const RETREAT_SPEED = GOAT_SPEED * 2.5;
+        goat.stunTimer--;
+        goat.dir = (player.x < goat.curX) ? 1 : -1;
+        goat.curX += goat.dir * RETREAT_SPEED;
+        goat.curX = Math.max(range.lo - 30, Math.min(range.hi + 30, goat.curX));
+        return;
+      }
+      goat.curX += goat.dir * GOAT_SPEED;
+      const visMaxX = Math.max(range.lo, range.hi - goat.w);
+      if (goat.curX >= visMaxX) { goat.curX = visMaxX; goat.dir = -1; }
+      else if (goat.curX <= range.lo) { goat.curX = range.lo; goat.dir = 1; }
+    });
+    if (goatHitCooldown <= 0 && knockbackTimer <= 0 && knockbackInvulnTimer <= 0) {
+      for (const goat of goats) {
+        const gRect = {x: goat.curX, y: GROUND_Y - goat.h, w: goat.w, h: goat.h};
+        if (rectsOverlap(player, gRect)) {
+          goat.stunTimer = GOAT_STUN_FRAMES;
+          goatHitCooldown = 40;
+          activePopup = {text: 'MAAA!', timer: 60, x: player.x, y: player.y - 20};
+          loseLife();
+          break;
+        }
+      }
+    }
+    if (goatHitCooldown > 0) goatHitCooldown--;
+
+    // ---- physics ----
+    if (knockbackTimer > 0) knockbackTimer--;
+    else if (knockbackInvulnTimer > 0) knockbackInvulnTimer--;
+
+    if (knockbackTimer <= 0) {
+      const anyDirKeyHeld = keys['ArrowLeft'] || keys['ArrowRight'];
+      if (keys['ArrowLeft']) { player.vx -= 0.6; player.facing = -1; }
+      if (keys['ArrowRight']) { player.vx += 0.6; player.facing = 1; }
+      player.vx *= (onIce && !anyDirKeyHeld) ? ICE_FRICTION : FRICTION;
+      player.vx = Math.max(-MOVE_SPEED, Math.min(MOVE_SPEED, player.vx));
+    }
+    if ((keys['Space'] || keys['ArrowUp']) && player.onGround) { player.vy = JUMP_FORCE; player.onGround = false; }
+    player.vy += GRAVITY;
+    if (player.vy > 14) player.vy = 14;
+
+    player.x += player.vx;
+    if (player.x < 0) player.x = 0;
+
+    if (!onIce && player.x >= ICE_START_X) onIce = true;
+
+    const activePlatforms = onIce ? walkPlatforms : [groundPlatform, ...ridgePlatforms];
+    const levelWidth = onIce ? LEVEL_WIDTH : CHASE_LEVEL_WIDTH + 40;
+    let rightEdge = levelWidth - player.w;
+    if (onIce) rightEdge = Math.min(rightEdge, GATE_X + GATE_W - player.w);
+    if (player.x > rightEdge) player.x = rightEdge;
+
+    for (const p of activePlatforms) {
+      if (p.h >= 100) {
+        if (rectsOverlap(player, p)) {
+          if (player.vx > 0) player.x = p.x - player.w;
+          else if (player.vx < 0) player.x = p.x + p.w;
+          player.vx = 0;
+        }
+      }
+    }
+    player.y += player.vy;
+    player.onGround = false;
+    for (const p of activePlatforms) {
+      if (rectsOverlap(player, p)) {
+        if (player.vy > 0) { player.y = p.y - player.h; player.vy = 0; player.onGround = true; }
+        else if (player.vy < 0) {
+          // Never let a ceiling-bump push the player's feet past the continuous chase-section
+          // floor. A ridge platform with less clearance than the player's own height (34px) would
+          // otherwise resolve to a y that embeds the player's bottom edge below GROUND_Y — which
+          // then makes them overlap groundPlatform's own hitbox (it's h>=100, treated as a solid
+          // body with the side-wall check above), launching them sideways to x≈-26 and, once they
+          // fall deep enough to clear groundPlatform's 132px hitbox entirely, dropping them forever
+          // with nothing left to catch them outside the ice section's water-death check — found via
+          // simulation to be exactly what happens jumping under the x:1300 ridge platform (only
+          // 40px clearance, less than the player's 34px height). Clamping here is the general fix
+          // (safe even if a future platform's y/h is ever tuned into the same unsafe range again);
+          // the ice section has no equivalent continuous floor, so this only clamps pre-ice.
+          player.y = onIce ? p.y + p.h : Math.min(p.y + p.h, GROUND_Y - player.h);
+          player.vy = 0;
+        }
+      }
+    }
+
+    // Defensive safety net: with the clamp above this should now be unreachable pre-ice (the floor
+    // is continuous, nothing should ever drop the player below it), but falling through the world
+    // was exactly the failure mode just fixed above and it left the game in a badly broken state
+    // (invisible player, desynced collectible/troll, able to skip straight to the ice) — so recover
+    // instead of trusting that no future change can reintroduce a way to fall out of bounds.
+    if (!onIce && !zoneComplete && player.y > GROUND_Y + 150) {
+      activePopup = {text: 'WHOOPS — RESETTING...', timer: 70, x: 40, y: 220};
+      loseLife();
+      return;
+    }
+
+    if (onIce && player.y > WATER_DEATH_Y && !zoneComplete) {
+      fellInWater();
+      return;
+    }
+
+    // ---- ice meter: flat drain, no regen, no direction check — see the note above ----
+    if (onIce) {
+      iceMeter -= ICE_DRAIN_PER_FRAME;
+      if (iceMeter <= 0) {
+        iceMeter = 0;
+        activePopup = {text: 'THE ICE GIVES WAY — KEEP MOVING!', timer: 80, x: player.x, y: player.y - 24};
+        loseLife();
+        updateHUD();
+        return;
+      }
+    }
+
+    // ---- gate ----
+    if (onIce && !zoneComplete) {
+      const gateRect = {x: GATE_X, y: GROUND_Y - GATE_H, w: GATE_W, h: GATE_H};
+      if (rectsOverlap(player, gateRect)) {
+        zoneComplete = true;
+        player.vx = 0; player.vy = 0;
+        activePopup = null;
+        document.getElementById('progressFill').style.width = '100%';
+        beginZoneTransition(ZONE_DORM, 'DOWN THE MOUNTAIN TO F BLOCK...', -1);
+      }
+    }
+
+    if (hitFlash > 0) hitFlash--;
+
+    const activeLevelWidth = onIce ? LEVEL_WIDTH : (CHASE_LEVEL_WIDTH + 40);
+    camX = player.x - 300;
+    camX = Math.max(0, Math.min(activeLevelWidth - canvas.width, camX));
+
+    if (!zoneComplete) {
+      const pct = onIce
+        ? 60 + Math.min(1, (player.x - ICE_START_X) / (LEVEL_WIDTH - ICE_START_X)) * 40
+        : Math.min(1, player.x / CHASE_LEVEL_WIDTH) * 60;
+      document.getElementById('progressFill').style.width = pct + '%';
+    }
+  }
+
+  // ============================================================
+  // DRAWING
+  // ============================================================
+  function drawSky() {
+    ctx.fillStyle = '#7ec8e3';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#fff6c9';
+    ctx.beginPath();
+    ctx.arc(660, 70, 34, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Snow-capped mountain range — verbatim technique from Zone 1 (quadratic-silhouette peaks with
+  // a taper-matched snow cap so the cap never sticks out past the rock outline).
+  function drawMountainRange(scrollFactor, baseColor, snowLine, yOffset) {
+    const scroll = camX * scrollFactor;
+    const peaks = [
+      {cx: 120, peakY: 60 + yOffset, halfW: 220},
+      {cx: 420, peakY: 20 + yOffset, halfW: 260},
+      {cx: 760, peakY: 55 + yOffset, halfW: 230},
+      {cx: 1080, peakY: 10 + yOffset, halfW: 270},
+      {cx: 1420, peakY: 65 + yOffset, halfW: 220},
+      {cx: 1760, peakY: 30 + yOffset, halfW: 250},
+      {cx: 2100, peakY: 60 + yOffset, halfW: 220},
+    ];
+    ctx.fillStyle = baseColor;
+    ctx.beginPath();
+    ctx.moveTo(-400, GROUND_Y);
+    for (const pk of peaks) {
+      const x = pk.cx - scroll;
+      ctx.lineTo(x - pk.halfW, GROUND_Y);
+      ctx.lineTo(x, pk.peakY);
+      ctx.lineTo(x + pk.halfW, GROUND_Y);
+    }
+    ctx.lineTo(2600, GROUND_Y);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = '#ffffff';
+    for (const pk of peaks) {
+      const x = pk.cx - scroll;
+      const capY = pk.peakY + snowLine;
+      const taper = snowLine / (GROUND_Y - pk.peakY);
+      const capHalfW = pk.halfW * taper * 0.85;
+      ctx.beginPath();
+      ctx.moveTo(x, pk.peakY);
+      ctx.lineTo(x - capHalfW, capY);
+      ctx.lineTo(x + capHalfW, capY);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+
+  function drawPine(sx, groundY, scale, inverted) {
+    const h = 90 * scale, w = 46 * scale;
+    ctx.fillStyle = '#3a5a3a';
+    for (let i = 0; i < 3; i++) {
+      const tierY = groundY - h + i * (h * 0.32); // i=0 is the topmost tier, i=2 the base
+      // Normal pine: widest tier at the base, tapering to a point at the top. The original
+      // version had this backwards (widest at the TOP) — Gerald liked the look enough to keep it
+      // on a few trees deliberately rather than call it a pure bug, so `inverted` preserves the
+      // old formula for those.
+      const tierW = inverted ? w * (1 - i * 0.22) : w * (0.56 + i * 0.22);
+      ctx.beginPath();
+      ctx.moveTo(sx, tierY);
+      ctx.lineTo(sx - tierW / 2, tierY + h * 0.4);
+      ctx.lineTo(sx + tierW / 2, tierY + h * 0.4);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.moveTo(sx, groundY - h);
+    ctx.lineTo(sx - 8 * scale, groundY - h + 14 * scale);
+    ctx.lineTo(sx + 8 * scale, groundY - h + 14 * scale);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#5a4030';
+    ctx.fillRect(sx - 4 * scale, groundY - 6, 8 * scale, 6);
+  }
+
+  function drawForestBackdrop(px) {
+    const trees = [-40, 60, 180, 300, 460, 620, 780, 900];
+    for (let i = 0; i < trees.length; i++) {
+      const wx = trees[i];
+      const sx = wx - px * 0.85;
+      if (sx < -60 || sx > canvas.width + 60) continue;
+      // Most trees are normal (wide base, narrow top); a couple keep the original top-heavy taper
+      // as a deliberate visual accent per Gerald's call, not every tree fixed.
+      const inverted = (i === 2 || i === 5);
+      drawPine(sx, GROUND_Y, i % 2 === 0 ? 1 : 0.75, inverted);
+    }
+  }
+
+  function drawRockFormation(sx, groundY) {
+    ctx.fillStyle = '#6b7280';
+    ctx.beginPath();
+    ctx.moveTo(sx, groundY);
+    ctx.lineTo(sx + 14, groundY - 46);
+    ctx.lineTo(sx + 34, groundY - 30);
+    ctx.lineTo(sx + 50, groundY - 58);
+    ctx.lineTo(sx + 70, groundY);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.moveTo(sx + 50, groundY - 58);
+    ctx.lineTo(sx + 42, groundY - 44);
+    ctx.lineTo(sx + 58, groundY - 44);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function drawRidgeBackdrop(px) {
+    const rocks = [880, 1080, 1320, 1500, 1780, 1920];
+    for (const wx of rocks) {
+      const sx = wx - px;
+      if (sx < -80 || sx > canvas.width + 80) continue;
+      drawRockFormation(sx, GROUND_Y);
+    }
+  }
+
+  function drawTrailSign(px) {
+    const sx = 40 - px;
+    if (sx < -100 || sx > canvas.width + 20) return;
+    ctx.fillStyle = '#7a4a30';
+    ctx.fillRect(sx + 20, GROUND_Y - 46, 6, 46);
+    ctx.fillRect(sx + 86, GROUND_Y - 46, 6, 46);
+    ctx.fillStyle = '#e8dfc5';
+    ctx.fillRect(sx, GROUND_Y - 86, 112, 44);
+    ctx.strokeStyle = '#5a3320';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(sx, GROUND_Y - 86, 112, 44);
+    ctx.fillStyle = '#1a1a2e';
+    ctx.font = 'bold 15px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('FLØYEN', sx + 56, GROUND_Y - 67);
+    ctx.fillText('TRAIL', sx + 56, GROUND_Y - 50);
+  }
+
+  function drawCollectLedge(px) {
+    const sx = COLLECT_X - px;
+    if (sx < -80 || sx > canvas.width + 80) return;
+    const sy = COLLECT_Y;
+    if (!collectBroken) {
+      ctx.fillStyle = '#7a5a3a';
+      ctx.fillRect(sx, sy, COLLECT_W, 20);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(sx, sy - 5, COLLECT_W, 6);
+    } else {
+      // broken/cracked remnants — a few scattered chunks, cosmetic only
+      ctx.fillStyle = '#7a5a3a';
+      ctx.fillRect(sx, sy + 10, COLLECT_W * 0.35, 8);
+      ctx.fillRect(sx + COLLECT_W * 0.55, sy + 14, COLLECT_W * 0.3, 8);
+    }
+  }
+
+  function drawTrollDormant(px) {
+    // half-hidden among the trees before it wakes
+    const sx = TROLL_DORMANT_X - px;
+    if (sx < -100 || sx > canvas.width + 100) return;
+    ctx.save();
+    ctx.globalAlpha = 0.85;
+    ctx.fillStyle = '#5a6b4f';
+    ctx.fillRect(sx, GROUND_Y - TROLL_H, TROLL_W, TROLL_H);
+    ctx.fillStyle = '#3f4a38';
+    ctx.fillRect(sx + 14, GROUND_Y - TROLL_H + 18, 12, 12);
+    ctx.fillRect(sx + TROLL_W - 26, GROUND_Y - TROLL_H + 18, 12, 12);
+    ctx.restore();
+  }
+
+  function drawTroll() {
+    if (trollState === 'dormant') return;
+    const sx = troll.x - camX;
+    if (sx < -150 || sx > canvas.width + 150) return;
+    const walkCycle = Math.sin(Date.now() / 90) * 8;
+    const legOffset = trollState === 'chasing' ? walkCycle : 0;
+    const armOffset = -legOffset; // arms swing opposite the legs for a running read
+    const bodyColor = trollState === 'givenUp' ? '#6b7a60' : '#5a6b4f';
+    const HEAD_W = 36, HEAD_H = 28, LEG_H = 20;
+    const headX = sx + (TROLL_W - HEAD_W) / 2, headY = GROUND_Y - TROLL_H;
+    const bodyY = headY + HEAD_H, bodyH = TROLL_H - HEAD_H - LEG_H;
+    ctx.save();
+    // arms, drawn before the body so their inner edge tucks behind it
+    ctx.fillStyle = bodyColor;
+    ctx.fillRect(sx - 8, bodyY + 6 + armOffset * 0.4, 12, 34);
+    ctx.fillRect(sx + TROLL_W - 4, bodyY + 6 - armOffset * 0.4, 12, 34);
+    // body
+    ctx.fillRect(sx, bodyY, TROLL_W, bodyH);
+    // legs, animated while actively chasing; still while stunned or given up
+    ctx.fillStyle = '#4a5a40';
+    ctx.fillRect(sx + 10, bodyY + bodyH, 16, LEG_H + legOffset * 0.3);
+    ctx.fillRect(sx + TROLL_W - 26, bodyY + bodyH, 16, LEG_H - legOffset * 0.3);
+    // head + eyes
+    ctx.fillStyle = bodyColor;
+    ctx.fillRect(headX, headY, HEAD_W, HEAD_H);
+    ctx.fillStyle = '#ffd23f';
+    ctx.fillRect(headX + 5, headY + 9, 9, 9);
+    ctx.fillRect(headX + HEAD_W - 14, headY + 9, 9, 9);
+    ctx.restore();
+  }
+
+  function drawGoat(goat) {
+    const sx = goat.curX - camX;
+    const sy = GROUND_Y - goat.h;
+    const legPhase = Math.sin(Date.now() / 120 + goat.curX) * 3;
+    ctx.save();
+    ctx.translate(sx + goat.w / 2, 0);
+    ctx.scale(goat.dir, 1);
+    ctx.translate(-goat.w / 2, 0);
+    ctx.fillStyle = '#e8e2d0';
+    ctx.fillRect(0, sy, goat.w, goat.h - 6);
+    ctx.fillStyle = '#3a3a4a';
+    ctx.fillRect(goat.w - 6, sy - 4, 6, 6); // horn
+    ctx.fillStyle = '#c9c2a8';
+    ctx.fillRect(2, sy + goat.h - 6 + legPhase * 0.2, 4, 6);
+    ctx.fillRect(goat.w - 6, sy + goat.h - 6 - legPhase * 0.2, 4, 6);
+    ctx.restore();
+  }
+
+  function drawPlayerSprite(px, py) {
+    ctx.save();
+    ctx.translate(px + player.w / 2, py);
+    if (player.facing < 0) ctx.scale(-1, 1);
+    ctx.translate(-player.w / 2, 0);
+    if (knockbackInvulnTimer > 0 && Math.floor(knockbackInvulnTimer / 3) % 2 === 0) { ctx.restore(); return; }
+    ctx.fillStyle = '#c94f4f'; // red coat, distinct from Zone 1's plain jacket, reads as "geared up"
+    ctx.fillRect(4, 12, player.w - 8, player.h - 12);
+    ctx.fillStyle = '#e8b98a';
+    ctx.fillRect(6, 0, player.w - 12, 14);
+    ctx.fillStyle = '#5a3a2a';
+    ctx.fillRect(4, 0, player.w - 8, 6);
+    ctx.restore();
+  }
+
+  function drawGroundFloor(px, w) {
+    ctx.fillStyle = '#e8f0f5';
+    ctx.fillRect(-px, GROUND_Y, w, BASE_H);
+    ctx.fillStyle = '#cfe0ea';
+    for (let x = 0; x < w; x += 24) ctx.fillRect(x - px, GROUND_Y, 2, BASE_H);
+  }
+
+  function drawRidgePlatform(p, px) {
+    const sx = p.x - px;
+    if (sx + p.w < -20 || sx > canvas.width + 20) return;
+    ctx.fillStyle = '#8a92a0';
+    ctx.fillRect(sx, p.y, p.w, p.h);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(sx, p.y - 3, p.w, 5);
+  }
+
+  function drawChaseScene() {
+    drawSky();
+    drawMountainRange(0.15, '#f0f5fa', 40, -10);
+    drawForestBackdrop(camX);
+    drawRidgeBackdrop(camX);
+    drawGroundFloor(camX, CHASE_LEVEL_WIDTH + 80);
+    drawTrailSign(camX);
+    for (const p of ridgePlatforms) drawRidgePlatform(p, camX);
+    drawCollectLedge(camX);
+    drawTrollDormant(camX);
+    for (const goat of goats) drawGoat(goat);
+    drawTroll();
+    drawPlayerSprite(player.x - camX, player.y);
+  }
+
+  const ICE_PROPS = [
+    {x: 2060, size: 14, depth: 10}, {x: 2200, size: 11, depth: 30},
+    {x: 2380, size: 17, depth: 14}, {x: 2540, size: 12, depth: 34},
+    {x: 2700, size: 15, depth: 16}, {x: 2870, size: 12, depth: 28},
+    {x: 3050, size: 14, depth: 18},
+  ];
+  function drawIceProp(sx, sy, size) {
+    ctx.fillStyle = 'rgba(222,238,248,0.8)';
+    ctx.beginPath();
+    ctx.ellipse(sx, sy, size, size * 0.55, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(150,182,200,0.65)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.ellipse(sx, sy, size, size * 0.55, 0, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  function drawIcyWater(px) {
+    const waterTop = Math.max(...LEDGES.map(l => l.y)) + LEDGE_H;
+    ctx.fillStyle = '#2a5c78';
+    ctx.fillRect(0, waterTop, canvas.width, canvas.height - waterTop);
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    for (let wx = -((px * 0.4) % 90); wx < canvas.width; wx += 90) {
+      ctx.beginPath();
+      ctx.ellipse(wx, waterTop + 22, 20, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    for (const p of ICE_PROPS) {
+      const sx = p.x - px;
+      if (sx < -40 || sx > canvas.width + 40) continue;
+      drawIceProp(sx, waterTop + 16 + p.depth, p.size);
+    }
+  }
+
+  function drawLedge(ledge, px) {
+    const sx = ledge.x - px;
+    if (sx + ledge.w < -20 || sx > canvas.width + 20) return;
+    ctx.fillStyle = '#dce8f0';
+    ctx.fillRect(sx, ledge.y, ledge.w, LEDGE_H);
+    ctx.fillStyle = '#b8cbd8';
+    ctx.fillRect(sx, ledge.y + LEDGE_H - 6, ledge.w, 6);
+    ctx.fillStyle = '#ffffff';
+    for (let i = 0; i < ledge.w; i += 14) ctx.fillRect(sx + i, ledge.y - 2, 8, 4);
+  }
+
+  function drawGateArch() {
+    const gx = GATE_X - camX;
+    ctx.fillStyle = '#8a6a4a';
+    ctx.fillRect(gx - 6, GROUND_Y - GATE_H, 8, GATE_H);
+    ctx.fillRect(gx + GATE_W - 2, GROUND_Y - GATE_H, 8, GATE_H);
+    ctx.fillRect(gx - 6, GROUND_Y - GATE_H, GATE_W + 16, 8);
+    ctx.fillStyle = 'rgba(26,26,46,0.85)';
+    ctx.fillRect(gx + GATE_W / 2 - 72, GROUND_Y - GATE_H - 30, 144, 24);
+    ctx.fillStyle = '#6bff8f';
+    ctx.font = 'bold 14px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('BACK TO CAMPUS', gx + GATE_W / 2, GROUND_Y - GATE_H - 13);
+  }
+
+  function drawIceScene() {
+    drawSky();
+    drawMountainRange(0.15, '#f0f5fa', 40, -10);
+    drawIcyWater(camX);
+    for (const ledge of LEDGES) drawLedge(ledge, camX);
+    drawGateArch();
+    drawPlayerSprite(player.x - camX, player.y);
+  }
+
+  function draw() {
+    if (onIce) drawIceScene();
+    else drawChaseScene();
+
+    if (hitFlash > 0) {
+      ctx.fillStyle = `rgba(255,80,80,${hitFlash / 20})`;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    // (popups now show in the #msgBox text box)
+  }
+
+  function onEnter() {
+    player.x = 40; player.y = GROUND_Y - player.h; player.vx = 0; player.vy = 0;
+    camX = 0;
+  }
+
+  return {
+    zoneName: 'FLØYEN',
+    update, draw, onEnter, respawnPlayer, onOutOfLives, sectionLabel,
+    respawnPopupX: () => player.x,
+    __debugState: () => ({
+      collectBroken, trollState, trollX: troll.x, onIce, iceMeter, zoneComplete,
+      playerX: player.x, lives: player.lives, dying, playerY: player.y,
+      goatXs: goats.map(g => g.curX),
+    }),
+  };
+})();
+
+// ============================================================
+// ZONE 3: F BLOCK (Sammen Hatleberg dorm)
+// Built standalone on a slightly different shell (own physics(), GROUND_Y=372, player.h=36,
+// a `shared` state object). Rather than rewrite it, it's wrapped here in an adapter IIFE that
+// supplies those names locally and exposes the standard zone interface to the World 4 shell.
+// ============================================================
+const ZoneDorm = (function() {
+  const W = 768, H = 432;
+  const GROUND_Y = 372;
+  const ACCEL = 0.6;
+  // Adapter for the standalone file's `shared` object: lives map onto the world-wide player.lives
+  // pool; inventory here is Zone-3-local (the 4 ingredients), separate from the world inventory
+  // so it never clobbers the coat.
+  const shared = {
+    get lives() { return player.lives; },
+    set lives(v) { player.lives = v; },
+    inventory: [],
+    mode: 'play',
+    frame: 0,
+  };
+  const showRiddle = () => { for (const k in keys) keys[k] = false; openRiddle(); };
+
+  /* ---- shared drawing helpers ---- */
+  const PEOPLE = {
+    jack:   { hair:'#3b2616', top:'#2c4a7a', trim:'#1b2f52', legs:'#2b2b33', skin:'#f1c9a5', long:false, mitt:'#c8323c', name:'JACK' },
+    tim:    { hair:'#e3c35a', top:'#3f8f55', trim:'#2c6a3d', legs:'#34343e', skin:'#f3d0b0', long:false, name:'TIM' },
+    chris:  { hair:'#1d1a1a', top:'#d9762b', trim:'#f4efe6', legs:'#2f2f3a', skin:'#e8bb92', long:false, apron:true, name:'CHRIS' },
+    marie:  { hair:'#6b3f22', top:'#e2b93b', trim:'#b88f1c', legs:'#3b3350', skin:'#f3d0b0', long:true, name:'MARIE' },
+    leonie: { hair:'#a2663a', top:'#b8325a', trim:'#f08aa8', legs:'#2e2a44', skin:'#f5d3b6', long:true, scarf:'#f08aa8', name:'LÉONIE' }
+  };
+  function drawPerson(sx, footY, p, facing, walkT, opts={}){
+    const x = Math.round(sx), y = Math.round(footY - 36);
+    const step = Math.floor(walkT/8)%2;
+    ctx.fillStyle = p.legs;
+    if (opts.moving) { ctx.fillRect(x+6+(step?2:0), y+26, 5, 10); ctx.fillRect(x+15-(step?2:0), y+26, 5, 10); }
+    else { ctx.fillRect(x+7, y+26, 5, 10); ctx.fillRect(x+14, y+26, 5, 10); }
+    ctx.fillStyle = '#1a1a1a'; ctx.fillRect(x+5, y+34, 8, 2); ctx.fillRect(x+13, y+34, 8, 2);
+    ctx.fillStyle = p.top; ctx.fillRect(x+4, y+13, 18, 14);
+    ctx.fillStyle = p.trim; ctx.fillRect(x+4, y+25, 18, 2);
+    if (p.apron) { ctx.fillStyle='#f4efe6'; ctx.fillRect(x+8, y+15, 10, 12); }
+    ctx.fillStyle = p.top; ctx.fillRect(x+1, y+14, 3, 10); ctx.fillRect(x+22, y+14, 3, 10);
+    ctx.fillStyle = p.mitt || p.skin; ctx.fillRect(x+1, y+23, 3, 3); ctx.fillRect(x+22, y+23, 3, 3);
+    if (p.scarf) { ctx.fillStyle=p.scarf; ctx.fillRect(x+5, y+12, 16, 3); ctx.fillRect(facing>0?x+6:x+16, y+15, 4, 6); }
+    ctx.fillStyle = p.skin; ctx.fillRect(x+6, y+1, 14, 12);
+    ctx.fillStyle = p.hair; ctx.fillRect(x+5, y, 16, 4);
+    if (facing>0) ctx.fillRect(x+5, y+3, 3, 5); else ctx.fillRect(x+18, y+3, 3, 5);
+    if (p.long) { ctx.fillRect(x+4, y+2, 3, 14); ctx.fillRect(x+19, y+2, 3, 14); }
+    ctx.fillStyle = '#1a1a1a'; ctx.fillRect(facing>0 ? x+15 : x+9, y+6, 2, 2);
+    if (opts.blush) { ctx.fillStyle='#ff8fa8'; ctx.fillRect(facing>0?x+16:x+7, y+9, 3, 2); }
+  }
+  function drawNameTag(cx, topY, name, color){
+    ctx.font = 'bold 12px monospace'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    const w = ctx.measureText(name).width + 10;
+    ctx.fillStyle='rgba(20,18,42,0.85)'; ctx.fillRect(Math.round(cx-w/2), topY-16, Math.round(w), 15);
+    ctx.fillStyle=color||'#fff'; ctx.fillText(name, Math.round(cx), topY-8);
+  }
+  function drawBubble(cx, bottomY, text, bg, name){
+    sayInBox(name, text); return; // legibility pass: speech goes to the #msgBox text box
+    ctx.font = 'bold 13px monospace'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    const w = Math.min(ctx.measureText(text).width + 14, 330), h = 20;
+    let bx = Math.round(cx - w/2); bx = Math.max(4, Math.min(W-w-4, bx));
+    const by = Math.round(bottomY - h - 6);
+    ctx.fillStyle = bg || '#fff'; ctx.fillRect(bx, by, w, h);
+    ctx.fillStyle = '#1c1a33'; ctx.fillRect(bx, by, w, 2); ctx.fillRect(bx, by+h-2, w, 2); ctx.fillRect(bx, by, 2, h); ctx.fillRect(bx+w-2, by, 2, h);
+    ctx.fillStyle = bg || '#fff'; ctx.fillRect(Math.round(cx)-3, by+h, 6, 5);
+    ctx.fillStyle = '#1c1a33'; ctx.fillText(text, bx + w/2, by + h/2 + 1);
+  }
+  function drawCaption(text, alpha){
+    captionText = text; captionOpacity = alpha == null ? 1 : alpha; return; // -> #msgBox
+    ctx.save(); ctx.globalAlpha = alpha==null?1:alpha;
+    ctx.font='bold 15px monospace'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    const w = ctx.measureText(text).width + 30;
+    ctx.fillStyle='rgba(20,18,42,0.88)'; ctx.fillRect(Math.round(W/2-w/2), 26, Math.round(w), 30);
+    ctx.fillStyle='#ffd36b'; ctx.fillText(text, W/2, 42);
+    ctx.restore();
+  }
+
+  /* ================= ZONE 3 — F BLOCK (IIFE, standard interface) ================= */
+  const ZONE = (function(){
+    const LEVEL_WIDTH = 2640;
+    const INTERIOR_X = 420, KITCHEN_X = 1480, RIGHT_WALL = 2620;
+    const COOK_FRAMES = 150;
+
+    const solids = [
+      { x:1600, y:GROUND_Y-136, w:130, h:28, kind:'cupboard' },
+      { x:1800, y:GROUND_Y-60,  w:160, h:60, kind:'counter' },
+      { x:1960, y:GROUND_Y-140, w:62, h:140, kind:'fridge' },
+      // Step-up bin on the fridge's right side (Gerald's playtest: reaching Chris without all 4
+      // ingredients left you stranded — the 140px fridge is taller than a full jump, so there
+      // was no way back left). Floor -> bin (56) -> fridge top (+84) are both normal jumps.
+      { x:2026, y:GROUND_Y-56,  w:30, h:56, kind:'bin' }
+    ];
+    const oneways = [ { x:1816, y:GROUND_Y-146, w:84, h:8, kind:'shelf' } ];
+
+    const ING_NAMES = { eggs:'EGGS', muffins:'ENGLISH MUFFINS', ham:'HAM', butter:'BUTTER & LEMON' };
+    let pickups, npcs, stations, drops, popups, flash, st;
+
+    const DOORS = [ {x:520,name:'JACK'}, {x:700,name:'TIM'}, {x:880,name:'CHRIS'}, {x:1060,name:'MARIE'}, {x:1240,name:'LÉONIE'} ];
+
+    function resetState(){
+      pickups = [
+        { id:'muffins', x:1976, y:GROUND_Y-140-16, w:30, h:16, got:false },
+        { id:'butter',  x:1840, y:GROUND_Y-146-16, w:36, h:16, got:false },
+        { id:'bonus',   x:1618, y:GROUND_Y-136-14, w:30, h:14, got:false, bonus:true }
+      ];
+      npcs = [
+        { id:'marie',  x:820,  lo:780,  hi:1000, dir:1,  speed:0.8, bubble:null, bubbleT:0, cd:0, talkN:0 },
+        { id:'leonie', x:1330, lo:1150, hi:1400, dir:-1, speed:0.7, bubble:null, bubbleT:0, cd:0, state:'wander', alpha:1 },
+        { id:'tim',    x:1520, lo:1500, hi:1700, dir:1,  speed:0.9, bubble:null, bubbleT:0, cd:0, gaveEggs:false },
+        { id:'chris',  x:2064, lo:2064, hi:2064, dir:-1, speed:0,   bubble:null, bubbleT:0, cd:0, state:'block', alpha:1 }
+      ];
+      stations = [
+        { id:'pot',      x:2200, label:'POT',     order:3, bar:0, done:false, doneMsg:'EGGS POACHED!' },
+        { id:'toaster',  x:2300, label:'TOASTER', order:1, bar:0, done:false, doneMsg:'MUFFINS TOASTED!' },
+        { id:'saucepan', x:2400, label:'SAUCE',   order:4, bar:0, done:false, doneMsg:'HOLLANDAISE DONE!' },
+        { id:'pan',      x:2500, label:'PAN',     order:2, bar:0, done:false, doneMsg:'HAM FRIED!' }
+      ];
+      drops = []; popups = []; flash = 0;
+      st = { hamGot:false, met:false, meetT:0, stage:0, dropT:90, hitCd:0, wrongCd:0, jackBubble:null, jackBubbleT:0,
+             cooked:false, cookedT:0, fadeT:0, movie:false, movieT:0, blockMsgCd:0, cupboardBump:0, bonusGot:false };
+      shared.inventory = [];
+    }
+
+    function hasAll(){ return ['eggs','muffins','ham','butter'].every(i => shared.inventory.includes(i)); }
+    function addItem(id, wx, wy){
+      if (shared.inventory.includes(id)) return;
+      shared.inventory.push(id);
+      popups.push({ text:'+ '+ING_NAMES[id], x:wx, y:wy, t:100 });
+      if (hasAll()) popups.push({ text:'ALL 4 INGREDIENTS!', x:wx, y:wy-22, t:120 });
+      updateHUD();
+    }
+    function say(npc, text, t){ npc.bubble=text; npc.bubbleT=t||110; }
+    function jackSay(text, t){ st.jackBubble=text; st.jackBubbleT=t||110; }
+
+    function onEnter(){ resetState(); respawnPlayer(); updateHUD(); }
+    function respawnPlayer(){ player.x=40; player.y=GROUND_Y-player.h; player.vx=0; player.vy=0; player.frozen=false; player.knock=0; }
+    function onOutOfLives(){ resetState(); }
+    function sectionLabel(){ return 'F BLOCK'; }
+    function hudText(){
+      if (st && st.movie) return '';
+      if (st && hasAll()) return 'COOKING '+st.stage+'/4';
+      return 'INGREDIENTS '+(shared.inventory ? shared.inventory.length : 0)+'/4';
+    }
+
+    /* ---------- physics ---------- */
+    function physics(){
+      const prevBottom = player.y + player.h;
+      let dir = 0;
+      if (!player.frozen && player.knock<=0) {
+        if (keys.ArrowLeft) dir -= 1;
+        if (keys.ArrowRight) dir += 1;
+        if ((keys.Space || keys.ArrowUp) && player.onGround) { player.vy = JUMP_FORCE; player.onGround=false; }
+      }
+      if (player.knock>0) player.knock--;
+      if (player.frozen) { player.vx = 0; }
+      else {
+        player.vx += dir*ACCEL;
+        if (player.vx > MOVE_SPEED) player.vx = MOVE_SPEED;
+        if (player.vx < -MOVE_SPEED) player.vx = -MOVE_SPEED;
+        player.vx *= FRICTION;
+        if (Math.abs(player.vx) < 0.05) player.vx = 0;
+      }
+      if (dir) player.facing = dir;
+      player.walkT = (dir && player.onGround) ? player.walkT+1 : 0;
+
+      // X axis
+      player.x += player.vx;
+      for (const s of solids) {
+        if (!rectsOverlap(player, s)) continue;
+        if (player.vy >= 0 && (player.y + player.h) - s.y <= 8) { player.y = s.y - player.h; player.vy = 0; player.onGround = true; continue; }
+        if (player.vx > 0) player.x = s.x - player.w; else if (player.vx < 0) player.x = s.x + s.w;
+        else player.x = (player.x + player.w/2 < s.x + s.w/2) ? s.x - player.w : s.x + s.w;
+        player.vx = 0;
+      }
+      if (player.x < 0) player.x = 0;
+      if (player.x + player.w > RIGHT_WALL) player.x = RIGHT_WALL - player.w;
+      // Chris blocks the stove until all ingredients are in (clamp at his far side so the trigger overlaps)
+      const chris = npcs.find(n=>n.id==='chris');
+      if (chris.state==='block' && player.x > chris.x + 4) { player.x = chris.x + 4; if (player.vx>0) player.vx=0; }
+
+      // Y axis
+      if (!player.frozen) {
+        player.vy += GRAVITY; if (player.vy > 14) player.vy = 14;
+        player.y += player.vy;
+      }
+      player.onGround = false;
+      for (const s of solids) {
+        if (!rectsOverlap(player, s)) continue;
+        if (player.vy > 0) { player.y = s.y - player.h; player.vy = 0; player.onGround = true; }
+        else if (player.vy < 0) { player.y = s.y + s.h; player.vy = 0; headHit(s); }
+      }
+      for (const o of oneways) {
+        if (player.vy >= 0 && prevBottom <= o.y + 0.5 && player.y + player.h >= o.y && player.x < o.x+o.w && player.x+player.w > o.x) {
+          player.y = o.y - player.h; player.vy = 0; player.onGround = true;
+        }
+      }
+      if (player.y + player.h >= GROUND_Y) { player.y = GROUND_Y - player.h; player.vy = 0; player.onGround = true; }
+    }
+    function headHit(s){
+      if (s.kind==='cupboard') {
+        st.cupboardBump = 12;
+        if (!st.hamGot) { st.hamGot = true; addItem('ham', s.x+s.w/2, s.y-10); }
+      }
+    }
+
+    /* ---------- NPCs ---------- */
+    const GREET = { tim:['Hi!','Hei hei!','What\'s up, chef?'], marie:['What\'s up!','Butter\'s on the shelf above the sink!'], chris:['Hei!'] };
+    function updateNPCs(){
+      for (const n of npcs) {
+        if (n.bubbleT>0) n.bubbleT--;
+        if (n.cd>0) n.cd--;
+        const talking = n.bubbleT>0;
+        if (n.id==='leonie') { updateLeonie(n); continue; }
+        if (n.id==='chris') { updateChris(n); continue; }
+        if (!talking) {
+          n.x += n.dir*n.speed;
+          if (n.x > n.hi) { n.x = n.hi; n.dir = -1; }
+          if (n.x < n.lo) { n.x = n.lo; n.dir = 1; }
+        }
+        const r = { x:n.x, y:GROUND_Y-36, w:26, h:36 };
+        if (n.cd<=0 && rectsOverlap(player, r)) {
+          n.cd = 70;
+          if (n.id==='tim' && !n.gaveEggs) { n.gaveEggs = true; say(n, 'Eggs? Here you go, chef!', 130); addItem('eggs', n.x+13, GROUND_Y-60); }
+          else if (n.id==='marie') { say(n, GREET.marie[n.talkN % 2]); n.talkN++; }
+          else say(n, GREET[n.id][Math.floor(Math.random()*GREET[n.id].length)]);
+          const push = (player.x + player.w/2 < n.x + 13) ? -1 : 1;
+          player.vx = push*4; player.knock = 10;
+          n.dir = -push;
+        }
+      }
+    }
+    function updateLeonie(n){
+      if (n.state==='wander') {
+        n.x += n.dir*n.speed;
+        if (n.x > n.hi) { n.x = n.hi; n.dir = -1; }
+        if (n.x < n.lo) { n.x = n.lo; n.dir = 1; }
+        // x-overlap only (ignores y) — she can't be jumped over and missed
+        if (player.x < n.x+26 && player.x+player.w > n.x) {
+          n.state='meet'; st.met=true; st.meetT=0;
+          player.frozen = true; player.vx = 0;
+          if (player.y + player.h < GROUND_Y) { player.y = GROUND_Y - player.h; player.vy = 0; }
+          n.dir = (player.x < n.x) ? -1 : 1;
+          player.facing = -n.dir;
+          // nudge apart so they stand face to face
+          if (n.dir<0) n.x = player.x + player.w + 42; else n.x = player.x - 26 - 42;
+        }
+      } else if (n.state==='meet') {
+        st.meetT++;
+        if (st.meetT===10) { say(n,'hmmm…',100); jackSay('hmmm…',100); }
+        if (st.meetT>=110) { n.state='leave'; player.frozen=false; }
+      } else if (n.state==='leave') {
+        const door = 1240 + 14;
+        if (Math.abs(n.x - door) > 1) { n.dir = n.x < door ? 1 : -1; n.x += n.dir*1.2; if (Math.abs(n.x-door)<1.2) n.x=door; }
+        else { n.alpha -= 0.03; if (n.alpha<=0) { n.alpha=0; n.state='gone'; } }
+      }
+    }
+    function updateChris(n){
+      const r = { x:n.x-10, y:GROUND_Y-36, w:46, h:36 };
+      if (n.state==='block') {
+        if (hasAll()) { n.state='leave'; say(n,'All yours, chef!',130); n.dir=-1; return; }
+        if (rectsOverlap(player, r) && n.cd<=0) { n.cd = 120; say(n, 'Need all 4 ingredients first! ('+shared.inventory.length+'/4)', 130); }
+      } else if (n.state==='leave') {
+        n.x -= 1.6;
+        if (n.x + 26 < camX() - 4) { n.state='gone'; n.bubbleT = 0; }
+        else if (n.bubbleT < 2) n.bubbleT = 2;   // keep "All yours, chef!" up until he's off screen
+      }
+    }
+
+    /* ---------- cooking ---------- */
+    function updateCooking(){
+      if (!hasAll() || st.cooked) return;
+      if (st.wrongCd>0) st.wrongCd--;
+      if (st.hitCd>0) st.hitCd--;
+      const pcx = player.x + player.w/2;
+      const still = player.onGround && Math.abs(player.vx) < 0.6 && !keys.ArrowLeft && !keys.ArrowRight && player.knock<=0;
+      for (const s of stations) {
+        if (Math.abs(pcx - s.x) > 30 || s.done) continue;
+        if (s.order === st.stage + 1) {
+          if (still) s.bar++;
+          if (s.bar >= COOK_FRAMES) {
+            s.done = true; st.stage++; popups.push({ text:s.doneMsg, x:s.x, y:GROUND_Y-90, t:100 }); updateHUD();
+            if (st.stage===4) { st.cooked = true; st.cookedT = 0; player.frozen = true; drops = []; }
+          }
+        } else if (st.wrongCd<=0) {
+          st.wrongCd = 150;
+          jackSay(s.id==='saucepan' ? 'Hollandaise first?! Not how Jack does it!' : 'Not yet — check the recipe card!', 140);
+        }
+      }
+      // oil spits
+      if (pcx > 2140) {
+        st.dropT--;
+        if (st.dropT<=0) {
+          st.dropT = 55 + Math.floor(Math.random()*20);
+          const targeted = Math.random() < 0.5;
+          const x = targeted ? pcx + (Math.random()*12-6) : 2170 + Math.random()*380;
+          drops.push({ x, y:GROUND_Y-200, vy:0, warn:35 });
+        }
+      }
+      for (const d of drops) {
+        if (d.warn > 0) { d.warn--; continue; }
+        d.vy += 0.3; d.y += d.vy;
+        if (!d.dead && st.hitCd<=0 && rectsOverlap(player, { x:d.x-5, y:d.y-6, w:10, h:12 })) {
+          d.dead = true; st.hitCd = 45; flash = 12;
+          const cur = stations.find(s=>s.order===st.stage+1);
+          if (cur) cur.bar = 0;
+          popups.push({ text:'HOT OIL! Start that step again', x:pcx, y:player.y-20, t:80, red:true });
+          player.vx = (Math.random()<0.5?-1:1)*3; player.knock = 10;
+        }
+        if (d.y >= GROUND_Y) d.dead = true;
+      }
+      drops = drops.filter(d=>!d.dead);
+    }
+
+    /* ---------- update ---------- */
+    function update(){
+      if (st.movie) { st.movieT++; if (st.movieT===420) showRiddle(); return; }
+      if (st.cooked) {
+        st.cookedT++;
+        if (st.cookedT > 170) { st.fadeT++; if (st.fadeT>=60) { st.movie = true; st.movieT = 0; updateHUD(); } }
+        return;
+      }
+      physics();
+      updateNPCs();
+      for (const p of pickups) if (!p.got && rectsOverlap(player, p)) {
+        p.got = true;
+        if (p.bonus) { st.bonusGot = true; popups.push({ text:'SECRET STASH! + KVIKK LUNSJ', x:p.x+p.w/2, y:p.y-10, t:130 }); }
+        else addItem(p.id, p.x+p.w/2, p.y);
+      }
+      updateCooking();
+      if (st.jackBubbleT>0) st.jackBubbleT--;
+      if (st.cupboardBump>0) st.cupboardBump--;
+      if (flash>0) flash--;
+      for (const p of popups) { p.t--; p.y -= 0.4; }
+      popups = popups.filter(p=>p.t>0);
+    }
+
+    /* ---------- drawing ---------- */
+    function camX(){ return Math.max(0, Math.min(LEVEL_WIDTH - W, player.x - W*0.4)); }
+
+    function drawExterior(cx){
+      const g = ctx.createLinearGradient(0,0,0,GROUND_Y);
+      g.addColorStop(0,'#241c4a'); g.addColorStop(0.55,'#6a3f78'); g.addColorStop(1,'#e58a6a');
+      ctx.fillStyle = g; ctx.fillRect(0,0,W,GROUND_Y);
+      // distant mountains (parallax)
+      ctx.fillStyle = '#3a2f5e';
+      for (let i=0;i<6;i++){ const mx = i*220 - cx*0.3; ctx.beginPath(); ctx.moveTo(mx-40,GROUND_Y); ctx.lineTo(mx+110,GROUND_Y-190); ctx.lineTo(mx+260,GROUND_Y); ctx.fill();
+        ctx.fillStyle='#e8e6f2'; ctx.beginPath(); ctx.moveTo(mx+86,GROUND_Y-160); ctx.lineTo(mx+110,GROUND_Y-190); ctx.lineTo(mx+134,GROUND_Y-160); ctx.fill(); ctx.fillStyle='#3a2f5e'; }
+      // snow + pines
+      ctx.fillStyle='#eef1f7'; ctx.fillRect(0, GROUND_Y, W, H-GROUND_Y);
+      ctx.fillStyle='#2a2448'; for (let i=0;i<40;i++){ const tx = i*22 - (cx*0.6)%22 - 22; ctx.beginPath(); ctx.moveTo(tx,GROUND_Y); ctx.lineTo(tx+11,GROUND_Y-26-(i%3)*6); ctx.lineTo(tx+22,GROUND_Y); ctx.fill(); }
+      for (const px of [30,110,230]) { const x = px - cx; ctx.fillStyle='#5a3a22'; ctx.fillRect(x+15,GROUND_Y-12,6,12); ctx.fillStyle='#2d4a3a'; for (const [w,y0,y1] of [[44,GROUND_Y-10,GROUND_Y-50],[34,GROUND_Y-36,GROUND_Y-74],[24,GROUND_Y-60,GROUND_Y-96]]) { ctx.beginPath(); ctx.moveTo(x+18-w/2,y0); ctx.lineTo(x+18,y1); ctx.lineTo(x+18+w/2,y0); ctx.fill(); } ctx.fillStyle='#fff'; ctx.fillRect(x+12,GROUND_Y-86,12,3); ctx.fillRect(x+8,GROUND_Y-62,10,3); }
+      // building facade
+      const bx = 300 - cx;
+      ctx.fillStyle = '#8c4a3c'; ctx.fillRect(bx, 70, 140, GROUND_Y-70);
+      ctx.fillStyle = '#7a3f33'; for (let yy=80; yy<GROUND_Y; yy+=14) ctx.fillRect(bx, yy, 140, 2);
+      ctx.fillStyle = '#ffe39a'; for (const wy of [100,160,220]) for (const wx of [14,58,100]) ctx.fillRect(bx+wx, wy, 24, 30);
+      ctx.fillStyle = '#f4efe6'; ctx.fillRect(bx-104, 28, 240, 34);
+      ctx.fillStyle = '#1c1a33'; ctx.font='bold 17px monospace'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('SAMMEN HATLEBERG', bx+16, 46);
+      // big F block marker + door
+      ctx.fillStyle='#ffd36b'; ctx.fillRect(bx+40, 262, 40, 40); ctx.fillStyle='#1c1a33'; ctx.font='bold 30px monospace'; ctx.fillText('F', bx+60, 283);
+      const near = Math.abs(player.x - 380) < 90;
+      ctx.fillStyle = '#3b2616'; ctx.fillRect(bx+94, GROUND_Y-64, 40, 64);
+      ctx.fillStyle = near ? '#ffe39a' : '#5a3a22'; ctx.fillRect(bx+98, GROUND_Y-60, near?10:32, 60);
+    }
+
+    function drawInterior(cx){
+      // corridor wall
+      const ix = INTERIOR_X - cx;
+      ctx.save(); ctx.beginPath(); ctx.rect(Math.max(0,ix), 0, W, H); ctx.clip();
+      ctx.fillStyle='#e9dcc2'; ctx.fillRect(ix, 0, KITCHEN_X-INTERIOR_X, GROUND_Y);
+      ctx.fillStyle='#c9b28c'; ctx.fillRect(ix, GROUND_Y-70, KITCHEN_X-INTERIOR_X, 4);
+      ctx.fillStyle='#d8c7a6'; ctx.fillRect(ix, GROUND_Y-66, KITCHEN_X-INTERIOR_X, 66);
+      ctx.fillStyle='#7d6a8f'; ctx.fillRect(ix, 0, KITCHEN_X-INTERIOR_X, 24);
+      // ceiling lights
+      for (let lx=INTERIOR_X+80; lx<KITCHEN_X; lx+=180){ ctx.fillStyle='#fff6c9'; ctx.fillRect(lx-cx, 24, 40, 6); }
+      // doors
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      for (const d of DOORS) {
+        const dx = d.x - cx;
+        ctx.fillStyle='#6d4a2f'; ctx.fillRect(dx, GROUND_Y-110, 56, 110);
+        ctx.fillStyle='#8a6140'; ctx.fillRect(dx+5, GROUND_Y-104, 46, 104);
+        ctx.fillStyle='#e6c35a'; ctx.fillRect(dx+42, GROUND_Y-56, 5, 5);
+        ctx.fillStyle='#f4efe6'; ctx.fillRect(dx-4, GROUND_Y-140, 64, 24);
+        ctx.fillStyle='#1c1a33'; ctx.font='bold 14px monospace'; ctx.fillText(d.name, dx+28, GROUND_Y-127);
+        if (d.name==='LÉONIE') { ctx.fillStyle='#f08aa8'; ctx.fillRect(dx+22, GROUND_Y-90, 12, 10); }
+      }
+      // noticeboard + shoe rack + radiator
+      const nb = 606 - cx; const nby = GROUND_Y-160; ctx.fillStyle='#b98a57'; ctx.fillRect(nb, nby, 70, 50);
+      ctx.fillStyle='#fff'; ctx.fillRect(nb+6,nby+6,20,16); ctx.fillStyle='#ffd36b'; ctx.fillRect(nb+32,nby+10,18,14); ctx.fillStyle='#9ad0ff'; ctx.fillRect(nb+20,nby+28,24,16);
+      ctx.fillStyle='#fff8e0'; ctx.fillRect(nb+4, nby+17, 62, 32); ctx.fillStyle='#1c1a33'; ctx.font='bold 12px monospace'; ctx.fillText('MOVIE', nb+35, nby+27); ctx.fillText('NIGHT', nb+35, nby+40);
+      const rack = 780 - cx; ctx.fillStyle='#6d5a4a'; ctx.fillRect(rack, GROUND_Y-20, 70, 20);
+      ctx.fillStyle='#3b3b52'; ctx.fillRect(rack+6,GROUND_Y-28,16,8); ctx.fillStyle='#b8325a'; ctx.fillRect(rack+28,GROUND_Y-28,16,8); ctx.fillStyle='#e2b93b'; ctx.fillRect(rack+50,GROUND_Y-28,14,8);
+      const rad = 1150 - cx; ctx.fillStyle='#f4f4f4'; for (let i=0;i<6;i++) ctx.fillRect(rad+i*8, GROUND_Y-50, 6, 34);
+      // kitchen doorway sign
+      const ks = 1350 - cx, ksy = GROUND_Y-180; ctx.fillStyle='#2a2650'; ctx.fillRect(ks, ksy, 124, 44);
+      ctx.fillStyle='#ffd36b'; ctx.font='bold 15px monospace'; ctx.fillText('KJØKKEN', ks+62, ksy+14); ctx.fillStyle='#fff'; ctx.font='bold 13px monospace'; ctx.fillText('KITCHEN →', ks+62, ksy+32);
+
+      // kitchen wall tiles
+      const kx = KITCHEN_X - cx;
+      ctx.fillStyle='#dfeaf0'; ctx.fillRect(kx, 0, LEVEL_WIDTH-KITCHEN_X, GROUND_Y);
+      ctx.fillStyle='#c5d6df';
+      for (let ty=40; ty<GROUND_Y; ty+=20) ctx.fillRect(kx, ty, LEVEL_WIDTH-KITCHEN_X, 1);
+      for (let tx=KITCHEN_X; tx<LEVEL_WIDTH; tx+=20) ctx.fillRect(tx-cx, 40, 1, GROUND_Y-40);
+      ctx.fillStyle='#5f7f8f'; ctx.fillRect(kx, 0, LEVEL_WIDTH-KITCHEN_X, 24);
+      ctx.fillStyle='#fff6c9'; for (let lx=KITCHEN_X+120; lx<LEVEL_WIDTH; lx+=260) ctx.fillRect(lx-cx, 24, 60, 6);
+      // window at night
+      const wx = 1820 - cx; ctx.fillStyle='#1c2250'; ctx.fillRect(wx, 60, 110, 70); ctx.fillStyle='#fff'; ctx.fillRect(wx+20,75,2,2); ctx.fillRect(wx+70,90,2,2); ctx.fillRect(wx+90,70,2,2);
+      ctx.fillStyle='#e9dcc2'; ctx.fillRect(wx+53,60,4,70); ctx.fillRect(wx,93,110,4);
+      // right wall
+      ctx.fillStyle='#4a5a66'; ctx.fillRect(RIGHT_WALL-cx, 0, LEVEL_WIDTH-RIGHT_WALL, GROUND_Y);
+      ctx.restore();
+    }
+
+    function drawKitchenProps(cx){
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      // cupboard (ham)
+      const cb = solids[0]; const bump = st.cupboardBump>0 ? -3 : 0;
+      ctx.fillStyle='#b4845a'; ctx.fillRect(cb.x-cx, cb.y+bump, cb.w, cb.h);
+      ctx.fillStyle='#9a6d46'; ctx.fillRect(cb.x-cx+cb.w/2-1, cb.y+bump, 2, cb.h);
+      ctx.fillStyle = st.hamGot ? '#6d4a2f' : '#ffd36b'; ctx.fillRect(cb.x-cx+cb.w/2-8, cb.y+bump+cb.h/2-2, 5, 5); ctx.fillRect(cb.x-cx+cb.w/2+3, cb.y+bump+cb.h/2-2, 5, 5);
+      if (!st.hamGot) { ctx.fillStyle='#ffd36b'; ctx.font='bold 14px monospace'; ctx.fillText('?', cb.x-cx+cb.w/2 - 30, cb.y+bump+cb.h/2); ctx.fillText('?', cb.x-cx+cb.w/2 + 30, cb.y+bump+cb.h/2); }
+      // plant pot on the cupboard (hides the secret stash behind its leaves)
+      if (!pickups.find(p=>p.bonus).got) { ctx.fillStyle='#c8323c'; ctx.fillRect(cb.x-cx+20, cb.y-8, 22, 8); ctx.fillStyle='#ffd36b'; ctx.fillRect(cb.x-cx+23, cb.y-6, 8, 4); }
+      ctx.fillStyle='#b4643c'; ctx.fillRect(cb.x-cx+26, cb.y-14, 16, 14); ctx.fillStyle='#9a4e2e'; ctx.fillRect(cb.x-cx+26, cb.y-14, 16, 3);
+      ctx.fillStyle='#3f8f55'; ctx.fillRect(cb.x-cx+14, cb.y-30, 10, 16); ctx.fillRect(cb.x-cx+22, cb.y-36, 8, 22); ctx.fillRect(cb.x-cx+30, cb.y-40, 8, 26); ctx.fillRect(cb.x-cx+38, cb.y-32, 10, 18); ctx.fillStyle='#2c6a3d'; ctx.fillRect(cb.x-cx+18, cb.y-24, 26, 10);
+      // counter + sink
+      const ct = solids[1];
+      ctx.fillStyle='#8e6a4a'; ctx.fillRect(ct.x-cx, ct.y, ct.w, ct.h);
+      ctx.fillStyle='#d9d4c8'; ctx.fillRect(ct.x-cx, ct.y, ct.w, 6);
+      ctx.fillStyle='#a9b4bb'; ctx.fillRect(ct.x-cx+54, ct.y+1, 50, 5);
+      ctx.fillStyle='#7c858c'; ctx.fillRect(ct.x-cx+76, ct.y-18, 4, 18); ctx.fillRect(ct.x-cx+76, ct.y-18, 14, 4);
+      ctx.fillStyle='#6f5038'; for (const dx of [8,112]) ctx.fillRect(ct.x-cx+dx, ct.y+14, 38, 38);
+      // shelf
+      const sh = oneways[0]; ctx.fillStyle='#8e6a4a'; ctx.fillRect(sh.x-cx, sh.y, sh.w, sh.h); ctx.fillStyle='#6f5038'; ctx.fillRect(sh.x-cx+6, sh.y+8, 4, 10); ctx.fillRect(sh.x-cx+sh.w-10, sh.y+8, 4, 10);
+      // fridge
+      const fr = solids[2];
+      ctx.fillStyle='#eef2f4'; ctx.fillRect(fr.x-cx, fr.y, fr.w, fr.h);
+      ctx.fillStyle='#b9c3c9'; ctx.fillRect(fr.x-cx, fr.y+50, fr.w, 3); ctx.fillRect(fr.x-cx+fr.w-8, fr.y+20, 3, 22); ctx.fillRect(fr.x-cx+fr.w-8, fr.y+62, 3, 40);
+      ctx.fillStyle='#ff5c7a'; ctx.fillRect(fr.x-cx+10, fr.y+70, 8, 8); ctx.fillStyle='#9ad0ff'; ctx.fillRect(fr.x-cx+24, fr.y+86, 10, 8);
+      // recycling bin (step back up onto the fridge)
+      const bn = solids[3];
+      ctx.fillStyle='#3f7fbf'; ctx.fillRect(bn.x-cx, bn.y+4, bn.w, bn.h-4);
+      ctx.fillStyle='#2c5f94'; ctx.fillRect(bn.x-cx-2, bn.y, bn.w+4, 6); ctx.fillRect(bn.x-cx+6, bn.y+14, 3, bn.h-22); ctx.fillRect(bn.x-cx+bn.w-9, bn.y+14, 3, bn.h-22);
+      ctx.fillStyle='#e8f1fa'; ctx.font='bold 10px monospace'; ctx.fillText('♻', bn.x-cx+bn.w/2, bn.y+26);
+      // recipe card (on wall above Chris)
+      const rc = 1980 - cx;
+      ctx.fillStyle='#fff8e0'; ctx.fillRect(rc-6, 50, 196, 118);
+      ctx.fillStyle='#c8323c'; ctx.fillRect(rc+88, 46, 8, 8);
+      ctx.fillStyle='#6b2d5c'; ctx.font='bold 13px monospace'; ctx.fillText("JACK'S EGGS BENEDICT", rc+92, 66);
+      ctx.fillStyle='#1c1a33'; ctx.textAlign='left';
+      ['1. Toast muffins','2. Fry ham','3. Poach eggs','4. Hollandaise'].forEach((l,i)=> ctx.fillText(l, rc+8, 88+i*20));
+      ctx.textAlign='center';
+      // stove run
+      const sx = 2160 - cx;
+      ctx.fillStyle='#7d8a93'; ctx.fillRect(sx+20, 150, 360, 40); ctx.fillStyle='#5d6a73'; ctx.fillRect(sx+60, 190, 280, 10);
+      ctx.fillStyle='#8e6a4a'; ctx.fillRect(sx, GROUND_Y-60, 400, 60);
+      ctx.fillStyle='#d9d4c8'; ctx.fillRect(sx, GROUND_Y-60, 400, 6);
+      for (const s of stations) drawStation(s, cx);
+    }
+    function drawStation(s, cx){
+      const x = s.x - cx, top = GROUND_Y-60, t = shared.frame;
+      ctx.fillStyle='#2a2a33'; ctx.fillRect(x-22, top-2, 44, 3);
+      if (s.id==='pot') { ctx.fillStyle='#8a939a'; ctx.fillRect(x-16, top-24, 32, 22); ctx.fillStyle='#bfe3f5'; ctx.fillRect(x-14, top-24, 28, 4); if (s.bar>0||s.done) { ctx.fillStyle='#fff'; ctx.fillRect(x-8+(t%20<10?0:4), top-30, 3, 3); ctx.fillRect(x+4, top-33+(t%14<7?0:2), 3, 3); } }
+      if (s.id==='toaster') { ctx.fillStyle='#c0c7cc'; ctx.fillRect(x-16, top-22, 32, 20); ctx.fillStyle='#2a2a33'; ctx.fillRect(x-10, top-22, 6, 3); ctx.fillRect(x+4, top-22, 6, 3); if (s.done){ ctx.fillStyle='#c98a3c'; ctx.fillRect(x-10,top-28,6,6); ctx.fillRect(x+4,top-28,6,6);} }
+      if (s.id==='saucepan') { ctx.fillStyle='#6b6f75'; ctx.fillRect(x-14, top-16, 28, 14); ctx.fillRect(x+14, top-12, 14, 3); ctx.fillStyle='#f2cf45'; ctx.fillRect(x-12, top-16, 24, 3); }
+      if (s.id==='pan') { ctx.fillStyle='#2e2e36'; ctx.fillRect(x-18, top-8, 36, 6); ctx.fillRect(x-32, top-7, 14, 3); if (s.bar>0||s.done){ ctx.fillStyle='#e58a8a'; ctx.fillRect(x-10, top-11, 20, 4);} }
+      // flame
+      if (s.bar>0 && !s.done) { ctx.fillStyle = (t%8<4)?'#ff8a2b':'#ffcf3b'; ctx.fillRect(x-12, top-3, 24, 2); }
+      // label
+      ctx.fillStyle='#f4efe6'; ctx.font='bold 13px monospace'; ctx.fillText(s.label, x, top+24);
+      // progress bar / tick
+      if (s.done) { ctx.fillStyle='#3f8f55'; ctx.font='bold 16px monospace'; ctx.fillText('✓', x, top-44); }
+      else if (s.bar>0) { ctx.fillStyle='#1c1a33'; ctx.fillRect(x-22, top-48, 44, 8); ctx.fillStyle='#ffd36b'; ctx.fillRect(x-21, top-47, Math.round(42*s.bar/COOK_FRAMES), 6); }
+    }
+    function drawItem(id, x, y){
+      if (id==='muffins') { ctx.fillStyle='#d9a45c'; ctx.fillRect(x, y+4, 13, 10); ctx.fillRect(x+16, y+4, 13, 10); ctx.fillStyle='#f2dcae'; ctx.fillRect(x+2, y+6, 9, 3); ctx.fillRect(x+18, y+6, 9, 3); }
+      if (id==='butter') { ctx.fillStyle='#fff3a6'; ctx.fillRect(x, y+6, 18, 10); ctx.fillStyle='#e0cf6a'; ctx.fillRect(x, y+6, 18, 2); ctx.fillStyle='#f2e030'; ctx.fillRect(x+22, y+5, 12, 11); ctx.fillStyle='#8ab43a'; ctx.fillRect(x+27, y+2, 3, 3); }
+    }
+    function drawNPC(n, cx){
+      if (n.state==='gone') return;
+      const p = PEOPLE[n.id];
+      ctx.save(); ctx.globalAlpha = n.alpha==null?1:n.alpha;
+      const moving = (n.id!=='chris' && n.bubbleT<=0 && n.state!=='meet') || n.state==='leave';
+      const sx = n.x - cx;
+      drawPerson(sx, GROUND_Y, p, n.dir, shared.frame, { moving, blush: n.id==='leonie' && st.met });
+      drawNameTag(sx+13, GROUND_Y-38, p.name, n.id==='leonie' ? '#f08aa8' : '#fff');
+      if (n.id==='tim' && !n.gaveEggs) { ctx.fillStyle='#fff'; ctx.fillRect(sx+22, GROUND_Y-16, 6, 7); ctx.fillRect(sx+24, GROUND_Y-19, 6, 7); }
+      if (n.bubbleT>0 && n.bubble) drawBubble(sx+13, GROUND_Y-56, n.bubble, n.id==='leonie' ? '#ffe0ea' : '#fff', (PEOPLE[n.id] || {}).name);
+      ctx.restore();
+    }
+    function drawSparkles(x, y){
+      const t = shared.frame;
+      ctx.fillStyle='#ff8fa8';
+      for (let i=0;i<5;i++){ const a = t/12 + i*1.26; const r = 18 + (t%30)/3; ctx.fillRect(Math.round(x+Math.cos(a)*r), Math.round(y+Math.sin(a)*r*0.6), 3, 3); }
+    }
+
+    function drawPlay(){
+      const cx = camX();
+      ctx.clearRect(0,0,W,H);
+      drawExterior(cx);
+      drawInterior(cx);
+      // floors
+      const ix = INTERIOR_X - cx;
+      ctx.fillStyle='#8a6b52'; ctx.fillRect(Math.max(0,ix), GROUND_Y, W, H-GROUND_Y);
+      ctx.fillStyle='#7a5d46'; for (let fx=INTERIOR_X; fx<KITCHEN_X; fx+=40) ctx.fillRect(fx-cx, GROUND_Y, 2, H-GROUND_Y);
+      const kx = KITCHEN_X - cx;
+      ctx.fillStyle='#d6d0c2'; ctx.fillRect(Math.max(0,kx), GROUND_Y, W, H-GROUND_Y);
+      ctx.fillStyle='#b9b2a2'; for (let fx=KITCHEN_X; fx<LEVEL_WIDTH; fx+=30) for (let fy=GROUND_Y; fy<H; fy+=30) if (((fx+fy)/30)%2===0) ctx.fillRect(fx-cx, fy, 30, 30);
+      ctx.fillStyle='#1c1a33'; ctx.fillRect(0, GROUND_Y, W, 2);
+
+      drawKitchenProps(cx);
+      for (const p of pickups) if (!p.got && !p.bonus) drawItem(p.id, p.x - cx, p.y + (p.bonus ? 0 : Math.sin(shared.frame/12)*1.5));
+      for (const n of npcs) drawNPC(n, cx);
+
+      // oil drops + floor warning shadow
+      for (const d of drops) {
+        const dx = Math.round(d.x - cx);
+        // floor warning: pulsing red target where the spit will land
+        const pulse = (shared.frame % 10) < 5;
+        ctx.fillStyle = pulse ? '#e0282e' : '#ff7a3c'; ctx.fillRect(dx-10, GROUND_Y-4, 20, 4);
+        if (d.warn > 0) { ctx.fillStyle='#e0282e'; ctx.font='bold 16px monospace'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('!', dx, GROUND_Y-16); }
+        // the oil blob: dark outline, hot orange core
+        const jig = d.warn > 0 ? ((shared.frame % 4) < 2 ? -1 : 1) : 0;
+        const oy = Math.round(d.y);
+        ctx.fillStyle='#3a1a00'; ctx.fillRect(dx-6+jig, oy-7, 12, 13);
+        ctx.fillStyle='#ff8a1c'; ctx.fillRect(dx-4+jig, oy-5, 8, 9);
+        ctx.fillStyle='#ffe07a'; ctx.fillRect(dx-2+jig, oy-3, 3, 3);
+        if (d.warn <= 0) { ctx.fillStyle='rgba(255,138,28,0.5)'; ctx.fillRect(dx-2, oy-18, 4, 10); }
+      }
+
+      // player
+      const px = player.x - cx;
+      drawPerson(px, player.y + player.h, PEOPLE.jack, player.facing, player.walkT, { moving: player.walkT>0, blush: st.met && st.meetT<110 && st.meetT>0 });
+      drawNameTag(px+13, player.y-2, 'JACK', '#ffd36b');
+      if (st.jackBubbleT>0) drawBubble(px+13, player.y-20, st.jackBubble, st.jackBubble==='hmmm…' ? '#ffe0ea' : '#fff', 'JACK');
+      const leo = npcs.find(n=>n.id==='leonie');
+      if (leo.state==='meet' && st.meetT>10) drawSparkles((px+13 + leo.x-cx+13)/2, GROUND_Y-60);
+
+      // plated dish
+      if (st.cooked) {
+        const dx = 2350 - cx, dy = GROUND_Y-66;
+        ctx.fillStyle='#fff'; ctx.fillRect(dx-26, dy, 52, 5);
+        for (const o of [-12, 12]) { ctx.fillStyle='#d9a45c'; ctx.fillRect(dx+o-9, dy-6, 18, 6); ctx.fillStyle='#e58a8a'; ctx.fillRect(dx+o-8, dy-9, 16, 3); ctx.fillStyle='#fff'; ctx.fillRect(dx+o-7, dy-15, 14, 6); ctx.fillStyle='#f2cf45'; ctx.fillRect(dx+o-8, dy-16, 16, 3); }
+        drawCaption("Jack's famous eggs benedict!");
+      }
+
+      // popups
+      // (pickup popups now show in the #msgBox text box — newest one wins)
+      { const live = popups.filter(p => p.t > 0); if (live.length) sayInBox('', live[live.length - 1].text); }
+      if (flash>0) { ctx.fillStyle='rgba(255,140,40,'+(flash/30)+')'; ctx.fillRect(0,0,W,H); }
+      if (st.fadeT>0) { ctx.fillStyle='rgba(10,8,30,'+Math.min(1,st.fadeT/60)+')'; ctx.fillRect(0,0,W,H); }
+    }
+
+    /* ---------- movie night finale (screen space) ---------- */
+    function drawSeatedBack(x, y, p, headTilt){
+      // seen from behind, facing the sheet
+      ctx.fillStyle = p.top; ctx.fillRect(x, y-22, 24, 22);
+      ctx.fillStyle = p.trim; ctx.fillRect(x, y-4, 24, 4);
+      if (p.scarf) { ctx.fillStyle=p.scarf; ctx.fillRect(x+3, y-24, 18, 4); }
+      ctx.fillStyle = p.hair; ctx.fillRect(x+4+headTilt, y-38, 16, 16);
+      if (p.long) ctx.fillRect(x+3+headTilt, y-30, 18, 14);
+      ctx.fillStyle = p.skin; ctx.fillRect(x+2+headTilt, y-32, 2, 5); ctx.fillRect(x+20+headTilt, y-32, 2, 5);
+    }
+    function drawMovie(){
+      const t = st.movieT;
+      ctx.fillStyle='#16142b'; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='#211d3c'; ctx.fillRect(0,300,W,H-300);
+      // bedsheet
+      const sx=190, sy=36, sw=388, sh=196;
+      ctx.fillStyle='#e8e4d8'; ctx.fillRect(sx, sy, sw, sh);
+      ctx.fillStyle='#d3cdbd'; for (const fx of [80,210,300]) ctx.fillRect(sx+fx, sy, 2, sh); ctx.fillRect(sx, sy+sh-6, sw, 6);
+      ctx.fillStyle='#e8e4d8'; ctx.fillRect(sx+30, sy+sh, 40, 6); ctx.fillRect(sx+250, sy+sh, 60, 5);
+      ctx.fillStyle='#c8323c'; for (const p of [[sx+2,sy+2],[sx+sw-8,sy+2],[sx+sw/2-3,sy]]) ctx.fillRect(p[0],p[1],6,6);
+      // projected film: a fjord at night, slowly panning
+      const fx0=sx+20, fy0=sy+16, fw=sw-40, fh=sh-40;
+      ctx.save(); ctx.beginPath(); ctx.rect(fx0,fy0,fw,fh); ctx.clip();
+      const fl = 0.85 + Math.sin(t*0.9)*0.05 + (Math.random()*0.06);
+      ctx.globalAlpha = fl;
+      ctx.fillStyle='#2b3f7a'; ctx.fillRect(fx0,fy0,fw,fh);
+      ctx.fillStyle='#5ec8a0'; for (let i=0;i<6;i++) ctx.fillRect(fx0 + ((i*70 - t*0.4)%(fw+60)+fw+60)%(fw+60) - 30, fy0+20+Math.sin(i+t/40)*6, 40, 8);
+      ctx.fillStyle='#1b2a55'; for (let i=0;i<5;i++){ const mx = fx0 + ((i*110 - t*0.6)%(fw+220)+fw+220)%(fw+220) - 110; ctx.beginPath(); ctx.moveTo(mx,fy0+fh-30); ctx.lineTo(mx+55,fy0+50); ctx.lineTo(mx+110,fy0+fh-30); ctx.fill(); }
+      ctx.fillStyle='#16224a'; ctx.fillRect(fx0, fy0+fh-30, fw, 30);
+      ctx.globalAlpha=1; ctx.restore();
+      // projector + beam
+      ctx.fillStyle='rgba(255,250,220,0.07)'; ctx.beginPath(); ctx.moveTo(640,300); ctx.lineTo(sx+20,sy+16); ctx.lineTo(sx+sw-20,sy+sh-24); ctx.fill();
+      ctx.fillStyle='#6b4a8a'; ctx.fillRect(615,316,60,10); ctx.fillStyle='#c8323c'; ctx.fillRect(620,306,50,10); ctx.fillStyle='#3f8f55'; ctx.fillRect(612,326,66,10);
+      ctx.fillStyle='#2e2e36'; ctx.fillRect(624,290,34,16); ctx.fillStyle='#fff6c9'; ctx.fillRect(624,294,4,8);
+      // couch (back row)
+      ctx.fillStyle='#4a3f6e'; ctx.fillRect(210,318,300,34); ctx.fillStyle='#3a3158'; ctx.fillRect(200,300,320,20);
+      drawSeatedBack(240, 318, PEOPLE.tim, 0);
+      drawSeatedBack(340, 318, PEOPLE.chris, 0);
+      drawSeatedBack(440, 318, PEOPLE.marie, 0);
+      ctx.fillStyle='#fff'; ctx.fillRect(282,312,20,4); ctx.fillStyle='#f2cf45'; ctx.fillRect(286,308,12,4);
+      // front row: Jack & Léonie on floor cushions
+      ctx.fillStyle='#b8325a'; ctx.fillRect(300,398,40,10); ctx.fillStyle='#2c4a7a'; ctx.fillRect(346,398,40,10);
+      const lean = Math.max(0, Math.min(1, (t - 80) / 40));   // both lean in over ~0.7s
+      drawSeatedBack(306 + Math.round(lean*3), 398, PEOPLE.leonie, Math.round(lean*5));
+      drawSeatedBack(352 - Math.round(lean*3), 398, PEOPLE.jack, -Math.round(lean*5));
+      ctx.font='bold 12px monospace'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      // the heart
+      if (t > 150) {
+        const k = Math.min(1, (t-150)/20), pulse = 1 + Math.sin(t/8)*0.12;
+        const size = Math.round(34*k*pulse);
+        ctx.font = size + 'px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText('❤️', 341, 342 - Math.min(10,(t-150)/6));
+        for (let i=0;i<4;i++){ const ht = (t - 160 - i*25); if (ht>0) { ctx.globalAlpha = Math.max(0, 1 - ht/120); ctx.font='14px sans-serif'; ctx.fillText('❤️', 341 + Math.sin(ht/15+i)*30, 322 - ht*0.8); ctx.globalAlpha=1; } }
+      }
+      if (t < 150) { drawCaption('Movie night in F Block', Math.min(1, t/40, (150 - t)/25)); msgTopThisFrame = true; }
+      // soft projector spill on the front row so Jack & Léonie read against the dark floor
+      { const g = ctx.createRadialGradient(343, 372, 6, 343, 372, 95); g.addColorStop(0, 'rgba(255,245,210,0.28)'); g.addColorStop(1, 'rgba(255,245,210,0)'); ctx.fillStyle = g; ctx.fillRect(240, 280, 210, 150); }
+      if (t < 40) { ctx.fillStyle='rgba(10,8,30,'+(1-t/40)+')'; ctx.fillRect(0,0,W,H); }
+    }
+
+    function draw(){ if (st.movie) drawMovie(); else drawPlay(); }
+
+    return { LEVEL_WIDTH, onEnter, update, draw, respawnPlayer, onOutOfLives, sectionLabel, hudText,
+             _debug: () => ({ st, npcs, stations, drops, pickups }) };
+  })();
+
+  return {
+    zoneName: 'F BLOCK',
+    update() {
+      if (riddleOpen || worldWon) return;
+      ZONE.update();
+      shared.frame++;
+      document.getElementById('progressFill').style.width =
+        Math.min(100, (player.x / ZONE.LEVEL_WIDTH) * 100) + '%';
+    },
+    draw: () => ZONE.draw(),
+    onEnter() {
+      // Zone 3's sprite/physics use a 36px-tall player plus a few extra fields.
+      player.h = 36; player.frozen = false; player.knock = 0; player.walkT = 0; player.onGround = true;
+      camX = 0;
+      ZONE.onEnter();
+    },
+    respawnPlayer: () => ZONE.respawnPlayer(),
+    onOutOfLives: () => ZONE.onOutOfLives(),
+    sectionLabel: () => ZONE.hudText(),
+    hudCount: () => ZONE.hudText(),
+    respawnPopupX: () => 200,
+    __debugState: () => ZONE._debug(),
+  };
+})();
+
+const zones = [ZoneWharf, ZoneHike, ZoneDorm];
+
+let framesElapsed = 0; // shared frame counter, used by Zone 4's passenger idle-bob animation
+
+// ============================================================
+// RIDDLE + WIN SCREEN — World 4's single riddle gate, after Zone 3's movie night
+// ============================================================
+let riddleOpen = false;
+
+function openRiddle() {
+  riddleOpen = true;
+  document.getElementById('riddleText').textContent = RIDDLE.text;
+  document.getElementById('riddleOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('riddleInput').focus(), 50);
+}
+
+// ===== EDIT THESE (placeholders carried over from the Zone 3 standalone) =====
+const RIDDLE = {
+  // PLACEHOLDER riddle — replace with the real one
+  text: "Two of us rest on a muffin, wearing a golden sauce; a saint's name follows us. What did Jack cook in F Block?",
+  answers: ["eggs benedict", "egg benedict", "eggs benny"]
+};
+const CLUE_FRAGMENT = "????";   // PLACEHOLDER — World 4 clue fragment
+const PHOTO_SRC = "jack-bergen.jpg";   // Jack in Bergen (same folder)
+const RIDDLE_ANSWERS = RIDDLE.answers;
+// Accent/punctuation-insensitive matching (Zone 3's normAnswer), so 'Léonie' == 'leonie'.
+function normAnswer(s) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+
+function submitRiddle() {
+  const val = normAnswer(document.getElementById('riddleInput').value);
+  if (RIDDLE_ANSWERS.map(normAnswer).includes(val)) {
+    riddleOpen = false;
+    document.getElementById('riddleOverlay').classList.remove('show');
+    worldWon = true;
+    applyPhoto();
+    document.getElementById('winOverlay').classList.add('show');
+    document.documentElement.classList.add('win-scroll');
+    document.body.classList.add('win-scroll');
+    document.getElementById('progressFill').style.width = '100%';
+    updateHUD();
+  } else {
+    document.getElementById('riddleWrong').textContent = 'Not quite — try again!';
+    document.getElementById('riddleInput').value = '';
+    document.getElementById('riddleInput').focus();
+  }
+}
+document.getElementById('riddleSubmit').addEventListener('click', submitRiddle);
+document.getElementById('riddleInput').addEventListener('keydown', e => { if (e.key === 'Enter') submitRiddle(); });
+
+document.getElementById('nextWorldBtn').addEventListener('click', () => {
+  // World 5 also starts with an empty inventory by design — only lives carry forward.
+  saveProgress({ world: 5, lives: player.lives, inventory: [] });
+  location.href = 'world5.html';
+});
+
+function applyPhoto() {
+  const img = document.getElementById('worldPhoto');
+  const src = PHOTO_SRC || img.getAttribute('src');
+  if (src) {
+    img.src = src;
+    img.style.display = 'block';
+    document.getElementById('photoPlaceholderText').style.display = 'none';
+  }
+}
+applyPhoto();
+
+// ============================================================
+// MAIN LOOP — same fixed-timestep accumulator pattern as every zone/world before this
+// ============================================================
+function update() {
+  if (!gameStarted) return; // frozen until the startGate is tapped
+  framesElapsed++;
+  if (transitioning) return; // transition clock handles its own pacing via updateZoneTransition
+  zones[currentZone].update();
+}
+
+function draw() {
+  captionText = null; captionOpacity = 1; frameSpeech = []; msgTopThisFrame = false;
+  zones[currentZone].draw();
+  if (transitioning) captionText = null, activePopup = null, frameSpeech = [];
+  updateMsgBox();
+  document.getElementById('msgBox').classList.toggle('top', msgTopThisFrame);
+
+  if (transitioning && transitionStage === 'clock') {
+    drawTransitionClock(performance.now() - transitionStageStart);
+  }
+
+  updateHUD();
+}
+
+let lastFrameTime = performance.now();
+let stepAccumulator = 0;
+const FIXED_STEP_MS = 1000 / 60;
+
+function loop(now) {
+  if (now === undefined) now = performance.now();
+  let frameDelta = now - lastFrameTime;
+  lastFrameTime = now;
+  if (frameDelta > 250) frameDelta = 250;
+  stepAccumulator += frameDelta;
+
+  let stepsRun = 0;
+  while (stepAccumulator >= FIXED_STEP_MS && stepsRun < 8) {
+    update();
+    stepAccumulator -= FIXED_STEP_MS;
+    stepsRun++;
+  }
+
+  updateZoneTransition(now);
+  draw();
+  requestAnimationFrame(loop);
+}
+
+// Exposed on window purely for the jsdom+node-canvas test harness (same verification approach
+// established for every prior zone/world) — not used by gameplay itself.
+window.zones = zones;
+window.ZoneWharf = ZoneWharf; window.ZoneHike = ZoneHike; window.ZoneDorm = ZoneDorm;
+window.player = player; window.keys = keys; window.hasItem = hasItem; window.inventory = inventory;
+window.submitRiddle = submitRiddle;
+window.beginZoneTransition = beginZoneTransition;
+window.__getWorldState = () => ({ currentZone, transitioning, transitionStage, worldWon, zoneComplete, gameStarted });
+window.__forceStart = () => { gameStarted = true; const sg = document.getElementById('startGate'); if (sg) sg.remove(); };
+
+zones[currentZone].onEnter();
+updateHUD();
+loop();
+</script>
+
+<script>
+/* ===== FAMILY PHOTO PIECE — copied verbatim from world5.html so the cut/deal is identical ===== */
+const FAMILY_PHOTO_SRC = "final-photo.jpg";
+const PIECE_WORLD = 4;
+function renderPhotoPiece(){
+  const c = document.getElementById('pieceCanvas'); if (!c) return;
+  const g = c.getContext('2d'); g.clearRect(0, 0, c.width, c.height);
+  FRAGMENTS.drawWorldPiece(g, PIECE_WORLD, 0, 0, c.width, c.height);
+}
+function onFragmentsReady(){ renderPhotoPiece(); }
+const FRAGMENTS = (function(){
+  const COLS = 9, ROWS = 12, FW = 225, FH = 300;    // 3:4 frame, 25px tiles
+  function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const order = [...Array(COLS*ROWS).keys()];
+  const r = rng(2109);                              // fixed seed: same cut in every world file
+  for (let i = order.length-1; i > 0; i--) { const j = Math.floor(r()*(i+1)); [order[i], order[j]] = [order[j], order[i]]; }
+  const tilesFor = w => order.filter((_, i) => i % 5 === w - 1);   // world 1..5
+  // resolution ladder: [0]=36×48 (4px per tile, chunky 8-bit) … [3]=225×300, [4]=450×600 (sharp)
+  const levels = [];
+  let usingPhoto = false;
+  function mk(w,h){ const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+  function build(src){
+    const full = mk(FW*2, FH*2), g = full.getContext('2d');
+    if (src) {   // cover-crop to 3:4
+      const iw = src.naturalWidth || src.width, ih = src.naturalHeight || src.height;
+      const s = Math.max(full.width/iw, full.height/ih), dw = iw*s, dh = ih*s;
+      g.drawImage(src, (full.width-dw)/2, (full.height-dh)/2, dw, dh);
+    } else {     // stand-in art if final-photo.jpg is missing
+      const gr = g.createLinearGradient(0,0,0,full.height); gr.addColorStop(0,'#5fa8e0'); gr.addColorStop(0.6,'#ffd9a0'); gr.addColorStop(1,'#6a8a4a');
+      g.fillStyle = gr; g.fillRect(0,0,full.width,full.height);
+      g.fillStyle = '#ffd36b'; g.beginPath(); g.arc(360,100,50,0,Math.PI*2); g.fill();
+      ['#c94f6a','#4f7ac9','#2c4a7a','#3f9a8a','#e0a03a','#8a5ac9'].forEach((c,i) => { const x = 20 + i*70; g.fillStyle = c; g.fillRect(x, 380, 56, 220); g.fillStyle = '#f1c9a5'; g.beginPath(); g.arc(x+28, 350, 26, 0, Math.PI*2); g.fill(); });
+      g.fillStyle = 'rgba(20,18,42,0.8)'; g.fillRect(40, 190, 370, 50); g.fillStyle = '#fff'; g.font = 'bold 24px monospace'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('final-photo.jpg', 225, 215);
+    }
+    levels.length = 0;
+    for (const w of [36, 72, 144, 225]) { const c = mk(w, w*4/3); const cg = c.getContext('2d'); cg.imageSmoothingEnabled = true; cg.drawImage(full, 0, 0, c.width, c.height); levels.push(c); }
+    levels.push(full);
+  }
+  build(null);
+  const img = new Image();
+  img.onload = () => { usingPhoto = true; build(img); if (typeof onFragmentsReady === 'function') onFragmentsReady(); };
+  img.src = FAMILY_PHOTO_SRC;
+  function drawTile(c, idx, L, dx, dy, dw, dh){
+    const src = levels[L], tw = src.width / COLS, th = src.height / ROWS;
+    const col = idx % COLS, row = Math.floor(idx / COLS);
+    c.imageSmoothingEnabled = L >= 4;
+    c.drawImage(src, col*tw, row*th, tw, th, Math.round(dx), Math.round(dy), Math.ceil(dw), Math.ceil(dh));
+    c.imageSmoothingEnabled = true;
+  }
+  function drawWorldPiece(c, world, x, y, w, h, skip){
+    const tw = w / COLS, th = h / ROWS;
+    c.fillStyle = 'rgba(20,18,42,0.6)'; c.fillRect(x, y, w, h);
+    tilesFor(world).forEach((idx, j) => { if (!skip || !skip(j)) drawTile(c, idx, 0, x + (idx%COLS)*tw, y + Math.floor(idx/COLS)*th, tw, th); });
+  }
+  return { COLS, ROWS, FW, FH, tilesFor, drawTile, drawWorldPiece, usingPhoto: () => usingPhoto };
+})();
+renderPhotoPiece();
+(function(){ const ov = document.getElementById('winOverlay'); if (!ov) return;
+  new MutationObserver(() => { if (ov.classList.contains('show')) renderPhotoPiece(); }).observe(ov, { attributes:true, attributeFilter:['class'] });
+})();
+</script>
+</body>
+</html>
