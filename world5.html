@@ -15,12 +15,14 @@
   #gameWrap { position:relative; width:min(768px,100%); aspect-ratio:768/432; max-height:60dvh; container-type:inline-size; }
   canvas { width:100%; height:100%; display:block; image-rendering:pixelated; background:#1c1a33; border:2px solid #3a3566; box-sizing:border-box; }
   #hud { position:absolute; top:1.2cqw; left:1.6cqw; right:1.6cqw; display:flex; justify-content:space-between; pointer-events:none; font-weight:bold; font-size:2.1cqw; color:#fff; text-shadow:0.25cqw 0.25cqw 0 #000; }
+  #secretsHud { position:absolute; top:1.2cqw; left:50%; transform:translateX(-50%); pointer-events:none; font-weight:bold; font-size:1.7cqw; color:#ffd23f; text-shadow:0.25cqw 0.25cqw 0 #000; white-space:nowrap; }
   #hud .lives { color:#ff5c7a; }
   .overlay { position:absolute; inset:0; display:none; align-items:center; justify-content:center; background:rgba(10,8,30,0.82); z-index:5; }
   .overlay.show { display:flex; }
   .box { background:#f4efe6; color:#1c1a33; border:0.6cqw solid #ffd36b; padding:2.4cqw 3cqw; max-width:80%; max-height:92%; overflow-y:auto; text-align:center; font-size:2.2cqw; box-sizing:border-box; }
   .box h2 { margin:0 0 1.2cqw; font-size:3cqw; color:#2c6a8a; }
   .box p { margin:0.8cqw 0; color:#1c1a33; }
+  #riddleText { white-space: pre-line; }
   .box button, #startOverlay button { font:inherit; font-weight:bold; font-size:2.2cqw; margin-top:1.4cqw; padding:1cqw 2.4cqw; background:#2c6a8a; color:#fff; border:none; cursor:pointer; }
   #startOverlay, #startOverlay .box { cursor:pointer; }
   #riddleInput { font:inherit; font-size:2.4cqw; padding:1cqw; width:60%; text-align:center; border:2px solid #2c6a8a; background:#fff; color:#1c1a33; margin-top:1cqw; }
@@ -89,6 +91,7 @@
     max-height: none; flex-shrink: 0;
   }
   #hud { font-family: 'Press Start 2P', 'Courier New', monospace; font-weight: normal; font-size: clamp(9px, 1.3cqw, 18px); top: 1.04cqw; left: 1.3cqw; right: 1.3cqw; }
+  #secretsHud { font-family: 'Press Start 2P', 'Courier New', monospace; font-weight: normal; font-size: clamp(8px, 1.1cqw, 15px); top: 1.04cqw; }
   #hud .lives { font-size: clamp(13px, 2.1cqw, 26px); letter-spacing: 0.3em; }
   .box { font-size: clamp(11px, 1.7cqw, 20px); line-height: 1.5; max-width: min(560px, 90%); }
   .box h2 { font-family: 'Press Start 2P', 'Courier New', monospace; font-size: clamp(12px, 2cqw, 24px); line-height: 1.5; }
@@ -154,6 +157,7 @@
 <div id="gameWrap">
   <canvas id="game" width="768" height="432"></canvas>
   <div id="hud"><span class="lives" id="hudLives">♥♥♥</span><span id="hudItems"></span></div>
+  <div id="secretsHud">SECRETS 0/6</div>
   <div id="msgBox"><span id="msgName"></span><span id="msgText"></span></div>
   <div id="focusMeterBottom"><div id="focusLabel">☕ FOCUS</div><div id="focusBar"><div id="focusFill"></div></div></div>
   <div class="overlay show" id="startOverlay"><div class="box"><h2>THE FLAT</h2><p>Back again — and this time Alex is moving in too. Find your room key and settle in.</p><button id="startBtn">TAP TO START</button></div></div>
@@ -188,10 +192,11 @@
 
 <script>
 /* ================= EDIT THESE ================= */
-// PLACEHOLDER final riddle — replace with the real one (answers are case/accent/punctuation-insensitive)
+// Final riddle (answers are case/accent/punctuation-insensitive; "henryscott" is also accepted
+// as a no-space fallback, same convention as World 1's "accidentshappen")
 const RIDDLE = {
-  text: "PLACEHOLDER — I was just blown out, and I'm the number you turn today. What am I?",
-  answers: ["21", "twenty one", "twenty-one"]
+  text: "A host who needs no introduction\nIs your answer, worn without obstruction\nYou arrive and know the score\nWho let's you through the door?",
+  answers: ["henry scott", "henryscott"]
 };
 // The family photo, dropped in the same folder. Cut into 108 tiles (9×12), dealt across the 5 worlds.
 // If the file is missing, a stand-in pattern is used so the sequence still plays.
@@ -282,6 +287,38 @@ function playSfx(kind) {
     case 'lifeLost': tone(400, 0, 0.12, 0.15); tone(300, 0.11, 0.12, 0.15); tone(180, 0.22, 0.22, 0.15); break;
   }
 }
+// 8-bit "Happy Birthday" melody (the tune itself has been public domain since a 2015 US court
+// ruling, so this is a plain instrumental rendition, not a reproduction of any recording) —
+// played once as the cake scene's candid captions start.
+function playHappyBirthday() {
+  if (!audioCtx) return;
+  const t0 = audioCtx.currentTime;
+  function note(freq, start, dur, vol) {
+    const osc = audioCtx.createOscillator(), g = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(freq, t0 + start);
+    g.gain.setValueAtTime(0, t0 + start);
+    g.gain.linearRampToValueAtTime(vol, t0 + start + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + start + dur);
+    osc.connect(g); g.connect(audioCtx.destination);
+    osc.start(t0 + start); osc.stop(t0 + start + dur + 0.02);
+  }
+  const N = { G4: 392.00, A4: 440.00, B4: 493.88, C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99 };
+  const Q = 0.28;
+  let t = 0;
+  function line(notes) {
+    notes.forEach((f, i) => {
+      const dur = (i === notes.length - 1) ? Q * 1.8 : Q * 0.9;
+      note(N[f], t, dur, 0.11);
+      t += Q;
+    });
+    t += Q * 0.6;
+  }
+  line(['G4', 'G4', 'A4', 'G4', 'C5', 'B4']);
+  line(['G4', 'G4', 'A4', 'G4', 'D5', 'C5']);
+  line(['G4', 'G4', 'G5', 'E5', 'C5', 'B4', 'A4']);
+  line(['F5', 'F5', 'E5', 'C5', 'D5', 'C5']);
+}
 const ICE_FRICTION = 0.95;
 const GROUND_Y = 372;
 const STEP = 1000/60;
@@ -320,7 +357,22 @@ function markSecretFound(id) {
     const arr = raw ? JSON.parse(raw) : [];
     if (!arr.includes(id)) { arr.push(id); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
   } catch (e) {}
+  updateSecretsHud();
 }
+// The 6 valid secret IDs across all 5 worlds — used to render the top-of-screen "SECRETS x/6"
+// counter (visible in every world, not just World 5's own credits screen).
+const ALL_SECRET_IDS = ['w1', 'w2', 'w3', 'w4', 'w5_lp', 'w5_capo'];
+function updateSecretsHud() {
+  try {
+    const el = document.getElementById('secretsHud');
+    if (!el) return;
+    const raw = localStorage.getItem(SECRETS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    const count = Array.isArray(arr) ? arr.filter(x => ALL_SECRET_IDS.includes(x)).length : 0;
+    el.textContent = 'SECRETS ' + count + '/' + ALL_SECRET_IDS.length;
+  } catch (e) {}
+}
+updateSecretsHud();
 
 
 function isTypingInField(){ const a=document.activeElement; return a && (a.tagName==='INPUT' || a.tagName==='TEXTAREA'); }
@@ -883,8 +935,16 @@ const ZONE1 = (function(){
     ctx.textAlign='center'; ctx.textBaseline='middle';
     // pendant light
     const lx = TABLE.x + TABLE.w/2 - cx; ctx.fillStyle='#3a3a48'; ctx.fillRect(lx-1, 18, 2, 70); ctx.fillStyle='#e2b93b'; ctx.fillRect(lx-14, 88, 28, 12); ctx.fillStyle='rgba(255,240,180,0.25)'; ctx.fillRect(lx-40, 100, 80, 6);
-    // wall art: a gig poster
-    const ax = 740 - cx; ctx.fillStyle='#1c1a33'; ctx.fillRect(ax, 120, 50, 66); ctx.fillStyle='#e0282e'; ctx.fillRect(ax+4, 124, 42, 30); ctx.fillStyle='#ffd36b'; ctx.font='bold 9px monospace'; ctx.fillText('LIVE', ax+25, 166); ctx.fillText('MUSIC', ax+25, 177);
+    // wall art: an OASIS gig poster — a generic abstract 8-bit face (not modeled on any real
+    // person), not a reproduction of any actual band photo or cover art
+    { const ax = 740 - cx, fx = ax + 25, fy = 140;
+      ctx.fillStyle='#1c1a33'; ctx.fillRect(ax, 120, 50, 66);
+      ctx.fillStyle='#e8dfc5'; ctx.fillRect(ax+4, 124, 42, 46);
+      ctx.fillStyle='#c9a06a'; ctx.fillRect(fx-9, fy-8, 18, 18);
+      ctx.fillStyle='#2a2a2a'; ctx.fillRect(fx-9, fy-13, 18, 6);
+      ctx.fillRect(fx-8, fy-2, 6, 2); ctx.fillRect(fx+2, fy-2, 6, 2);
+      ctx.fillStyle='#1c1a33'; ctx.font='bold 9px monospace'; ctx.fillText('OASIS', ax+25, 178);
+    }
     // chairs (seat is one-way; backs are decorative)
     for (const c of [CHAIR_L, CHAIR_R]) {
       const x = c.x - cx; ctx.fillStyle='#6d4a2f'; ctx.fillRect(x, GROUND_Y-24, c.w, 4); ctx.fillRect(x+2, GROUND_Y-20, 3, 20); ctx.fillRect(x+c.w-5, GROUND_Y-20, 3, 20);
@@ -1048,8 +1108,7 @@ const ZONE1 = (function(){
       if (st.exitT > 100) {
         const ta = Math.min(1, (st.exitT-100)/30);
         ctx.save(); ctx.globalAlpha = ta; ctx.textAlign='center'; ctx.textBaseline='middle';
-        ctx.fillStyle='#b9b3d6'; ctx.font='bold 16px monospace'; ctx.fillText('A few weeks later…', W/2, H/2-16);
-        ctx.fillStyle='#ffd36b'; ctx.font='bold 20px monospace'; ctx.fillText('Léonie lands in Melbourne!', W/2, H/2+14);
+        ctx.fillStyle='#ffd36b'; ctx.font='bold 20px monospace'; ctx.fillText('Léonie arrives in Melbourne!', W/2, H/2);
         ctx.restore();
       }
     }
@@ -2199,6 +2258,7 @@ const ZONE4 = (function(){
       physics();
       if (t === 55) jackSay('♪ Happy birth—', 60);
       if (t === 118) jackSay('…wait. WHAT?!', 60);
+      if (t === SONG_START) playHappyBirthday();
       if (t === SONG_END + 10) { st.said.gogo = true; }
       if (t >= SONG_END + 100) { st.phase = 'candles'; st.pt = 0; st.candleArmed = false; }
     }

@@ -63,6 +63,18 @@
     text-shadow: 2px 2px 0 #000;
     pointer-events: none;
   }
+  #secretsHud {
+    position: absolute;
+    top: 1.04cqw;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1.1cqw;
+    color: #ffd23f;
+    text-shadow: 2px 2px 0 #000;
+    pointer-events: none;
+    white-space: nowrap;
+  }
   #hudLeft { display: flex; flex-direction: column; gap: 0.52cqw; }
   #livesDisplay { color: #e84545; font-size: 1.7cqw; }
   #invLabel { font-size: 1.04cqw; color: #9be3ff; letter-spacing: 1px; }
@@ -562,6 +574,7 @@
       </div>
       <div id="itemsDisplay"></div>
     </div>
+    <div id="secretsHud">SECRETS 0/6</div>
     <div id="oxyWrap">
       <div id="oxyLabel">AIR</div>
       <div id="oxyBarOuter"><div id="oxyBarInner"></div></div>
@@ -588,7 +601,7 @@
     <div class="overlay" id="riddleOverlay">
       <div class="box">
         <h2>ONE LAST RIDDLE<br>BEFORE YOU GO</h2>
-        <p id="riddleText">An Uncle who helped you find your stroke,<br>A relative you see more than most.<br>What do they share, beyond hair of the same hue?<br>Think back… the answer may come to you.</p>
+        <p id="riddleText">An Uncle who helped you find your stroke,<br>A relative you see more than most.<br>What do they share, beyond their black hair?<br>Think back… the answer may come to you.</p>
         <input type="text" id="riddleInput" placeholder="type your answer" autocomplete="off">
         <br>
         <button id="riddleSubmit">SUBMIT</button>
@@ -784,7 +797,22 @@ function markSecretFound(id) {
     const arr = raw ? JSON.parse(raw) : [];
     if (!arr.includes(id)) { arr.push(id); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
   } catch (e) {}
+  updateSecretsHud();
 }
+// The 6 valid secret IDs across all 5 worlds — used to render the top-of-screen "SECRETS x/6"
+// counter (visible in every world, not just World 5's own credits screen).
+const ALL_SECRET_IDS = ['w1', 'w2', 'w3', 'w4', 'w5_lp', 'w5_capo'];
+function updateSecretsHud() {
+  try {
+    const el = document.getElementById('secretsHud');
+    if (!el) return;
+    const raw = localStorage.getItem(SECRETS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    const count = Array.isArray(arr) ? arr.filter(x => ALL_SECRET_IDS.includes(x)).length : 0;
+    el.textContent = 'SECRETS ' + count + '/' + ALL_SECRET_IDS.length;
+  } catch (e) {}
+}
+updateSecretsHud();
 
 
 const OXY_MAX = 300;
@@ -818,12 +846,20 @@ function triggerItemUse(slotIndex, toWorldX, toWorldY, onComplete) {
 // INPUT — shared across the whole page (only ever one game instance)
 // ============================================================
 const keys = {};
+function isTypingInField() {
+  const el = document.activeElement;
+  return !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
+}
 function handleKeyDown(e) {
   if (document.body.classList.contains('win-scroll')) return; // let arrows/space scroll the win screen
+  if (isTypingInField()) return; // let the riddle field take spaces/letters without doubling as movement
   keys[e.code] = true;
   if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.code)) e.preventDefault();
 }
-function handleKeyUp(e) { keys[e.code] = false; }
+function handleKeyUp(e) {
+  if (isTypingInField()) return;
+  keys[e.code] = false;
+}
 window.addEventListener('keydown', handleKeyDown);
 window.addEventListener('keyup', handleKeyUp);
 document.addEventListener('keydown', handleKeyDown);
@@ -1714,14 +1750,32 @@ const ZoneSkyDeck = (function() {
     }
   }
 
+  const UMBRELLA_RAINBOW = ['#e8544f', '#f0a23b', '#f0d43b', '#5fc95f', '#4a9fe0', '#9a5fd6'];
   function drawUmbrellas() {
     for (const u of umbrellas) {
       ctx.fillStyle = '#6b5a3a';
       ctx.fillRect(u.x - u.poleW/2, u.canopyY, u.poleW, GROUND_Y - u.canopyY);
-      ctx.fillStyle = u.hasCollectible && !u.popped ? '#e8544f' : '#d68a3a';
-      ctx.beginPath();
-      ctx.ellipse(u.x, u.canopyY, u.canopyW/2, 16, 0, Math.PI, 0, false);
-      ctx.fill();
+      if (u.hasCollectible && !u.popped) {
+        // The ONLY tell distinguishing this umbrella from the plain one: a rainbow-striped
+        // canopy, which just reads as a colourful beach umbrella rather than a "click me"
+        // marker (replaces the old hanging-pedal-box tell, which was too obvious).
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(u.x, u.canopyY, u.canopyW/2, 16, 0, Math.PI, 0, false);
+        ctx.closePath();
+        ctx.clip();
+        const bandW = u.canopyW / UMBRELLA_RAINBOW.length;
+        for (let i = 0; i < UMBRELLA_RAINBOW.length; i++) {
+          ctx.fillStyle = UMBRELLA_RAINBOW[i];
+          ctx.fillRect(u.x - u.canopyW/2 + i * bandW, u.canopyY - 18, bandW, 20);
+        }
+        ctx.restore();
+      } else {
+        ctx.fillStyle = '#d68a3a';
+        ctx.beginPath();
+        ctx.ellipse(u.x, u.canopyY, u.canopyW/2, 16, 0, Math.PI, 0, false);
+        ctx.fill();
+      }
       ctx.strokeStyle = 'rgba(0,0,0,0.2)';
       ctx.lineWidth = 1;
       for (let seg = -2; seg <= 2; seg++) {
@@ -1729,27 +1783,6 @@ const ZoneSkyDeck = (function() {
         ctx.moveTo(u.x, u.canopyY);
         ctx.lineTo(u.x + seg * (u.canopyW/2/2.5), u.canopyY - 14);
         ctx.stroke();
-      }
-      if (u.hasCollectible && !u.popped) {
-        // secret: a small 8-bit guitar effects pedal (stompbox), themed with the other
-        // guitar-related secrets tucked around the game
-        const bob = Math.sin(Date.now()/400) * 2;
-        const px = u.x, py = u.canopyY + 12 + bob;
-        ctx.fillStyle = '#c23b3b';
-        ctx.fillRect(px - 8, py - 6, 16, 12);
-        ctx.strokeStyle = 'rgba(0,0,0,0.35)';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(px - 8, py - 6, 16, 12);
-        ctx.fillStyle = '#2a2a2a';
-        ctx.beginPath();
-        ctx.arc(px, py - 3, 2, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#dcdcdc';
-        ctx.beginPath();
-        ctx.arc(px, py + 3, 2.5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#5fef5f';
-        ctx.fillRect(px - 6, py - 5, 2, 2);
       }
     }
   }
@@ -1842,6 +1875,21 @@ const ZoneSkyDeck = (function() {
   }
 
   function drawGate() {
+    // block-like lift-lobby building housing the doors (replaces the old two tall green
+    // "pole" trees flanking the gate, which looked out of place on the Sky Deck)
+    const bx = gateZone.x - 40, bw = gateZone.w + 80;
+    ctx.fillStyle = '#8a8a9a';
+    ctx.fillRect(bx, SHIP_DECK_BG_Y, bw, GROUND_Y - SHIP_DECK_BG_Y);
+    ctx.fillStyle = '#787888';
+    ctx.fillRect(bx, SHIP_DECK_BG_Y, bw, 8);
+    ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+    ctx.lineWidth = 1;
+    for (let px = bx + 14; px < bx + bw - 10; px += 22) {
+      ctx.beginPath();
+      ctx.moveTo(px, SHIP_DECK_BG_Y + 10);
+      ctx.lineTo(px, GROUND_Y - 4);
+      ctx.stroke();
+    }
     ctx.fillStyle = '#7a7a8a';
     ctx.fillRect(gateZone.x, gateZone.y, gateZone.w, gateZone.h);
     ctx.fillStyle = gateOpen ? '#3a6b4a' : '#4a4a5a';
@@ -1856,14 +1904,6 @@ const ZoneSkyDeck = (function() {
     ctx.beginPath();
     ctx.arc(gateZone.x + gateZone.w + 10, gateZone.y + 14, 4, 0, Math.PI * 2);
     ctx.fill();
-    for (const fx of [gateZone.x - 20, gateZone.x + gateZone.w + 20]) {
-      ctx.fillStyle = '#3a6b2a';
-      ctx.fillRect(fx, SHIP_DECK_BG_Y + 6, 12, GROUND_Y - SHIP_DECK_BG_Y - 6);
-      ctx.fillStyle = '#4a8a3a';
-      ctx.beginPath();
-      ctx.arc(fx + 6, SHIP_DECK_BG_Y + 6, 8, Math.PI, 0, false);
-      ctx.fill();
-    }
   }
 
   function drawPlayerSprite(px, py) {
@@ -2010,7 +2050,10 @@ const ZoneReflections = (function() {
     {baseX: 980,  y: POOL_TOP_Y - 10, w: 70, h: 16, range: 25, dir: 1, _t: 0},
     {baseX: 1120, y: POOL_TOP_Y - 30, w: 70, h: 16, range: 25, dir: -1, _t: 10},
     {baseX: 1250, y: POOL_TOP_Y - 45, w: 70, h: 16, range: 17, dir: 1, _t: 0},
-    {baseX: 1400, y: SKY_BRIDGE_Y,     w: 70, h: 16, range: 17, dir: 1, _t: 0},
+    // opposite starting dir from the platform above so the two move independently rather than
+    // in lock-step — worst-case gaps re-verified by simulation: 46-114px to platform 3, 68-102px
+    // to the sky bridge, both comfortably under the ~134px max jump distance
+    {baseX: 1400, y: SKY_BRIDGE_Y,     w: 70, h: 16, range: 17, dir: -1, _t: 0},
   ];
 
   const guitarBrick = {x: 1190, y: POOL_TOP_Y - 110, w: 40, h: 20};

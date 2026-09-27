@@ -55,6 +55,18 @@
     text-shadow: 2px 2px 0 #000;
     pointer-events: none;
   }
+  #secretsHud {
+    position: absolute;
+    top: 1.5cqw;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1.7cqw;
+    color: #ffd23f;
+    text-shadow: 2px 2px 0 #000;
+    pointer-events: none;
+    white-space: nowrap;
+  }
   #title {
     color: #ffd23f;
     text-shadow: 2px 2px 0 #000;
@@ -430,6 +442,7 @@
       <div id="livesDisplay">♥ ♥ ♥</div>
       <div id="itemsDisplay">ITEMS: 0/3</div>
     </div>
+    <div id="secretsHud">SECRETS 0/6</div>
     <div id="progressBar"><div id="progressFill"></div></div>
     <div id="msgBox"><span id="msgName"></span><span id="msgText"></span></div>
 
@@ -437,6 +450,7 @@
       <div class="box">
         <h2 id="riddleTitle">THE HARBOUR GATE</h2>
         <p id="riddleText">Between the wind and the waves, the gusts and the gulls<br>If you don't concentrate on the thing that you're doing<br>Whatever you're doing is not what you're thinking</p>
+        <p id="riddleHint" style="opacity:0.8; font-size:0.85em; margin:6px 0;">NAME THE SONG</p>
         <div>
           <input type="text" class="textInput" id="riddleInput" placeholder="TYPE YOUR ANSWER" autocomplete="off">
           <button class="goBtn" id="riddleSubmit">GO</button>
@@ -824,17 +838,38 @@ function markSecretFound(id) {
     const arr = raw ? JSON.parse(raw) : [];
     if (!arr.includes(id)) { arr.push(id); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
   } catch (e) {}
+  updateSecretsHud();
 }
+// The 6 valid secret IDs across all 5 worlds — used to render the top-of-screen "SECRETS x/6"
+// counter (visible in every world, not just World 5's own credits screen).
+const ALL_SECRET_IDS = ['w1', 'w2', 'w3', 'w4', 'w5_lp', 'w5_capo'];
+function updateSecretsHud() {
+  try {
+    const el = document.getElementById('secretsHud');
+    if (!el) return;
+    const raw = localStorage.getItem(SECRETS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    const count = Array.isArray(arr) ? arr.filter(x => ALL_SECRET_IDS.includes(x)).length : 0;
+    el.textContent = 'SECRETS ' + count + '/' + ALL_SECRET_IDS.length;
+  } catch (e) {}
+}
+updateSecretsHud();
 
 const keys = {};
+function isTypingInField() {
+  const el = document.activeElement;
+  return !!el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
+}
 function handleKeyDown(e) {
   if (document.body.classList.contains('win-scroll')) return; // let arrows/space scroll the win screen
+  if (isTypingInField()) return; // let the riddle field take spaces/letters without doubling as movement
   keys[e.code] = true;
   // Arrow keys + Space only — WASD removed so letter keys are free for typing riddle answers
   // (e.g. words containing "a") without doubling as movement controls.
   if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.code)) e.preventDefault();
 }
 function handleKeyUp(e) {
+  if (isTypingInField()) return;
   keys[e.code] = false;
 }
 // listen on both window and document — some embedded/iframe contexts only deliver
@@ -2094,7 +2129,7 @@ function openRiddle() {
 
 function solveRiddle() {
   const val = document.getElementById('riddleInput').value.trim().toLowerCase();
-  const accepted = ['accidents happen', 'accidents will happen', 'an accident happens', 'accident', 'accidents'];
+  const accepted = ['accidents happen', 'accidentshappen', 'accidents will happen', 'an accident happens', 'accident', 'accidents'];
   const fb = document.getElementById('riddleFeedback');
   if (accepted.includes(val)) {
     fb.textContent = 'CORRECT!';

@@ -57,6 +57,18 @@
     text-shadow: 2px 2px 0 #000;
     pointer-events: none;
   }
+  #secretsHud {
+    position: absolute;
+    top: 1.04cqw;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 1.1cqw;
+    color: #ffd23f;
+    text-shadow: 2px 2px 0 #000;
+    pointer-events: none;
+    white-space: nowrap;
+  }
   #hudLeft { display: flex; flex-direction: column; gap: 0.52cqw; }
   #livesDisplay { color: #e84545; font-size: 1.7cqw; }
   #invLabel { font-size: 1.04cqw; color: #9be3ff; letter-spacing: 1px; }
@@ -562,6 +574,7 @@
       </div>
       <div id="hudRight"><div id="itemsDisplay"></div></div>
     </div>
+    <div id="secretsHud">SECRETS 0/6</div>
     <div id="progressBar"><div id="progressFill"></div></div>
     <div id="msgBox"><span id="msgName"></span><span id="msgText"></span></div>
     <div id="iceMeterBottom">
@@ -766,7 +779,22 @@ function markSecretFound(id) {
     const arr = raw ? JSON.parse(raw) : [];
     if (!arr.includes(id)) { arr.push(id); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
   } catch (e) {}
+  updateSecretsHud();
 }
+// The 6 valid secret IDs across all 5 worlds — used to render the top-of-screen "SECRETS x/6"
+// counter (visible in every world, not just World 5's own credits screen).
+const ALL_SECRET_IDS = ['w1', 'w2', 'w3', 'w4', 'w5_lp', 'w5_capo'];
+function updateSecretsHud() {
+  try {
+    const el = document.getElementById('secretsHud');
+    if (!el) return;
+    const raw = localStorage.getItem(SECRETS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    const count = Array.isArray(arr) ? arr.filter(x => ALL_SECRET_IDS.includes(x)).length : 0;
+    el.textContent = 'SECRETS ' + count + '/' + ALL_SECRET_IDS.length;
+  } catch (e) {}
+}
+updateSecretsHud();
 
 
 let camX = 0;
@@ -1569,18 +1597,17 @@ const ZoneWharf = (function() {
 
   function drawBryggenHouses(px) {
     // Colorful wharf-house facades — the single most recognizable Bergen image — drawn as a
-    // row of gabled buildings in alternating bright colors, same flat-silhouette technique used
-    // for World 3's leaning-tower parallax buildings. Widened and shortened from the original
-    // pass (54 wide x 150 tall, a ~2.8:1 ratio) — Gerald flagged them as too skinny/tall for how
-    // the real Bryggen row houses read, so they're now wider and less extreme (66 x 105, ~1.6:1)
-    // while still keeping the tall-narrow-gabled silhouette that makes the row recognizable.
-    const colors = ['#d94f4f', '#e8c14a', '#4f8fd9', '#e88a3f', '#6ab04c', '#d94f8f'];
-    const HOUSE_W = 66;
-    const HOUSE_STEP = 78;
+    // row of gabled buildings in alternating colors, same flat-silhouette technique used for
+    // World 3's leaning-tower parallax buildings. Widened again and given deeper, more muted
+    // tones (the real Bryggen row houses read as deep red/ochre/white, not bright pastels) plus
+    // proper white-paned windows instead of plain dark rectangles.
+    const colors = ['#a8382f', '#c9a227', '#3a5f8a', '#b8672f', '#4a7a4a', '#8a3a52'];
+    const HOUSE_W = 84;
+    const HOUSE_STEP = 98;
     const HOUSE_TOP = GROUND_Y - 105;
     for (let i = 0, wx = -100; wx < WHARF_LEVEL_WIDTH + 200; i++, wx += HOUSE_STEP) {
       const sx = wx - px;
-      if (sx < -90 || sx > canvas.width + 90) continue;
+      if (sx < -110 || sx > canvas.width + 110) continue;
       ctx.fillStyle = colors[i % colors.length];
       ctx.beginPath();
       ctx.moveTo(sx, GROUND_Y);
@@ -1590,9 +1617,19 @@ const ZoneWharf = (function() {
       ctx.lineTo(sx + HOUSE_W, GROUND_Y);
       ctx.closePath();
       ctx.fill();
-      ctx.fillStyle = 'rgba(0,0,0,0.18)';
-      ctx.fillRect(sx + 13, HOUSE_TOP + 42, 14, 18);
-      ctx.fillRect(sx + HOUSE_W - 27, HOUSE_TOP + 42, 14, 18);
+      // white-paned windows with a thin dark frame, two per house
+      for (const wxOff of [17, HOUSE_W - 35]) {
+        ctx.fillStyle = '#3a2a1a';
+        ctx.fillRect(sx + wxOff - 2, HOUSE_TOP + 40, 22, 26);
+        ctx.fillStyle = '#f5f0e0';
+        ctx.fillRect(sx + wxOff, HOUSE_TOP + 42, 18, 22);
+        ctx.strokeStyle = '#3a2a1a';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(sx + wxOff + 9, HOUSE_TOP + 42); ctx.lineTo(sx + wxOff + 9, HOUSE_TOP + 64);
+        ctx.moveTo(sx + wxOff, HOUSE_TOP + 53); ctx.lineTo(sx + wxOff + 18, HOUSE_TOP + 53);
+        ctx.stroke();
+      }
     }
   }
 
@@ -1654,11 +1691,59 @@ const ZoneWharf = (function() {
     for (let x = 0; x < w; x += 24) ctx.fillRect(x - px, GROUND_Y, 2, BASE_H);
   }
 
+  function drawWharfProps(px) {
+    // A few extra street-level props along the wharf — lampposts, a fire hydrant, a bench and a
+    // phone booth — purely decorative (no collision), just fleshing out the row of houses.
+    for (const wx of [30, 440, 1020]) {
+      const sx = wx - px;
+      if (sx < -20 || sx > canvas.width + 20) continue;
+      ctx.fillStyle = '#2a2a2a';
+      ctx.fillRect(sx - 2, GROUND_Y - 70, 4, 70);
+      ctx.beginPath(); ctx.arc(sx, GROUND_Y - 74, 7, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(255,226,122,0.7)';
+      ctx.beginPath(); ctx.arc(sx, GROUND_Y - 74, 4, 0, Math.PI * 2); ctx.fill();
+    }
+    {
+      const sx = 360 - px;
+      if (sx > -20 && sx < canvas.width + 20) {
+        ctx.fillStyle = '#c0392b';
+        ctx.fillRect(sx - 6, GROUND_Y - 22, 12, 22);
+        ctx.fillRect(sx - 9, GROUND_Y - 24, 18, 6);
+        ctx.fillStyle = '#8a2118';
+        ctx.fillRect(sx - 10, GROUND_Y - 14, 4, 6);
+        ctx.fillRect(sx + 6, GROUND_Y - 14, 4, 6);
+      }
+    }
+    {
+      const sx = 610 - px;
+      if (sx > -30 && sx < canvas.width + 30) {
+        ctx.fillStyle = '#6b4a2f';
+        ctx.fillRect(sx, GROUND_Y - 20, 40, 5);
+        ctx.fillRect(sx, GROUND_Y - 5, 40, 5);
+        ctx.fillStyle = '#3a2a1a';
+        ctx.fillRect(sx + 2, GROUND_Y - 15, 4, 15);
+        ctx.fillRect(sx + 34, GROUND_Y - 15, 4, 15);
+      }
+    }
+    {
+      const sx = 900 - px;
+      if (sx > -30 && sx < canvas.width + 30) {
+        ctx.fillStyle = '#b8342a';
+        ctx.fillRect(sx, GROUND_Y - 60, 26, 60);
+        ctx.fillStyle = '#cde6f0';
+        ctx.fillRect(sx + 4, GROUND_Y - 52, 18, 30);
+        ctx.fillStyle = '#8a241c';
+        ctx.fillRect(sx, GROUND_Y - 64, 26, 6);
+      }
+    }
+  }
+
   function drawWharfScene() {
     drawSky();
     drawMountainRange(0.25, '#a8c8dc', 26, 30);
     drawBryggenHouses(camX * 0.6);
     drawFishMarket(camX);
+    drawWharfProps(camX);
     drawGroundFloor(camX, WHARF_LEVEL_WIDTH + 40);
     for (const gull of gulls) drawGull(gull);
     drawPlayerSprite(player.x - camX, player.y);
@@ -1681,16 +1766,42 @@ const ZoneWharf = (function() {
       ctx.fillText('HARBOUR', signX + 63, GROUND_Y - 50);
     }
 
-    // funicular station marker
-    const sx = STATION_X - camX;
-    ctx.fillStyle = '#4a4a63';
-    ctx.fillRect(sx, GROUND_Y - 90, STATION_TRIGGER_W, 90);
+    // funicular station — one of the row houses converted into the entrance (per Gerald's
+    // request), rather than a separate grey box that never quite squared up with the house
+    // behind it. Drawn in the same gabled-house style as drawBryggenHouses, just larger and a
+    // distinct dark navy so it reads clearly as "the" building, with a proper door and the
+    // FLØIBANEN sign mounted directly above it on the facade.
+    const STATION_W = STATION_TRIGGER_W + 50;
+    const stationTop = GROUND_Y - 130;
+    const sx = STATION_X - camX - 25;
+    ctx.fillStyle = '#22304a';
+    ctx.beginPath();
+    ctx.moveTo(sx, GROUND_Y);
+    ctx.lineTo(sx, stationTop + 24);
+    ctx.lineTo(sx + STATION_W / 2, stationTop);
+    ctx.lineTo(sx + STATION_W, stationTop + 24);
+    ctx.lineTo(sx + STATION_W, GROUND_Y);
+    ctx.closePath();
+    ctx.fill();
+    // door
+    ctx.fillStyle = '#14192a';
+    ctx.fillRect(sx + STATION_W / 2 - 20, GROUND_Y - 56, 40, 56);
+    ctx.fillStyle = '#3a4a68';
+    ctx.fillRect(sx + STATION_W / 2 - 16, GROUND_Y - 52, 32, 48);
+    // flanking windows, white-paned to match the row houses
+    for (const wxOff of [16, STATION_W - 40]) {
+      ctx.fillStyle = '#14192a';
+      ctx.fillRect(sx + wxOff - 2, stationTop + 48, 22, 26);
+      ctx.fillStyle = '#f5f0e0';
+      ctx.fillRect(sx + wxOff, stationTop + 50, 18, 22);
+    }
+    // sign, mounted directly on the facade above the door
     ctx.fillStyle = '#1a1a2e';
-    ctx.fillRect(sx + STATION_TRIGGER_W / 2 - 58, GROUND_Y - 118, 116, 26);
+    ctx.fillRect(sx + STATION_W / 2 - 58, GROUND_Y - 108, 116, 26);
     ctx.fillStyle = '#ffd23f';
     ctx.font = 'bold 15px monospace';
     ctx.textAlign = 'center';
-    ctx.fillText('FLØIBANEN', sx + STATION_TRIGGER_W / 2, GROUND_Y - 100);
+    ctx.fillText('FLØIBANEN', sx + STATION_W / 2, GROUND_Y - 90);
   }
 
   function drawCaption() {
@@ -2656,9 +2767,8 @@ const ZoneHike = (function() {
     }
   }
 
-  const TROLL_BLOCK_COLOR = '#5a6b4f';  // mossy log/block colour, matched at the start of the transform
-  const TROLL_BOULDER_COLOR = '#8a8a8a'; // grey "boulder" colour it settles into once fully awake
-  const TROLL_BOULDER_GIVEUP_COLOR = '#9a9a9a'; // slightly lighter grey while given-up, same idea as before
+  const TROLL_BLOCK_COLOR = '#5a6b4f';  // mossy log/block colour — kept throughout, including once
+  // fully awake and chasing (on second thoughts, no separate grey "boulder" colour).
 
   function drawTrollDormant(px) {
     // half-hidden among the trees before it wakes — only while still fully dormant; once it
@@ -2686,7 +2796,7 @@ const ZoneHike = (function() {
     if (sx < -150 || sx > canvas.width + 150) return;
     const elapsed = TROLL_TRANSFORM_DURATION - trollTransformTimer; // 0 -> DURATION
     const p = elapsed / TROLL_TRANSFORM_DURATION; // 0 -> 1
-    const bodyColor = lerpColor(TROLL_BLOCK_COLOR, TROLL_BOULDER_COLOR, p);
+    const bodyColor = TROLL_BLOCK_COLOR; // stays the block's own green throughout the transform
     const HEAD_W = 36, HEAD_H = 28, LEG_H = 20;
     const headX = sx + (TROLL_W - HEAD_W) / 2, headY = GROUND_Y - TROLL_H;
     const bodyY = headY + HEAD_H, bodyH = TROLL_H - HEAD_H - LEG_H;
@@ -2738,9 +2848,8 @@ const ZoneHike = (function() {
     const walkCycle = Math.sin(Date.now() / 90) * 8;
     const legOffset = trollState === 'chasing' ? walkCycle : 0;
     const armOffset = -legOffset; // arms swing opposite the legs for a running read
-    // Grey "boulder" troll now that it's fully transformed (was the same green as the block it
-    // came from) — givenUp gets a slightly lighter grey, same idea as the old two-tone scheme.
-    const bodyColor = trollState === 'givenUp' ? TROLL_BOULDER_GIVEUP_COLOR : TROLL_BOULDER_COLOR;
+    // Same mossy green as the block it came from, in every state (chasing or given up).
+    const bodyColor = TROLL_BLOCK_COLOR;
     const HEAD_W = 36, HEAD_H = 28, LEG_H = 20;
     const headX = sx + (TROLL_W - HEAD_W) / 2, headY = GROUND_Y - TROLL_H;
     const bodyY = headY + HEAD_H, bodyH = TROLL_H - HEAD_H - LEG_H;
@@ -3347,7 +3456,7 @@ const ZoneDorm = (function() {
       const cb = solids[0]; const bump = st.cupboardBump>0 ? -3 : 0;
       ctx.fillStyle='#b4845a'; ctx.fillRect(cb.x-cx, cb.y+bump, cb.w, cb.h);
       ctx.fillStyle='#9a6d46'; ctx.fillRect(cb.x-cx+cb.w/2-1, cb.y+bump, 2, cb.h);
-      ctx.fillStyle = st.hamGot ? '#6d4a2f' : '#ffd36b'; ctx.fillRect(cb.x-cx+cb.w/2-8, cb.y+bump+cb.h/2-2, 5, 5); ctx.fillRect(cb.x-cx+cb.w/2+3, cb.y+bump+cb.h/2-2, 5, 5);
+      ctx.fillStyle = '#6d4a2f'; ctx.fillRect(cb.x-cx+cb.w/2-8, cb.y+bump+cb.h/2-2, 5, 5); ctx.fillRect(cb.x-cx+cb.w/2+3, cb.y+bump+cb.h/2-2, 5, 5); // plain knobs — same colour regardless of state, no longer a tell
       // plant pot on the cupboard (hides the secret guitar amp behind its leaves)
       if (!pickups.find(p=>p.bonus).got) { ctx.fillStyle='#c8323c'; ctx.fillRect(cb.x-cx+20, cb.y-8, 22, 8); ctx.fillStyle='#ffd36b'; ctx.fillRect(cb.x-cx+23, cb.y-6, 8, 4); }
       ctx.fillStyle='#b4643c'; ctx.fillRect(cb.x-cx+26, cb.y-14, 16, 14); ctx.fillStyle='#9a4e2e'; ctx.fillRect(cb.x-cx+26, cb.y-14, 16, 3);

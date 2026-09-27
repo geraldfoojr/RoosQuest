@@ -62,6 +62,18 @@
     text-shadow: 2px 2px 0 #000;
     pointer-events: none;
   }
+  #secretsHud {
+    position: absolute;
+    top: 1.04cqw;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: clamp(8px, 1.1cqw, 15px);
+    color: #ffd23f;
+    text-shadow: 2px 2px 0 #000;
+    pointer-events: none;
+    white-space: nowrap;
+  }
   #hudLeft { display: flex; flex-direction: column; gap: 0.52cqw; }
   #livesDisplay { color: #e84545; font-size: clamp(13px, 2.1cqw, 26px); }
   #invLabel { font-size: clamp(8px, 1.1cqw, 14px); color: #9be3ff; letter-spacing: 1px; }
@@ -485,12 +497,13 @@
         </div>
       </div>
     </div>
+    <div id="secretsHud">SECRETS 0/6</div>
     <div id="progressBar"><div id="progressFill"></div></div>
     <div id="msgBox"><span id="msgName"></span><span id="msgText"></span></div>
 
     <div class="overlay" id="riddleOverlay">
       <div class="box">
-        <h2>ONE LAST RIDDLE<br>BEFORE YOU GO</h2>
+        <h2>WHAT AM I</h2>
         <p id="riddleText">Before "Hello", I quietly appear<br>Where there are six strings I'm often near</p>
         <input type="text" id="riddleInput" placeholder="type your answer" autocomplete="off">
         <br>
@@ -637,7 +650,22 @@ function markSecretFound(id) {
     const arr = raw ? JSON.parse(raw) : [];
     if (!arr.includes(id)) { arr.push(id); localStorage.setItem(SECRETS_KEY, JSON.stringify(arr)); }
   } catch (e) {}
+  updateSecretsHud();
 }
+// The 6 valid secret IDs across all 5 worlds — used to render the top-of-screen "SECRETS x/6"
+// counter (visible in every world, not just World 5's own credits screen).
+const ALL_SECRET_IDS = ['w1', 'w2', 'w3', 'w4', 'w5_lp', 'w5_capo'];
+function updateSecretsHud() {
+  try {
+    const el = document.getElementById('secretsHud');
+    if (!el) return;
+    const raw = localStorage.getItem(SECRETS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    const count = Array.isArray(arr) ? arr.filter(x => ALL_SECRET_IDS.includes(x)).length : 0;
+    el.textContent = 'SECRETS ' + count + '/' + ALL_SECRET_IDS.length;
+  } catch (e) {}
+}
+updateSecretsHud();
 
 
 let camX = 0;
@@ -3630,7 +3658,7 @@ const ZoneRestaurant = (function() {
   const KE_POSTERS = [ {x:120, kind:'temple', label:'BANGKOK'}, {x:330, kind:'beach', label:'PHUKET'}, {x:790, kind:'elephant', label:'CHIANG MAI'} ];
   function drawPosters() {
     for (const p of KE_POSTERS) {
-      const x = p.x - 30, y = 52;
+      const x = p.x - 30, y = 100; // lowered from the ceiling line so they sit at a natural eye height
       ctx.fillStyle = '#1c1a1a'; ctx.fillRect(x-3, y-3, 66, 90);
       if (p.kind === 'temple') {
         ctx.fillStyle = '#f0a040'; ctx.fillRect(x, y, 60, 84); ctx.fillStyle = '#ffd36b'; ctx.fillRect(x, y+34, 60, 14);
