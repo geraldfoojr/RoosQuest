@@ -284,8 +284,40 @@ function playSfx(kind) {
     case 'land':     tone(160, 0, 0.07, 0.1);  tone(90, 0.03, 0.08, 0.08); break;
     case 'hit':      tone(140, 0, 0.12, 0.16); tone(100, 0.05, 0.12, 0.14); break;
     case 'pickup':   tone(523, 0, 0.08, 0.13); tone(784, 0.07, 0.11, 0.13); break;
-    case 'lifeLost': tone(400, 0, 0.12, 0.15); tone(300, 0.11, 0.12, 0.15); tone(180, 0.22, 0.22, 0.15); break;
+    case 'lifeLost': {
+      // Original comedic "lost a life" cue — a quick 7-note descending stumble ending on a flat,
+      // deflated note. Same arcade spirit as a classic "aw, lost a life" jingle, but its own tune,
+      // not a reproduction of any specific game's copyrighted melody.
+      const seq = [523.25, 466.16, 415.30, 349.23, 293.66, 246.94, 196.00];
+      seq.forEach((f, i) => { const last = i === seq.length - 1; tone(f, i * 0.075, last ? 0.3 : 0.09, last ? 0.16 : 0.12); });
+      break;
+    }
   }
+}
+// Original "zone clear" fanfare — a short triumphant major-key flourish played once whenever a
+// zone wraps up, ahead of the clock-sweep cutscene. Not modeled on any specific game's jingle.
+function playZoneClearFanfare() {
+  if (!audioCtx) return;
+  const t0 = audioCtx.currentTime;
+  function note(freq, start, dur, vol) {
+    const osc = audioCtx.createOscillator(), g = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(freq, t0 + start);
+    g.gain.setValueAtTime(0, t0 + start);
+    g.gain.linearRampToValueAtTime(vol, t0 + start + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + start + dur);
+    osc.connect(g); g.connect(audioCtx.destination);
+    osc.start(t0 + start); osc.stop(t0 + start + dur + 0.02);
+  }
+  const seq = [
+    { f: 523.25, t: 0.00, d: 0.11 },  // C5
+    { f: 659.25, t: 0.11, d: 0.11 },  // E5
+    { f: 783.99, t: 0.22, d: 0.11 },  // G5
+    { f: 1046.50, t: 0.33, d: 0.24 }, // C6
+    { f: 783.99, t: 0.60, d: 0.10 },  // G5 kick
+    { f: 1046.50, t: 0.70, d: 0.40 }  // C6 ring-out
+  ];
+  seq.forEach(n => note(n.f, n.t, n.d, 0.14));
 }
 // 8-bit "Happy Birthday" melody (the tune itself has been public domain since a 2015 US court
 // ruling, so this is a plain instrumental rendition, not a reproduction of any recording) —
@@ -442,6 +474,7 @@ let trans = null;   // { t, target }
 function zoneComplete(){
   if (trans || zoneIdx >= 4) return;
   releaseKeys();
+  playZoneClearFanfare();
   trans = { t:0, target: zoneIdx + 1 };
   shared.mode = 'transition';
 }
@@ -469,6 +502,9 @@ function drawTransitionClock(){
   ctx.fillStyle = '#ffd23f'; ctx.beginPath(); ctx.arc(cx, cy, 4, 0, Math.PI*2); ctx.fill();
   ctx.fillStyle = '#fff'; ctx.font = 'bold 22px monospace'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.fillText(ZONE_INTROS[trans.target].clock, cx, cy - r - 24);
+  // Jack does a little victory jig off to the side while the clock sweeps
+  const jigX = cx - r - 90, jigBounce = Math.sin(trans.t/5) * 6;
+  drawPerson(jigX, cy + 30 + jigBounce, PEOPLE.jack, Math.sin(trans.t/9) > 0 ? 1 : -1, trans.t, { moving:true });
   ctx.restore();
 }
 
@@ -476,6 +512,7 @@ function drawTransitionClock(){
 const PEOPLE = {
   jack:   { hair:'#3b2616', top:'#2c4a7a', trim:'#1b2f52', legs:'#2b2b33', skin:'#f1c9a5', long:false, name:'JACK' },
   alex:   { hair:'#2a1c12', top:'#3f9a8a', trim:'#2a6e62', legs:'#3a3a48', skin:'#f1c9a5', long:false, name:'ALEX' },
+  prith:  { hair:'#1a1310', top:'#e0722a', trim:'#a8501a', legs:'#2b2b33', skin:'#8a5a34', long:false, name:'PRITH' },
   leonie: { hair:'#a2663a', top:'#b8325a', trim:'#f08aa8', legs:'#2e2a44', skin:'#f5d3b6', long:true, scarf:'#f08aa8', name:'LÉONIE' },
   // Table 8 — colours are guesses, tweak freely
   mm:     { hair:'#4a3428', top:'#c94f6a', trim:'#8a2f45', legs:'#3a3a48', skin:'#f1c9a5', long:false, name:'MM' },
@@ -512,6 +549,30 @@ function drawPerson(sx, footY, p, facing, walkT, opts={}){
   ctx.fillStyle = '#1a1a1a'; ctx.fillRect(facing>0 ? x+15 : x+9, y+6, 2, 2);
   if (opts.blush) { ctx.fillStyle='#ff8fa8'; ctx.fillRect(facing>0?x+16:x+7, y+9, 3, 2); }
   if (opts.smile) { ctx.fillStyle='#1a1a1a'; ctx.fillRect(facing>0?x+13:x+9, y+10, 4, 1); }
+}
+// Small pixel-art flourish for the win screen once all 6 secrets are found: Jack in sunglasses
+// with a guitar slung on — he can finally nail that solo. Drawn on its own little DOM canvas
+// (not the main game canvas) so it can sit inside the credits block.
+function drawBonusJack(canvasEl){
+  if (!canvasEl) return;
+  const c = canvasEl.getContext('2d');
+  c.imageSmoothingEnabled = false;
+  c.clearRect(0, 0, 80, 86);
+  const p = PEOPLE.jack;
+  c.fillStyle = p.legs; c.fillRect(26, 56, 8, 22); c.fillRect(40, 56, 8, 22);
+  c.fillStyle = p.top; c.fillRect(21, 32, 32, 26);
+  c.fillStyle = p.skin; c.fillRect(15, 32, 6, 18); c.fillRect(53, 32, 6, 18);
+  c.fillStyle = p.skin; c.fillRect(23, 10, 24, 22);
+  c.fillStyle = p.hair; c.fillRect(21, 6, 28, 9); c.fillRect(21, 10, 4, 10); c.fillRect(45, 10, 4, 10);
+  // sunglasses
+  c.fillStyle = '#1c1a33'; c.fillRect(25, 18, 20, 6);
+  c.fillStyle = '#6fb8ff'; c.fillRect(26, 19, 8, 4); c.fillRect(36, 19, 8, 4);
+  // guitar, slung across the body
+  c.save(); c.translate(48, 46); c.rotate(0.5);
+  c.fillStyle = '#8a4a22'; c.fillRect(-9, 0, 20, 26);
+  c.fillStyle = '#5a2a12'; c.fillRect(-3, -20, 6, 22);
+  c.fillStyle = '#e6c35a'; c.fillRect(-6, 8, 12, 3);
+  c.restore();
 }
 function drawCrouched(sx, footY, p, facing, squash){
   const x = Math.round(sx), y = Math.round(footY - 22 + squash);
@@ -639,8 +700,10 @@ const ZONE1 = (function(){
     { id:'laundry',x0:1400, x1:1500, text:'Is this pile clean… or dirty?' }
   ];
   const ALEX_LINES = ['Yo gogo!', 'Got any food?', 'Gogo, move!', 'Sup!', 'Did you get milk?'];   // Alex calls Jack "gogo" (big brother)
+  // flatmate territorial dispute over kitchen space — his two go-to lines, cycled on each bump
+  const PRITH_LINES = ['Give me a little bit of space, bro', 'Hey mate, just need 5 mins'];
 
-  let st, alex, vac, key, popups;
+  let st, alex, vac, prith, key, popups;
 
   function resetState(){
     st = { t:0, gagsDone:{}, jackBubble:null, jackBubbleT:0, hasKey:false, doorOpen:false, exitT:0, doorMsgCd:0,
@@ -648,6 +711,9 @@ const ZONE1 = (function(){
            hasBar:false, cabBump:0, bar:null, shelfJumps:0, shelfT:0, wetIn:false };
     alex = { x:900, lo:760, hi:1560, dir:1, speed:0.9, state:'wander', bubble:null, bubbleT:0, cd:0, talkN:0, squash:0 };
     vac  = { x:1400, lo:1340, hi:1700, dir:1, speed:1.1, w:30, h:12, beep:0 };
+    // Prith patrols a stretch of open kitchen floor between the milk gag and the dishes gag —
+    // a second flatmate hazard bookending the flat, same knockback convention as the vacuum robot
+    prith = { x:300, lo:260, hi:370, dir:1, speed:0.9, w:20, h:36, lineN:0 };
     key  = { x:SHELF.x+34, y:SHELF.top-16, w:22, h:14, got:false };
     popups = [];
     shared.inventory = [];
@@ -795,6 +861,23 @@ const ZONE1 = (function(){
     popups.push({ text:'BEEP BOOP! Out of the way!', x:vac.x+15, y:GROUND_Y-60, t:90, red:true });
   }
 
+  /* ---------- Prith (flatmate turf war) ---------- */
+  function updatePrith(prevBottom){
+    prith.x += prith.dir*prith.speed;
+    if (prith.x > prith.hi) { prith.x = prith.hi; prith.dir = -1; }
+    if (prith.x < prith.lo) { prith.x = prith.lo; prith.dir = 1; }
+    const r = { x:prith.x, y:GROUND_Y-prith.h, w:prith.w, h:prith.h };
+    if (!rectsOverlap(player, r)) return;
+    // landed on top from above → harmless bounce, same convention as the vacuum robot
+    if (player.vy >= 0 && prevBottom <= r.y + 8) { playSfx('land'); player.y = r.y - player.h; player.vy = -7; return; }
+    if (player.invuln>0 || player.knock>0) return;
+    playSfx('hit');
+    const push = (player.x + player.w/2 < prith.x + prith.w/2) ? -1 : 1;
+    player.vx = push*5; player.vy = -3; player.knock = 16; player.invuln = 70;
+    prith.dir = -push;
+    popups.push({ text: PRITH_LINES[prith.lineN++ % PRITH_LINES.length], x:prith.x-10, y:GROUND_Y-60, t:90, red:true });
+  }
+
   /* ---------- update ---------- */
   function update(){
     st.t++;
@@ -807,6 +890,7 @@ const ZONE1 = (function(){
     const prevBottom = physics();
     updateAlex();
     updateVacuum(prevBottom);
+    updatePrith(prevBottom);
 
     // one-shot comedy pop-ups (x-range only, so they can't be jumped past)
     for (const g of GAGS) {
@@ -1052,6 +1136,12 @@ const ZONE1 = (function(){
     if (vac.beep>0) { ctx.fillStyle='#1c1a33'; ctx.font='bold 13px monospace'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('beep!', x+15, y-12); }
   }
 
+  function drawPrith(cx){
+    const sx = prith.x - cx;
+    drawPerson(sx, GROUND_Y, PEOPLE.prith, prith.dir, shared.frame, { moving:true });
+    drawNameTag(sx+13, GROUND_Y-38, 'PRITH', '#ffb86b');
+  }
+
   function drawAlex(cx){
     const sx = alex.x - cx;
     if (alex.state==='crouch') {
@@ -1081,6 +1171,7 @@ const ZONE1 = (function(){
     drawFrontDoor(cx); drawKitchen(cx); drawDining(cx); drawBedroomDoors(cx); drawLiving(cx);
     drawKey(cx);
     drawVacuum(cx);
+    drawPrith(cx);
     drawAlex(cx);
 
     // player
@@ -1115,7 +1206,7 @@ const ZONE1 = (function(){
   }
 
   return { LEVEL_WIDTH, onEnter, update, draw, respawnPlayer, onOutOfLives, sectionLabel, hudText,
-           _debug: () => ({ st, alex, vac, key, SHELF, ALEX_SPOT, CAB }) };
+           _debug: () => ({ st, alex, vac, prith, key, SHELF, ALEX_SPOT, CAB }) };
 })();
 
 /* ================= WORLD 5 ZONE 2 — LÉONIE'S VISIT: GREAT OCEAN ROAD (IIFE, standard interface) ================= */
@@ -2305,10 +2396,12 @@ const ZONE4 = (function(){
     st.phase = 'won'; shared.mode = 'won';
     document.getElementById('giftBox').innerHTML = GIFT_TEXT;
     const foundCount = secretsFoundCount();
-    const bonusLine = foundCount >= ALL_SECRET_IDS.length
-      ? `<div class="credHead" style="margin-top:10px;">★ ALL SECRETS FOUND ★</div><div>You can finally nail that Comfortably Numb solo while spinning the album!</div>`
+    const allFound = foundCount >= ALL_SECRET_IDS.length;
+    const bonusLine = allFound
+      ? `<div class="credHead" style="margin-top:10px;">★ ALL SECRETS FOUND ★</div><div>You can finally nail that Comfortably Numb solo while spinning the album!</div><canvas id="bonusCanvas" width="80" height="86" style="image-rendering:pixelated;width:80px;height:86px;display:block;margin:8px auto 0;"></canvas>`
       : '';
     document.getElementById('credits').innerHTML = CREDITS + `<div class="credHead">SECRETS FOUND</div><div>${foundCount} / ${ALL_SECRET_IDS.length}</div>` + bonusLine;
+    if (allFound) drawBonusJack(document.getElementById('bonusCanvas'));
     const fam = document.getElementById('familyPhoto');
     fam.onload = () => { fam.style.display = 'block'; };
     fam.src = FAMILY_PHOTO_SRC;
