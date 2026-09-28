@@ -1788,6 +1788,42 @@ const ZoneTram = (function() {
     ctx.lineTo(canvas.width + 32, SCENERY_BOTTOM + 14);
     ctx.stroke();
     ctx.setLineDash([]);
+
+    drawKeepClearMarkings(px);
+  }
+
+  // "TRAM CROSSING — KEEP CLEAR" road stencil, spotted at crossings on the ride in today —
+  // screen-space, scrolls with the dashed centre line at the same 0.9 rate so it stays glued
+  // to the track. Pure floor decal drawn on the road strip below the dashed line, no collision
+  // box, so it can't touch the parallax buildings above it or player movement at all.
+  function drawKeepClearMarkings(px) {
+    const PERIOD = 620, W = 84, H = 36;
+    const y = SCENERY_BOTTOM + 28;
+    const scroll = -(px * 0.9) % PERIOD;
+    for (let i = -1; i <= Math.ceil(canvas.width / PERIOD) + 1; i++) {
+      const bx = scroll + i * PERIOD - W / 2;
+      if (bx + W < -20 || bx > canvas.width + 20) continue;
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(bx, y, W, H);
+      ctx.clip();
+      ctx.strokeStyle = 'rgba(245,240,216,0.6)';
+      ctx.lineWidth = 4;
+      for (let hx = -H; hx < W + H; hx += 14) {
+        ctx.beginPath();
+        ctx.moveTo(bx + hx, y);
+        ctx.lineTo(bx + hx + H, y + H);
+        ctx.stroke();
+      }
+      ctx.restore();
+      ctx.strokeStyle = '#f5f0d8';
+      ctx.lineWidth = 2.5;
+      ctx.strokeRect(bx, y, W, H);
+      ctx.fillStyle = '#f5f0d8';
+      ctx.font = 'bold 8px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('KEEP CLEAR', bx + W / 2, y + H + 11);
+    }
   }
 
   function drawTramWindowScenery(worldX, winY, winW, winH, scrollPx, screenOriginX) {
@@ -1838,8 +1874,11 @@ const ZoneTram = (function() {
     // would leave pillar color visible beneath, which read as "floating") and flush against
     // each other's frame width, so the player and inspector read as walking in front of the
     // windows, with the windows as background.
-    const PILLAR_COLOR = '#8a3a3a';
-    const FRAME_COLOR = '#c94f4f';
+    // Classic W-class livery (per Gerald, who rode one this trip): mustard/gold roof fascia
+    // above the windows, green everywhere from the window line down — same split real Melbourne
+    // heritage trams still run today.
+    const PILLAR_COLOR = '#2f6b3f';
+    const FRAME_COLOR = '#c9972e';
     const TRIM_COLOR = '#f2ead8';
     const WINDOW_W = 64, WINDOW_GAP = 26;
     const winTop = WINDOW_TOP;
@@ -1879,10 +1918,11 @@ const ZoneTram = (function() {
     }
 
     // slim solid base strip — flush against the window band directly above it, player/inspector
-    // walk in front of this
-    ctx.fillStyle = '#5a4a42';
+    // walk in front of this. Green, matching the pillars above (the mustard/gold band is the
+    // roof fascia only).
+    ctx.fillStyle = '#3a7a48';
     ctx.fillRect(0, winBottom, LEVEL_WIDTH, 6);
-    ctx.fillStyle = '#3f332d';
+    ctx.fillStyle = '#1e4a2c';
     ctx.fillRect(0, winBottom + 6, LEVEL_WIDTH, BASE_H - 6);
   }
 
@@ -2197,17 +2237,22 @@ const ZoneTram = (function() {
     ctx.fillRect(bx + 2, by - 34, 3, 12); ctx.fillRect(bx + 39, by - 34, 3, 12);
   }
   function drawExtraStreetProps() {
-    // tram stop where Jack got off
+    // tram stop where Jack got off — named now (Swanston St, matching the disembark overlay's
+    // own label for this same stop), widened/shrunk from the plain "TRAM" placard to fit the
+    // longer text.
     const sx = STREET_START + 60;
     ctx.fillStyle = '#3a3a48';
     ctx.fillRect(sx, GROUND_Y - 70, 4, 70);
     ctx.fillStyle = '#2e8a4a';
-    ctx.fillRect(sx - 22, GROUND_Y - 92, 48, 26);
+    ctx.fillRect(sx - 33, GROUND_Y - 92, 70, 26);
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(sx - 33, GROUND_Y - 92, 70, 26);
     ctx.fillStyle = '#fff';
-    ctx.font = 'bold 14px monospace';
+    ctx.font = 'bold 8px monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'alphabetic';
-    ctx.fillText('TRAM', sx + 2, GROUND_Y - 74);
+    ctx.fillText('SWANSTON ST', sx + 2, GROUND_Y - 76);
     for (const lx of [STREET_START + 200, STREET_START + 470, STREET_START + 740]) drawStreetLamp(lx);
     drawStreetBench(STREET_START + 120);
     drawStreetBench(STREET_START + 590);
@@ -5165,6 +5210,41 @@ const ZoneHome = (function() {
     ctx.lineTo(canvas.width + 32, SCENERY_BOTTOM + 14);
     ctx.stroke();
     ctx.setLineDash([]);
+
+    drawKeepClearMarkings();
+  }
+
+  // Same "TRAM CROSSING — KEEP CLEAR" road stencil as Zone 1, reused exactly (screen-space,
+  // scrolls with the dashed centre line, no collision box) — road markings stay visible at
+  // night same as real ones do, so no dusk dimming needed here.
+  function drawKeepClearMarkings() {
+    const PERIOD = 620, W = 84, H = 36;
+    const y = SCENERY_BOTTOM + 28;
+    const scroll = -(tramMotion * 0.9) % PERIOD;
+    for (let i = -1; i <= Math.ceil(canvas.width / PERIOD) + 1; i++) {
+      const bx = scroll + i * PERIOD - W / 2;
+      if (bx + W < -20 || bx > canvas.width + 20) continue;
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(bx, y, W, H);
+      ctx.clip();
+      ctx.strokeStyle = 'rgba(245,240,216,0.6)';
+      ctx.lineWidth = 4;
+      for (let hx = -H; hx < W + H; hx += 14) {
+        ctx.beginPath();
+        ctx.moveTo(bx + hx, y);
+        ctx.lineTo(bx + hx + H, y + H);
+        ctx.stroke();
+      }
+      ctx.restore();
+      ctx.strokeStyle = '#f5f0d8';
+      ctx.lineWidth = 2.5;
+      ctx.strokeRect(bx, y, W, H);
+      ctx.fillStyle = '#f5f0d8';
+      ctx.font = 'bold 8px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('KEEP CLEAR', bx + W / 2, y + H + 11);
+    }
   }
 
   function drawWindowScenery(worldX, winY, winW, winH, screenOriginX) {
@@ -5180,8 +5260,10 @@ const ZoneHome = (function() {
   }
 
   function drawTramInterior() {
-    const PILLAR_COLOR = '#8a3a3a';
-    const FRAME_COLOR = '#c94f4f';
+    // Same classic W-class mustard/green livery as Zone 1 — mustard/gold roof fascia, green
+    // from the window line down.
+    const PILLAR_COLOR = '#2f6b3f';
+    const FRAME_COLOR = '#c9972e';
     const TRIM_COLOR = '#f2ead8';
     const WINDOW_W = 64, WINDOW_GAP = 26;
     const winTop = WINDOW_TOP;
@@ -5207,9 +5289,9 @@ const ZoneHome = (function() {
       ctx.stroke();
     }
 
-    ctx.fillStyle = '#5a4a42';
+    ctx.fillStyle = '#3a7a48';
     ctx.fillRect(0, winBottom, TRAM_SCREEN_W + 40, 6);
-    ctx.fillStyle = '#3f332d';
+    ctx.fillStyle = '#1e4a2c';
     ctx.fillRect(0, winBottom + 6, TRAM_SCREEN_W + 40, BASE_H - 6);
 
     drawCabinFurniture();
