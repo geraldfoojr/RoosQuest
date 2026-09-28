@@ -597,7 +597,14 @@ function playSfx(kind) {
     case 'land':     tone(160, 0, 0.07, 0.1);  tone(90, 0.03, 0.08, 0.08); break;
     case 'hit':      tone(140, 0, 0.12, 0.16); tone(100, 0.05, 0.12, 0.14); break;
     case 'pickup':   tone(523, 0, 0.08, 0.13); tone(784, 0.07, 0.11, 0.13); break;
-    case 'lifeLost': tone(400, 0, 0.12, 0.15); tone(300, 0.11, 0.12, 0.15); tone(180, 0.22, 0.22, 0.15); break;
+    case 'lifeLost': {
+      // Original comedic "lost a life" cue — a quick 7-note descending stumble ending on a flat,
+      // deflated note (same tune used in all 5 worlds for consistency). Same arcade spirit as a
+      // classic "aw, lost a life" jingle, but its own tune, not a reproduction of any game's melody.
+      const seq = [523.25, 466.16, 415.30, 349.23, 293.66, 246.94, 196.00];
+      seq.forEach((f, i) => { const last = i === seq.length - 1; tone(f, i * 0.075, last ? 0.3 : 0.09, last ? 0.16 : 0.12); });
+      break;
+    }
   }
 }
 
