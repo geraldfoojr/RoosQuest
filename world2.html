@@ -479,6 +479,7 @@
     pointer-events: none; display: none; z-index: 5;
   }
   #msgBox.show { display: block; }
+  #msgBox.top { top: 5cqw; bottom: auto !important; }
   #msgName { display: block; color: #ffd23f; font-size: 0.8em; margin-bottom: 0.35em; }
   #msgName:empty { display: none; }
   #msgText { white-space: pre-line; }
@@ -530,7 +531,12 @@
   #invLabel { font-size: clamp(8px, 1.1cqw, 14px); }
   .invSlot { width: clamp(22px, 3.6cqw, 44px); height: clamp(22px, 3.6cqw, 44px); }
   #oxyLabel { font-size: clamp(9px, 1.43cqw, 18px); }
-  #gameWrap:has(#oxyWrap.show) #msgBox { bottom: 10cqw; }
+  /* was: #gameWrap:has(#oxyWrap.show) #msgBox { bottom: 10cqw; } — that rule's specificity beat
+     the mobile-landscape #msgBox rule below in every context (not just landscape), and 10cqw
+     itself sits inside the swimmers' vertical range in the dive zone. Replaced by the
+     msgTopThisFrame/.top mechanism above (same fix already used for World 4's ice meter and
+     World 5's zones 1/3/4), which moves the box to the top of the screen instead of squeezing
+     it into the narrow gap between the oxygen meter and the pool hazards. */
   @media (hover: none) and (pointer: coarse) and (orientation: landscape) {
     #diveBtn { order: 3; margin-left: auto; }
     #jumpBtn { order: 4; margin-left: 0; }
@@ -674,6 +680,9 @@ ctx.imageSmoothingEnabled = false;
 let captionText = null;
 let captionOpacity = 1;
 let frameSpeech = []; // [{name, text}] — cleared at the start of every draw()
+let msgTopThisFrame = false; // true = show the text box at the TOP of the game this frame (used
+// while the oxygen meter is up, so the box clears both the meter and the swim hazards near the
+// bottom of the pool instead of fighting the meter for the same low strip)
 function sayInBox(name, text) { if (text) frameSpeech.push({name: name || '', text: String(text)}); }
 let msgShown = null, msgLingerUntil = 0;
 const MSG_NOT_SPEAKERS = ['FOUND'];
@@ -2757,6 +2766,11 @@ const ZoneReflections = (function() {
     const now = performance.now();
     updateCutscene(now);
 
+    // Same trigger as the oxygen meter's own visibility (oxyWrap gets .show off player.swimming
+    // below): keeps the message box up top, clear of both the meter and the swim hazards, for
+    // every message that fires while swimming ("OUT OF AIR!", pickups, hits) — not just this frame's.
+    if (player.swimming) msgTopThisFrame = true;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawParallaxTowers();
 
@@ -2824,10 +2838,11 @@ function update() {
 }
 
 function draw() {
-  captionText = null; captionOpacity = 1; frameSpeech = [];
+  captionText = null; captionOpacity = 1; frameSpeech = []; msgTopThisFrame = false;
   zones[currentZone].draw();
   if (transitioning) captionText = null, activePopup = null;
   updateMsgBox();
+  document.getElementById('msgBox').classList.toggle('top', msgTopThisFrame);
 
   if (transitioning && transitionStage === 'clock') {
     drawTransitionClock(performance.now() - transitionStageStart);

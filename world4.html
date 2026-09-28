@@ -536,7 +536,11 @@
   .invSlot { width: clamp(22px, 3.6cqw, 44px); height: clamp(22px, 3.6cqw, 44px); }
   .invSlot.filled::before { font-size: clamp(14px, 2.4cqw, 30px); }
   #iceLabel2 { font-size: clamp(9px, 1.3cqw, 18px); }
-  #gameWrap:has(#iceMeterBottom.show) #msgBox { bottom: 10cqw; }
+  /* was: #gameWrap:has(#iceMeterBottom.show) #msgBox { bottom: 10cqw; } — that rule's specificity
+     beat the mobile-landscape #msgBox rule below in every context (not just landscape), so it
+     never actually gave phones the tighter, safer position they needed. Replaced by the existing
+     msgTopThisFrame/.top mechanism (see #msgBox.top above, and the onIce check in ZONE_HIKE's
+     draw()), the same fix already proven for World 5's zones 1/3/4. */
 </style>
 <style>
   /* ===== polish pass 2: the win screen is its own full-screen scroll area (works in Safari/iOS
@@ -3017,6 +3021,12 @@ const ZoneHike = (function() {
   function draw() {
     if (onIce) drawIceScene();
     else drawChaseScene();
+
+    // Ice meter is up whenever onIce is true — same trigger updateHUD() uses to show it. Keeps
+    // every message that fires here ("ice gives way", the troll's thin-ice line, pickups/hits)
+    // clear of both the meter and the ice-crossing hazards below, instead of the two fighting
+    // over the same low strip.
+    if (onIce) msgTopThisFrame = true;
 
     if (hitFlash > 0) {
       ctx.fillStyle = `rgba(255,80,80,${hitFlash / 20})`;

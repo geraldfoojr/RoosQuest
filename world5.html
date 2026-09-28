@@ -118,9 +118,10 @@
   #msgName:empty { display: none; }
   #msgText { white-space: pre-line; }
   body[data-zone="3"] #msgBox { top: 5.5cqw; bottom: auto; } /* up in the sky, clear of the phone notifications and focus meter */
-  /* Zone 1 (the flat) and Zone 4 (Kan Eang finale) also move the text box up top — bottom-of-screen
-     text was sitting right over the play field (kitchen floor hazards / restaurant floor hazards). */
-  body[data-zone="1"] #msgBox, body[data-zone="4"] #msgBox { top: 5.5cqw; bottom: auto; }
+  /* Zone 1 (the flat), Zone 2 (Great Ocean Road) and Zone 4 (Kan Eang finale) also move the text
+     box up top — bottom-of-screen text was sitting right over the play field (kitchen floor
+     hazards / roo hazards / restaurant floor hazards). */
+  body[data-zone="1"] #msgBox, body[data-zone="2"] #msgBox, body[data-zone="4"] #msgBox { top: 5.5cqw; bottom: auto; }
   #rotateHint {
     display: none; color: #9be3ff; font-family: 'Press Start 2P', 'Courier New', monospace;
     font-size: 9px; line-height: 1.6; text-align: center; margin: 4px 0 0; flex-shrink: 0;
@@ -145,7 +146,7 @@
     #rightBtn { order: 2; }
     #jumpBtn { order: 3; margin-left: auto; width: 84px !important; font-family: 'Press Start 2P', 'Courier New', monospace; font-size: 11px !important; }
     #msgBox { bottom: 3cqw; max-width: 58%; }
-    body[data-zone="3"] #msgBox, body[data-zone="1"] #msgBox, body[data-zone="4"] #msgBox { top: 5.5cqw; bottom: auto; }
+    body[data-zone="3"] #msgBox, body[data-zone="1"] #msgBox, body[data-zone="2"] #msgBox, body[data-zone="4"] #msgBox { top: 5.5cqw; bottom: auto; }
   }
   body.win-scroll #gameWrap { width: min(900px, 100%); }
   body.win-scroll #msgBox, body.win-scroll #rotateHint { display: none !important; }
